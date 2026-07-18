@@ -424,6 +424,7 @@ section[id] {
   backdrop-filter: blur(3px);
   pointer-events: none;
   user-select: none;
+  z-index: 10;
 }
 
 .bpost-body {
@@ -719,6 +720,7 @@ section[id] {
   box-shadow: var(--color-shadow);
   pointer-events: none;
   user-select: none;
+  z-index: 10;
 }
 
 .story-badge b {
@@ -949,6 +951,7 @@ section[id] {
   border-radius: 50px;
   pointer-events: none;
   user-select: none;
+  z-index: 10;
 }
 
 .pbody {
