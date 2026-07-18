@@ -5,6 +5,8 @@ import ProjectDetails from './pages/ProjectDetails';
 import Blog from './pages/Blog';
 import ChannelPartner from './pages/ChannelPartner';
 import CustomerRegistration from './pages/CustomerRegistration';
+import TermsConditions from './pages/TermsConditions';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 export default function App() {
   return (
@@ -19,6 +21,8 @@ export default function App() {
           <Route path="/blogs" element={<Blog />} />
           <Route path="/channel-partner" element={<ChannelPartner />} />
           <Route path="/customer-registration" element={<CustomerRegistration />} />
+          <Route path="/terms-conditions" element={<TermsConditions />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         </Routes>
       </Layout>
     </Router>

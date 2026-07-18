@@ -137,14 +137,24 @@ export default function Footer() {
               Legal
             </h5>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              {['Terms & Conditions', 'Privacy Policy', 'Sitemap'].map((label) => (
-                <a key={label} href="#"
-                  style={{ display: 'block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'color .25s', textDecoration: 'none' }}
-                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>
-                  {label}
-                </a>
-              ))}
+              <Link to="/terms-conditions"
+                style={{ display: 'block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'color .25s', textDecoration: 'none' }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>
+                Terms &amp; Conditions
+              </Link>
+              <Link to="/privacy-policy"
+                style={{ display: 'block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'color .25s', textDecoration: 'none' }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>
+                Privacy Policy
+              </Link>
+              <a href="#"
+                style={{ display: 'block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'color .25s', textDecoration: 'none' }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>
+                Sitemap
+              </a>
             </div>
           </div>
         </div>

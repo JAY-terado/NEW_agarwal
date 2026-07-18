@@ -1443,6 +1443,14 @@ section[id] {
   padding: clamp(80px, 13vh, 150px) 0;
 }
 
+.section.clients {
+  padding-bottom: clamp(30px, 5vh, 60px);
+}
+
+.section.bloghome {
+  padding-top: clamp(30px, 5vh, 60px);
+}
+
 .section-head {
   max-width: 780px;
   margin-bottom: clamp(46px, 7vh, 80px);
