@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  MapPin, 
-  Send, 
+import {
+  MapPin,
+  Send,
   CheckCircle2,
   Building,
   Waves,
@@ -228,10 +228,9 @@ export default function ProjectDetails() {
                   return (
                     <div key={idx} className="flex flex-col">
                       {/* Pricing Row */}
-                      <div 
-                        className={`grid grid-cols-4 p-4 text-xs sm:text-sm items-center hover:bg-brass/5 transition-colors cursor-pointer ${
-                          isLayoutRowActive ? 'bg-brass/5' : ''
-                        }`}
+                      <div
+                        className={`grid grid-cols-4 p-4 text-xs sm:text-sm items-center hover:bg-brass/5 transition-colors cursor-pointer ${isLayoutRowActive ? 'bg-brass/5' : ''
+                          }`}
                         onClick={() => setActiveLayout(p.type as '1 BHK' | '2 BHK' | '3 BHK')}
                       >
                         <div className="font-serif">
@@ -250,9 +249,8 @@ export default function ProjectDetails() {
                         <div>{p.carpetArea}</div>
                         <div className="text-brass-deep font-semibold">{p.price}</div>
                         <div>
-                          <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase ${
-                            p.status === 'Available' ? 'bg-emerald-500/10 text-emerald-600' : 'bg-brass/15 text-brass-deep'
-                          }`}>
+                          <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase ${p.status === 'Available' ? 'bg-emerald-500/10 text-emerald-600' : 'bg-brass/15 text-brass-deep'
+                            }`}>
                             {p.status}
                           </span>
                         </div>
@@ -270,8 +268,8 @@ export default function ProjectDetails() {
                           >
                             <div className="p-4 flex flex-col items-center justify-center">
                               <div className="max-w-2xl w-full border border-line rounded-xl bg-white p-2 shadow-sm">
-                                <img 
-                                  src={layoutImages[p.type as '1 BHK' | '2 BHK' | '3 BHK']} 
+                                <img
+                                  src={layoutImages[p.type as '1 BHK' | '2 BHK' | '3 BHK']}
                                   alt={`${p.type} 3D Layout Plan`}
                                   className="w-full h-auto object-contain max-h-[350px] mx-auto"
                                 />
@@ -380,100 +378,85 @@ export default function ProjectDetails() {
         </div>
 
         {/* Right 1 Column: Sticky Enquiry Form */}
-        <div id="project-enquiry-form" className="bg-white border border-line rounded-2xl p-6 shadow-2xl lg:sticky lg:top-24 z-10 overflow-hidden">
+        <div id="project-enquiry-form" className="lg:sticky lg:top-24 z-10" style={{ background: 'var(--color-ivory)', border: '1px solid var(--color-line)', borderRadius: '8px', padding: '24px 24px 20px 24px', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }}>
           <AnimatePresence mode="wait">
             {!formSubmitted ? (
-              <motion.form
-                key="form"
-                onSubmit={handleFormSubmit}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="flex flex-col gap-4"
-              >
-                <div className="pb-2 border-b border-line mb-2">
-                  <h3 className="font-serif text-lg text-ink font-semibold">Interested in {project.name}?</h3>
-                  <p className="text-[11px] text-taupe mt-1 font-light">Share your details and our relationship manager will contact you with booking options.</p>
+              <form onSubmit={handleFormSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.4rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '12px', borderBottom: '1px solid var(--color-line)', lineHeight: 1.4 }}>
+                  Request an Immediate Callback for Exclusive Offers.
+                </div>
+                <div className="fsub" style={{ fontSize: '.8rem', color: 'var(--color-ink-soft)', paddingTop: '10px', marginBottom: '16px', fontWeight: 300 }}>
+                  Share your details and our relationship manager will contact you with booking options.
                 </div>
 
-                <div className="flex flex-col gap-1">
-                  <label className="text-[9px] tracking-widest uppercase font-bold text-taupe">Full Name</label>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                  <label style={{ display: 'block', fontSize: '.65rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-taupe)', fontWeight: 600, marginBottom: '5px' }}>Full Name</label>
                   <input
                     type="text"
                     required
-                    placeholder="Your name"
-                    className="border border-line rounded px-3 py-2 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-ivory/20"
+                    placeholder="Full name"
+                    style={{ width: '100%', border: '1px solid var(--color-line)', borderRadius: '4px', padding: '10px 12px', fontSize: '.85rem', fontFamily: 'inherit', color: 'var(--color-ink)', outline: 'none', background: '#ffffff' }}
                   />
                 </div>
 
-                <div className="flex flex-col gap-1">
-                  <label className="text-[9px] tracking-widest uppercase font-bold text-taupe">Mobile Number</label>
-                  <div className="flex border border-line rounded overflow-hidden bg-ivory/20 focus-within:border-brass">
-                    <span className="bg-ivory border-r border-line text-[10px] font-bold text-taupe flex items-center px-3">+91</span>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                  <label style={{ display: 'block', fontSize: '.65rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-taupe)', fontWeight: 600, marginBottom: '5px' }}>Mobile Number</label>
+                  <div style={{ display: 'flex', border: '1px solid var(--color-line)', borderRadius: '4px', overflow: 'hidden', background: '#ffffff' }}>
+                    <span style={{ display: 'flex', alignItems: 'center', background: 'var(--color-ivory)', borderRight: '1px solid var(--color-line)', fontSize: '.85rem', fontWeight: 500, color: 'var(--color-ink)', padding: '0 10px', userSelect: 'none' }}>+91</span>
                     <input
                       type="tel"
                       required
+                      maxLength={10}
                       pattern="[0-9]{10}"
-                      placeholder="10 digit number"
-                      className="px-3 py-2 text-xs focus:outline-none w-full text-ink font-medium bg-transparent"
+                      title="Please enter a valid 10-digit mobile number"
+                      onInput={(e) => {
+                        e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '').slice(0, 10);
+                      }}
+                      placeholder="00000 00000"
+                      style={{ width: '100%', flex: 1, border: 'none', padding: '10px 12px', fontSize: '.85rem', fontFamily: 'inherit', color: 'var(--color-ink)', outline: 'none', background: 'transparent' }}
                     />
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-1">
-                  <label className="text-[9px] tracking-widest uppercase font-bold text-taupe">Email</label>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                  <label style={{ display: 'block', fontSize: '.65rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-taupe)', fontWeight: 600, marginBottom: '5px' }}>Email Address</label>
                   <input
                     type="email"
                     required
+                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                    title="Please enter a valid email address (e.g. name@example.com)"
                     placeholder="you@email.com"
-                    className="border border-line rounded px-3 py-2 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-ivory/20"
-                  />
-                </div>
-
-                <div className="flex flex-col gap-1">
-                  <label className="text-[9px] tracking-widest uppercase font-bold text-taupe">Preferred Configuration</label>
-                  <select
-                    required
-                    className="border border-line rounded px-3 py-2 text-xs focus:outline-none focus:border-brass bg-white text-ink font-medium"
-                  >
-                    <option value="1 BHK">1 BHK</option>
-                    <option value="2 BHK">2 BHK</option>
-                    <option value="3 BHK">3 BHK</option>
-                  </select>
-                </div>
-
-                <div className="flex flex-col gap-1">
-                  <label className="text-[9px] tracking-widest uppercase font-bold text-taupe">Message</label>
-                  <textarea
-                    rows={2}
-                    placeholder="I'd like to schedule a site visit..."
-                    className="border border-line rounded px-3 py-2 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-ivory/20"
+                    style={{ width: '100%', border: '1px solid var(--color-line)', borderRadius: '4px', padding: '10px 12px', fontSize: '.85rem', fontFamily: 'inherit', color: 'var(--color-ink)', outline: 'none', background: '#ffffff' }}
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-brass hover:bg-brass-deep text-pine hover:text-white py-3 rounded-full font-bold uppercase tracking-wider text-[10px] transition-colors mt-2 flex items-center justify-center gap-1.5 shadow-md"
+                  style={{ width: '100%', padding: '14px 16px', borderRadius: '50px', fontSize: '.7rem', fontWeight: 600, letterSpacing: '.12em', textTransform: 'uppercase', background: 'linear-gradient(135deg, var(--color-brass-bright), var(--color-brass))', color: 'var(--color-pine)', border: 'none', cursor: 'pointer', transition: 'transform .4s var(--ease), box-shadow .45s var(--ease)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginTop: '8px' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.transform = ''; }}
                 >
-                  Request a Callback
-                  <Send className="w-3 h-3" />
+                  Get Best Offers →
                 </button>
-              </motion.form>
+                <div style={{ fontSize: '.65rem', color: 'var(--color-taupe)', textAlign: 'center', marginTop: '8px', lineHeight: 1.4 }}>
+                  By submitting, you agree to our Terms &amp; Privacy Policy. We will never share your data.
+                </div>
+              </form>
             ) : (
               <motion.div
                 key="success"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="flex flex-col items-center justify-center text-center py-12 gap-3"
+                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '30px 0', gap: '14px' }}
               >
-                <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center">
-                  <CheckCircle2 className="w-6 h-6" />
+                <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'rgba(16, 185, 129, 0.2)', color: 'rgb(16, 185, 129)', display: 'grid', placeItems: 'center', margin: '0 auto' }}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
                 </div>
-                <h3 className="font-serif text-lg text-ink font-semibold">
-                  Callback Requested!
-                </h3>
-                <p className="text-[11px] text-ink-soft max-w-sm leading-relaxed font-light">
-                  Thank you! Your inquiry has been submitted. Our sales team will reach out to you within 24 hours.
+                <h3 className="serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.3rem', fontWeight: 500, color: 'var(--color-ink)' }}>Callback Requested!</h3>
+                <p style={{ fontSize: '.8rem', color: 'var(--color-ink-soft)', lineHeight: 1.5 }}>
+                  Thank you! Your details have been submitted. Our relationship manager will reach out shortly.
                 </p>
               </motion.div>
             )}

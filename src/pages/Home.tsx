@@ -121,7 +121,7 @@ function useCountUp(target: number, duration: number = 2000, trigger: boolean) {
     const end = target;
     const range = end - start;
     let current = start;
-    
+
     const timer = setInterval(() => {
       current += Math.ceil(range / (duration / 16)); // ~60fps
       if (current >= end) {
@@ -139,12 +139,12 @@ function useCountUp(target: number, duration: number = 2000, trigger: boolean) {
 }
 
 const searchItems = [
-  { name: 'Agarwal Skyrise', status: 'Ongoing', sub: 'Vasai East · 2022', slug: 'skyrise' },
-  { name: 'Agarwal Infinity', status: 'Ongoing', sub: 'Virar West · 2023', slug: 'infinity' },
-  { name: 'Agarwal Sky Heights', status: 'Ongoing', sub: 'Virar West · 2019', slug: 'sky-heights' },
-  { name: 'Agarwal Horizon', status: 'Ongoing', sub: 'Virar West · 2015', slug: 'horizon' },
-  { name: 'Agarwal Yashwant Hts.', status: 'Completed', sub: 'Virar · 2018', link: '#projects' },
-  { name: 'Agarwal Nagri', status: 'Completed', sub: 'Vasai · 2012', link: '#projects' },
+  { name: 'Agarwal Skyrise', status: 'Ongoing', sub: 'Vasai East', slug: 'skyrise' },
+  { name: 'Agarwal Infinity', status: 'Ongoing', sub: 'Virar West', slug: 'infinity' },
+  { name: 'Agarwal Sky Heights', status: 'Ongoing', sub: 'Virar West', slug: 'sky-heights' },
+  { name: 'Agarwal Horizon', status: 'Ongoing', sub: 'Virar West', slug: 'horizon' },
+  // { name: 'Agarwal Yashwant Hts.', status: 'Completed', sub: 'Virar', link: '#projects' },
+  // { name: 'Agarwal Nagri', status: 'Completed', sub: 'Vasai', link: '#projects' },
 ];
 
 export default function Home() {
@@ -271,17 +271,39 @@ export default function Home() {
     };
   }, []);
 
+  // Refs for interval timers to allow resetting on manual click
+  const reelsTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const blogsTimerRef = useRef<NodeJS.Timeout | null>(null);
+
   // Reels horizontal scrolling
-  const scrollReels = (direction: number) => {
+  const scrollReels = (direction: number, manual = false) => {
     if (reelsRef.current) {
       const card = reelsRef.current.querySelector('.reel');
       const cardWidth = card ? card.getBoundingClientRect().width : 320;
-      reelsRef.current.scrollBy({ left: direction * (cardWidth + 22) * 3, behavior: 'smooth' });
+      if (direction === 1 && reelsRef.current.scrollLeft + reelsRef.current.clientWidth >= reelsRef.current.scrollWidth - 10) {
+        reelsRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+      } else if (direction === -1 && reelsRef.current.scrollLeft <= 0) {
+        reelsRef.current.scrollTo({ left: reelsRef.current.scrollWidth, behavior: 'smooth' });
+      } else {
+        reelsRef.current.scrollBy({ left: direction * (cardWidth + 22), behavior: 'smooth' });
+      }
     }
+    if (manual) startReelsTimer();
   };
 
+  const startReelsTimer = () => {
+    if (reelsTimerRef.current) clearInterval(reelsTimerRef.current);
+    reelsTimerRef.current = setInterval(() => scrollReels(1), 15000);
+  };
+
+  // Auto-slide reels every 15 seconds
+  useEffect(() => {
+    startReelsTimer();
+    return () => { if (reelsTimerRef.current) clearInterval(reelsTimerRef.current); };
+  }, []);
+
   // Blogs horizontal scrolling
-  const scrollBlogs = (direction: number) => {
+  const scrollBlogs = (direction: number, manual = false) => {
     if (btrackRef.current) {
       const card = btrackRef.current.querySelector('.bpost');
       const cardWidth = card ? card.getBoundingClientRect().width : 360;
@@ -290,17 +312,21 @@ export default function Home() {
       } else if (direction === -1 && btrackRef.current.scrollLeft <= 0) {
         btrackRef.current.scrollTo({ left: btrackRef.current.scrollWidth, behavior: 'smooth' });
       } else {
-        btrackRef.current.scrollBy({ left: direction * (cardWidth + 24) * 3, behavior: 'smooth' });
+        btrackRef.current.scrollBy({ left: direction * (cardWidth + 24), behavior: 'smooth' });
       }
     }
+    if (manual) startBlogsTimer();
+  };
+
+  const startBlogsTimer = () => {
+    if (blogsTimerRef.current) clearInterval(blogsTimerRef.current);
+    blogsTimerRef.current = setInterval(() => scrollBlogs(1), 15000);
   };
 
   // Auto-slide blogs every 15 seconds
   useEffect(() => {
-    const timer = setInterval(() => {
-      scrollBlogs(1);
-    }, 15000);
-    return () => clearInterval(timer);
+    startBlogsTimer();
+    return () => { if (blogsTimerRef.current) clearInterval(blogsTimerRef.current); };
   }, []);
 
   const filteredSearchItems = searchItems.filter((item) =>
@@ -308,7 +334,7 @@ export default function Home() {
     item.sub.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const countYears = useCountUp(47, 1500, statsTriggered);
+  const countYears = useCountUp(48, 1500, statsTriggered);
   const countProjects = useCountUp(30, 1500, statsTriggered);
   const countFamilies = useCountUp(5000, 2000, statsTriggered);
 
@@ -403,8 +429,8 @@ export default function Home() {
                                 borderRadius: '4px',
                                 fontWeight: 600,
                                 background: isCompleted ? 'rgba(255, 255, 255, 0.1)' : 'rgba(220, 188, 124, 0.15)',
-                                color: isCompleted ? 'rgba(255, 255, 255, 0.7)' : 'var(--color-brass-bright)',
-                                border: isCompleted ? '1px solid rgba(255, 255, 255, 0.15)' : '1px solid rgba(220, 188, 124, 0.3)'
+                                color: isCompleted ? 'rgba(255, 255, 255, 0.7)' : '#fff',
+                                border: isCompleted ? '1px solid rgba(255, 255, 255, 0.15)' : '1px solid rgba(255, 255, 255, 0.6)'
                               }}>{p.status}</span>
                             </div>
                             <div className="sdd-sub" style={{ color: 'rgba(255, 255, 255, .5)', fontSize: '0.85rem', fontWeight: 300 }}>{p.sub}</div>
@@ -471,7 +497,7 @@ export default function Home() {
             <h2 className="serif">A Legacy Built on <em>Trust &amp; Craftsmanship</em></h2>
             <p>Since 1978, the Agarwal Group has been the cornerstone of residential development across the Vasai–Virar sub-region of Mumbai. What began as a vision to create thoughtfully designed homes has evolved into a legacy of excellence spanning generations of families.</p>
             <p>Each Agarwal residence is a testament to our unwavering commitment — spaces that blend intelligent architecture with world-class amenities, positioned in the most promising locations of the Mumbai Metropolitan Region.</p>
-            
+
             <Link className="custom-read-more" to="/blogs">
               <span className="custom-read-more__label">Read More</span>
               <span className="custom-read-more__icon">
@@ -551,8 +577,8 @@ export default function Home() {
         <div className="wrap">
           <div className="section-head reveal" style={{ position: 'relative' }}>
             <div className="folio-watermark">
-              <div style={{ transform: 'translateX(0.25em)' }}>ongoing</div>
-              <div>projects</div>
+              <div style={{ transform: 'translateX(0.2em)' }}>ongoing</div>
+              <div style={{ transform: 'translateX(0.3em)' }}>projects</div>
             </div>
             <span className="eyebrow" style={{ position: 'relative', zIndex: 1 }}>Ongoing Projects</span>
             <h2 className="serif" style={{ position: 'relative', zIndex: 1 }}>Residences Crafted for <em>Discerning Lives</em></h2>
@@ -562,7 +588,7 @@ export default function Home() {
           <div className="pgrid">
             {projects.map((proj) => {
               const imageSrc = projectHeroMap[proj.slug];
-              
+
               // Map project details to exact static page values
               const projectMeta = {
                 infinity: {
@@ -640,32 +666,44 @@ export default function Home() {
           <div className="faq-wrap reveal">
             {[
               {
-                q: "Where are Agarwal Group's projects located?",
-                a: "Our residences are spread across the Vasai–Virar &amp; Mumbai region, positioned close to the railway stations and with seamless access to the Western Express Highway — keeping you well connected to the wider Mumbai Metropolitan Region."
+                q: "How long has Agarwal Group been building homes?",
+                a: "Since 1978, Agarwal Group has been developing residential projects across Mumbai, Vasai, and Virar. With over 47 years of experience, the company has earned the trust of thousands of families through quality construction, timely delivery, and customer-focused developments."
               },
               {
-                q: "What home configurations are available?",
-                a: "We offer thoughtfully designed 1, 2 &amp; 3 BHK homes (with select 1RK options) across our ongoing and completed developments, so you can choose the layout that best fits your family and budget."
+                q: "Where are Agarwal Group's residential projects located?",
+                a: "Agarwal Group has residential projects in key locations across Mumbai, Vasai, and Virar, offering excellent connectivity to railway stations, highways, schools, hospitals, and daily conveniences."
               },
               {
-                q: "Are the projects RERA registered?",
-                a: "Yes. All Agarwal Group developments are RERA registered, and the relevant registration details are available on request — part of our long-standing commitment to transparent, accountable practices."
+                q: "What types of residential properties does Agarwal Group offer?",
+                a: "Agarwal Group offers thoughtfully planned 1 BHK, 2 BHK, and 3 BHK apartments designed to meet the needs of first-time homebuyers, growing families, and property investors."
               },
               {
-                q: "Are the homes ready to move in?",
-                a: "Several of our projects are ready-possession homes that have received their Occupancy Certificate, so you can move in without a long wait — while others are at various stages of construction."
+                q: "Are Agarwal Group projects RERA registered?",
+                a: "Yes. All applicable Agarwal Group residential projects are registered under the Real Estate Regulatory Authority (RERA), ensuring transparency, regulatory compliance, and greater confidence for homebuyers."
               },
               {
-                q: "Can I avail a home loan?",
-                a: "Absolutely. Our projects are approved by leading national banks and financial institutions, which makes securing a home loan straightforward and hassle-free."
+                q: "What makes Agarwal Group different from other builders in Mumbai?",
+                a: "Agarwal Group stands apart through its legacy of over four decades, commitment to quality construction, prime project locations, transparent practices, and thoughtfully designed homes. Every project is built to offer long-term value, modern amenities, and a comfortable lifestyle for families."
               },
               {
-                q: "What amenities can I expect?",
-                a: "Residents enjoy a complete world of leisure — from the Club One clubhouse, swimming pool and sports courts to landscaped gardens, jogging tracks and children's play areas, all within the community."
+                q: "Does Agarwal Group offer ready-to-move homes?",
+                a: "Agarwal Group offers a mix of ready-to-move and under-construction residential projects, depending on the development. Availability varies by project."
               },
               {
-                q: "How do I book a site visit?",
-                a: "Simply reach out through the enquiry form, WhatsApp or a quick call, and our team will arrange a site visit at a time that suits you."
+                q: "Can I book a site visit for an Agarwal Group project?",
+                a: "Yes. You can schedule a site visit by contacting the sales team through the website or by calling the customer support numbers."
+              },
+              {
+                q: "Are home loans available for Agarwal Group projects?",
+                a: "Yes. Agarwal Group projects are approved by leading banks and financial institutions, making it easier for eligible buyers to avail home loan assistance with a smooth financing process."
+              },
+              {
+                q: "Are Agarwal Group projects suitable for investment?",
+                a: "Agarwal Group develops projects in well-connected locations across Mumbai, Vasai, and Virar, making them attractive for both end-users and long-term property investors."
+              },
+              {
+                q: "How can I contact Agarwal Group?",
+                a: "You can connect with Agarwal Group through the contact form on the website, call the sales team, or visit the corporate office in Virar for personalized assistance."
               }
             ].map((item, idx) => {
               const isOpen = activeFaq === idx;
@@ -775,12 +813,12 @@ export default function Home() {
               ))}
             </div>
             <div className="reels-nav">
-              <button aria-label="Previous reels" onClick={() => scrollReels(-1)}>
+              <button aria-label="Previous reels" onClick={() => scrollReels(-1, true)}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M15 18l-6-6 6-6" />
                 </svg>
               </button>
-              <button aria-label="Next reels" onClick={() => scrollReels(1)}>
+              <button aria-label="Next reels" onClick={() => scrollReels(1, true)}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M9 18l6-6-6-6" />
                 </svg>
@@ -822,12 +860,12 @@ export default function Home() {
               ))}
             </div>
             <div className="bnav">
-              <button aria-label="Previous posts" onClick={() => scrollBlogs(-1)}>
+              <button aria-label="Previous posts" onClick={() => scrollBlogs(-1, true)}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M15 18l-6-6 6-6" />
                 </svg>
               </button>
-              <button aria-label="More posts" onClick={() => scrollBlogs(1)}>
+              <button aria-label="More posts" onClick={() => scrollBlogs(1, true)}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M9 18l6-6-6-6" />
                 </svg>
@@ -838,7 +876,7 @@ export default function Home() {
       </section>
 
       <section className="contact" id="contact" style={{ padding: 'clamp(80px, 13vh, 150px) 0', background: 'var(--color-paper)' }}>
-        <div className="wrap contact-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px' }}>
+        <div className="wrap contact-grid">
           {/* Left info */}
           <div className="reveal">
             <span className="eyebrow" style={{ fontSize: '.64rem', letterSpacing: '.24em', textTransform: 'uppercase', color: 'var(--color-brass-deep)', fontWeight: 700, display: 'block', marginBottom: '8px' }}>Contact Us</span>
@@ -855,8 +893,11 @@ export default function Home() {
                 <a href="tel:+918408008002">+91 840 800 8002</a>
               </div>
               <div>
-                <div className="ct">Email &amp; WhatsApp</div>
+                <div className="ct">Email</div>
                 <a href="mailto:sales@agarwalrealties.com">sales@agarwalrealties.com</a>
+              </div>
+              <div>
+                <div className="ct">WhatsApp</div>
                 <a href="https://api.whatsapp.com/send?phone=918530081105&amp;text=Hello%2C%20I%27m%20interested%20in%20Agarwal%20Group%20projects">+91 853 008 1105</a>
               </div>
               <div>
@@ -867,12 +908,12 @@ export default function Home() {
           </div>
 
           {/* Right form Card - matches original 3-field callback form exactly */}
-          <div className="form reveal" style={{ background: 'var(--color-ivory)', border: '1px solid var(--color-line)', borderRadius: '8px', padding: 'clamp(26px, 4vw, 42px)' }}>
-            <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', marginBottom: '6px', lineHeight: 1.25 }}>
+          <div className="form reveal" style={{ background: 'var(--color-ivory)', border: '1px solid var(--color-line)', borderRadius: '8px', padding: 'clamp(26px, 4vw, 42px)', paddingBottom: '24px' }}>
+            <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '16px', borderBottom: '1px solid var(--color-line)', lineHeight: 1.5 }}>
               Request an Immediate Callback for Exclusive Offers.
             </div>
-            <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', marginBottom: '24px', fontWeight: 300 }}>
-              Share your details and our sales advisor will reach out shortly.
+            <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingTop: '16px', marginBottom: '24px', fontWeight: 300 }}>
+              Share your details and our relationship manager will contact you with special offer.
             </div>
             <AnimatePresence mode="wait">
               {!contactSubmitted ? (
@@ -926,7 +967,7 @@ export default function Home() {
                   >
                     Get Best Offers →
                   </button>
-                  <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', marginTop: '14px', lineHeight: 1.4 }}>
+                  <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', marginTop: '10px', lineHeight: 1.4 }}>
                     By submitting, you agree to our Terms &amp; Privacy Policy. We will never share your data.
                   </div>
                 </form>

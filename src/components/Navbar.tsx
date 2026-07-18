@@ -129,13 +129,13 @@ export default function Navbar() {
     left: 0,
     right: 0,
     zIndex: 100,
-    background: scrolled ? 'rgba(255,255,255,.9)' : 'transparent',
-    backdropFilter: scrolled ? 'blur(14px)' : 'none',
-    WebkitBackdropFilter: scrolled ? 'blur(14px)' : 'none',
+    background: scrolled ? 'rgba(255,255,255,.9)' : 'rgba(0, 0, 0, 0.15)',
+    backdropFilter: 'blur(14px)',
+    WebkitBackdropFilter: 'blur(14px)',
     transition: 'background .5s, box-shadow .5s, padding .5s, top .45s cubic-bezier(.22,.61,.36,1)',
     padding: scrolled ? '13px 0' : '20px 0',
     boxShadow: scrolled ? '0 10px 40px -24px rgba(0,0,0,.22)' : 'none',
-    borderBottom: scrolled ? '1px solid rgba(20,20,18,.14)' : 'none',
+    borderBottom: scrolled ? '1px solid rgba(20,20,18,.14)' : '1px solid rgba(255, 255, 255, 0.1)',
   };
 
   const brandColor = scrolled ? 'var(--ink)' : 'var(--paper)';
@@ -353,7 +353,7 @@ export default function Navbar() {
         >
           <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 clamp(20px, 5vw, 64px)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '20px' }}>
-              <span style={{ fontSize: '.68rem', letterSpacing: '.22em', textTransform: 'uppercase', color: 'var(--brass-deep)', fontWeight: 600 }}>Ongoing Residences · 4 Projects</span>
+              <span style={{ fontSize: '.68rem', letterSpacing: '.22em', textTransform: 'uppercase', color: 'var(--brass-deep)', fontWeight: 600 }}>Ongoing Projects</span>
               <Link to="/" onClick={() => handleNavClick('projects')}
                 style={{ fontSize: '.72rem', letterSpacing: '.12em', textTransform: 'uppercase', fontWeight: 600, color: 'var(--pine)', textDecoration: 'none' }}
                 onMouseEnter={e => (e.currentTarget.style.color = 'var(--brass-deep)')}
@@ -553,7 +553,7 @@ export default function Navbar() {
           >
             Enquire Now
           </button>
-          
+
           <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '0.74rem', color: 'rgba(244, 240, 231, 0.5)' }}>
             <span>Sales: <a href="tel:+918408008001" style={{ color: 'var(--brass-bright)', textDecoration: 'none' }}>+91 840 800 8001</a></span>
             <span>Email: <a href="mailto:sales@agarwalrealties.com" style={{ color: 'var(--brass-bright)', textDecoration: 'none' }}>sales@agarwalrealties.com</a></span>
