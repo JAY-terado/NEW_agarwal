@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { projects } from '../data/projects';
 import Logo from '../assets/Agarwal_Group_Logo.png';
 
@@ -37,6 +38,7 @@ export default function Navbar() {
   const [megaOpen, setMegaOpen] = useState(false);
   const [ddOpen, setDdOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const megaTimer = useRef<number | null>(null);
   const ddTimer = useRef<number | null>(null);
 
@@ -73,6 +75,24 @@ export default function Navbar() {
       const el = document.getElementById(pathId);
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleEnquireClick = () => {
+    if (location.pathname.startsWith('/projects/')) {
+      const el = document.getElementById('project-enquiry-form');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+    }
+    if (location.pathname === '/') {
+      const el = document.getElementById('contact');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+    }
+    navigate('/customer-registration');
   };
 
   const handleLogoClick = (e: React.MouseEvent) => {
@@ -253,7 +273,7 @@ export default function Navbar() {
 
             {/* CTA Button */}
             <button
-              onClick={() => handleNavClick('contact')}
+              onClick={handleEnquireClick}
               style={{
                 border: `1px solid ${ctaBorder}`,
                 color: ctaColor,
@@ -285,13 +305,28 @@ export default function Navbar() {
           {/* Mobile Burger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            style={{ display: 'none', flexDirection: 'column', gap: '5px', background: 'none', border: 0, cursor: 'pointer', padding: '8px' }}
+            style={{
+              display: 'none',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '4px',
+              background: scrolled ? 'rgba(30, 31, 26, 0.04)' : 'rgba(255, 255, 255, 0.08)',
+              border: scrolled ? '1px solid rgba(30, 31, 26, 0.1)' : '1px solid rgba(255, 255, 255, 0.15)',
+              borderRadius: '50%',
+              width: '42px',
+              height: '42px',
+              cursor: 'pointer',
+              padding: '0',
+              outline: 'none',
+              transition: 'background 0.3s, border-color 0.3s'
+            }}
             className="burger-btn"
             aria-label="Open menu"
           >
-            <span style={{ width: '26px', height: '2px', background: burgerColor, display: 'block', transition: '.3s' }} />
-            <span style={{ width: '26px', height: '2px', background: burgerColor, display: 'block', transition: '.3s' }} />
-            <span style={{ width: '26px', height: '2px', background: burgerColor, display: 'block', transition: '.3s' }} />
+            <span style={{ width: '18px', height: '1.6px', background: burgerColor, display: 'block', transition: '.3s' }} />
+            <span style={{ width: '18px', height: '1.6px', background: burgerColor, display: 'block', transition: '.3s' }} />
+            <span style={{ width: '18px', height: '1.6px', background: burgerColor, display: 'block', transition: '.3s' }} />
           </button>
         </div>
 
@@ -366,74 +401,171 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer Backdrop Overlay */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setMobileMenuOpen(false)}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              background: 'rgba(0, 0, 0, 0.5)',
+              backdropFilter: 'blur(5px)',
+              WebkitBackdropFilter: 'blur(5px)',
+              zIndex: 999,
+            }}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Mobile Drawer Panel */}
       <div
         style={{
           position: 'fixed',
-          inset: 0,
-          zIndex: 40,
-          background: 'rgba(30,31,26,.98)',
+          top: 0,
+          bottom: 0,
+          right: 0,
+          width: 'min(420px, 100vw)',
+          zIndex: 1000,
+          background: 'rgba(30, 31, 26, 0.96)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          borderLeft: '1px solid rgba(220, 188, 124, 0.15)',
+          boxShadow: '-10px 0 40px rgba(0, 0, 0, 0.5)',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '24px',
-          transform: mobileMenuOpen ? 'translateY(0)' : 'translateY(-100%)',
-          transition: 'transform .5s cubic-bezier(.22,.61,.36,1)',
-          willChange: 'transform',
+          padding: '32px 32px 40px',
+          transform: mobileMenuOpen ? 'translateX(0)' : 'translateX(100%)',
+          transition: 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
         className="mobile-drawer"
       >
-        <button
-          onClick={() => setMobileMenuOpen(false)}
-          style={{ position: 'absolute', top: '24px', right: '24px', background: 'none', border: 0, color: 'rgba(244,240,231,.9)', fontSize: '2rem', cursor: 'pointer', lineHeight: 1 }}
-          aria-label="Close menu"
-        >
-          ×
-        </button>
-
-        {[
-          { label: 'About Us', to: '/story', pathId: 'story' },
-          { label: 'Blogs', to: '/blogs' },
-          { label: 'Channel Partner', to: '/channel-partner' },
-          { label: 'Contact Us', to: '/contact', pathId: 'contact' },
-        ].map(item => (
-          <Link key={item.label}
-            to={item.to}
-            onClick={() => { setMobileMenuOpen(false); if (item.pathId) handleNavClick(item.pathId); }}
-            style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', color: 'rgba(244,240,231,.9)', textDecoration: 'none', transition: 'color .3s' }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--brass-bright)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(244,240,231,.9)')}>
-            {item.label}
-          </Link>
-        ))}
-
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <span style={{ fontFamily: '"Fraunces", serif', fontSize: '1.1rem', color: 'var(--brass)', marginBottom: '8px' }}>Projects</span>
-          {projects.map(p => (
-            <Link key={p.slug} to={`/projects/${p.slug}`}
-              onClick={() => setMobileMenuOpen(false)}
-              style={{ fontSize: '.9rem', color: 'rgba(244,240,231,.7)', textDecoration: 'none', padding: '4px 0' }}
-              onMouseEnter={e => (e.currentTarget.style.color = 'var(--brass-bright)')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'rgba(244,240,231,.7)')}>
-              {p.name}
-            </Link>
-          ))}
+        {/* Drawer Header */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '36px' }}>
+          <img src={Logo} alt="Agarwal Group" style={{ height: '36px', width: 'auto', display: 'block', borderRadius: '4px' }} />
+          <button
+            onClick={() => setMobileMenuOpen(false)}
+            style={{
+              background: 'rgba(255, 255, 255, 0.05)',
+              border: '1px solid rgba(220, 188, 124, 0.2)',
+              color: '#fff',
+              width: '36px',
+              height: '36px',
+              borderRadius: '50%',
+              display: 'grid',
+              placeItems: 'center',
+              cursor: 'pointer',
+              fontSize: '1.4rem',
+              lineHeight: 1,
+              outline: 'none',
+              transition: 'background 0.3s, transform 0.3s'
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(220, 188, 124, 0.2)'; e.currentTarget.style.transform = 'rotate(90deg)'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)'; e.currentTarget.style.transform = 'rotate(0deg)'; }}
+          >
+            ×
+          </button>
         </div>
 
-        <Link to="/customer-registration"
-          onClick={() => setMobileMenuOpen(false)}
-          style={{ marginTop: '16px', border: '1px solid var(--brass)', color: 'var(--paper)', padding: '13px 28px', borderRadius: '50px', fontSize: '.82rem', letterSpacing: '.1em', textTransform: 'uppercase', fontWeight: 600, textDecoration: 'none', transition: '.35s' }}
-          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'var(--brass)'; (e.currentTarget as HTMLElement).style.color = 'var(--pine)'; }}
-          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = ''; (e.currentTarget as HTMLElement).style.color = 'var(--paper)'; }}>
-          Enquire Now
-        </Link>
+        {/* Drawer Scrollable Links */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', flex: 1, overflowY: 'auto', paddingRight: '8px' }}>
+          {[
+            { label: 'About Us', to: '/story', pathId: 'story', index: '01' },
+            { label: 'Blogs', to: '/blogs', index: '02' },
+            { label: 'Channel Partner', to: '/channel-partner', index: '03' },
+            { label: 'Contact Us', to: '/contact', pathId: 'contact', index: '04' },
+          ].map(item => (
+            <Link
+              key={item.label}
+              to={item.to}
+              onClick={() => { setMobileMenuOpen(false); if (item.pathId) handleNavClick(item.pathId); }}
+              style={{
+                display: 'flex',
+                alignItems: 'baseline',
+                gap: '12px',
+                fontFamily: '"Fraunces", serif',
+                fontSize: '1.5rem',
+                fontWeight: 300,
+                color: 'rgba(244, 240, 231, 0.9)',
+                textDecoration: 'none',
+                transition: 'color .3s, transform 0.3s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass-bright)'; e.currentTarget.style.transform = 'translateX(6px)'; }}
+              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(244, 240, 231, 0.9)'; e.currentTarget.style.transform = 'none'; }}
+            >
+              <span style={{ fontSize: '0.75rem', fontFamily: '"Inter", sans-serif', color: 'var(--brass)', fontWeight: 600, letterSpacing: '0.1em' }}>{item.index}</span>
+              {item.label}
+            </Link>
+          ))}
+
+          {/* Ongoing Projects Section */}
+          <div style={{ marginTop: '12px', borderTop: '1px solid rgba(220, 188, 124, 0.15)', paddingTop: '20px' }}>
+            <span style={{ fontFamily: '"Fraunces", serif', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--brass)', display: 'block', marginBottom: '14px', fontWeight: 600 }}>
+              Ongoing Projects
+            </span>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', borderLeft: '1px solid rgba(220, 188, 124, 0.2)', paddingLeft: '14px', marginLeft: '4px' }}>
+              {projects.map(p => (
+                <Link
+                  key={p.slug}
+                  to={`/projects/${p.slug}`}
+                  onClick={() => setMobileMenuOpen(false)}
+                  style={{
+                    fontSize: '0.92rem',
+                    color: 'rgba(244, 240, 231, 0.7)',
+                    textDecoration: 'none',
+                    transition: 'color 0.3s, transform 0.3s',
+                    display: 'block'
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass-bright)'; e.currentTarget.style.transform = 'translateX(4px)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.color = 'rgba(244, 240, 231, 0.7)'; e.currentTarget.style.transform = 'none'; }}
+                >
+                  {p.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Drawer Footer / CTA */}
+        <div style={{ marginTop: 'auto', paddingTop: '24px', borderTop: '1px solid rgba(220, 188, 124, 0.15)', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <button
+            onClick={() => { setMobileMenuOpen(false); handleEnquireClick(); }}
+            style={{
+              width: '100%',
+              background: 'linear-gradient(135deg, var(--color-brass-bright), var(--color-brass))',
+              color: 'var(--color-pine)',
+              border: 'none',
+              padding: '14px 28px',
+              borderRadius: '50px',
+              fontSize: '.78rem',
+              letterSpacing: '.12em',
+              textTransform: 'uppercase',
+              fontWeight: 700,
+              cursor: 'pointer',
+              boxShadow: '0 8px 20px -8px rgba(182, 142, 63, 0.4)',
+              transition: 'transform 0.3s, box-shadow 0.3s'
+            }}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 24px -6px rgba(182, 142, 63, 0.6)'; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 8px 20px -8px rgba(182, 142, 63, 0.4)'; }}
+          >
+            Enquire Now
+          </button>
+          
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '0.74rem', color: 'rgba(244, 240, 231, 0.5)' }}>
+            <span>Sales: <a href="tel:+918408008001" style={{ color: 'var(--brass-bright)', textDecoration: 'none' }}>+91 840 800 8001</a></span>
+            <span>Email: <a href="mailto:sales@agarwalrealties.com" style={{ color: 'var(--brass-bright)', textDecoration: 'none' }}>sales@agarwalrealties.com</a></span>
+          </div>
+        </div>
       </div>
 
       {/* Responsive CSS for nav links and burger */}
       <style>{`
         .nav-links-desktop { display: flex !important; }
         .burger-btn { display: none !important; }
+        .burger-btn:focus { outline: none; }
         @media (max-width: 1080px) {
           .nav-links-desktop { display: none !important; }
           .burger-btn { display: flex !important; }

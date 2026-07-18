@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search } from 'lucide-react';
+import { Search, Sparkles, Clock, ShieldCheck, Users } from 'lucide-react';
 import { projects } from '../data/projects';
 
 // Asset Imports
@@ -490,10 +490,42 @@ export default function Home() {
             </Link>
 
             <div className="values">
-              <div className="vcard"><b>Quality Living</b><span>Every detail crafted with precision.</span></div>
-              <div className="vcard"><b>On-Time Delivery</b><span>A commitment upheld for decades.</span></div>
-              <div className="vcard"><b>RERA Compliant</b><span>Transparent, accountable practices.</span></div>
-              <div className="vcard"><b>Community First</b><span>Neighbourhoods that thrive together.</span></div>
+              <div className="vcard">
+                <div className="vcard-icon">
+                  <Sparkles className="w-5 h-5" strokeWidth={1.8} />
+                </div>
+                <div className="vcard-content">
+                  <b>Quality Living</b>
+                  <span>Every detail crafted with precision.</span>
+                </div>
+              </div>
+              <div className="vcard">
+                <div className="vcard-icon">
+                  <Clock className="w-5 h-5" strokeWidth={1.8} />
+                </div>
+                <div className="vcard-content">
+                  <b>On-Time Delivery</b>
+                  <span>A commitment upheld for decades.</span>
+                </div>
+              </div>
+              <div className="vcard">
+                <div className="vcard-icon">
+                  <ShieldCheck className="w-5 h-5" strokeWidth={1.8} />
+                </div>
+                <div className="vcard-content">
+                  <b>RERA Compliant</b>
+                  <span>Transparent, accountable practices.</span>
+                </div>
+              </div>
+              <div className="vcard">
+                <div className="vcard-icon">
+                  <Users className="w-5 h-5" strokeWidth={1.8} />
+                </div>
+                <div className="vcard-content">
+                  <b>Community First</b>
+                  <span>Neighbourhoods that thrive together.</span>
+                </div>
+              </div>
             </div>
 
             <div className="quote">
@@ -855,30 +887,35 @@ export default function Home() {
                     />
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                      <label style={{ display: 'block', fontSize: '.7rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-taupe)', fontWeight: 600, marginBottom: '7px' }}>Mobile Number</label>
-                      <div style={{ display: 'flex', border: '1px solid var(--color-line)', borderRadius: '4px', overflow: 'hidden', background: '#ffffff' }}>
-                        <span style={{ display: 'flex', alignItems: 'center', background: 'var(--color-ivory)', borderRight: '1px solid var(--color-line)', fontSize: '.95rem', fontWeight: 500, color: 'var(--color-ink)', padding: '0 13px', userSelect: 'none' }}>+91</span>
-                        <input
-                          type="tel"
-                          required
-                          pattern="[0-9]{10}"
-                          placeholder="00000 00000"
-                          style={{ width: '100%', flex: 1, border: 'none', padding: '13px 15px', fontSize: '.95rem', fontFamily: 'inherit', color: 'var(--color-ink)', outline: 'none', background: 'transparent' }}
-                        />
-                      </div>
-                    </div>
-
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                      <label style={{ display: 'block', fontSize: '.7rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-taupe)', fontWeight: 600, marginBottom: '7px' }}>Email Address</label>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <label style={{ display: 'block', fontSize: '.7rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-taupe)', fontWeight: 600, marginBottom: '7px' }}>Mobile Number</label>
+                    <div style={{ display: 'flex', border: '1px solid var(--color-line)', borderRadius: '4px', overflow: 'hidden', background: '#ffffff' }}>
+                      <span style={{ display: 'flex', alignItems: 'center', background: 'var(--color-ivory)', borderRight: '1px solid var(--color-line)', fontSize: '.95rem', fontWeight: 500, color: 'var(--color-ink)', padding: '0 13px', userSelect: 'none' }}>+91</span>
                       <input
-                        type="email"
+                        type="tel"
                         required
-                        placeholder="you@email.com"
-                        style={{ width: '100%', border: '1px solid var(--color-line)', borderRadius: '4px', padding: '13px 15px', fontSize: '.95rem', fontFamily: 'inherit', color: 'var(--color-ink)', outline: 'none', background: '#ffffff' }}
+                        maxLength={10}
+                        pattern="[0-9]{10}"
+                        title="Please enter a valid 10-digit mobile number"
+                        onInput={(e) => {
+                          e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '').slice(0, 10);
+                        }}
+                        placeholder="00000 00000"
+                        style={{ width: '100%', flex: 1, border: 'none', padding: '13px 15px', fontSize: '.95rem', fontFamily: 'inherit', color: 'var(--color-ink)', outline: 'none', background: 'transparent' }}
                       />
                     </div>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <label style={{ display: 'block', fontSize: '.7rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-taupe)', fontWeight: 600, marginBottom: '7px' }}>Email Address</label>
+                    <input
+                      type="email"
+                      required
+                      pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                      title="Please enter a valid email address (e.g. name@example.com)"
+                      placeholder="you@email.com"
+                      style={{ width: '100%', border: '1px solid var(--color-line)', borderRadius: '4px', padding: '13px 15px', fontSize: '.95rem', fontFamily: 'inherit', color: 'var(--color-ink)', outline: 'none', background: '#ffffff' }}
+                    />
                   </div>
 
                   <button

@@ -380,7 +380,7 @@ export default function ProjectDetails() {
         </div>
 
         {/* Right 1 Column: Sticky Enquiry Form */}
-        <div className="bg-white border border-line rounded-2xl p-6 shadow-2xl lg:sticky lg:top-24 z-10 overflow-hidden">
+        <div id="project-enquiry-form" className="bg-white border border-line rounded-2xl p-6 shadow-2xl lg:sticky lg:top-24 z-10 overflow-hidden">
           <AnimatePresence mode="wait">
             {!formSubmitted ? (
               <motion.form
