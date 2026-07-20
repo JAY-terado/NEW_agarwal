@@ -18,18 +18,17 @@ const projectImages: Record<string, string> = {
 
 // Completed projects list from original site
 const completedProjects = [
-  { name: 'Agarwal Skyrise', sub: 'Vasai East · 2022', href: '/projects/skyrise' },
-  { name: 'Agarwal Infinity', sub: 'Virar West · 2023', href: '/projects/infinity' },
-  { name: 'Agarwal Sky Heights', sub: 'Virar West · 2019', href: '/projects/sky-heights' },
-  { name: 'Agarwal Yashwant Hts.', sub: 'Virar · 2018', href: '#projects' },
-  { name: 'Agarwal Horizon', sub: 'Virar West · 2015', href: '/projects/horizon' },
-  { name: 'Agarwal Nagri', sub: 'Vasai East · 2012', href: '#projects' },
-  { name: 'Viva Vrindavan', sub: 'Virar Township', href: '#projects' },
-  { name: 'Gokul Solitaire', sub: 'Virar', href: '#projects' },
-  { name: 'Gokul Sapphire', sub: 'Virar', href: '#projects' },
-  { name: 'Vrindavan Gardens', sub: 'Vasai', href: '#projects' },
-  { name: 'Agarwal Residency', sub: 'Vasai', href: '#projects' },
-  { name: 'Agarwal Sky Heights', sub: 'Vasai East', href: '#projects' },
+  { name: 'Agarwal Paramount', sub: 'Virar West', href: '/completed-projects' },
+  { name: 'Agarwal Exotica', sub: 'Vasai East', href: '/completed-projects' },
+  { name: 'Agarwal Lifestyle', sub: 'Virar West', href: '/completed-projects' },
+  { name: 'Agarwal Yashwant Hts.', sub: 'Virar', href: '/completed-projects' },
+  { name: 'Agarwal Meadows', sub: 'Virar West', href: '/completed-projects' },
+  { name: 'Agarwal Nagri', sub: 'Vasai East', href: '/completed-projects' },
+  { name: 'Viva Vrindavan', sub: 'Virar Township', href: '/completed-projects' },
+  { name: 'Gokul Solitaire', sub: 'Virar', href: '/completed-projects' },
+  { name: 'Gokul Sapphire', sub: 'Virar', href: '/completed-projects' },
+  { name: 'Vrindavan Gardens', sub: 'Vasai', href: '/completed-projects' },
+  { name: 'Agarwal Residency', sub: 'Vasai', href: '/completed-projects' },
 ];
 
 export default function Navbar() {
@@ -122,6 +121,10 @@ export default function Navbar() {
     ddTimer.current = window.setTimeout(() => setDdOpen(false), 120);
   };
 
+  // Check if current page needs light navbar by default
+  const isLightHero = location.pathname === '/completed-projects';
+  const forceScrolledStyle = scrolled || isLightHero;
+
   // Nav base: transparent/blur; scrolled: white glass
   const navStyle: React.CSSProperties = {
     position: 'fixed',
@@ -129,24 +132,24 @@ export default function Navbar() {
     left: 0,
     right: 0,
     zIndex: 100,
-    background: scrolled ? 'rgba(255,255,255,.9)' : 'rgba(0, 0, 0, 0.15)',
+    background: forceScrolledStyle ? 'rgba(255,255,255,.9)' : 'rgba(0, 0, 0, 0.15)',
     backdropFilter: 'blur(14px)',
     WebkitBackdropFilter: 'blur(14px)',
     transition: 'background .5s, box-shadow .5s, padding .5s, top .45s cubic-bezier(.22,.61,.36,1)',
     padding: scrolled ? '13px 0' : '20px 0',
     boxShadow: scrolled ? '0 10px 40px -24px rgba(0,0,0,.22)' : 'none',
-    borderBottom: scrolled ? '1px solid rgba(20,20,18,.14)' : '1px solid rgba(255, 255, 255, 0.1)',
+    borderBottom: forceScrolledStyle ? '1px solid rgba(20,20,18,.14)' : '1px solid rgba(255, 255, 255, 0.1)',
   };
 
-  const brandColor = scrolled ? 'var(--ink)' : 'var(--paper)';
-  const ctaBorder = scrolled ? 'var(--ink)' : 'var(--brass)';
-  const ctaColor = scrolled ? 'var(--ink)' : 'var(--paper)';
-  const burgerColor = scrolled ? 'var(--ink)' : 'var(--paper)';
+  const brandColor = forceScrolledStyle ? 'var(--ink)' : 'var(--paper)';
+  const ctaBorder = forceScrolledStyle ? 'var(--ink)' : 'var(--brass)';
+  const ctaColor = forceScrolledStyle ? 'var(--ink)' : 'var(--paper)';
+  const burgerColor = forceScrolledStyle ? 'var(--ink)' : 'var(--paper)';
 
   return (
     <>
       {/* NAV */}
-      <nav style={navStyle} id="nav" className={scrolled ? 'nav scrolled' : 'nav'}>
+      <nav style={navStyle} id="nav" className={forceScrolledStyle ? 'nav scrolled' : 'nav'}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 clamp(20px, 5vw, 64px)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '24px' }}>
           {/* Brand */}
           <Link to="/" onClick={handleLogoClick} style={{ textDecoration: 'none', color: brandColor, lineHeight: 1 }}>
@@ -190,9 +193,9 @@ export default function Navbar() {
               onMouseLeave={closeDd}
             >
               <Link
-                to="/projects"
-                onClick={() => handleNavClick('projects')}
-                className={`lk dd-toggle ${location.pathname === '/projects' ? 'active' : ''}`}
+                to="/completed-projects"
+                onClick={() => handleNavClick('completed-projects')}
+                className={`lk dd-toggle ${location.pathname === '/completed-projects' ? 'active' : ''}`}
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
               >
                 Completed Projects
@@ -238,7 +241,7 @@ export default function Navbar() {
                     ))}
                   </div>
                   <div style={{ marginTop: '14px', paddingTop: '13px', borderTop: '1px solid rgba(20,20,18,.14)', textAlign: 'right' }}>
-                    <Link to="/projects"
+                    <Link to="/completed-projects"
                       style={{ fontSize: '.72rem', letterSpacing: '.12em', textTransform: 'uppercase', fontWeight: 600, color: 'var(--brass-deep)', textDecoration: 'none' }}
                       onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
                       onMouseLeave={e => (e.currentTarget.style.color = 'var(--brass-deep)')}>

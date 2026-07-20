@@ -9,6 +9,7 @@ import TermsConditions from './pages/TermsConditions';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Careers from './pages/Careers';
 import AboutUs from './pages/AboutUs';
+import CompletedProjects from './pages/CompletedProjects';
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/completed-projects" element={<CompletedProjects />} />
         </Routes>
       </Layout>
     </Router>
