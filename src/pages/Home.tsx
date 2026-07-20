@@ -498,7 +498,7 @@ export default function Home() {
             <p>Since 1978, the Agarwal Group has been the cornerstone of residential development across the Vasai–Virar sub-region of Mumbai. What began as a vision to create thoughtfully designed homes has evolved into a legacy of excellence spanning generations of families.</p>
             <p>Each Agarwal residence is a testament to our unwavering commitment — spaces that blend intelligent architecture with world-class amenities, positioned in the most promising locations of the Mumbai Metropolitan Region.</p>
 
-            <Link className="custom-read-more" to="/blogs">
+            <Link className="custom-read-more" to="/about-us">
               <span className="custom-read-more__label">Read More</span>
               <span className="custom-read-more__icon">
                 <span className="custom-read-more__icon-small">

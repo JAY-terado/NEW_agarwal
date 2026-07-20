@@ -106,20 +106,20 @@ export default function Footer() {
           {/* Column 3: Company */}
           <div className="foot-col">
             <h5 style={{ fontSize: '.72rem', letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--brass)', marginBottom: '18px' }}>
-              Company
+              Quick Links
             </h5>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {[
                 { to: '/customer-registration', label: 'Customer Registration' },
-                { to: '/story', label: 'About Us' },
+                { to: '/about-us', label: 'About Us' },
                 { to: '/projects', label: 'Ongoing Projects' },
                 { to: '/projects', label: 'Completed Projects' },
                 { to: '/blogs', label: 'Blogs' },
                 { to: '/channel-partner', label: 'Channel Partner' },
                 { to: '/contact', label: 'Contact Us' },
-                { to: '/contact', label: 'Careers' },
+                { to: '/careers', label: 'Careers' },
                 { to: '/story', label: 'Our Vision' },
-                { to: '/projects', label: 'RERA Details' },
+                // { to: '/projects', label: 'RERA Details' },
               ].map((link, i) => (
                 <Link key={i} to={link.to}
                   style={{ display: 'block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'color .25s', textDecoration: 'none' }}

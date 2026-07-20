@@ -20,17 +20,17 @@ export default function TermsConditions() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-pine via-pine/40 to-pine/65" />
         </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-6 pb-12 w-full text-ivory">
-          <div className="text-xs uppercase tracking-widest text-ivory/60 mb-3">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 pb-12 w-full text-ivory flex flex-col items-center text-center">
+          {/* <div className="text-xs uppercase tracking-widest text-ivory/60 mb-3">
             <Link to="/" className="hover:text-brass-bright transition-colors">Home</Link> &nbsp;/&nbsp; <span className="text-brass-bright">Terms &amp; Conditions</span>
           </div>
           <span className="bg-brass-bright text-pine text-[10px] tracking-wider uppercase font-bold py-1 px-3.5 rounded-full inline-block mb-3.5">
             Legal &amp; Policy
-          </span>
+          </span> */}
           <h1 className="font-serif text-4xl sm:text-5xl font-light tracking-tight mb-2">
             Terms &amp; <span className="italic font-serif text-brass-bright font-normal">Conditions</span>
           </h1>
-          <p className="text-xs sm:text-sm text-ivory/80 max-w-xl font-light leading-relaxed">
+          <p className="text-xs sm:text-sm text-ivory/80 font-light leading-relaxed">
             Effective Date: July 18, 2026. Please read these terms carefully before using our services.
           </p>
         </div>
@@ -39,56 +39,39 @@ export default function TermsConditions() {
       {/* Main Content */}
       <section className="py-16 max-w-4xl mx-auto px-6">
         <div className="bg-white border border-line rounded-3xl p-8 sm:p-12 shadow-xl flex flex-col gap-8">
-          
+
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brass-deep pb-3 border-b border-line/40">
             <FileText className="w-4 h-4" /> Website Terms of Use &amp; Service disclaimers
           </div>
 
           <div className="prose max-w-none text-xs sm:text-sm text-ink-soft leading-relaxed font-light flex flex-col gap-6">
-            <div>
-              <h3 className="font-serif text-lg text-ink font-semibold mb-2">1. Agreement to Terms</h3>
-              <p>
-                By accessing and using this website, you agree to be bound by these Terms &amp; Conditions and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site. The materials contained on this website are protected by applicable copyright and trademark law.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-serif text-lg text-ink font-semibold mb-2">2. Property disclaimers &amp; MahaRERA</h3>
-              <p>
-                All project specifications, layout designs, 3D renderings, and amenities shown on this website are conceptual artist impressions intended only for representation purposes. Actual project dimensions, configuration details, and layouts are subject to approvals from appropriate municipal authorities and MahaRERA. 
-              </p>
-              <p className="mt-2">
-                Prospective buyers are advised to check the official MahaRERA website or inspect the approved plans directly at our sales offices to review registration certificates and municipal layout approvals before making any booking decisions.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-serif text-lg text-ink font-semibold mb-2">3. Enquiries &amp; Customer Submissions</h3>
-              <p>
-                When submitting details through our callback request form, customer registration forms, or channel partner forms, you certify that the information provided is accurate and belongs to you. You grant the Agarwal Group and its authorized sales coordinators explicit consent to reach out to you via call, email, or WhatsApp relative to your inquiry, overriding DND status if registered.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-serif text-lg text-ink font-semibold mb-2">4. Limitations of Liability</h3>
-              <p>
-                In no event shall the Agarwal Group or its developers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on this website, even if an authorized representative has been notified orally or in writing of the possibility of such damage.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-serif text-lg text-ink font-semibold mb-2">5. Intellectual Property</h3>
-              <p>
-                The trademarks, brands, images, logos, copy, and layout design displayed on this site are the sole property of the Agarwal Group and its partner brands. You are not granted any license or permission to copy, reuse, modify, or download any media files or assets (such as videos or project layouts) from this site without explicit written approval.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-serif text-lg text-ink font-semibold mb-2">6. Modifications and Updates</h3>
-              <p>
-                The Agarwal Group may revise these website Terms &amp; Conditions at any time without prior notice. By using this website, you agree to be bound by the current version of these Terms &amp; Conditions.
-              </p>
-            </div>
+            <ul className="list-none pl-0 space-y-4">
+              {[
+                "The information, images, plans, layouts, specifications, dimensions, elevations, amenities, facilities, illustrations, videos, and other content displayed on this website are for general information and artistic representation only and are subject to change without prior notice, subject to approvals from the competent authorities.",
+                "All visual representations, including computer-generated images (CGIs), renders, walkthroughs, animations, and sample apartment photographs, are indicative only and may differ from the actual completed development.",
+                "Furniture, furnishings, décor items, electronic appliances, landscaping elements, vehicles, and accessories shown in the images or videos are for illustrative purposes only and do not form part of the standard apartment unless specifically mentioned in the Agreement for Sale.",
+                "Apartments shall be delivered as per the specifications mentioned in the Agreement for Sale and the approved construction plans.",
+                "Views shown from balconies, windows, terraces, or common areas are indicative and may vary depending on the apartment location, floor level, surrounding developments, weather conditions, and future construction in the vicinity.",
+                "Floor plans, dimensions, and layouts are approximate and may undergo minor modifications due to architectural, structural, engineering, or statutory requirements.",
+                "Carpet Area, as defined under the Real Estate (Regulation and Development) Act, 2016 (RERA), shall prevail wherever applicable. Super Built-up Area or Saleable Area, if mentioned, is for reference only.",
+                "Prices mentioned for 1 BHK, 2 BHK, and 3 BHK apartments are exclusive of applicable GST (where applicable), stamp duty, registration charges, maintenance deposits, legal charges, government levies, utility connection charges, society formation charges, and any other statutory charges payable by the purchaser.",
+                "All offers, discounts, payment plans, and promotional schemes are subject to change, withdrawal, or modification without prior notice and are subject to the terms of the respective offer.",
+                "Amenities and recreational facilities shall be developed in phases wherever applicable and will be provided in accordance with the approved plans and project specifications.",
+                "The project timeline, possession schedule, and completion dates are subject to force majeure events, government directives, judicial orders, natural calamities, material shortages, labour issues, or any other circumstances beyond the control of the developer.",
+                "The developer reserves the right to make reasonable modifications in design, specifications, materials, colour schemes, landscaping, or common areas, provided such changes comply with applicable laws and regulatory approvals.",
+                "Prospective purchasers are advised to independently verify all project details, approvals, specifications, pricing, availability, payment schedules, and legal documents before making any booking or purchase decision.",
+                "The information contained on this website does not constitute a legal offer, contract, warranty, or commitment. The terms of the Agreement for Sale and other executed legal documents shall prevail in case of any inconsistency.",
+                "The project shall be governed by the applicable provisions of the Real Estate (Regulation and Development) Act, 2016, the rules framed thereunder, and other applicable laws.",
+                "The Project RERA Registration Number, approved plans, and other statutory details are available on the respective State RERA portal and should be verified by intending purchasers before making any payment.",
+                "The developer shall not be liable for any reliance placed on outdated information after the website has been updated or revised.",
+                "By accessing this website, the user acknowledges that they have read, understood, and agreed to these Terms & Conditions."
+              ].map((text, idx) => (
+                <li key={idx} className="flex items-start gap-3">
+                  <span className="mt-1.5 w-1.5 h-1.5 rotate-45 bg-brass-bright shrink-0" />
+                  <span>{text}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div className="pt-6 border-t border-line/40 flex items-center justify-between">
