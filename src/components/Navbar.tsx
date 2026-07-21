@@ -34,6 +34,7 @@ const completedProjects = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileOngoingOpen, setMobileOngoingOpen] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
   const [ddOpen, setDdOpen] = useState(false);
   const location = useLocation();
@@ -49,6 +50,7 @@ export default function Navbar() {
 
   useEffect(() => {
     setMobileMenuOpen(false);
+    setMobileOngoingOpen(false);
     setMegaOpen(false);
     setDdOpen(false);
   }, [location]);
@@ -150,14 +152,14 @@ export default function Navbar() {
     <>
       {/* NAV */}
       <nav style={navStyle} id="nav" className={forceScrolledStyle ? 'nav scrolled' : 'nav'}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 clamp(20px, 5vw, 64px)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '24px' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 clamp(20px, 3.5vw, 64px)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'clamp(12px, 2vw, 24px)' }}>
           {/* Brand */}
           <Link to="/" onClick={handleLogoClick} style={{ textDecoration: 'none', color: brandColor, lineHeight: 1 }}>
             <img src={Logo} alt="Agarwal Group" style={{ height: '42px', width: 'auto', display: 'block', borderRadius: '6px' }} />
           </Link>
 
           {/* Desktop Nav Links */}
-          <div className="nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: '26px' }}>
+          <div className="nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: 'clamp(10px, 1.8vw, 26px)' }}>
             <Link
               to="/story"
               onClick={() => handleNavClick('story')}
@@ -281,9 +283,9 @@ export default function Navbar() {
                 border: `1px solid ${ctaBorder}`,
                 color: ctaColor,
                 background: 'transparent',
-                padding: '11px 22px',
+                padding: 'clamp(8px, 1vw, 11px) clamp(12px, 1.5vw, 22px)',
                 borderRadius: '50px',
-                fontSize: '.76rem',
+                fontSize: 'clamp(0.7rem, 0.8vw, 0.76rem)',
                 letterSpacing: '.12em',
                 textTransform: 'uppercase',
                 fontWeight: 600,
@@ -474,63 +476,104 @@ export default function Navbar() {
         </div>
 
         {/* Drawer Scrollable Links */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', flex: 1, overflowY: 'auto', paddingRight: '8px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', flex: 1, overflowY: 'auto', paddingRight: '8px' }}>
           {[
             { label: 'About Us', to: '/story', pathId: 'story', index: '01' },
-            { label: 'Blogs', to: '/blogs', index: '02' },
-            { label: 'Channel Partner', to: '/channel-partner', index: '03' },
-            { label: 'Contact Us', to: '/contact', pathId: 'contact', index: '04' },
-            { label: 'Completed Projects', to: '/completed-projects', index: '05' },
-          ].map(item => (
-            <Link
-              key={item.label}
-              to={item.to}
-              onClick={() => { setMobileMenuOpen(false); if (item.pathId) handleNavClick(item.pathId); }}
-              style={{
-                display: 'flex',
-                alignItems: 'baseline',
-                gap: '12px',
-                fontFamily: '"Fraunces", serif',
-                fontSize: '1.5rem',
-                fontWeight: 300,
-                color: 'rgba(244, 240, 231, 0.9)',
-                textDecoration: 'none',
-                transition: 'color .3s, transform 0.3s',
-              }}
-              onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass-bright)'; e.currentTarget.style.transform = 'translateX(6px)'; }}
-              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(244, 240, 231, 0.9)'; e.currentTarget.style.transform = 'none'; }}
-            >
-              <span style={{ fontSize: '0.75rem', fontFamily: '"Inter", sans-serif', color: 'var(--brass)', fontWeight: 600, letterSpacing: '0.1em' }}>{item.index}</span>
-              {item.label}
-            </Link>
-          ))}
+            { label: 'Ongoing Projects', isAccordion: true, items: projects, index: '02' },
+            { label: 'Completed Projects', to: '/completed-projects', index: '03' },
+            { label: 'Blogs', to: '/blogs', index: '04' },
+            { label: 'Channel Partner', to: '/channel-partner', index: '05' },
+            { label: 'Contact Us', to: '/contact', pathId: 'contact', index: '06' },
+          ].map(item => {
+            if (item.isAccordion) {
+              return (
+                <div key={item.label} style={{ display: 'flex', flexDirection: 'column' }}>
+                  <button
+                    onClick={() => setMobileOngoingOpen(!mobileOngoingOpen)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'baseline',
+                      gap: '12px',
+                      fontFamily: '"Fraunces", serif',
+                      fontSize: '1.5rem',
+                      fontWeight: 300,
+                      color: 'rgba(244, 240, 231, 0.9)',
+                      background: 'none',
+                      border: 'none',
+                      cursor: 'pointer',
+                      padding: 0,
+                      textAlign: 'left',
+                      transition: 'color .3s, transform 0.3s',
+                      outline: 'none'
+                    }}
+                  >
+                    <span style={{ fontSize: '0.75rem', fontFamily: '"Inter", sans-serif', color: 'var(--brass)', fontWeight: 600, letterSpacing: '0.1em' }}>{item.index}</span>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      {item.label}
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" style={{ transition: 'transform .3s', transform: mobileOngoingOpen ? 'rotate(180deg)' : 'none', opacity: 0.7 }}>
+                        <path d="m6 9 6 6 6-6" />
+                      </svg>
+                    </span>
+                  </button>
+                  <AnimatePresence>
+                    {mobileOngoingOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        style={{ overflow: 'hidden' }}
+                      >
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', borderLeft: '1px solid rgba(220, 188, 124, 0.2)', paddingLeft: '14px', marginLeft: '4px', marginTop: '16px', marginBottom: '8px' }}>
+                          {item.items?.map(p => (
+                            <Link
+                              key={p.slug}
+                              to={`/projects/${p.slug}`}
+                              onClick={() => setMobileMenuOpen(false)}
+                              style={{
+                                fontSize: '0.92rem',
+                                color: 'rgba(244, 240, 231, 0.7)',
+                                textDecoration: 'none',
+                                transition: 'color 0.3s, transform 0.3s',
+                                display: 'block'
+                              }}
+                              onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass-bright)'; e.currentTarget.style.transform = 'translateX(4px)'; }}
+                              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(244, 240, 231, 0.7)'; e.currentTarget.style.transform = 'none'; }}
+                            >
+                              {p.name}
+                            </Link>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            }
 
-          {/* Ongoing Projects Section */}
-          <div style={{ marginTop: '12px', borderTop: '1px solid rgba(220, 188, 124, 0.15)', paddingTop: '20px' }}>
-            <span style={{ fontFamily: '"Fraunces", serif', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'var(--brass)', display: 'block', marginBottom: '14px', fontWeight: 600 }}>
-              Ongoing Projects
-            </span>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', borderLeft: '1px solid rgba(220, 188, 124, 0.2)', paddingLeft: '14px', marginLeft: '4px' }}>
-              {projects.map(p => (
-                <Link
-                  key={p.slug}
-                  to={`/projects/${p.slug}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                  style={{
-                    fontSize: '0.92rem',
-                    color: 'rgba(244, 240, 231, 0.7)',
-                    textDecoration: 'none',
-                    transition: 'color 0.3s, transform 0.3s',
-                    display: 'block'
-                  }}
-                  onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass-bright)'; e.currentTarget.style.transform = 'translateX(4px)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.color = 'rgba(244, 240, 231, 0.7)'; e.currentTarget.style.transform = 'none'; }}
-                >
-                  {p.name}
-                </Link>
-              ))}
-            </div>
-          </div>
+            return (
+              <Link
+                key={item.label}
+                to={item.to as string}
+                onClick={() => { setMobileMenuOpen(false); if (item.pathId) handleNavClick(item.pathId); }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'baseline',
+                  gap: '12px',
+                  fontFamily: '"Fraunces", serif',
+                  fontSize: '1.5rem',
+                  fontWeight: 300,
+                  color: 'rgba(244, 240, 231, 0.9)',
+                  textDecoration: 'none',
+                  transition: 'color .3s, transform 0.3s',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass-bright)'; e.currentTarget.style.transform = 'translateX(6px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.color = 'rgba(244, 240, 231, 0.9)'; e.currentTarget.style.transform = 'none'; }}
+              >
+                <span style={{ fontSize: '0.75rem', fontFamily: '"Inter", sans-serif', color: 'var(--brass)', fontWeight: 600, letterSpacing: '0.1em' }}>{item.index}</span>
+                {item.label}
+              </Link>
+            );
+          })}
         </div>
 
         {/* Drawer Footer / CTA */}

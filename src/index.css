@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -914,6 +914,12 @@ section[id] {
     border-right: 0;
   }
 
+  /* Make the 3rd odd item span full width to center it */
+  .sbox:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    border-right: 0;
+  }
+
   /* Remove bottom border for the last row on a 2-col grid */
   .sbox:last-child,
   .sbox:nth-last-child(2):nth-child(odd) {
@@ -1002,8 +1008,8 @@ section[id] {
   position: absolute;
   top: 14px;
   left: 14px;
-  background: var(--color-pine);
-  color: var(--color-brass-bright);
+  background: #fff;
+  color: var(--color-ink);
   font-size: .64rem;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -1102,7 +1108,7 @@ section[id] {
   gap: 12px;
 }
 
-.pcta a {
+.pcta a, .pcta-btn {
   flex: 1;
   position: relative;
   overflow: hidden;
@@ -1121,12 +1127,12 @@ section[id] {
   transition: transform .4s var(--ease), color .45s var(--ease), border-color .45s var(--ease), box-shadow .45s var(--ease);
 }
 
-.pcta a>span {
+.pcta a>span, .pcta-btn>span {
   position: relative;
   z-index: 2;
 }
 
-.pcta a .arr {
+.pcta a .arr, .pcta-btn .arr {
   display: inline-flex;
   align-items: center;
   max-width: 0;
@@ -1137,14 +1143,14 @@ section[id] {
   transition: max-width .45s var(--ease), margin-left .45s var(--ease), opacity .4s var(--ease), transform .45s var(--ease);
 }
 
-.pcta a:hover .arr {
+.pcta a:hover .arr, .pcta-btn:hover .arr {
   max-width: 1.6em;
   margin-left: 10px;
   opacity: 1;
   transform: translateX(0);
 }
 
-.pcta a::before {
+.pcta a::before, .pcta-btn::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -1153,7 +1159,7 @@ section[id] {
   transition: transform .6s var(--ease);
 }
 
-.pcta a::after {
+.pcta a::after, .pcta-btn::after {
   content: "";
   position: absolute;
   left: 0;
@@ -1167,24 +1173,24 @@ section[id] {
   pointer-events: none;
 }
 
-.pcta a:hover::before {
+.pcta a:hover::before, .pcta-btn:hover::before {
   transform: translateX(0);
 }
 
-.pcta a:hover::after {
+.pcta a:hover::after, .pcta-btn:hover::after {
   opacity: 1;
 }
 
-.pcta a:hover {
+.pcta a:hover, .pcta-btn:hover {
   transform: translateY(-3px);
 }
 
-.pcta a:active {
+.pcta a:active, .pcta-btn:active {
   transform: translateY(-1px) scale(.98);
   transition-duration: .09s;
 }
 
-.pcta a:focus-visible {
+.pcta a:focus-visible, .pcta-btn:focus-visible {
   outline: 2px solid var(--color-brass);
   outline-offset: 3px;
 }
@@ -1792,7 +1798,7 @@ section[id] {
    ========================================== */
 .nav-links-desktop a.lk {
   color: rgba(244, 240, 231, .86) !important;
-  font-size: .8rem;
+  font-size: clamp(0.7rem, 0.8vw, 0.8rem);
   letter-spacing: .08em;
   text-transform: uppercase;
   font-weight: 500;

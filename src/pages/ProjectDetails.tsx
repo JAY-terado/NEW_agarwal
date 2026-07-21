@@ -700,9 +700,10 @@ export default function ProjectDetails() {
 
                   <button
                     type="submit"
-                    className="w-full p-4 rounded-full text-sm font-bold tracking-widest uppercase bg-gradient-to-br from-brass-bright to-brass text-pine border-none cursor-pointer hover:-translate-y-1 hover:shadow-lg transition-all flex items-center justify-center gap-2 mt-4"
+                    className="pcta-btn btn-enquire w-full mt-4"
                   >
-                    Get Best Offers →
+                    <span>Get Best Offers</span>
+                    <span className="arr">→</span>
                   </button>
                   <div className="text-xs text-taupe text-center mt-2 leading-relaxed">
                     By submitting, you agree to our Terms &amp; Privacy Policy.

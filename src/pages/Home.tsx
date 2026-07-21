@@ -139,9 +139,9 @@ function useCountUp(target: number, duration: number = 2000, trigger: boolean) {
 }
 
 const searchItems: Array<{ name: string; status: string; sub: string; slug?: string; link?: string }> = [
-  { name: 'Agarwal Skyrise', status: 'Ongoing', sub: 'Vasai East', slug: 'skyrise' },
   { name: 'Agarwal Infinity', status: 'Ongoing', sub: 'Virar West', slug: 'infinity' },
   { name: 'Agarwal Sky Heights', status: 'Ongoing', sub: 'Virar West', slug: 'sky-heights' },
+  { name: 'Agarwal Skyrise', status: 'Ongoing', sub: 'Vasai East', slug: 'skyrise' },
   { name: 'Agarwal Horizon', status: 'Ongoing', sub: 'Virar West', slug: 'horizon' },
   // { name: 'Agarwal Yashwant Hts.', status: 'Completed', sub: 'Virar', link: '#projects' },
   // { name: 'Agarwal Nagri', status: 'Completed', sub: 'Vasai', link: '#projects' },
@@ -364,7 +364,7 @@ export default function Home() {
         {/* Centered Search Bar */}
         <div className="absolute inset-0 flex items-end justify-center z-10" style={{ padding: '0 24px clamp(46px, 11vh, 104px)' }} ref={searchContainerRef}>
           <form className="relative" style={{ width: 'min(760px, 90vw)' }} onSubmit={(e) => e.preventDefault()}>
-            <div className="hero-search" style={{
+            {/* <div className="hero-search" style={{
               display: 'flex',
               alignItems: 'center',
               gap: '16px',
@@ -401,7 +401,7 @@ export default function Home() {
                 onMouseLeave={(e) => (e.currentTarget.style.color = '#fff')}>
                 <Search className="w-6 h-6" strokeWidth={1.6} />
               </button>
-            </div>
+            </div> */}
 
             {/* Dropdown search autocomplete panel */}
             <AnimatePresence>
@@ -961,11 +961,11 @@ export default function Home() {
 
                   <button
                     type="submit"
-                    style={{ width: '100%', padding: '16px 20px', borderRadius: '50px', fontSize: '.75rem', fontWeight: 600, letterSpacing: '.12em', textTransform: 'uppercase', background: 'linear-gradient(135deg, var(--color-brass-bright), var(--color-brass))', color: 'var(--color-pine)', border: 'none', cursor: 'pointer', transition: 'transform .4s var(--ease), box-shadow .45s var(--ease)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginTop: '10px' }}
-                    onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.transform = ''; }}
+                    className="pcta-btn btn-enquire"
+                    style={{ width: '100%', marginTop: '10px' }}
                   >
-                    Get Best Offers →
+                    <span>Get Best Offers</span>
+                    <span className="arr">→</span>
                   </button>
                   <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', marginTop: '10px', lineHeight: 1.4 }}>
                     By submitting, you agree to our Terms &amp; Privacy Policy. We will never share your data.
@@ -1048,10 +1048,10 @@ export default function Home() {
                 rel="noopener"
                 aria-label="View on Instagram"
               >
-                <img 
-                  src={post.image} 
-                  alt={`Instagram post ${post.id}`} 
-                  loading="lazy" 
+                <img
+                  src={post.image}
+                  alt={`Instagram post ${post.id}`}
+                  loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none" />
