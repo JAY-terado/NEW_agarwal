@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Sparkles, Clock, ShieldCheck, Users } from 'lucide-react';
+import { Sparkles, Clock, ShieldCheck, Users } from 'lucide-react';
 import { projects } from '../data/projects';
 
 // Asset Imports
@@ -138,24 +138,16 @@ function useCountUp(target: number, duration: number = 2000, trigger: boolean) {
   return count;
 }
 
-const searchItems: Array<{ name: string; status: string; sub: string; slug?: string; link?: string }> = [
-  { name: 'Agarwal Infinity', status: 'Ongoing', sub: 'Virar West', slug: 'infinity' },
-  { name: 'Agarwal Sky Heights', status: 'Ongoing', sub: 'Virar West', slug: 'sky-heights' },
-  { name: 'Agarwal Skyrise', status: 'Ongoing', sub: 'Vasai East', slug: 'skyrise' },
-  { name: 'Agarwal Horizon', status: 'Ongoing', sub: 'Virar West', slug: 'horizon' },
-  // { name: 'Agarwal Yashwant Hts.', status: 'Completed', sub: 'Virar', link: '#projects' },
-  // { name: 'Agarwal Nagri', status: 'Completed', sub: 'Vasai', link: '#projects' },
-];
+
 
 export default function Home() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchFocused, setSearchFocused] = useState(false);
+
   const [statsTriggered, setStatsTriggered] = useState(false);
   const [contactSubmitted, setContactSubmitted] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
   const statsRef = useRef<HTMLDivElement>(null);
-  const searchContainerRef = useRef<HTMLDivElement>(null);
+
   const reelsRef = useRef<HTMLDivElement>(null);
   const btrackRef = useRef<HTMLDivElement>(null);
 
@@ -329,10 +321,7 @@ export default function Home() {
     return () => { if (blogsTimerRef.current) clearInterval(blogsTimerRef.current); };
   }, []);
 
-  const filteredSearchItems = searchItems.filter((item) =>
-    item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.sub.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+
 
   const countYears = useCountUp(48, 1500, statsTriggered);
   const countProjects = useCountUp(30, 1500, statsTriggered);
@@ -361,115 +350,7 @@ export default function Home() {
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(18, 18, 16, .5) 0%, rgba(18, 18, 16, .2) 36%, rgba(18, 18, 16, .85) 100%)' }} />
         </div>
 
-        {/* Centered Search Bar */}
-        <div className="absolute inset-0 flex items-end justify-center z-10" style={{ padding: '0 24px clamp(46px, 11vh, 104px)' }} ref={searchContainerRef}>
-          <form className="relative" style={{ width: 'min(760px, 90vw)' }} onSubmit={(e) => e.preventDefault()}>
-            {/* <div className="hero-search" style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '16px',
-              background: searchFocused ? 'rgba(18, 16, 12, .46)' : 'rgba(18, 16, 12, .34)',
-              backdropFilter: 'blur(7px)',
-              WebkitBackdropFilter: 'blur(7px)',
-              border: searchFocused ? '1px solid rgba(220, 188, 124, .7)' : '1px solid rgba(255, 255, 255, .18)',
-              borderRadius: '14px',
-              padding: '20px 24px',
-              boxShadow: '0 26px 64px -30px rgba(0, 0, 0, .65)',
-              transition: 'border-color .35s ease, background .35s ease'
-            }}>
-              <input
-                type="search"
-                placeholder="Search"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onFocus={() => setSearchFocused(true)}
-                style={{
-                  background: 'transparent',
-                  color: '#fff',
-                  width: '100%',
-                  border: 'none',
-                  outline: 'none',
-                  fontFamily: '"Fraunces", serif',
-                  fontStyle: 'italic',
-                  fontWeight: 300,
-                  fontSize: 'clamp(1.05rem, 2vw, 1.3rem)',
-                  letterSpacing: '.01em'
-                }}
-              />
-              <button type="submit" aria-label="Search" style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#fff', display: 'grid', placeItems: 'center', transition: 'color .3s ease' }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-brass-bright)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = '#fff')}>
-                <Search className="w-6 h-6" strokeWidth={1.6} />
-              </button>
-            </div> */}
 
-            {/* Dropdown search autocomplete panel */}
-            <AnimatePresence>
-              {searchFocused && (
-                <motion.div
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 8 }}
-                  style={{ position: 'absolute', bottom: 'calc(100% + 12px)', left: 0, right: 0, background: 'rgba(18, 16, 12, .85)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', border: '1px solid rgba(255, 255, 255, .15)', borderRadius: '14px', boxShadow: '0 -24px 64px -16px rgba(0, 0, 0, .6)', zIndex: 20 }}
-                  className="max-h-[300px] overflow-y-auto"
-                >
-                  {filteredSearchItems.length > 0 ? (
-                    <div>
-                      {filteredSearchItems.map((p, idx) => {
-                        const isCompleted = p.status.toLowerCase() === 'completed';
-                        const itemContent = (
-                          <>
-                            <div className="sdd-main" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                              <span className="sdd-title" style={{ color: '#fff', fontFamily: '"Fraunces", serif', fontSize: '1.15rem', fontWeight: 500 }}>{p.name}</span>
-                              <span className={`sdd-status ${isCompleted ? 'completed' : 'ongoing'}`} style={{
-                                fontSize: '0.65rem',
-                                textTransform: 'uppercase',
-                                letterSpacing: '0.08em',
-                                padding: '4px 8px',
-                                borderRadius: '4px',
-                                fontWeight: 600,
-                                background: isCompleted ? 'rgba(255, 255, 255, 0.1)' : 'rgba(220, 188, 124, 0.15)',
-                                color: isCompleted ? 'rgba(255, 255, 255, 0.7)' : '#fff',
-                                border: isCompleted ? '1px solid rgba(255, 255, 255, 0.15)' : '1px solid rgba(255, 255, 255, 0.6)'
-                              }}>{p.status}</span>
-                            </div>
-                            <div className="sdd-sub" style={{ color: 'rgba(255, 255, 255, .5)', fontSize: '0.85rem', fontWeight: 300 }}>{p.sub}</div>
-                          </>
-                        );
-
-                        return p.slug ? (
-                          <Link
-                            key={idx}
-                            to={`/projects/${p.slug}`}
-                            className="sdd-item"
-                            style={{ display: 'block', padding: '16px 24px', borderBottom: '1px solid rgba(255, 255, 255, .06)', textDecoration: 'none', transition: 'background .2s' }}
-                            onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255, 255, 255, .05)')}
-                            onMouseLeave={(e) => (e.currentTarget.style.background = '')}
-                          >
-                            {itemContent}
-                          </Link>
-                        ) : (
-                          <a
-                            key={idx}
-                            href={p.link}
-                            className="sdd-item"
-                            style={{ display: 'block', padding: '16px 24px', borderBottom: '1px solid rgba(255, 255, 255, .06)', textDecoration: 'none', transition: 'background .2s' }}
-                            onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255, 255, 255, .05)')}
-                            onMouseLeave={(e) => (e.currentTarget.style.background = '')}
-                          >
-                            {itemContent}
-                          </a>
-                        );
-                      })}
-                    </div>
-                  ) : (
-                    <div style={{ padding: '24px', textAlign: 'center', color: 'rgba(255, 255, 255, .5)', fontStyle: 'italic' }}>No projects found.</div>
-                  )}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </form>
-        </div>
       </header>
 
       <section ref={statsRef} className="stats">
