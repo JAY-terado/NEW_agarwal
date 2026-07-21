@@ -1037,17 +1037,24 @@ export default function Home() {
               <small>Awards</small>
             </div>
           </div>
-          <div className="insta-grid reveal">
-            {instagramPosts.map((post) => (
+          <div className="grid grid-cols-3 gap-1 md:gap-2 lg:gap-4 reveal">
+            {instagramPosts.slice(0, 6).map((post) => (
               <a
                 key={post.id}
-                className="ig-post"
+                className="relative block overflow-hidden bg-line-light group w-full"
+                style={{ aspectRatio: '4/5' }}
                 href="https://www.instagram.com/agarwalrealties"
                 target="_blank"
                 rel="noopener"
                 aria-label="View on Instagram"
               >
-                <img src={post.image} alt={`Instagram post ${post.id}`} loading="lazy" />
+                <img 
+                  src={post.image} 
+                  alt={`Instagram post ${post.id}`} 
+                  loading="lazy" 
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none" />
               </a>
             ))}
           </div>

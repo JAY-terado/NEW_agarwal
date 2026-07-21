@@ -480,6 +480,7 @@ export default function Navbar() {
             { label: 'Blogs', to: '/blogs', index: '02' },
             { label: 'Channel Partner', to: '/channel-partner', index: '03' },
             { label: 'Contact Us', to: '/contact', pathId: 'contact', index: '04' },
+            { label: 'Completed Projects', to: '/completed-projects', index: '05' },
           ].map(item => (
             <Link
               key={item.label}

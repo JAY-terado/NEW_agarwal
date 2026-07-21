@@ -27,6 +27,8 @@ import skyriseHero from '../assets/agarwal-skyrise-hero.jpg';
 import skyHeightsHero from '../assets/agarwal-sky-heights-hero.jpg';
 import horizonHero from '../assets/agarwal-horizon-hero.jpg';
 
+import qrSample from '../assets/qrSample.svg';
+
 const projectHeroMap: Record<string, string> = {
   infinity: infinityHero,
   skyrise: skyriseHero,
@@ -70,13 +72,90 @@ const amenityImageMap: Record<string, string> = {
   'Rooftop Sky Lounge': amenityRooftop
 };
 
+function ReraDetailsWidget({ project }: { project: any }) {
+  const [isExpanded, setIsExpanded] = useState(false);
 
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  return (
+    <div className="absolute top-[82px] right-0 z-[40]">
+      {/* The Expandable Panel */}
+      <div
+        className={`
+          text-white shadow-lg transition-all duration-300 ease-in-out overflow-hidden origin-top-right
+          w-[280px] sm:w-[320px] /* Fixed width for both states to prevent leftward movement */
+          border border-white/10 backdrop-blur-[14px]
+          ${isExpanded ? 'h-[420px] p-6 bg-black/40' : 'h-[50px] cursor-pointer bg-black/15 hover:bg-black/25'}
+        `}
+        onClick={!isExpanded ? toggleExpand : undefined}
+      >
+        {/* Collapsed State Content */}
+        <div
+          className={`h-[50px] flex items-center justify-center transition-opacity duration-200 absolute top-0 left-0 right-0
+            ${isExpanded ? 'opacity-0 pointer-events-none' : 'opacity-100'}
+          `}
+        >
+          <span className="text-xs sm:text-sm tracking-[0.1em] font-medium text-white/90">MAHARERA DETAILS</span>
+        </div>
+
+        {/* Expanded State Content */}
+        <div
+          className={`flex flex-col items-center pt-2 transition-opacity duration-500 delay-100
+            ${isExpanded ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+          `}
+        >
+          {/* Close Button */}
+          <button
+            onClick={toggleExpand}
+            className="absolute top-4 right-4 p-1 rounded-full border border-white/40 hover:bg-white/10 transition-colors"
+            aria-label="Close details"
+          >
+            <X size={16} strokeWidth={1.5} className="text-white/80" />
+          </button>
+
+          {/* Logo Area */}
+          <div className="mt-4 mb-4 flex flex-col items-center text-center">
+            <h2 className="text-xl sm:text-2xl tracking-[0.2em] font-light mb-1 uppercase">{project.name}</h2>
+            <p className="text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-white/80">{project.location.split(',')[0]}</p>
+          </div>
+
+          {/* QR Code Container */}
+          <div className="bg-white p-2 mb-4 rounded-sm">
+            <img
+              src={qrSample}
+              alt="RERA QR Code"
+              className="w-24 h-24 sm:w-28 sm:h-28 object-contain"
+            />
+          </div>
+
+          {/* Registration Details */}
+          <div className="text-center mb-6 flex flex-col gap-1">
+            <p className="text-[10px] sm:text-xs uppercase tracking-[0.1em] text-white/90">RERA Registration Number</p>
+            <p className="text-sm sm:text-lg tracking-widest font-light">{project.rera || 'N/A'}</p>
+          </div>
+
+          {/* Link */}
+          <a
+            href="https://maharera.mahaonline.gov.in/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs sm:text-sm tracking-[0.1em] pb-1 border-b border-white hover:text-white/80 hover:border-white/80 transition-colors"
+          >
+            MAHARERA WEBSITE
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function ProjectDetails() {
   const { slug } = useParams<{ slug: string }>();
   const [project, setProject] = useState(projects.find((p) => p.slug === slug));
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [lightbox, setLightbox] = useState<{ images: string[], index: number } | null>(null);
   const [activeLayout, setActiveLayout] = useState<'1 BHK' | '2 BHK' | '3 BHK'>('1 BHK');
   const [amenityOffset, setAmenityOffset] = useState(0);
   const [showFloater, setShowFloater] = useState(false);
@@ -87,7 +166,7 @@ export default function ProjectDetails() {
   useEffect(() => {
     setProject(projects.find((p) => p.slug === slug));
     setFormSubmitted(false);
-    setSelectedImage(null);
+    setLightbox(null);
     setAmenityOffset(0);
     setShowFloater(false);
     setHasClosedFloater(false);
@@ -174,6 +253,8 @@ export default function ProjectDetails() {
           <div className="absolute inset-0 bg-gradient-to-t from-pine via-pine/40 to-pine/10" />
         </div>
 
+        <ReraDetailsWidget project={project} />
+
         {/* Hero Title & Breadcrumb */}
         <div className="wrap relative z-10 w-full text-ivory pb-12">
           {/* <div className="text-xs uppercase tracking-widest text-ivory/80 mb-3">
@@ -196,21 +277,21 @@ export default function ProjectDetails() {
       {/* 2. FACTS SUMMARY STRIP */}
       <section className="stats relative z-20">
         <div className="wrap grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-line-light">
-          <div className="py-10 lg:py-14 px-4 flex flex-col justify-center items-center text-center">
-            <div className="font-serif font-light text-brass-deep leading-none text-3xl lg:text-3xl whitespace-nowrap">{project.config}</div>
-            <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-3 lg:mt-4">Configuration</div>
+          <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center">
+            <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.config}</div>
+            <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Configuration</div>
           </div>
-          <div className="py-10 lg:py-14 px-4 flex flex-col justify-center items-center text-center">
-            <div className="font-serif font-light text-brass-deep leading-none text-3xl lg:text-3xl whitespace-nowrap">{project.startingPrice}</div>
-            <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-3 lg:mt-4">Starting Price</div>
+          <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center">
+            <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.startingPrice}</div>
+            <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Starting Price</div>
           </div>
-          <div className="py-10 lg:py-14 px-4 flex flex-col justify-center items-center text-center">
-            <div className="font-serif font-light text-brass-deep leading-none text-3xl lg:text-3xl whitespace-nowrap">{project.carpetAreaRange}</div>
-            <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-3 lg:mt-4">Carpet Area</div>
+          <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center">
+            <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.carpetAreaRange}</div>
+            <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Carpet Area</div>
           </div>
-          <div className="py-10 lg:py-14 px-4 flex flex-col justify-center items-center text-center">
-            <div className="font-serif font-light text-brass-deep leading-none text-3xl lg:text-3xl whitespace-nowrap">{project.status}</div>
-            <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-3 lg:mt-4">Possession</div>
+          <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center">
+            <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.status}</div>
+            <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Possession</div>
           </div>
         </div>
       </section>
@@ -230,13 +311,26 @@ export default function ProjectDetails() {
               {project.overviewText2}
             </p>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col h-full">
             <h4 className="font-serif text-xl font-semibold text-ink mb-6">Why Choose This Residence?</h4>
-            <ul className="grid gap-4 text-sm text-ink-soft font-light pl-5 list-disc">
+            <ul className="grid gap-4 text-sm text-ink-soft font-light pl-5 list-disc mb-10">
               {project.whyUs.map((usp, idx) => (
                 <li key={idx} className="leading-relaxed">{usp}</li>
               ))}
             </ul>
+            
+            <div className="w-full aspect-video rounded-xl overflow-hidden shadow-md mt-auto">
+              <iframe 
+                width="100%" 
+                height="100%" 
+                src="https://www.youtube.com/embed/VzODXnvK5_E?si=-8guiX9CJPId4_xR" 
+                title="YouTube video player" 
+                frameBorder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerPolicy="strict-origin-when-cross-origin" 
+                allowFullScreen
+              ></iframe>
+            </div>
           </div>
         </div>
       </section>
@@ -287,11 +381,11 @@ export default function ProjectDetails() {
                     </div>
 
                     {/* Dark Overlay for Text Legibility */}
-                    <div className="absolute inset-0 bg-ink/30 group-hover:bg-ink/50 transition-colors duration-700 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent opacity-70 group-hover:opacity-100 transition-opacity duration-700 z-10" />
 
                     {/* Text Content */}
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-20">
-                      <div className="flex flex-col items-center transition-transform duration-[1000ms] group-hover:scale-105">
+                    <div className="absolute inset-0 flex flex-col items-center justify-end p-6 pb-8 text-center z-20">
+                      <div className="flex flex-col items-center transition-transform duration-[1000ms] group-hover:-translate-y-2">
                         <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-ivory drop-shadow-md mb-3">
                           {item}
                         </span>
@@ -373,7 +467,11 @@ export default function ProjectDetails() {
                     src={layoutImages[activeLayout]}
                     alt={`${activeLayout} 3D Layout Plan`}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-700 cursor-zoom-in"
-                    onClick={() => setSelectedImage(layoutImages[activeLayout])}
+                    onClick={() => {
+                      const images = project.pricing.map(p => layoutImages[p.type as '1 BHK' | '2 BHK' | '3 BHK']).filter(Boolean);
+                      const idx = images.indexOf(layoutImages[activeLayout]);
+                      setLightbox({ images, index: idx >= 0 ? idx : 0 });
+                    }}
                   />
                 </motion.div>
               </AnimatePresence>
@@ -412,24 +510,37 @@ export default function ProjectDetails() {
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="aspect-[4/3] bg-white border border-line-light rounded-2xl overflow-hidden shadow-sm flex items-center justify-center p-6 relative">
-              <svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" className="w-full h-full opacity-60">
-                <rect width="600" height="400" fill="#F6F4EE" />
-                <rect x="0" y="150" width="600" height="70" fill="#bcd3dc" opacity=".5" />
-                <g stroke="#ddd3bf" strokeWidth="10">
-                  <line x1="0" y1="90" x2="600" y2="90" />
-                  <line x1="0" y1="300" x2="600" y2="300" />
-                  <line x1="130" y1="0" x2="130" y2="400" />
-                  <line x1="430" y1="0" x2="430" y2="400" />
-                </g>
-                <circle cx="300" cy="200" r="46" fill="#B68E3F" opacity=".18" />
-                <path d="M300 158 c-24 0 -40 18 -40 40 c0 30 40 64 40 64 c0 0 40 -34 40 -64 c0 -22 -16 -40 -40 -40Z" fill="#94762F" />
-                <circle cx="300" cy="198" r="15" fill="#F6F4EE" />
-              </svg>
-              <div className="absolute inset-0 flex flex-col justify-center items-center gap-2 p-6 bg-pine/5 backdrop-blur-[1px]">
-                <span className="font-serif text-sm font-semibold text-pine text-center">Agarwal Project Site Location</span>
-                <span className="text-[10px] text-taupe uppercase tracking-wider text-center">Gokul Sub-Region, Vasai-Virar, MH</span>
-              </div>
+            <div className="aspect-[4/3] bg-white border border-line-light rounded-2xl overflow-hidden shadow-sm flex items-center justify-center relative">
+              {(project as any).mapEmbedUrl ? (
+                <iframe
+                  src={(project as any).mapEmbedUrl}
+                  className="w-full h-full border-0"
+                  allowFullScreen={false}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title={`${project.name} Location Map`}
+                ></iframe>
+              ) : (
+                <>
+                  <svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" className="w-full h-full opacity-60">
+                    <rect width="600" height="400" fill="#F6F4EE" />
+                    <rect x="0" y="150" width="600" height="70" fill="#bcd3dc" opacity=".5" />
+                    <g stroke="#ddd3bf" strokeWidth="10">
+                      <line x1="0" y1="90" x2="600" y2="90" />
+                      <line x1="0" y1="300" x2="600" y2="300" />
+                      <line x1="130" y1="0" x2="130" y2="400" />
+                      <line x1="430" y1="0" x2="430" y2="400" />
+                    </g>
+                    <circle cx="300" cy="200" r="46" fill="#B68E3F" opacity=".18" />
+                    <path d="M300 158 c-24 0 -40 18 -40 40 c0 30 40 64 40 64 c0 0 40 -34 40 -64 c0 -22 -16 -40 -40 -40Z" fill="#94762F" />
+                    <circle cx="300" cy="198" r="15" fill="#F6F4EE" />
+                  </svg>
+                  <div className="absolute inset-0 flex flex-col justify-center items-center gap-2 p-6 bg-pine/5 backdrop-blur-[1px] pointer-events-none">
+                    <span className="font-serif text-sm font-semibold text-pine text-center">Agarwal Project Site Location</span>
+                    <span className="text-[10px] text-taupe uppercase tracking-wider text-center">Gokul Sub-Region, Vasai-Virar, MH</span>
+                  </div>
+                </>
+              )}
             </div>
 
             <ul className="grid gap-3 font-medium">
@@ -449,7 +560,7 @@ export default function ProjectDetails() {
         <div className="wrap">
           <div className="section-head mb-14">
             <span className="eyebrow">Gallery</span>
-            <h2 className="serif">A Closer Look at {project.name}</h2>
+            <h2 className="serif whitespace-nowrap tracking-tight" style={{ fontSize: 'min(6vw, clamp(2.1rem, 4.6vw, 3.6rem))' }}>A Closer Look at {project.name}</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             {project.gallery.map((imgName, idx) => {
@@ -457,7 +568,10 @@ export default function ProjectDetails() {
               return (
                 <div
                   key={idx}
-                  onClick={() => setSelectedImage(imgAsset)}
+                  onClick={() => {
+                    const images = project.gallery.map(img => galleryMap[img]);
+                    setLightbox({ images, index: idx });
+                  }}
                   className="aspect-square bg-paper border border-line-light rounded-2xl overflow-hidden shadow-sm cursor-zoom-in group relative"
                 >
                   <img
@@ -619,22 +733,84 @@ export default function ProjectDetails() {
 
       {/* 4. LIGHTBOX / PHOTO VIEWER MODAL */}
       <AnimatePresence>
-        {selectedImage && (
+        {lightbox && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setSelectedImage(null)}
-            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-6 cursor-zoom-out"
+            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center cursor-zoom-out"
+            onClick={() => setLightbox(null)}
           >
-            <motion.img
-              initial={{ scale: 0.95 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.95 }}
-              src={selectedImage}
-              alt="Lightbox View"
-              className="max-w-full max-h-[85vh] rounded-lg shadow-2xl object-contain"
-            />
+            <div className="absolute top-4 right-4 z-[101]">
+              <button
+                onClick={(e) => { e.stopPropagation(); setLightbox(null); }}
+                className="text-white/50 hover:text-white transition-colors bg-white/10 hover:bg-white/20 rounded-full p-2"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            {lightbox.images.length > 1 && (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLightbox(prev => prev ? { ...prev, index: (prev.index - 1 + prev.images.length) % prev.images.length } : null);
+                  }}
+                  className="absolute left-2 sm:left-6 z-[101] text-white/50 hover:text-white transition-colors p-3 bg-white/5 hover:bg-white/10 rounded-full hidden sm:block"
+                >
+                  <ChevronLeft className="w-8 h-8" />
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLightbox(prev => prev ? { ...prev, index: (prev.index + 1) % prev.images.length } : null);
+                  }}
+                  className="absolute right-2 sm:right-6 z-[101] text-white/50 hover:text-white transition-colors p-3 bg-white/5 hover:bg-white/10 rounded-full hidden sm:block"
+                >
+                  <ChevronRight className="w-8 h-8" />
+                </button>
+              </>
+            )}
+
+            <div className="w-full h-full flex flex-col items-center justify-center p-4 sm:p-12 overflow-hidden relative">
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={lightbox.index}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -50 }}
+                  transition={{ type: "tween", duration: 0.3 }}
+                  src={lightbox.images[lightbox.index]}
+                  alt="Lightbox View"
+                  drag={lightbox.images.length > 1 ? "x" : false}
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={1}
+                  onDragEnd={(e, { offset, velocity }) => {
+                    const swipe = offset.x;
+                    if (swipe < -50) {
+                      setLightbox(prev => prev ? { ...prev, index: (prev.index + 1) % prev.images.length } : null);
+                    } else if (swipe > 50) {
+                      setLightbox(prev => prev ? { ...prev, index: (prev.index - 1 + prev.images.length) % prev.images.length } : null);
+                    }
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="max-w-full max-h-[85vh] rounded-lg shadow-2xl object-contain select-none touch-none"
+                  style={{ cursor: lightbox.images.length > 1 ? "grab" : "auto" }}
+                />
+              </AnimatePresence>
+
+              {lightbox.images.length > 1 && (
+                <div className="absolute bottom-6 flex gap-2 z-[101]">
+                  {lightbox.images.map((_, idx) => (
+                    <div
+                      key={idx}
+                      className={`w-2 h-2 rounded-full transition-colors ${idx === lightbox.index ? 'bg-white' : 'bg-white/30'}`}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

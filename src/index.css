@@ -536,7 +536,18 @@ section[id] {
   font-size: 2rem;
   color: var(--color-paper);
   flex: none;
-  box-shadow: 0 0 0 4px var(--color-ivory), 0 0 0 6px var(--color-brass);
+  /* Use Instagram gradient for the ring */
+  box-shadow: 0 0 0 4px var(--color-ivory);
+  position: relative;
+}
+
+.ig-avatar::before {
+  content: '';
+  position: absolute;
+  top: -6px; left: -6px; right: -6px; bottom: -6px;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  border-radius: 50%;
+  z-index: -1;
 }
 
 .ig-id {
@@ -576,21 +587,20 @@ section[id] {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: var(--color-pine);
-  color: var(--color-paper);
-  padding: 13px 24px;
-  border-radius: 50px;
-  font-size: .76rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 8px; /* Classic Insta button radius */
+  font-size: .85rem;
   font-weight: 600;
+  letter-spacing: .05em;
   transition: .35s var(--ease);
   text-decoration: none;
 }
 
 .ig-follow:hover {
-  background: var(--color-pine-600);
   transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(220, 39, 67, 0.4);
 }
 
 .ig-follow svg {
@@ -614,11 +624,11 @@ section[id] {
 }
 
 .hl .ring {
-  width: 62px;
-  height: 62px;
+  width: 66px;
+  height: 66px;
   border-radius: 50%;
-  border: 1.5px solid var(--color-brass);
-  padding: 3px;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  padding: 2px;
   display: grid;
   place-items: center;
 }
@@ -628,6 +638,7 @@ section[id] {
   height: 100%;
   border-radius: 50%;
   background: var(--color-ivory);
+  border: 3px solid var(--color-ivory);
   display: grid;
   place-items: center;
   font-size: 1.3rem;

@@ -43,8 +43,19 @@ const TEAM_TESTIMONIALS = [
 export default function AboutUs() {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(4);
 
-  const visibleCount = 4;
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) setVisibleCount(1);
+      else if (window.innerWidth < 1024) setVisibleCount(2);
+      else setVisibleCount(4);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const canScrollLeft = currentIndex > 0;
   const canScrollRight = currentIndex < TEAM_TESTIMONIALS.length - visibleCount;
 
@@ -101,7 +112,7 @@ export default function AboutUs() {
                 Established in <strong>1978</strong>, the Agarwal Group has grown into one of the most trusted names in real estate, delivering thoughtfully designed residential developments across <strong>Mumbai, Vasai, Virar, and the MMR</strong>.
               </p>
               <p>
-                For over <strong>47 years</strong>, we have remained committed to creating homes that combine exceptional construction quality, intelligent planning, and enduring value.
+                For over <strong>48 years</strong>, we have remained committed to creating homes that combine exceptional construction quality, intelligent planning, and enduring value.
               </p>
               <div className="quote">
                 <p className="serif">"Every development reflects our dedication to building communities that inspire better living today while creating value for tomorrow."</p>
@@ -238,7 +249,16 @@ export default function AboutUs() {
                 <ChevronLeft size={24} />
               </button>
 
-              <div className="flex justify-center gap-4 md:gap-6 w-full h-[450px] items-center">
+              <motion.div 
+                className="flex justify-center gap-4 md:gap-6 w-full h-[450px] items-center cursor-grab active:cursor-grabbing"
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.1}
+                onDragEnd={(e, { offset }) => {
+                  if (offset.x < -40) handleNext();
+                  else if (offset.x > 40) handlePrev();
+                }}
+              >
                 <AnimatePresence mode="popLayout">
                   {visiblePartners.map((member, idx) => {
                     const memberId = currentIndex + idx;
@@ -253,11 +273,12 @@ export default function AboutUs() {
                         isAnyHovered={isAnyHovered}
                         onHover={() => setHoveredId(memberId)}
                         onLeave={() => setHoveredId(null)}
+                        isMobile={visibleCount === 1}
                       />
                     );
                   })}
                 </AnimatePresence>
-              </div>
+              </motion.div>
 
               <button
                 onClick={handleNext}
@@ -284,17 +305,17 @@ export default function AboutUs() {
   );
 }
 
-function TeamCard({ member, isHovered, isAnyHovered, onHover, onLeave }: any) {
+function TeamCard({ member, isHovered, isAnyHovered, onHover, onLeave, isMobile }: any) {
   const cardVariants = {
     idle: {
-      width: '240px',
+      width: isMobile ? '320px' : '240px',
       scale: 1,
       opacity: isAnyHovered ? 0.6 : 1,
       filter: isAnyHovered ? 'brightness(0.8) grayscale(0.3)' : 'brightness(1) grayscale(0)',
       zIndex: 1,
     },
     hovered: {
-      width: '380px',
+      width: isMobile ? '320px' : '380px',
       scale: 1.05,
       opacity: 1,
       filter: 'brightness(1) grayscale(0)',
@@ -335,7 +356,7 @@ function TeamCard({ member, isHovered, isAnyHovered, onHover, onLeave }: any) {
         <div className="absolute inset-0 bg-gradient-to-t from-pine via-pine/70 to-transparent opacity-90" />
       </motion.div>
 
-      <div className="absolute bottom-0 left-0 w-[380px] p-6 flex flex-col justify-end h-full">
+      <div className="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end h-full">
         <motion.div
           layout="position"
           animate={{ y: isHovered ? -10 : 0 }}

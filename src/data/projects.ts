@@ -34,6 +34,7 @@ export interface Project {
   specifications: SpecificationRow[];
   connectivity: ConnectivityRow[];
   gallery: string[];
+  mapEmbedUrl: string;
 }
 
 export const projects: Project[] = [
@@ -97,7 +98,8 @@ export const projects: Project[] = [
       'gallery-bedroom.jpg',
       'gallery-pool.jpg',
       'gallery-aerial.jpg'
-    ]
+    ],
+    mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.7471885210675!2d72.8020161!3d19.4664638!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ab98fe48e75f%3A0x3677f404d52a5136!2sAgarwal%20skyrise!5e0!3m2!1sen!2sin!4v1784611565341!5m2!1sen!2sin'
   },
   {
     slug: 'infinity',
@@ -159,7 +161,8 @@ export const projects: Project[] = [
       'gallery-bedroom.jpg',
       'gallery-pool.jpg',
       'gallery-aerial.jpg'
-    ]
+    ],
+    mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.8917781719983!2d72.7994673760003!3d19.46023223979633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ab000fb32b41%3A0x7641e67f26411fa3!2sAgarwal%20Infinity!5e0!3m2!1sen!2sin!4v1784611645839!5m2!1sen!2sin'
   },
   {
     slug: 'sky-heights',
@@ -221,7 +224,8 @@ export const projects: Project[] = [
       'gallery-bedroom.jpg',
       'gallery-pool.jpg',
       'gallery-aerial.jpg'
-    ]
+    ],
+    mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.463647118351!2d72.8469149759992!3d19.392363241963135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7afe1180f68cd%3A0xcc8573a1e7dd76ab!2sAgarwal%20Sky%20Heights!5e0!3m2!1sen!2sin!4v1784611689586!5m2!1sen!2sin'
   },
   {
     slug: 'horizon',
@@ -281,8 +285,8 @@ export const projects: Project[] = [
       'gallery-lobby.jpg',
       'gallery-living.jpg',
       'gallery-bedroom.jpg',
-      'gallery-pool.jpg',
       'gallery-aerial.jpg'
-    ]
+    ],
+    mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.176013521966!2d72.79982009999999!3d19.4479766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7aa2b7336c9df%3A0xa20ede8f1d00bbf2!2sGlory%20-%20Agarwal%20Group!5e0!3m2!1sen!2sin!4v1784611810538!5m2!1sen!2sin'
   }
 ];
