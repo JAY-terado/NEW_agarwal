@@ -6,7 +6,7 @@ import heroImage from '../assets/gallery-exterior.jpg';
 export default function CustomerRegistration() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [showApplicant2, setShowApplicant2] = useState(false);
-  const [showContactPerson, setShowContactPerson] = useState(false);
+
   const [otpSent, setOtpSent] = useState(false);
 
   const handleFormSubmit = (e: React.FormEvent) => {

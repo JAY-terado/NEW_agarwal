@@ -167,8 +167,7 @@ export default function ProjectDetails() {
   const [project, setProject] = useState(projects.find((p) => p.slug === slug));
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [lightbox, setLightbox] = useState<{ images: string[], index: number } | null>(null);
-  const [activeLayout, setActiveLayout] = useState<'1 BHK' | '2 BHK' | '3 BHK'>('1 BHK');
-  const [amenityOffset, setAmenityOffset] = useState(0);
+
   const [showFloater, setShowFloater] = useState(false);
   const [hasClosedFloater, setHasClosedFloater] = useState(false);
   const [isContactVisible, setIsContactVisible] = useState(false);
@@ -178,7 +177,6 @@ export default function ProjectDetails() {
     setProject(projects.find((p) => p.slug === slug));
     setFormSubmitted(false);
     setLightbox(null);
-    setAmenityOffset(0);
     setShowFloater(false);
     setHasClosedFloater(false);
     window.scrollTo(0, 0);
@@ -202,35 +200,7 @@ export default function ProjectDetails() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    if (!project?.amenities) return;
-    const interval = setInterval(() => {
-      setAmenityOffset((prev) => (prev + 1) % project.amenities.length);
-    }, 15000);
-    return () => clearInterval(interval);
-  }, [project]);
 
-  const getVisibleAmenities = () => {
-    if (!project) return [];
-    const arr = project.amenities;
-    const len = arr.length;
-    if (len === 0) return [];
-    if (len <= 2) return arr.map((item, idx) => ({ item, idx }));
-    return [
-      { item: arr[(amenityOffset) % len], idx: (amenityOffset) % len },
-      { item: arr[(amenityOffset + 1) % len], idx: (amenityOffset + 1) % len }
-    ];
-  };
-
-  const nextAmenity = () => {
-    if (!project?.amenities) return;
-    setAmenityOffset((prev) => (prev + 1) % project.amenities.length);
-  };
-
-  const prevAmenity = () => {
-    if (!project?.amenities) return;
-    setAmenityOffset((prev) => (prev - 1 + project.amenities.length) % project.amenities.length);
-  };
 
   if (!project) {
     return (
