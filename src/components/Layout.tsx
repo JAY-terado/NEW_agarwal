@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
+import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
+import ProjectNavbar from './ProjectNavbar';
 import Footer from './Footer';
 
 interface LayoutProps {
@@ -7,10 +9,13 @@ interface LayoutProps {
 }
 
 export default function Layout({ children }: LayoutProps) {
+  const location = useLocation();
+  const isProjectPage = location.pathname.startsWith('/projects/') && location.pathname !== '/projects';
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: 'var(--ivory)', overflowX: 'hidden', width: '100%' }}>
       {/* Navigation */}
-      <Navbar />
+      {isProjectPage ? <ProjectNavbar /> : <Navbar />}
 
       {/* Main content — 0 padding to allow page heroes to slide under fixed navbar and ticker */}
       <main style={{ flexGrow: 1, paddingTop: 0 }}>

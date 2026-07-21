@@ -152,7 +152,7 @@ export default function Navbar() {
     <>
       {/* NAV */}
       <nav style={navStyle} id="nav" className={forceScrolledStyle ? 'nav scrolled' : 'nav'}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 clamp(20px, 3.5vw, 64px)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'clamp(12px, 2vw, 24px)' }}>
+        <div className="wrap-widescreen" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'clamp(12px, 2vw, 24px)' }}>
           {/* Brand */}
           <Link to="/" onClick={handleLogoClick} style={{ textDecoration: 'none', color: brandColor, lineHeight: 1 }}>
             <img src={Logo} alt="Agarwal Group" style={{ height: '42px', width: 'auto', display: 'block', borderRadius: '6px' }} />
@@ -161,9 +161,9 @@ export default function Navbar() {
           {/* Desktop Nav Links */}
           <div className="nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: 'clamp(10px, 1.8vw, 26px)' }}>
             <Link
-              to="/story"
-              onClick={() => handleNavClick('story')}
-              className={`lk ${location.pathname === '/story' ? 'active' : ''}`}
+              to="/about-us"
+              onClick={() => handleNavClick('about-us')}
+              className={`lk ${location.pathname === '/about-us' ? 'active' : ''}`}
             >
               About Us
             </Link>
@@ -450,7 +450,9 @@ export default function Navbar() {
       >
         {/* Drawer Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '36px' }}>
-          <img src={Logo} alt="Agarwal Group" style={{ height: '36px', width: 'auto', display: 'block', borderRadius: '4px' }} />
+          <Link to="/" onClick={() => setMobileMenuOpen(false)}>
+            <img src={Logo} alt="Agarwal Group" style={{ height: '36px', width: 'auto', display: 'block', borderRadius: '4px' }} />
+          </Link>
           <button
             onClick={() => setMobileMenuOpen(false)}
             style={{
@@ -478,7 +480,7 @@ export default function Navbar() {
         {/* Drawer Scrollable Links */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', flex: 1, overflowY: 'auto', paddingRight: '8px' }}>
           {[
-            { label: 'About Us', to: '/story', pathId: 'story', index: '01' },
+            { label: 'About Us', to: '/about-us', pathId: 'story', index: '01' },
             { label: 'Ongoing Projects', isAccordion: true, items: projects, index: '02' },
             { label: 'Completed Projects', to: '/completed-projects', index: '03' },
             { label: 'Blogs', to: '/blogs', index: '04' },

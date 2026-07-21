@@ -104,7 +104,7 @@ export default function AboutUs() {
 
         {/* Section 1: Intro (Story style) */}
         <section className="section story">
-          <div className="wrap story-grid">
+          <div className="wrap-widescreen story-grid">
             <div>
               <span className="eyebrow">Our Legacy</span>
               <h2 className="serif">Built on Principles of <em>Trust & Excellence.</em></h2>
@@ -134,7 +134,7 @@ export default function AboutUs() {
 
         {/* Section 2: Why Choose Us (Folio style / Vcards) */}
         <section className="section folio pt-24" style={{ backgroundColor: '#F8F6F0' }}>
-          <div className="wrap">
+          <div className="wrap-widescreen">
             <div className="section-head" style={{ position: 'relative' }}>
               <div className="folio-watermark" style={{ top: '-60px' }}>
                 <div style={{ transform: 'translateX(0.1em)' }}>choose</div>
@@ -206,7 +206,7 @@ export default function AboutUs() {
 
         {/* Section 3: Values & Vision (Story grid inverted) */}
         <section className="section story pt-24 pb-12">
-          <div className="wrap story-grid" style={{ direction: 'rtl' }}>
+          <div className="wrap-widescreen story-grid" style={{ direction: 'rtl' }}>
             <div style={{ direction: 'ltr' }}>
               <span className="eyebrow">Our Vision</span>
               <h2 className="serif">Shaping <em>Tomorrows.</em></h2>
@@ -229,7 +229,7 @@ export default function AboutUs() {
 
         {/* Section 4: Hear From Our Team */}
         <section className="section pt-24 pb-0">
-          <div className="wrap">
+          <div className="wrap-widescreen">
             <div className="section-head mb-14" style={{ position: 'relative' }}>
               {/* <div className="folio-watermark" style={{ top: '-30%' }}>
                 <div style={{ transform: 'translateX(0.2em)' }}>core</div>

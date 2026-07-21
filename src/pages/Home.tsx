@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Clock, ShieldCheck, Users, Instagram } from 'lucide-react';
+import { Gem, Timer, BadgeCheck, HeartHandshake, Instagram } from 'lucide-react';
 import { projects } from '../data/projects';
 
 // Asset Imports
@@ -254,12 +254,25 @@ export default function Home() {
     if (reelsRef.current) {
       const card = reelsRef.current.querySelector('.reel');
       const cardWidth = card ? card.getBoundingClientRect().width : 320;
-      if (direction === 1 && reelsRef.current.scrollLeft + reelsRef.current.clientWidth >= reelsRef.current.scrollWidth - 10) {
-        reelsRef.current.scrollTo({ left: 0, behavior: 'smooth' });
-      } else if (direction === -1 && reelsRef.current.scrollLeft <= 0) {
-        reelsRef.current.scrollTo({ left: reelsRef.current.scrollWidth, behavior: 'smooth' });
+      const gap = 22;
+      const setWidth = testimonialsData.length * (cardWidth + gap);
+
+      if (direction === 1) {
+        if (reelsRef.current.scrollLeft >= setWidth - 5) {
+          reelsRef.current.style.scrollBehavior = 'auto';
+          reelsRef.current.scrollLeft -= setWidth;
+          void reelsRef.current.offsetWidth;
+          reelsRef.current.style.scrollBehavior = 'smooth';
+        }
+        reelsRef.current.scrollBy({ left: cardWidth + gap, behavior: 'smooth' });
       } else {
-        reelsRef.current.scrollBy({ left: direction * (cardWidth + 22), behavior: 'smooth' });
+        if (reelsRef.current.scrollLeft <= 5) {
+          reelsRef.current.style.scrollBehavior = 'auto';
+          reelsRef.current.scrollLeft += setWidth;
+          void reelsRef.current.offsetWidth;
+          reelsRef.current.style.scrollBehavior = 'smooth';
+        }
+        reelsRef.current.scrollBy({ left: -(cardWidth + gap), behavior: 'smooth' });
       }
     }
     if (manual) startReelsTimer();
@@ -281,12 +294,25 @@ export default function Home() {
     if (btrackRef.current) {
       const card = btrackRef.current.querySelector('.bpost');
       const cardWidth = card ? card.getBoundingClientRect().width : 360;
-      if (direction === 1 && btrackRef.current.scrollLeft + btrackRef.current.clientWidth >= btrackRef.current.scrollWidth - 10) {
-        btrackRef.current.scrollTo({ left: 0, behavior: 'smooth' });
-      } else if (direction === -1 && btrackRef.current.scrollLeft <= 0) {
-        btrackRef.current.scrollTo({ left: btrackRef.current.scrollWidth, behavior: 'smooth' });
+      const gap = 24;
+      const setWidth = blogPostsData.length * (cardWidth + gap);
+
+      if (direction === 1) {
+        if (btrackRef.current.scrollLeft >= setWidth - 5) {
+          btrackRef.current.style.scrollBehavior = 'auto';
+          btrackRef.current.scrollLeft -= setWidth;
+          void btrackRef.current.offsetWidth;
+          btrackRef.current.style.scrollBehavior = 'smooth';
+        }
+        btrackRef.current.scrollBy({ left: cardWidth + gap, behavior: 'smooth' });
       } else {
-        btrackRef.current.scrollBy({ left: direction * (cardWidth + 24), behavior: 'smooth' });
+        if (btrackRef.current.scrollLeft <= 5) {
+          btrackRef.current.style.scrollBehavior = 'auto';
+          btrackRef.current.scrollLeft += setWidth;
+          void btrackRef.current.offsetWidth;
+          btrackRef.current.style.scrollBehavior = 'smooth';
+        }
+        btrackRef.current.scrollBy({ left: -(cardWidth + gap), behavior: 'smooth' });
       }
     }
     if (manual) startBlogsTimer();
@@ -336,7 +362,7 @@ export default function Home() {
       </header>
 
       <section ref={statsRef} className="stats">
-        <div className="wrap stats-grid">
+        <div className="wrap-widescreen stats-grid">
           <div className="sbox">
             <div className="num">{countYears}+</div>
             <div className="lbl">Years Crafting Excellence</div>
@@ -354,7 +380,7 @@ export default function Home() {
 
       {/* 3. STORY (ABOUT US) - matches original design */}
       <section className="section story" id="story">
-        <div className="wrap story-grid">
+        <div className="wrap-widescreen story-grid">
           <div className="reveal">
             <span className="eyebrow">About Us</span>
             <h2 className="serif">A Legacy Built on <em>Trust &amp; Craftsmanship</em></h2>
@@ -380,8 +406,8 @@ export default function Home() {
 
             <div className="values">
               <div className="vcard">
-                <div className="vcard-icon">
-                  <Sparkles className="w-5 h-5" strokeWidth={1.8} />
+                <div className="vcard-icon-clear">
+                  <Gem className="w-7 h-7" strokeWidth={1.25} />
                 </div>
                 <div className="vcard-content">
                   <b>Quality Living</b>
@@ -389,8 +415,8 @@ export default function Home() {
                 </div>
               </div>
               <div className="vcard">
-                <div className="vcard-icon">
-                  <Clock className="w-5 h-5" strokeWidth={1.8} />
+                <div className="vcard-icon-clear">
+                  <Timer className="w-7 h-7" strokeWidth={1.25} />
                 </div>
                 <div className="vcard-content">
                   <b>On-Time Delivery</b>
@@ -398,8 +424,8 @@ export default function Home() {
                 </div>
               </div>
               <div className="vcard">
-                <div className="vcard-icon">
-                  <ShieldCheck className="w-5 h-5" strokeWidth={1.8} />
+                <div className="vcard-icon-clear">
+                  <BadgeCheck className="w-7 h-7" strokeWidth={1.25} />
                 </div>
                 <div className="vcard-content">
                   <b>RERA Compliant</b>
@@ -407,8 +433,8 @@ export default function Home() {
                 </div>
               </div>
               <div className="vcard">
-                <div className="vcard-icon">
-                  <Users className="w-5 h-5" strokeWidth={1.8} />
+                <div className="vcard-icon-clear">
+                  <HeartHandshake className="w-7 h-7" strokeWidth={1.25} />
                 </div>
                 <div className="vcard-content">
                   <b>Community First</b>
@@ -437,7 +463,7 @@ export default function Home() {
 
       {/* 4. ONGOING PROJECTS PORTFOLIO */}
       <section className="section folio" id="projects">
-        <div className="wrap">
+        <div className="wrap-widescreen">
           <div className="section-head reveal" style={{ position: 'relative' }}>
             <div className="folio-watermark">
               <div style={{ transform: 'translateX(0.2em)' }}>ongoing</div>
@@ -519,7 +545,7 @@ export default function Home() {
 
       {/* 9. FAQ SECTION - matches original white background */}
       <section className="section faq" id="faq">
-        <div className="wrap">
+        <div className="wrap-widescreen">
           <div className="section-head reveal">
             <span className="eyebrow">FAQ</span>
             <h2 className="serif">Questions, <em>Answered</em></h2>
@@ -598,7 +624,7 @@ export default function Home() {
 
       {/* 5. FEATURES SECTION - 4-column strip, matches original */}
       <section className="section feat">
-        <div className="wrap feat-grid">
+        <div className="wrap-widescreen feat-grid">
           <div className="fitem reveal">
             <div className="fitem-ic">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -648,7 +674,7 @@ export default function Home() {
 
       {/* 6. CLIENTS (TESTIMONIAL REELS) - matches original horizontal scroll */}
       <section className="section clients" id="testimonials">
-        <div className="wrap">
+        <div className="wrap-widescreen">
           <div className="section-head reveal">
             <span className="eyebrow">Testimonials</span>
             <h2 className="serif">What Our <em>Clients Say</em></h2>
@@ -656,7 +682,7 @@ export default function Home() {
           </div>
           <div className="reels-wrap reveal">
             <div className="reels" id="reels" ref={reelsRef}>
-              {testimonialsData.map((item, index) => (
+              {[...testimonialsData, ...testimonialsData, ...testimonialsData].map((item, index) => (
                 <article
                   key={index}
                   className="reel"
@@ -693,7 +719,7 @@ export default function Home() {
 
       {/* 7. PROPERTY INSIGHTS (BLOGS) - matches original layout */}
       <section className="section bloghome" id="insights">
-        <div className="wrap">
+        <div className="wrap-widescreen">
           <div className="section-head reveal">
             <span className="eyebrow">From the Blog</span>
             <h2 className="serif">Property <em>Insights</em></h2>
@@ -701,7 +727,7 @@ export default function Home() {
           </div>
           <div className="bcarousel reveal">
             <div className="btrack" id="btrack" ref={btrackRef}>
-              {blogPostsData.map((post, index) => (
+              {[...blogPostsData, ...blogPostsData, ...blogPostsData].map((post, index) => (
                 <article key={index} className="bpost">
                   <Link
                     className="bpost-media"
@@ -739,7 +765,7 @@ export default function Home() {
       </section>
 
       <section className="contact" id="contact" style={{ padding: 'clamp(80px, 13vh, 150px) 0', background: 'var(--color-paper)' }}>
-        <div className="wrap contact-grid">
+        <div className="wrap-widescreen contact-grid">
           {/* Left info */}
           <div className="reveal">
             <span className="eyebrow" style={{ fontSize: '.64rem', letterSpacing: '.24em', textTransform: 'uppercase', color: 'var(--color-brass-deep)', fontWeight: 700, display: 'block', marginBottom: '8px' }}>Contact Us</span>
@@ -859,7 +885,7 @@ export default function Home() {
 
       {/* 8. INSTAGRAM FEED SECTION - matches original profile & grid */}
       <section className="section insta" id="social">
-        <div className="wrap">
+        <div className="wrap-widescreen">
           <div className="section-head reveal" style={{ marginBottom: 'clamp(34px, 5vh, 52px)' }}>
             <span className="eyebrow">Instagram</span>
             <h2 className="serif">Follow Our <em>Journey</em></h2>

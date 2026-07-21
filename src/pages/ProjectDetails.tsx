@@ -5,8 +5,19 @@ import {
   MapPin,
   ChevronLeft,
   ChevronRight,
-  X
+  X,
+  Leaf,
+  Dumbbell,
+  Car,
+  Sun
 } from 'lucide-react';
+
+const iconComponents: Record<string, React.ElementType> = {
+  Leaf,
+  Dumbbell,
+  Car,
+  Sun,
+};
 import { projects } from '../data/projects';
 
 // Gallery Asset Imports
@@ -241,251 +252,230 @@ export default function ProjectDetails() {
 
   return (
     <div className="bg-ivory text-ink">
-      {/* 1. PROJECT HERO */}
-      <section className="hero relative h-[55vh] flex items-end overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src={heroImage}
-            alt={project.name}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-pine via-pine/40 to-pine/10" />
-        </div>
+      <div className="min-h-[100svh] flex flex-col">
+        {/* 1. PROJECT HERO */}
+        <section className="hero relative flex-1 flex items-end overflow-hidden">
+          {/* Background Image */}
+          <div className="absolute inset-0 z-0">
+            <img
+              src={heroImage}
+              alt={project.name}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-pine via-pine/40 to-pine/10" />
+          </div>
 
-        <ReraDetailsWidget project={project} />
+          <ReraDetailsWidget project={project} />
 
-        {/* Hero Title & Breadcrumb */}
-        <div className="wrap relative z-10 w-full text-ivory pb-12">
-          {/* <div className="text-xs uppercase tracking-widest text-ivory/80 mb-3">
+          {/* Hero Title & Breadcrumb */}
+          <div className="wrap-widescreen relative z-10 w-full text-ivory pb-12">
+            {/* <div className="text-xs uppercase tracking-widest text-ivory/80 mb-3">
             <Link to="/" className="hover:text-brass-bright transition-colors">Home</Link> &nbsp;/&nbsp;
             <span className="text-brass-bright">{project.name}</span>
           </div>
           <span className="bg-brass-bright text-pine text-[10px] tracking-wider uppercase font-bold py-1 px-3.5 rounded-full inline-block mb-3.5">
             {project.status}
           </span> */}
-          <h1 className="font-serif text-5xl sm:text-6xl font-light tracking-tight mb-3">
-            {project.name}
-          </h1>
-          <div className="flex items-center gap-2 text-sm text-ivory/90 font-medium pb-8">
-            <MapPin className="w-4 h-4 text-brass-bright" />
-            <span>{project.location}</span>
+            <h1 className="font-serif text-5xl sm:text-6xl font-light tracking-tight mb-3">
+              {project.name}
+            </h1>
+            <div className="flex items-center gap-2 text-sm text-ivory/90 font-medium pb-8">
+              <MapPin className="w-4 h-4 text-brass-bright" />
+              <span>{project.location}</span>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 2. FACTS SUMMARY STRIP */}
-      <section className="stats relative z-20">
-        <div className="wrap grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-line-light">
-          <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center">
-            <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.config}</div>
-            <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Configuration</div>
+        {/* 2. FACTS SUMMARY STRIP */}
+        <section className="stats relative z-20">
+          <div className="wrap-widescreen grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-line-light">
+            <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center">
+              <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.config}</div>
+              <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Configuration</div>
+            </div>
+            <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center">
+              <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.startingPrice}</div>
+              <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Starting Price</div>
+            </div>
+            <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center">
+              <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.carpetAreaRange}</div>
+              <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Carpet Area</div>
+            </div>
+            <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center">
+              <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.status}</div>
+              <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Possession</div>
+            </div>
           </div>
-          <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center">
-            <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.startingPrice}</div>
-            <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Starting Price</div>
-          </div>
-          <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center">
-            <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.carpetAreaRange}</div>
-            <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Carpet Area</div>
-          </div>
-          <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center">
-            <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.status}</div>
-            <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Possession</div>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
-      {/* 3. OVERVIEW SECTION */}
-      <section className="section story pt-24 pb-12">
-        <div className="wrap story-grid" style={{ alignItems: 'flex-start' }}>
+      {/* 2. OVERVIEW */}
+      <section id="overview" className="section story pt-24 pb-12">
+        <div className="wrap-widescreen story-grid" style={{ alignItems: 'flex-start' }}>
           <div>
-            <div className="section-head mb-6">
+            <div className="section-head !mb-4 lg:!mb-6">
               <span className="eyebrow">Overview</span>
               <h2 className="serif">{project.overviewTitle}</h2>
             </div>
-            <p className="text-sm sm:text-base text-ink-soft leading-relaxed font-light mb-4">
+            <p className="text-sm md:text-base text-ink-soft leading-relaxed font-light mb-4 !max-w-none">
               {project.overviewText1}
             </p>
-            <p className="text-sm sm:text-base text-ink-soft leading-relaxed font-light">
+            <p className="text-sm md:text-base text-ink-soft leading-relaxed font-light mb-10 !max-w-none">
               {project.overviewText2}
             </p>
-          </div>
-          <div className="flex flex-col h-full">
-            <h4 className="font-serif text-xl font-semibold text-ink mb-6">Why Choose This Residence?</h4>
-            <ul className="grid gap-4 text-sm text-ink-soft font-light pl-5 list-disc mb-10">
-              {project.whyUs.map((usp, idx) => (
-                <li key={idx} className="leading-relaxed">{usp}</li>
-              ))}
-            </ul>
 
-            <div className="w-full aspect-video rounded-xl overflow-hidden shadow-md mt-auto">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/VzODXnvK5_E?si=-8guiX9CJPId4_xR"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              ></iframe>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-4">
+              {(project.overviewFeatures || [
+                { title: "Landscaped Gardens", desc: "Lush green spaces to unwind in", icon: "Leaf" },
+                { title: "Fitness Zones", desc: "State-of-the-art equipment", icon: "Dumbbell" },
+                { title: "Podium Parking", desc: "Dedicated covered parking spaces", icon: "Car" },
+                { title: "Sky Deck Views", desc: "Panoramic vistas from the rooftop", icon: "Sun" }
+              ]).map((feat, idx) => {
+                const IconComponent = iconComponents[feat.icon] || Leaf;
+                return (
+                  <div key={idx} className="flex items-start gap-4">
+                    <div className="w-8 h-8 rounded-full bg-line-light flex items-center justify-center shrink-0 text-pine">
+                      <IconComponent className="w-[14px] h-[14px]" strokeWidth={2} />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-ink mb-1">{feat.title}</h4>
+                      <p className="text-[11px] text-ink-soft font-medium">{feat.desc}</p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
+
+          {/* Right: Asymmetric Image Grid */}
+          <div className="flex flex-col gap-1 md:gap-2 h-full mt-10 lg:mt-0">
+            <div className="w-full aspect-[2/1] lg:aspect-[21/9] bg-line-light overflow-hidden">
+              <img src={galleryMap[project.gallery[0]]} alt="Overview 1" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
+            </div>
+            <div className="flex gap-1 md:gap-2 w-full">
+              <div className="flex-1 aspect-[4/3] lg:aspect-[16/10] bg-line-light overflow-hidden">
+                <img src={galleryMap[project.gallery[1]]} alt="Overview 2" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
+              </div>
+              <div className="flex-1 aspect-[4/3] lg:aspect-[16/10] bg-line-light overflow-hidden">
+                <img src={galleryMap[project.gallery[2]]} alt="Overview 3" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      {/* 4. LIFESTYLE / AMENITIES */}
-      <section className="section pt-24 pb-24 bg-ivory">
-        <div className="wrap">
+      {/* 3. AMENITIES */}
+      <section id="amenities" className="section pt-24 pb-24 bg-ivory">
+        <div className="wrap-widescreen">
           <div className="section-head mb-14">
             <span className="eyebrow">Lifestyle</span>
             <h2 className="serif mt-2">Amenities Designed for Every Generation</h2>
           </div>
-          <div className="relative group/slider">
-            <button
-              onClick={prevAmenity}
-              className="absolute left-2 lg:-left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-paper border border-line-light flex items-center justify-center text-ink hover:bg-brass hover:text-white hover:border-brass transition-colors shadow-xl opacity-0 group-hover/slider:opacity-100"
-              aria-label="Previous amenity"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-1">
+            {project.amenities.map((item, idx) => {
+              let spanClass = 'col-span-1';
+              let heightClass = 'h-[250px] lg:h-[320px]';
 
-            <button
-              onClick={nextAmenity}
-              className="absolute right-2 lg:-right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-paper border border-line-light flex items-center justify-center text-ink hover:bg-brass hover:text-white hover:border-brass transition-colors shadow-xl opacity-0 group-hover/slider:opacity-100"
-              aria-label="Next amenity"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
+              const patternIdx = idx % 8;
+              if (patternIdx === 0) spanClass = 'col-span-1 md:col-span-2';
+              else if (patternIdx === 1) spanClass = 'col-span-1 md:col-span-1';
+              else if (patternIdx === 2) spanClass = 'col-span-1 md:col-span-1';
+              else if (patternIdx === 3) spanClass = 'col-span-1 md:col-span-1';
+              else if (patternIdx === 4) spanClass = 'col-span-1 md:col-span-1';
+              else if (patternIdx === 5) {
+                spanClass = 'col-span-1 md:col-span-2 md:row-span-2';
+                heightClass = 'h-[250px] md:h-full';
+              }
+              else if (patternIdx === 6) spanClass = 'col-span-1 md:col-span-1';
+              else if (patternIdx === 7) spanClass = 'col-span-1 md:col-span-1';
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 relative">
-              <AnimatePresence mode="popLayout">
-                {getVisibleAmenities().map(({ item, idx }) => (
-                  <motion.div
-                    layout
-                    key={item}
-                    initial={{ opacity: 0, scale: 0.9, x: 20 }}
-                    animate={{ opacity: 1, scale: 1, x: 0 }}
-                    exit={{ opacity: 0, scale: 0.9, x: -20 }}
-                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative rounded-xl overflow-hidden cursor-pointer group aspect-[4/3] bg-line-light"
-                  >
-                    {/* Image */}
-                    <div className="absolute inset-0 transition-transform duration-[1000ms] group-hover:scale-110">
-                      <img
-                        src={amenityImageMap[item] || `https://placehold.co/600x600/e2e0d8/8a867d?text=Amenity+${idx + 1}`}
-                        alt={item}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-
-                    {/* Dark Overlay for Text Legibility */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent opacity-70 group-hover:opacity-100 transition-opacity duration-700 z-10" />
-
-                    {/* Text Content */}
-                    <div className="absolute inset-0 flex flex-col items-center justify-end p-6 pb-8 text-center z-20">
-                      <div className="flex flex-col items-center transition-transform duration-[1000ms] group-hover:-translate-y-2">
-                        <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-ivory drop-shadow-md mb-3">
-                          {item}
-                        </span>
-                        <div className="w-6 h-[2px] bg-brass/50 group-hover:w-16 group-hover:bg-brass transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)]" />
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </div>
+              return (
+                <div key={item} className={`relative overflow-hidden group bg-line-light ${spanClass} ${heightClass}`}>
+                  <img
+                    src={amenityImageMap[item] || `https://placehold.co/600x600/e2e0d8/8a867d?text=Amenity+${idx + 1}`}
+                    alt={item}
+                    className="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-700 z-10" />
+                  <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-6 text-left z-20">
+                    <span className="font-serif text-sm md:text-base text-ivory tracking-wide">{item}</span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* 5. PLANS & PRICING */}
-      <section className="section pt-24 pb-24 bg-paper">
-        <div className="wrap">
-          <div className="section-head mb-14">
-            <span className="eyebrow">Plans & Pricing</span>
-            <h2 className="serif">Configurations & Indicative Pricing</h2>
+      {/* 4. CONFIGURATIONS */}
+      <section id="configurations" className="section pt-24 pb-24 bg-paper">
+        <div className="wrap-widescreen">
+          <div className="mb-14">
+            <div className="section-head mb-0 max-w-full text-left">
+              <span className="eyebrow">Plans & Pricing</span>
+              <h2 className="serif whitespace-nowrap">Configurations & Indicative Pricing</h2>
+            </div>
           </div>
 
-          <div className="flex flex-col lg:flex-row w-full border border-line-light rounded-2xl overflow-hidden shadow-sm bg-paper items-stretch">
-            {/* Left Column: Pricing Table */}
-            <div className="flex flex-col w-full lg:w-1/2 border-b lg:border-b-0 lg:border-r border-line-light">
-              {/* Header */}
-              <div className="grid grid-cols-[1.2fr_1fr_1.5fr_1fr] bg-pine/5 border-b border-line-light text-taupe font-bold text-[10px] sm:text-xs uppercase tracking-wider p-5">
-                <div>Type</div>
-                <div>Carpet</div>
-                <div>Price</div>
-                <div>Status</div>
-              </div>
-
-              {/* Body Rows */}
-              <div className="divide-y divide-line text-ink font-medium flex-1 flex flex-col">
-                {project.pricing.map((p, idx) => {
-                  const isLayoutRowActive = activeLayout === p.type;
-                  return (
-                    <div
-                      key={idx}
-                      className={`flex-1 grid grid-cols-[1.2fr_1fr_1.5fr_1fr] p-5 text-sm items-center hover:bg-brass/5 transition-colors cursor-pointer ${isLayoutRowActive ? 'bg-brass/5 border-l-4 border-l-brass-deep' : 'border-l-4 border-l-transparent'
-                        }`}
-                      onClick={() => setActiveLayout(p.type as '1 BHK' | '2 BHK' | '3 BHK')}
-                    >
-                      <div className="font-serif pr-2 flex items-center gap-2">
-                        <span className={`text-xs transition-opacity duration-200 ${isLayoutRowActive ? 'opacity-100 text-brass-deep' : 'opacity-0'}`}>
-                          ▶
-                        </span>
-                        <span className="text-base">{p.type}</span>
-                      </div>
-                      <div>
-                        {p.carpetArea.replace(' sq.ft', '')} <span className="text-[10px] text-taupe">sq.ft</span>
-                      </div>
-                      <div className="text-brass-deep font-semibold text-[11px] sm:text-xs md:text-sm">Price on Request</div>
-                      <div>
-                        <span className={`text-[9px] px-2 py-1 rounded-full font-bold uppercase ${p.status === 'Available' ? 'bg-emerald-500/10 text-emerald-600' : 'bg-brass/15 text-brass-deep'
-                          }`}>
-                          {p.status}
-                        </span>
-                      </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {project.pricing.map((p, idx) => (
+              <div
+                key={idx}
+                className="bg-white border border-line-light flex flex-col cursor-pointer group hover:shadow-xl transition-shadow duration-300"
+                onClick={() => {
+                  const images = project.pricing.map(p => layoutImages[p.type as '1 BHK' | '2 BHK' | '3 BHK']).filter(Boolean);
+                  const imgIdx = images.indexOf(layoutImages[p.type as '1 BHK' | '2 BHK' | '3 BHK']);
+                  setLightbox({ images, index: imgIdx >= 0 ? imgIdx : 0 });
+                }}
+              >
+                {/* Image Area */}
+                <div className="w-full relative overflow-hidden border-b border-line-light bg-white">
+                  <div className="absolute top-6 left-6 flex items-center gap-2 z-10">
+                    <div className="text-brass-deep flex items-center gap-1.5">
+                      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 stroke-current stroke-[1.5]">
+                        <path d="M12 2L14.4 7.6L20.5 8.5L16.1 12.8L17.1 18.9L12 16.2L6.9 18.9L7.9 12.8L3.5 8.5L9.6 7.6L12 2Z" />
+                      </svg>
+                      <span className="font-serif font-bold text-[11px] uppercase tracking-wider">{p.type}</span>
                     </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Right Column: Layout Image Viewer */}
-            <div className="w-full lg:w-1/2 flex items-center justify-center relative overflow-hidden min-h-[400px]">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeLayout}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.3 }}
-                  className="absolute inset-0 w-full h-full"
-                >
+                  </div>
                   <img
-                    src={layoutImages[activeLayout]}
-                    alt={`${activeLayout} 3D Layout Plan`}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700 cursor-zoom-in"
-                    onClick={() => {
-                      const images = project.pricing.map(p => layoutImages[p.type as '1 BHK' | '2 BHK' | '3 BHK']).filter(Boolean);
-                      const idx = images.indexOf(layoutImages[activeLayout]);
-                      setLightbox({ images, index: idx >= 0 ? idx : 0 });
-                    }}
+                    src={layoutImages[p.type as '1 BHK' | '2 BHK' | '3 BHK']}
+                    alt={`${p.type} Floor Plan`}
+                    className="w-full h-auto object-contain group-hover:scale-[1.03] transition-transform duration-700 block"
                   />
-                </motion.div>
-              </AnimatePresence>
-            </div>
+                </div>
+
+                {/* Details Area */}
+                <div className="p-6 md:p-8 flex flex-col gap-6">
+                  {/* <div className="flex flex-col gap-1.5">
+                    <div className="text-[11px] text-brass-deep font-semibold tracking-widest uppercase">SKY DECK RESIDENCE</div>
+                    <div className="font-serif text-[28px] text-ink tracking-tight">{p.type}</div>
+                  </div> */}
+                  <div className="grid grid-cols-2 gap-4 mt-2">
+                    <div className="flex flex-col gap-1.5">
+                      <div className="font-bold text-ink text-[17px] font-sans tracking-tight">~{p.carpetArea.replace(' sq.ft', '')}</div>
+                      <div className="text-[11px] text-ink-soft font-medium">Carpet Area (sq.ft.)</div>
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <div className="font-bold text-ink text-[17px] font-sans tracking-tight">Price on Request</div>
+                      <div className="text-[11px] text-ink-soft font-medium">Starting Price</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-          <p className="text-xs text-taupe italic mt-4 w-full">
-            *Prices are indicative, exclusive of government taxes and other statutory charges, and subject to change. Contact our sales office for latest offers.
+
+          <p className="text-xs text-taupe italic mt-10 text-center w-full">
+            *Prices and areas are indicative, exclusive of government taxes and other statutory charges, and subject to change.
           </p>
         </div>
       </section>
 
-      {/* 6A. SPECIFICATIONS */}
-      <section className="section pt-24 pb-24 bg-ivory">
-        <div className="wrap max-w-4xl mx-auto">
+      {/* 5. SPECIFICATIONS */}
+      <section id="specifications" className="section pt-24 pb-24 bg-ivory">
+        <div className="wrap-widescreen max-w-4xl mx-auto">
           <div className="section-head mb-14">
             <span className="eyebrow">Specifications</span>
             <h2 className="serif mt-2">Built with Quality That Lasts</h2>
@@ -501,9 +491,9 @@ export default function ProjectDetails() {
         </div>
       </section>
 
-      {/* 6B. LOCATION */}
-      <section className="section pt-24 pb-24 bg-paper">
-        <div className="wrap max-w-5xl mx-auto">
+      {/* 6. LOCATION */}
+      <section id="location" className="section pt-24 pb-24 bg-paper">
+        <div className="wrap-widescreen max-w-5xl mx-auto">
           <div className="section-head mb-14">
             <span className="eyebrow">Location</span>
             <h2 className="serif mt-2">Connected to Everything</h2>
@@ -556,15 +546,24 @@ export default function ProjectDetails() {
       </section>
 
       {/* 7. GALLERY */}
-      <section className="section pt-24 pb-24 bg-ivory">
-        <div className="wrap">
+      <section id="gallery" className="section pt-24 pb-24 bg-ivory">
+        <div className="wrap-widescreen">
           <div className="section-head mb-14">
             <span className="eyebrow">Gallery</span>
             <h2 className="serif whitespace-nowrap tracking-tight" style={{ fontSize: 'min(6vw, clamp(2.1rem, 4.6vw, 3.6rem))' }}>A Closer Look at {project.name}</h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+
+          <div className="grid grid-cols-12 gap-1 md:gap-2">
             {project.gallery.map((imgName, idx) => {
               const imgAsset = galleryMap[imgName];
+
+              let colSpan = 'col-span-12';
+              if (idx < 3) colSpan = 'col-span-12 md:col-span-4'; // Top row
+              else if (idx === 3) colSpan = 'col-span-12 md:col-span-3'; // Bottom left
+              else if (idx === 4) colSpan = 'col-span-12 md:col-span-5'; // Bottom middle
+              else if (idx === 5) colSpan = 'col-span-12 md:col-span-4'; // Bottom right
+              else colSpan = 'col-span-12 md:col-span-4'; // Fallback
+
               return (
                 <div
                   key={idx}
@@ -572,7 +571,7 @@ export default function ProjectDetails() {
                     const images = project.gallery.map(img => galleryMap[img]);
                     setLightbox({ images, index: idx });
                   }}
-                  className="aspect-square bg-paper border border-line-light rounded-2xl overflow-hidden shadow-sm cursor-zoom-in group relative"
+                  className={`${colSpan} h-[250px] sm:h-[350px] lg:h-[420px] overflow-hidden cursor-zoom-in group relative bg-line-light`}
                 >
                   <img
                     src={imgAsset}
@@ -628,8 +627,8 @@ export default function ProjectDetails() {
       </AnimatePresence>
 
       {/* 8. ENQUIRY & RERA */}
-      <section ref={contactRef} className="section pt-24 pb-24 bg-paper">
-        <div className="wrap grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+      <section id="contact" ref={contactRef} className="section pt-24 pb-24 bg-paper">
+        <div className="wrap-widescreen grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
           <div className="flex flex-col gap-12">
             <div className="section-head">

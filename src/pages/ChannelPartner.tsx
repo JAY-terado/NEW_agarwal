@@ -18,7 +18,7 @@ export default function ChannelPartner() {
         <div className="page-hero-bg">
           <img src={heroImage} alt="Channel Partner network" />
         </div>
-        <div className="wrap">
+        <div className="wrap-widescreen">
           <span className="eyebrow light">Channel Partners</span>
           <h1 className="serif">Grow With <em>Agarwal Group</em></h1>
           <p>Partner with one of Vasai-Virar's most trusted developers — and turn our 47-year legacy into your next closing.</p>
@@ -30,7 +30,7 @@ export default function ChannelPartner() {
 
       {/* Main Section */}
       <section className="section">
-        <div className="wrap channel-grid">
+        <div className="wrap-widescreen channel-grid">
           <div>
             <span className="eyebrow">Why Partner With Us</span>
             <h2 className="serif" style={{ fontFamily: "'Fraunces', serif", fontWeight: 300, fontSize: 'clamp(1.9rem, 3.8vw, 2.8rem)', lineHeight: 1.12, margin: '.4em 0 .5em' }}>

@@ -72,6 +72,7 @@ section[id] {
 input[type="radio"] {
   accent-color: var(--color-brass);
 }
+
 /* Custom micro-animations */
 .reveal {
   opacity: 0;
@@ -186,7 +187,7 @@ input[type="radio"] {
 
 .reel {
   position: relative;
-  flex: 0 0 calc((100% - 44px)/3);
+  flex: 0 0 calc((100% - 66px)/4);
   scroll-snap-align: start;
   aspect-ratio: 9/16;
   border-radius: 16px;
@@ -196,7 +197,7 @@ input[type="radio"] {
 
 @media(max-width:900px) {
   .reel {
-    flex: 0 0 calc((100% - 22px)/2);
+    flex: 0 0 calc((100% - 44px)/3);
   }
 }
 
@@ -547,7 +548,10 @@ input[type="radio"] {
 .ig-avatar::before {
   content: '';
   position: absolute;
-  top: -6px; left: -6px; right: -6px; bottom: -6px;
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
   background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
   border-radius: 50%;
   z-index: -1;
@@ -593,7 +597,8 @@ input[type="radio"] {
   background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
   color: #fff;
   padding: 10px 24px;
-  border-radius: 8px; /* Classic Insta button radius */
+  border-radius: 8px;
+  /* Classic Insta button radius */
   font-size: .85rem;
   font-weight: 600;
   letter-spacing: .05em;
@@ -968,7 +973,7 @@ input[type="radio"] {
   gap: clamp(18px, 2vw, 28px);
 }
 
-@media(max-width:768px) {
+@media(max-width: 768px) {
   .pgrid {
     grid-template-columns: 1fr;
   }
@@ -992,8 +997,14 @@ input[type="radio"] {
 
 .pcard-media {
   position: relative;
-  aspect-ratio: 4/3;
+  aspect-ratio: 16/9;
   overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .pcard-media {
+    aspect-ratio: 4/3;
+  }
 }
 
 .pcard-media img {
@@ -1111,7 +1122,8 @@ input[type="radio"] {
   gap: 12px;
 }
 
-.pcta a, .pcta-btn {
+.pcta a,
+.pcta-btn {
   flex: 1;
   position: relative;
   overflow: hidden;
@@ -1130,12 +1142,14 @@ input[type="radio"] {
   transition: transform .4s var(--ease), color .45s var(--ease), border-color .45s var(--ease), box-shadow .45s var(--ease);
 }
 
-.pcta a>span, .pcta-btn>span {
+.pcta a>span,
+.pcta-btn>span {
   position: relative;
   z-index: 2;
 }
 
-.pcta a .arr, .pcta-btn .arr {
+.pcta a .arr,
+.pcta-btn .arr {
   display: inline-flex;
   align-items: center;
   max-width: 0;
@@ -1146,14 +1160,16 @@ input[type="radio"] {
   transition: max-width .45s var(--ease), margin-left .45s var(--ease), opacity .4s var(--ease), transform .45s var(--ease);
 }
 
-.pcta a:hover .arr, .pcta-btn:hover .arr {
+.pcta a:hover .arr,
+.pcta-btn:hover .arr {
   max-width: 1.6em;
   margin-left: 10px;
   opacity: 1;
   transform: translateX(0);
 }
 
-.pcta a::before, .pcta-btn::before {
+.pcta a::before,
+.pcta-btn::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -1162,7 +1178,8 @@ input[type="radio"] {
   transition: transform .6s var(--ease);
 }
 
-.pcta a::after, .pcta-btn::after {
+.pcta a::after,
+.pcta-btn::after {
   content: "";
   position: absolute;
   left: 0;
@@ -1176,24 +1193,29 @@ input[type="radio"] {
   pointer-events: none;
 }
 
-.pcta a:hover::before, .pcta-btn:hover::before {
+.pcta a:hover::before,
+.pcta-btn:hover::before {
   transform: translateX(0);
 }
 
-.pcta a:hover::after, .pcta-btn:hover::after {
+.pcta a:hover::after,
+.pcta-btn:hover::after {
   opacity: 1;
 }
 
-.pcta a:hover, .pcta-btn:hover {
+.pcta a:hover,
+.pcta-btn:hover {
   transform: translateY(-3px);
 }
 
-.pcta a:active, .pcta-btn:active {
+.pcta a:active,
+.pcta-btn:active {
   transform: translateY(-1px) scale(.98);
   transition-duration: .09s;
 }
 
-.pcta a:focus-visible, .pcta-btn:focus-visible {
+.pcta a:focus-visible,
+.pcta-btn:focus-visible {
   outline: 2px solid var(--color-brass);
   outline-offset: 3px;
 }
@@ -1235,7 +1257,7 @@ input[type="radio"] {
 .folio-watermark {
   position: absolute;
   top: 35px;
-  left: 700px;
+  left: 975px;
   right: 0;
   font-size: clamp(5rem, 7vw, 8rem);
   font-family: "Fraunces", serif;
@@ -1435,6 +1457,14 @@ input[type="radio"] {
   color: var(--color-brass-deep);
 }
 
+.vcard-icon-clear {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  color: var(--color-brass-deep);
+  padding-top: 2px;
+}
+
 .vcard-content {
   display: flex;
   flex-direction: column;
@@ -1589,6 +1619,12 @@ input[type="radio"] {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 44px;
+}
+
+.wrap-widescreen {
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 @media(max-width: 768px) {

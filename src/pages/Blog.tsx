@@ -75,7 +75,7 @@ export default function Blog() {
             alt="Insights & Updates"
           />
         </div>
-        <div className="wrap">
+        <div className="wrap-widescreen">
           <span className="eyebrow light">The Agarwal Journal</span>
           <h1 className="serif">Insights &amp; <em>Updates</em></h1>
           <p>Stories on design, community and the evolving Vasai–Virar landscape — straight from the team building it.</p>
@@ -87,7 +87,7 @@ export default function Blog() {
 
       {/* Blog Post Grid Section */}
       <section className="section">
-        <div className="wrap">
+        <div className="wrap-widescreen">
           <div className="blog-grid">
             {blogs.map((post) => {
               const blogImg = blogImageMap[post.image];

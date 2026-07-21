@@ -34,7 +34,7 @@ export default function CompletedProjects() {
 
   return (
     <div className="bg-ivory min-h-screen text-ink pt-32 pb-24">
-      <div className="wrap max-w-6xl mx-auto">
+      <div className="wrap-widescreen">
         <div className="text-left mb-16">
           <span className="eyebrow block mb-4">Our Legacy</span>
           <h1 className="serif text-4xl md:text-5xl">Completed Projects</h1>

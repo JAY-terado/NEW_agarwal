@@ -4,7 +4,7 @@ import Logo from '../assets/Agarwal_Group_Logo.png';
 export default function Footer() {
   return (
     <footer style={{ background: 'var(--ivory)', color: 'var(--ink-soft)', borderTop: '1px solid var(--line)', padding: 'clamp(64px, 9vh, 100px) 0 30px' }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 clamp(20px, 5vw, 64px)' }}>
+      <div className="wrap-widescreen">
         {/* foot-top: 1.6fr 1fr 1fr 1fr */}
         <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr 1fr 1fr', gap: '40px', paddingBottom: '48px', borderBottom: '1px solid rgba(20,20,18,.12)' }} className="footer-top-grid">
           {/* Brand Column */}
@@ -94,6 +94,7 @@ export default function Footer() {
                 { to: '/projects/horizon', label: 'Agarwal Horizon' },
               ].map(link => (
                 <Link key={link.to} to={link.to}
+                  onClick={() => window.scrollTo(0, 0)}
                   style={{ display: 'block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'color .25s', textDecoration: 'none' }}
                   onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
                   onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>
@@ -122,6 +123,7 @@ export default function Footer() {
                 // { to: '/projects', label: 'RERA Details' },
               ].map((link, i) => (
                 <Link key={i} to={link.to}
+                  onClick={() => window.scrollTo(0, 0)}
                   style={{ display: 'block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'color .25s', textDecoration: 'none' }}
                   onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
                   onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>
@@ -138,12 +140,14 @@ export default function Footer() {
             </h5>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <Link to="/terms-conditions"
+                onClick={() => window.scrollTo(0, 0)}
                 style={{ display: 'block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'color .25s', textDecoration: 'none' }}
                 onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
                 onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>
                 Terms &amp; Conditions
               </Link>
               <Link to="/privacy-policy"
+                onClick={() => window.scrollTo(0, 0)}
                 style={{ display: 'block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'color .25s', textDecoration: 'none' }}
                 onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
                 onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>

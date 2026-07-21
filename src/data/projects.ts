@@ -28,7 +28,7 @@ export interface Project {
   overviewTitle: string;
   overviewText1: string;
   overviewText2: string;
-  whyUs: string[];
+  overviewFeatures: { title: string; desc: string; icon: string; }[];
   amenities: string[];
   pricing: PricingRow[];
   specifications: SpecificationRow[];
@@ -51,12 +51,11 @@ export const projects: Project[] = [
     overviewTitle: 'A landmark address where everyday life feels elevated.',
     overviewText1: 'Agarwal Infinity brings thoughtfully designed 1, 2 & 3 BHK homes to the heart of Virar West. Every residence is planned for abundant natural light, cross-ventilation and efficient carpet areas — wrapped in a gated community with resort-grade amenities and seamless connectivity to Mumbai.',
     overviewText2: 'Backed by four decades of Agarwal Group craftsmanship, Infinity is built to hold its value and grow with your family for generations.',
-    whyUs: [
-      'Prime Virar West location with quick access to the Western Line & highways',
-      'Vaastu-compliant 1, 2 & 3 BHK layouts with efficient carpet areas',
-      'Gated community with 24×7 security & CCTV surveillance',
-      'Resort-style amenities across landscaped podium & rooftop decks',
-      'RERA-registered · clear title · bank-approved for home loans'
+    overviewFeatures: [
+      { title: "Landscaped Gardens", desc: "Lush green spaces to unwind in", icon: "Leaf" },
+      { title: "Fitness Zones", desc: "State-of-the-art equipment", icon: "Dumbbell" },
+      { title: "Podium Parking", desc: "Dedicated covered parking spaces", icon: "Car" },
+      { title: "Sky Deck Views", desc: "Panoramic vistas from the rooftop", icon: "Sun" }
     ],
     amenities: [
       'Grand Entrance Lobby',
@@ -114,12 +113,11 @@ export const projects: Project[] = [
     overviewTitle: 'A landmark address where everyday life feels elevated.',
     overviewText1: 'Agarwal Sky Heights brings thoughtfully designed 1, 2 & 3 BHK homes to the heart of Virar West. Every residence is planned for abundant natural light, cross-ventilation and efficient carpet areas — wrapped in a gated community with resort-grade amenities and seamless connectivity to Mumbai.',
     overviewText2: 'Backed by four decades of Agarwal Group craftsmanship, Sky Heights is built to hold its value and grow with your family for generations.',
-    whyUs: [
-      'Prime Virar West location with quick access to the Western Line & highways',
-      'Vaastu-compliant 1, 2 & 3 BHK layouts with efficient carpet areas',
-      'Gated community with 24×7 security & CCTV surveillance',
-      'Resort-style amenities across landscaped podium & rooftop decks',
-      'RERA-registered · clear title · bank-approved for home loans'
+    overviewFeatures: [
+      { title: "Landscaped Gardens", desc: "Lush green spaces to unwind in", icon: "Leaf" },
+      { title: "Fitness Zones", desc: "State-of-the-art equipment", icon: "Dumbbell" },
+      { title: "Podium Parking", desc: "Dedicated covered parking spaces", icon: "Car" },
+      { title: "Sky Deck Views", desc: "Panoramic vistas from the rooftop", icon: "Sun" }
     ],
     amenities: [
       'Grand Entrance Lobby',
@@ -177,12 +175,11 @@ export const projects: Project[] = [
     overviewTitle: 'A landmark address where everyday life feels elevated.',
     overviewText1: 'Agarwal Skyrise brings thoughtfully designed 1, 2 & 3 BHK homes to the heart of Vasai East. Every residence is planned for abundant natural light, cross-ventilation and efficient carpet areas — wrapped in a gated community with resort-grade amenities and seamless connectivity to Mumbai.',
     overviewText2: 'Backed by four decades of Agarwal Group craftsmanship, Skyrise is built to hold its value and grow with your family for generations.',
-    whyUs: [
-      'Prime Vasai East location with quick access to the Western Line & highways',
-      'Vaastu-compliant 1, 2 & 3 BHK layouts with efficient carpet areas',
-      'Gated community with 24×7 security & CCTV surveillance',
-      'Resort-style amenities across landscaped podium & rooftop decks',
-      'RERA-registered · clear title · bank-approved for home loans'
+    overviewFeatures: [
+      { title: "Landscaped Gardens", desc: "Lush green spaces to unwind in", icon: "Leaf" },
+      { title: "Fitness Zones", desc: "State-of-the-art equipment", icon: "Dumbbell" },
+      { title: "Podium Parking", desc: "Dedicated covered parking spaces", icon: "Car" },
+      { title: "Sky Deck Views", desc: "Panoramic vistas from the rooftop", icon: "Sun" }
     ],
     amenities: [
       'Grand Entrance Lobby',
@@ -240,12 +237,11 @@ export const projects: Project[] = [
     overviewTitle: 'A landmark address where everyday life feels elevated.',
     overviewText1: 'Agarwal Horizon brings thoughtfully designed 1, 2 & 3 BHK homes to the heart of Virar West. Every residence is planned for abundant natural light, cross-ventilation and efficient carpet areas — wrapped in a gated community with resort-grade amenities and seamless connectivity to Mumbai.',
     overviewText2: 'Backed by four decades of Agarwal Group craftsmanship, Horizon is built to hold its value and grow with your family for generations.',
-    whyUs: [
-      'Prime Virar West location with quick access to the Western Line & highways',
-      'Vaastu-compliant 1, 2 & 3 BHK layouts with efficient carpet areas',
-      'Gated community with 24×7 security & CCTV surveillance',
-      'Resort-style amenities across landscaped podium & rooftop decks',
-      'RERA-registered · clear title · bank-approved for home loans'
+    overviewFeatures: [
+      { title: "Landscaped Gardens", desc: "Lush green spaces to unwind in", icon: "Leaf" },
+      { title: "Fitness Zones", desc: "State-of-the-art equipment", icon: "Dumbbell" },
+      { title: "Podium Parking", desc: "Dedicated covered parking spaces", icon: "Car" },
+      { title: "Sky Deck Views", desc: "Panoramic vistas from the rooftop", icon: "Sun" }
     ],
     amenities: [
       'Grand Entrance Lobby',
