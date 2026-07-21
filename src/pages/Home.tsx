@@ -243,25 +243,7 @@ export default function Home() {
     };
   }, []);
 
-  // Click anywhere (except input) or scroll to close search dropdown
-  useEffect(() => {
-    const handleOutsideClick = (e: MouseEvent) => {
-      const input = searchContainerRef.current?.querySelector('input');
-      if (input && input.contains(e.target as Node)) {
-        return;
-      }
-      setSearchFocused(false);
-    };
-    const handleScroll = () => {
-      setSearchFocused(false);
-    };
-    document.addEventListener('mousedown', handleOutsideClick);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+
 
   // Refs for interval timers to allow resetting on manual click
   const reelsTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
