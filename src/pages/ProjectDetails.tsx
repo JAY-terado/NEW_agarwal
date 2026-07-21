@@ -3,17 +3,6 @@ import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   MapPin,
-  Send,
-  CheckCircle2,
-  Building,
-  Waves,
-  Dumbbell,
-  TreePine,
-  Gamepad2,
-  Users,
-  BookOpen,
-  Sparkles,
-  HelpCircle,
   ChevronLeft,
   ChevronRight,
   X
@@ -81,21 +70,7 @@ const amenityImageMap: Record<string, string> = {
   'Rooftop Sky Lounge': amenityRooftop
 };
 
-const amenityIconMap: Record<string, React.ComponentType<any>> = {
-  'Grand Entrance Lobby': Building,
-  'Swimming Pool & Deck': Waves,
-  'Fully-Equipped Gymnasium': Dumbbell,
-  'Landscaped Podium Garden': TreePine,
-  "Children's Play Area": Gamepad2,
-  'Multipurpose Community Hall': Users,
-  'Indoor Games & Library': BookOpen,
-  'Rooftop Sky Lounge': Sparkles,
-};
 
-const getAmenityIcon = (name: string) => {
-  const Icon = amenityIconMap[name.trim()] || HelpCircle;
-  return <Icon className="w-4 h-4 text-brass" />;
-};
 
 export default function ProjectDetails() {
   const { slug } = useParams<{ slug: string }>();

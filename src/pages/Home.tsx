@@ -138,7 +138,7 @@ function useCountUp(target: number, duration: number = 2000, trigger: boolean) {
   return count;
 }
 
-const searchItems = [
+const searchItems: Array<{ name: string; status: string; sub: string; slug?: string; link?: string }> = [
   { name: 'Agarwal Skyrise', status: 'Ongoing', sub: 'Vasai East', slug: 'skyrise' },
   { name: 'Agarwal Infinity', status: 'Ongoing', sub: 'Virar West', slug: 'infinity' },
   { name: 'Agarwal Sky Heights', status: 'Ongoing', sub: 'Virar West', slug: 'sky-heights' },
@@ -272,8 +272,8 @@ export default function Home() {
   }, []);
 
   // Refs for interval timers to allow resetting on manual click
-  const reelsTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const blogsTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const reelsTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const blogsTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Reels horizontal scrolling
   const scrollReels = (direction: number, manual = false) => {
