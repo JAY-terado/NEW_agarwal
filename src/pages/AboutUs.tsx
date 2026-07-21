@@ -254,7 +254,7 @@ export default function AboutUs() {
                 drag="x"
                 dragConstraints={{ left: 0, right: 0 }}
                 dragElastic={0.1}
-                onDragEnd={(e, { offset }) => {
+                onDragEnd={(_, { offset }) => {
                   if (offset.x < -40) handleNext();
                   else if (offset.x > 40) handlePrev();
                 }}

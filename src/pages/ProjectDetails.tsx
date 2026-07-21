@@ -786,7 +786,7 @@ export default function ProjectDetails() {
                   drag={lightbox.images.length > 1 ? "x" : false}
                   dragConstraints={{ left: 0, right: 0 }}
                   dragElastic={1}
-                  onDragEnd={(e, { offset, velocity }) => {
+                  onDragEnd={(_, { offset }) => {
                     const swipe = offset.x;
                     if (swipe < -50) {
                       setLightbox(prev => prev ? { ...prev, index: (prev.index + 1) % prev.images.length } : null);
