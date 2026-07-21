@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Clock, ShieldCheck, Users } from 'lucide-react';
+import { Sparkles, Clock, ShieldCheck, Users, Instagram } from 'lucide-react';
 import { projects } from '../data/projects';
 
 // Asset Imports
@@ -772,27 +772,27 @@ export default function Home() {
 
           {/* Right form Card - matches original 3-field callback form exactly */}
           <div className="form reveal" style={{ background: 'var(--color-ivory)', border: '1px solid var(--color-line)', borderRadius: '8px', padding: 'clamp(26px, 4vw, 42px)', paddingBottom: '24px' }}>
-            <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '16px', borderBottom: '1px solid var(--color-line)', lineHeight: 1.5 }}>
+            <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '12px', lineHeight: 1.4 }}>
               Request an Immediate Callback for Exclusive Offers.
             </div>
-            <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingTop: '16px', marginBottom: '24px', fontWeight: 300 }}>
+            <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingBottom: '20px', marginBottom: '24px', fontWeight: 300, borderBottom: '1px solid var(--color-line)' }}>
               Share your details and our relationship manager will contact you with special offer.
             </div>
             <AnimatePresence mode="wait">
               {!contactSubmitted ? (
                 <form onSubmit={handleContactSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ display: 'block', fontSize: '.7rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-taupe)', fontWeight: 600, marginBottom: '7px' }}>Full Name</label>
+                    <label style={{ display: 'block', fontSize: '.7rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-taupe)', fontWeight: 600 }}>Full Name*</label>
                     <input
                       type="text"
                       required
-                      placeholder="Full name"
+                      placeholder="Full Name"
                       style={{ width: '100%', border: '1px solid var(--color-line)', borderRadius: '4px', padding: '13px 15px', fontSize: '.95rem', fontFamily: 'inherit', color: 'var(--color-ink)', outline: 'none', background: '#ffffff' }}
                     />
                   </div>
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ display: 'block', fontSize: '.7rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-taupe)', fontWeight: 600, marginBottom: '7px' }}>Mobile Number</label>
+                    <label style={{ display: 'block', fontSize: '.7rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-taupe)', fontWeight: 600 }}>Mobile Number*</label>
                     <div style={{ display: 'flex', border: '1px solid var(--color-line)', borderRadius: '4px', overflow: 'hidden', background: '#ffffff' }}>
                       <span style={{ display: 'flex', alignItems: 'center', background: 'var(--color-ivory)', borderRight: '1px solid var(--color-line)', fontSize: '.95rem', fontWeight: 500, color: 'var(--color-ink)', padding: '0 13px', userSelect: 'none' }}>+91</span>
                       <input
@@ -811,7 +811,7 @@ export default function Home() {
                   </div>
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ display: 'block', fontSize: '.7rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-taupe)', fontWeight: 600, marginBottom: '7px' }}>Email Address</label>
+                    <label style={{ display: 'block', fontSize: '.7rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-taupe)', fontWeight: 600 }}>Email Address*</label>
                     <input
                       type="email"
                       required
@@ -830,8 +830,9 @@ export default function Home() {
                     <span>Get Best Offers</span>
                     <span className="arr">→</span>
                   </button>
+                  <br />
                   <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', marginTop: '10px', lineHeight: 1.4 }}>
-                    By submitting, you agree to our Terms &amp; Privacy Policy. We will never share your data.
+                    I Authorize Agarwal Group And Its Representatives To Call, SMS, Email Or Whatsapp Me About Its Products And Offers. This Consent Overrides Any Registration For DND NDNC.
                   </div>
                 </form>
               ) : (
@@ -874,7 +875,8 @@ export default function Home() {
                 <span><b>326</b> Following</span>
               </div>
             </div>
-            <a className="ig-follow" href="https://www.instagram.com/agarwalrealties" target="_blank" rel="noopener">
+            <a className="ig-follow flex items-center justify-center gap-2" href="https://www.instagram.com/agarwalrealties" target="_blank" rel="noopener">
+              <Instagram className="w-4 h-4" />
               Follow @agarwalrealties
             </a>
           </div>

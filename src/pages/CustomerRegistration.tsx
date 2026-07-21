@@ -27,19 +27,15 @@ export default function CustomerRegistration() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-pine via-pine/30 to-pine/50" />
         </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-6 pb-12 w-full text-ivory">
-          <div className="text-xs uppercase tracking-widest text-ivory/60 mb-3">
-            <span>Home</span> &nbsp;/&nbsp; <span className="text-brass-bright">Customer Registration</span>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 pb-12 w-full text-ivory flex justify-center">
+          <div className="max-w-xl w-full text-center flex flex-col items-center">
+            <h1 className="font-serif text-4xl sm:text-5xl font-light tracking-tight mb-2">
+              Customer <span className="italic font-serif text-brass-bright font-normal">Registration</span>
+            </h1>
+            <p className="text-xs sm:text-sm text-ivory/80 font-light leading-relaxed">
+              Onboard as an official buyer with the Agarwal Group. Share your requirements and budget, and our CRM team will guide you through registration.
+            </p>
           </div>
-          <span className="bg-brass-bright text-pine text-[10px] tracking-wider uppercase font-bold py-1 px-3.5 rounded-full inline-block mb-3.5">
-            New Booking Onboarding
-          </span>
-          <h1 className="font-serif text-4xl sm:text-5xl font-light tracking-tight mb-2">
-            Customer <span className="italic font-serif text-brass-bright font-normal">Registration</span>
-          </h1>
-          <p className="text-xs sm:text-sm text-ivory/80 max-w-xl font-light leading-relaxed">
-            Onboard as an official buyer with the Agarwal Group. Share your requirements and budget, and our CRM team will guide you through registration.
-          </p>
         </div>
       </section>
 
@@ -74,7 +70,7 @@ export default function CustomerRegistration() {
                       <input
                         type="text"
                         required
-                        placeholder="Full name"
+                        placeholder="Full Name"
                         className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-ivory/20"
                       />
                     </div>
@@ -87,7 +83,7 @@ export default function CustomerRegistration() {
                         <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Applicant 2 Name</label>
                         <input
                           type="text"
-                          placeholder="Full name"
+                          placeholder="Full Name"
                           className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-ivory/20"
                         />
                       </motion.div>
@@ -107,25 +103,23 @@ export default function CustomerRegistration() {
                 {/* 2. Project Selector & Core Contacts */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1">
-                    <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Email Address <span className="text-rose-500">*</span></label>
+                    <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Email Address</label>
                     <input
                       type="email"
-                      required
                       placeholder="you@email.com"
                       className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-ivory/20"
                     />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Preferred Project <span className="text-rose-500">*</span></label>
+                    <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Preferred Project</label>
                     <select
-                      required
                       className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass bg-white text-ink font-medium"
                     >
-                      <option value="">Please select project</option>
                       <option value="skyrise">Agarwal Skyrise — Vasai East</option>
                       <option value="infinity">Agarwal Infinity — Virar West</option>
                       <option value="sky-heights">Agarwal Sky Heights — Virar West</option>
                       <option value="horizon">Agarwal Horizon — Virar West</option>
+                      <option value="general inquiry">General Inquiry</option>
                     </select>
                   </div>
                 </div>
@@ -231,6 +225,7 @@ export default function CustomerRegistration() {
                       <input
                         type="text"
                         required
+                        defaultValue="Maharashtra"
                         className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-ivory/20"
                       />
                     </div>
@@ -282,7 +277,7 @@ export default function CustomerRegistration() {
                   </div>
                 </div>
 
-                {/* 6. Contact Person Info */}
+                {/* 6. Contact Person Info
                 <div className="flex flex-col gap-4">
                   <div className="flex flex-col gap-2">
                     <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Is the contact person same as Applicant 1? <span className="text-rose-500">*</span></label>
@@ -333,12 +328,25 @@ export default function CustomerRegistration() {
                       </div>
                     </motion.div>
                   )}
-                </div>
+                </div> */}
 
                 {/* 7. Requirements & Budget Categories */}
                 <div className="flex flex-col gap-6">
                   <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brass-deep pb-2 border-b border-line/40">
                     <FileText className="w-4 h-4" /> Requirements &amp; Preferences
+                  </div>
+
+                  {/* Requirements */}
+                  <div className="flex flex-col gap-2">
+                    <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Preferred Configuration <span className="text-rose-500">*</span></label>
+                    <div className="flex gap-2.5">
+                      {['1 BHK', '2 BHK', '3 BHK', '4 BHK',].map((c) => (
+                        <label key={c} className="flex items-center gap-2 border border-line rounded-lg px-4 py-2 text-xs font-semibold cursor-pointer hover:bg-ivory/30">
+                          <input type="radio" name="config" value={c} required />
+                          <span>{c}</span>
+                        </label>
+                      ))}
+                    </div>
                   </div>
 
                   {/* Budget */}
@@ -354,24 +362,11 @@ export default function CustomerRegistration() {
                     </div>
                   </div>
 
-                  {/* Requirements */}
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Preferred Configuration <span className="text-rose-500">*</span></label>
-                    <div className="flex gap-2.5">
-                      {['1 BHK', '2 BHK', '3 BHK'].map((c) => (
-                        <label key={c} className="flex items-center gap-2 border border-line rounded-lg px-4 py-2 text-xs font-semibold cursor-pointer hover:bg-ivory/30">
-                          <input type="radio" name="config" value={c} required />
-                          <span>{c}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-
                   {/* Source */}
                   <div className="flex flex-col gap-2">
                     <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">How did you hear about us? <span className="text-rose-500">*</span></label>
                     <div className="flex flex-wrap gap-2.5">
-                      {['Hoardings', 'Friends & Relatives', 'Property Consultant', 'Print Media', 'Digital'].map((s) => (
+                      {['Hoardings', 'Friends & Relatives', 'Channel Partner', 'Print Media', 'Social Media', 'Website', 'WhatsApp', 'Other'].map((s) => (
                         <label key={s} className="flex items-center gap-2 border border-line rounded-lg px-3 py-2 text-xs font-semibold cursor-pointer hover:bg-ivory/30">
                           <input type="radio" name="source" value={s} required />
                           <span>{s}</span>

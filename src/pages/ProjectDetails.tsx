@@ -318,16 +318,16 @@ export default function ProjectDetails() {
                 <li key={idx} className="leading-relaxed">{usp}</li>
               ))}
             </ul>
-            
+
             <div className="w-full aspect-video rounded-xl overflow-hidden shadow-md mt-auto">
-              <iframe 
-                width="100%" 
-                height="100%" 
-                src="https://www.youtube.com/embed/VzODXnvK5_E?si=-8guiX9CJPId4_xR" 
-                title="YouTube video player" 
-                frameBorder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerPolicy="strict-origin-when-cross-origin" 
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/VzODXnvK5_E?si=-8guiX9CJPId4_xR"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
               ></iframe>
             </div>
@@ -605,7 +605,7 @@ export default function ProjectDetails() {
             <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
               <div className="flex flex-col">
                 <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Full Name</label>
-                <input type="text" placeholder="Full name" className="border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors bg-white" required />
+                <input type="text" placeholder="Full Name" className="border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors bg-white" required />
               </div>
               <div className="flex flex-col">
                 <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Mobile Number</label>
@@ -653,22 +653,25 @@ export default function ProjectDetails() {
             <AnimatePresence mode="wait">
               {!formSubmitted ? (
                 <form onSubmit={handleFormSubmit} className="flex flex-col gap-5">
-                  <div className="serif text-2xl text-ink pb-4 border-b border-line-light leading-tight">
-                    Request an Immediate Callback.
+                  <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '12px', lineHeight: 1.4 }}>
+                    Request an Immediate Callback for Exclusive Offers.
+                  </div>
+                  <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingBottom: '20px', marginBottom: '24px', fontWeight: 300, borderBottom: '1px solid var(--color-line)' }}>
+                    Share your details and our relationship manager will contact you with special offer.
                   </div>
 
                   <div className="flex flex-col gap-2 mt-2">
-                    <label className="block text-xs tracking-widest uppercase text-taupe font-bold">Full Name</label>
+                    <label className="block text-xs tracking-widest uppercase text-taupe font-bold">Full Name*</label>
                     <input
                       type="text"
                       required
-                      placeholder="Full name"
+                      placeholder="Full Name"
                       className="w-full border border-line-light rounded-xl p-4 text-sm text-ink outline-none bg-paper focus:border-brass transition-colors"
                     />
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <label className="block text-xs tracking-widest uppercase text-taupe font-bold">Mobile Number</label>
+                    <label className="block text-xs tracking-widest uppercase text-taupe font-bold">Mobile Number*</label>
                     <div className="flex border border-line-light rounded-xl overflow-hidden bg-paper focus-within:border-brass transition-colors">
                       <span className="flex items-center bg-ivory border-r border-line-light text-sm font-medium text-ink px-4 select-none">+91</span>
                       <input
@@ -687,7 +690,7 @@ export default function ProjectDetails() {
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <label className="block text-xs tracking-widest uppercase text-taupe font-bold">Email Address</label>
+                    <label className="block text-xs tracking-widest uppercase text-taupe font-bold">Email Address*</label>
                     <input
                       type="email"
                       required
@@ -705,8 +708,8 @@ export default function ProjectDetails() {
                     <span>Get Best Offers</span>
                     <span className="arr">→</span>
                   </button>
-                  <div className="text-xs text-taupe text-center mt-2 leading-relaxed">
-                    By submitting, you agree to our Terms &amp; Privacy Policy.
+                  <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', marginTop: '10px', lineHeight: 1.4 }}>
+                    I Authorize Agarwal Group And Its Representatives To Call, SMS, Email Or Whatsapp Me About Its Products And Offers. This Consent Overrides Any Registration For DND NDNC.
                   </div>
                 </form>
               ) : (
