@@ -10,6 +10,12 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const location = useLocation();
+  const isAdmin = location.pathname.startsWith('/admin');
+  
+  if (isAdmin) {
+    return <>{children}</>;
+  }
+
   const isProjectPage = location.pathname.startsWith('/projects/') && location.pathname !== '/projects';
 
   return (

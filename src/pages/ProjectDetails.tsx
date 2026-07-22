@@ -172,6 +172,7 @@ export default function ProjectDetails() {
   const [hasClosedFloater, setHasClosedFloater] = useState(false);
   const [isContactVisible, setIsContactVisible] = useState(false);
   const contactRef = useRef<HTMLElement>(null);
+  const [activeAmenityTab, setActiveAmenityTab] = useState<'Elevation' | 'Podium Amenities' | 'Terrace Amenities'>('Podium Amenities');
 
   useEffect(() => {
     setProject(projects.find((p) => p.slug === slug));
@@ -305,11 +306,11 @@ export default function ProjectDetails() {
                 return (
                   <div key={idx} className="flex items-start gap-4">
                     <div className="w-8 h-8 rounded-full bg-line-light flex items-center justify-center shrink-0 text-pine">
-                      <IconComponent className="w-[14px] h-[14px]" strokeWidth={2} />
+                      <IconComponent className="w-[20px] h-[20px]" strokeWidth={2} />
                     </div>
                     <div>
                       <h4 className="text-sm font-bold text-ink mb-1">{feat.title}</h4>
-                      <p className="text-[11px] text-ink-soft font-medium">{feat.desc}</p>
+                      <p className="text-[14px] text-ink-soft font-medium">{feat.desc}</p>
                     </div>
                   </div>
                 );
@@ -338,12 +339,29 @@ export default function ProjectDetails() {
       {/* 3. AMENITIES */}
       <section id="amenities" className="section pt-24 pb-24 bg-ivory">
         <div className="wrap-widescreen">
-          <div className="section-head mb-14">
+          <div className="section-head mb-10">
             <span className="eyebrow">Lifestyle</span>
             <h2 className="serif mt-2">Amenities Designed for Every Generation</h2>
           </div>
+
+          {/* Tabs */}
+          <div className="flex flex-wrap gap-3 md:gap-4 mb-10 justify-center md:justify-start">
+            {['Elevation', 'Podium Amenities', 'Terrace Amenities'].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveAmenityTab(tab as any)}
+                className={`px-5 py-2.5 rounded-full text-xs md:text-sm font-semibold tracking-wider uppercase transition-all duration-300 ${activeAmenityTab === tab
+                  ? 'bg-brass-deep text-white shadow-md'
+                  : 'bg-white border border-line-light text-ink hover:border-brass-deep hover:text-brass-deep'
+                  }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-4 gap-1">
-            {project.amenities.map((item, idx) => {
+            {Array.from({ length: 8 }).map((_, idx) => {
               let spanClass = 'col-span-1';
               let heightClass = 'h-[250px] lg:h-[320px]';
 
@@ -360,18 +378,32 @@ export default function ProjectDetails() {
               else if (patternIdx === 6) spanClass = 'col-span-1 md:col-span-1';
               else if (patternIdx === 7) spanClass = 'col-span-1 md:col-span-1';
 
+              let imageSrc = `https://placehold.co/600x600/e2e0d8/8a867d?text=${project.slug}+${activeAmenityTab.split(' ')[0]}+${idx + 1}`;
+              let displayText = `${activeAmenityTab} ${idx + 1}`;
+
+              if (activeAmenityTab === 'Podium Amenities' && project.amenities[idx]) {
+                displayText = project.amenities[idx];
+                imageSrc = amenityImageMap[displayText] || imageSrc;
+              }
+
               return (
-                <div key={item} className={`relative overflow-hidden group bg-line-light ${spanClass} ${heightClass}`}>
+                <motion.div
+                  key={`${activeAmenityTab}-${idx}`}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: idx * 0.05 }}
+                  className={`relative overflow-hidden group bg-line-light ${spanClass} ${heightClass}`}
+                >
                   <img
-                    src={amenityImageMap[item] || `https://placehold.co/600x600/e2e0d8/8a867d?text=Amenity+${idx + 1}`}
-                    alt={item}
+                    src={imageSrc}
+                    alt={displayText}
                     className="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-700 z-10" />
                   <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-6 text-left z-20">
-                    <span className="font-serif text-sm md:text-base text-ivory tracking-wide">{item}</span>
+                    <span className="font-serif text-sm md:text-base text-ivory tracking-wide">{displayText}</span>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -443,7 +475,7 @@ export default function ProjectDetails() {
         </div>
       </section>
 
-      {/* 5. SPECIFICATIONS */}
+      {/* 5. SPECIFICATIONS
       <section id="specifications" className="section pt-24 pb-24 bg-ivory">
         <div className="wrap-widescreen max-w-4xl mx-auto">
           <div className="section-head mb-14">
@@ -459,10 +491,10 @@ export default function ProjectDetails() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* 6. LOCATION */}
-      <section id="location" className="section pt-24 pb-24 bg-paper">
+      <section id="location" className="section pt-24 pb-24 bg-ivory">
         <div className="wrap-widescreen max-w-5xl mx-auto">
           <div className="section-head mb-14">
             <span className="eyebrow">Location</span>
@@ -516,7 +548,7 @@ export default function ProjectDetails() {
       </section>
 
       {/* 7. GALLERY */}
-      <section id="gallery" className="section pt-24 pb-24 bg-ivory">
+      <section id="gallery" className="section pt-24 pb-24 bg-paper">
         <div className="wrap-widescreen">
           <div className="section-head mb-14">
             <span className="eyebrow">Gallery</span>
@@ -555,6 +587,50 @@ export default function ProjectDetails() {
           </div>
         </div>
       </section>
+
+      {/* WHY CHOOSE US */}
+      {project.whyChoseUs && project.whyChoseUs.length > 0 && (
+        <section className="section pt-24 pb-0 bg-ivory border-t border-line-light">
+          <div className="wrap-widescreen">
+            <div className="section-head mb-16 text-center max-w-2xl mx-auto">
+              <span className="eyebrow">Highlights</span>
+              <h2 className="serif mt-2">Why Choose {project.name}?</h2>
+            </div>
+
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-x-8">
+              {project.whyChoseUs.map((item, idx) => {
+                const IconComponent = iconComponents[item.icon] || Leaf;
+                return (
+                  <div key={idx} className="flex flex-col items-center text-center px-2 group">
+                    <div className="w-16 h-16 rounded-full bg-paper flex items-center justify-center text-brass-deep mb-5 shadow-sm border border-line-light transition-transform duration-500 group-hover:scale-110">
+                      <IconComponent className="w-7 h-7" strokeWidth={1.5} />
+                    </div>
+                    <h4 className="font-serif text-[17px] md:text-lg font-medium text-ink mb-2.5">{item.title}</h4>
+                    <p className="text-[13px] md:text-sm text-ink-soft leading-relaxed font-light">{item.desc}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Sticky Side Button */}
+      <AnimatePresence>
+        {!isContactVisible && (
+          <motion.button
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 50 }}
+            onClick={() => contactRef.current?.scrollIntoView({ behavior: 'smooth' })}
+            className="fixed top-1/2 right-0 -translate-y-1/2 z-[98] bg-brass-deep text-white text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase py-4 md:py-6 px-2 md:px-2.5 rounded-l-lg shadow-[-4px_0_15px_rgba(0,0,0,0.1)] hover:bg-[#b59254] hover:pr-3 md:hover:pr-4 transition-all duration-300 flex items-center justify-center cursor-pointer"
+            style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+          >
+            Enquire Now
+          </motion.button>
+        )}
+      </AnimatePresence>
+
       {/* Floating Callback Form Widget */}
       <AnimatePresence>
         {showFloater && !hasClosedFloater && !isContactVisible && (
@@ -629,14 +705,16 @@ export default function ProjectDetails() {
             <AnimatePresence mode="wait">
               {!formSubmitted ? (
                 <form onSubmit={handleFormSubmit} className="flex flex-col gap-5">
-                  <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '12px', lineHeight: 1.4 }}>
-                    Request an Immediate Callback for Exclusive Offers.
-                  </div>
-                  <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingBottom: '20px', marginBottom: '24px', fontWeight: 300, borderBottom: '1px solid var(--color-line)' }}>
-                    Share your details and our relationship manager will contact you with special offer.
+                  <div className="flex flex-col">
+                    <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '4px', lineHeight: 1.4 }}>
+                      Request an Immediate Callback for Exclusive Offers.
+                    </div>
+                    <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingBottom: '20px', marginBottom: '0px', fontWeight: 300, borderBottom: '1px solid var(--color-line)' }}>
+                      Share your details and our relationship manager will contact you with special offer.
+                    </div>
                   </div>
 
-                  <div className="flex flex-col gap-2 mt-2">
+                  <div className="flex flex-col gap-2">
                     <label className="block text-xs tracking-widest uppercase text-taupe font-bold">Full Name*</label>
                     <input
                       type="text"
@@ -666,10 +744,9 @@ export default function ProjectDetails() {
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <label className="block text-xs tracking-widest uppercase text-taupe font-bold">Email Address*</label>
+                    <label className="block text-xs tracking-widest uppercase text-taupe font-bold">Email Address</label>
                     <input
                       type="email"
-                      required
                       pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
                       title="Please enter a valid email address (e.g. name@example.com)"
                       placeholder="you@email.com"

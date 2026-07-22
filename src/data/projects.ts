@@ -29,6 +29,7 @@ export interface Project {
   overviewText1: string;
   overviewText2: string;
   overviewFeatures: { title: string; desc: string; icon: string; }[];
+  whyChoseUs: { title: string; desc: string; icon: string; }[];
   amenities: string[];
   pricing: PricingRow[];
   specifications: SpecificationRow[];
@@ -56,6 +57,12 @@ export const projects: Project[] = [
       { title: "Fitness Zones", desc: "State-of-the-art equipment", icon: "Dumbbell" },
       { title: "Podium Parking", desc: "Dedicated covered parking spaces", icon: "Car" },
       { title: "Sky Deck Views", desc: "Panoramic vistas from the rooftop", icon: "Sun" }
+    ],
+    whyChoseUs: [
+      { title: "Prime Locations", desc: "Nestled in thriving neighbourhoods with excellent connectivity", icon: "Car" },
+      { title: "Premium Amenities", desc: "Thoughtfully curated lifestyle amenities for every age", icon: "Dumbbell" },
+      { title: "Quality Craftsmanship", desc: "Built with trust and attention to detail, ensuring lasting value", icon: "Leaf" },
+      { title: "Hassle-Free Living", desc: "Ready-to-move-in homes with OC received, making your transition seamless", icon: "Sun" }
     ],
     amenities: [
       'Grand Entrance Lobby',
@@ -119,6 +126,12 @@ export const projects: Project[] = [
       { title: "Podium Parking", desc: "Dedicated covered parking spaces", icon: "Car" },
       { title: "Sky Deck Views", desc: "Panoramic vistas from the rooftop", icon: "Sun" }
     ],
+    whyChoseUs: [
+      { title: "Prime Locations", desc: "Nestled in thriving neighbourhoods with excellent connectivity", icon: "Car" },
+      { title: "Premium Amenities", desc: "Thoughtfully curated lifestyle amenities for every age", icon: "Dumbbell" },
+      { title: "Quality Craftsmanship", desc: "Built with trust and attention to detail, ensuring lasting value", icon: "Leaf" },
+      { title: "Hassle-Free Living", desc: "Ready-to-move-in homes with OC received, making your transition seamless", icon: "Sun" }
+    ],
     amenities: [
       'Grand Entrance Lobby',
       'Swimming Pool & Deck',
@@ -181,6 +194,12 @@ export const projects: Project[] = [
       { title: "Podium Parking", desc: "Dedicated covered parking spaces", icon: "Car" },
       { title: "Sky Deck Views", desc: "Panoramic vistas from the rooftop", icon: "Sun" }
     ],
+    whyChoseUs: [
+      { title: "Prime Locations", desc: "Nestled in thriving neighbourhoods with excellent connectivity", icon: "Car" },
+      { title: "Premium Amenities", desc: "Thoughtfully curated lifestyle amenities for every age", icon: "Dumbbell" },
+      { title: "Quality Craftsmanship", desc: "Built with trust and attention to detail, ensuring lasting value", icon: "Leaf" },
+      { title: "Hassle-Free Living", desc: "Ready-to-move-in homes with OC received, making your transition seamless", icon: "Sun" }
+    ],
     amenities: [
       'Grand Entrance Lobby',
       'Swimming Pool & Deck',
@@ -242,6 +261,12 @@ export const projects: Project[] = [
       { title: "Fitness Zones", desc: "State-of-the-art equipment", icon: "Dumbbell" },
       { title: "Podium Parking", desc: "Dedicated covered parking spaces", icon: "Car" },
       { title: "Sky Deck Views", desc: "Panoramic vistas from the rooftop", icon: "Sun" }
+    ],
+    whyChoseUs: [
+      { title: "Prime Locations", desc: "Nestled in thriving neighbourhoods with excellent connectivity", icon: "Car" },
+      { title: "Premium Amenities", desc: "Thoughtfully curated lifestyle amenities for every age", icon: "Dumbbell" },
+      { title: "Quality Craftsmanship", desc: "Built with trust and attention to detail, ensuring lasting value", icon: "Leaf" },
+      { title: "Hassle-Free Living", desc: "Ready-to-move-in homes with OC received, making your transition seamless", icon: "Sun" }
     ],
     amenities: [
       'Grand Entrance Lobby',

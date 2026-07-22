@@ -124,7 +124,7 @@ export default function Navbar() {
   };
 
   // Check if current page needs light navbar by default
-  const isLightHero = location.pathname === '/completed-projects';
+  const isLightHero = location.pathname === '/completed-projects' || (location.pathname.startsWith('/blogs/') && location.pathname !== '/blogs');
   const forceScrolledStyle = scrolled || isLightHero;
 
   // Nav base: transparent/blur; scrolled: white glass

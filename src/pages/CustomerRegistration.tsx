@@ -8,6 +8,10 @@ export default function CustomerRegistration() {
   const [showApplicant2, setShowApplicant2] = useState(false);
 
   const [otpSent, setOtpSent] = useState(false);
+  const [source, setSource] = useState('');
+  const [cpOtpSent, setCpOtpSent] = useState(false);
+  const [cpOtpVerified, setCpOtpVerified] = useState(false);
+  const [cpOtp, setCpOtp] = useState('');
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,12 +32,12 @@ export default function CustomerRegistration() {
           <div className="absolute inset-0 bg-gradient-to-t from-pine via-pine/30 to-pine/50" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 pb-12 w-full text-ivory flex justify-center">
-          <div className="max-w-xl w-full text-center flex flex-col items-center">
+          <div className="max-w-2xl w-full text-center flex flex-col items-center">
             <h1 className="font-serif text-4xl sm:text-5xl font-light tracking-tight mb-2">
               Customer <span className="italic font-serif text-brass-bright font-normal">Registration</span>
             </h1>
-            <p className="text-xs sm:text-sm text-ivory/80 font-light leading-relaxed">
-              Onboard as an official buyer with the Agarwal Group. Share your requirements and budget, and our CRM team will guide you through registration.
+            <p className="text-xs sm:text-sm text-ivory/80 font-light leading-relaxed sm:whitespace-nowrap">
+              Share your requirements and budget, and our CRM team will guide you through registration.
             </p>
           </div>
         </div>
@@ -114,7 +118,11 @@ export default function CustomerRegistration() {
                     <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Preferred Project</label>
                     <select
                       className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass bg-white text-ink font-medium"
+                      defaultValue=""
                     >
+                      <option value="" disabled hidden>
+                        Select Preferred Project
+                      </option>
                       <option value="skyrise">Agarwal Skyrise — Vasai East</option>
                       <option value="infinity">Agarwal Infinity — Virar West</option>
                       <option value="sky-heights">Agarwal Sky Heights — Virar West</option>
@@ -367,13 +375,112 @@ export default function CustomerRegistration() {
                     <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">How did you hear about us? <span className="text-rose-500">*</span></label>
                     <div className="flex flex-wrap gap-2.5">
                       {['Hoardings', 'Friends & Relatives', 'Channel Partner', 'Print Media', 'Social Media', 'Website', 'WhatsApp', 'Other'].map((s) => (
-                        <label key={s} className="flex items-center gap-2 border border-line rounded-lg px-3 py-2 text-xs font-semibold cursor-pointer hover:bg-ivory/30">
-                          <input type="radio" name="source" value={s} required />
+                        <label key={s} className={`flex items-center gap-2 border rounded-lg px-3 py-2 text-xs font-semibold cursor-pointer transition-colors ${source === s ? 'border-brass bg-ivory/50 text-pine' : 'border-line hover:bg-ivory/30'}`}>
+                          <input type="radio" name="source" value={s} onChange={(e) => setSource(e.target.value)} required className="hidden" />
                           <span>{s}</span>
                         </label>
                       ))}
                     </div>
                   </div>
+
+                  {/* Channel Partner Fields */}
+                  <AnimatePresence>
+                    {source === 'Channel Partner' && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="flex flex-col gap-4 overflow-hidden mt-2 p-4 bg-ivory/30 border border-line-light rounded-xl"
+                      >
+                        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brass-deep pb-2 border-b border-line/40">
+                          Channel Partner Details
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="flex flex-col gap-1">
+                            <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Name of Channel Partner <span className="text-rose-500">*</span></label>
+                            <input
+                              type="text"
+                              required
+                              placeholder="Full Name"
+                              className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-white"
+                            />
+                          </div>
+                          <div className="flex flex-col gap-1">
+                            <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Agency Name <span className="text-rose-500">*</span></label>
+                            <input
+                              type="text"
+                              required
+                              placeholder="Agency Name"
+                              className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-white"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="flex flex-col gap-1 mt-2">
+                          <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Contact Number of Channel Partner <span className="text-rose-500">*</span></label>
+                          <div className="flex flex-col md:flex-row gap-3 items-start md:items-center">
+                            <div className="flex border border-line rounded overflow-hidden bg-white focus-within:border-brass flex-1 w-full">
+                              <span className="bg-ivory border-r border-line text-[10px] font-bold text-taupe flex items-center px-4">+91</span>
+                              <input
+                                type="tel"
+                                required
+                                disabled={cpOtpVerified}
+                                pattern="[0-9]{10}"
+                                placeholder="10 digit number"
+                                className="px-4 py-3 text-xs focus:outline-none w-full text-ink font-medium bg-transparent disabled:opacity-50"
+                              />
+                            </div>
+
+                            {!cpOtpVerified && (
+                              <button
+                                type="button"
+                                onClick={() => setCpOtpSent(true)}
+                                className="whitespace-nowrap bg-brass text-pine px-4 py-3 rounded text-[10px] font-bold uppercase tracking-wider hover:bg-brass-deep transition-colors w-full md:w-auto"
+                              >
+                                {cpOtpSent ? 'Resend OTP' : 'Send OTP'}
+                              </button>
+                            )}
+
+                            {cpOtpVerified && (
+                              <div className="flex items-center gap-1.5 text-emerald-600 text-xs font-bold uppercase tracking-wider bg-emerald-50 px-3 py-2.5 rounded border border-emerald-200">
+                                <CheckCircle2 className="w-4 h-4" /> Verified
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        {cpOtpSent && !cpOtpVerified && (
+                          <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="flex flex-col gap-1"
+                          >
+                            <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Enter Verification Code</label>
+                            <div className="flex gap-3">
+                              <input
+                                type="text"
+                                maxLength={4}
+                                value={cpOtp}
+                                onChange={(e) => setCpOtp(e.target.value)}
+                                placeholder="4-digit code"
+                                className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-white w-32 tracking-[0.25em]"
+                              />
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  if (cpOtp.length === 4) setCpOtpVerified(true);
+                                }}
+                                className={`px-4 py-3 rounded text-[10px] font-bold uppercase tracking-wider transition-colors ${cpOtp.length === 4 ? 'bg-pine text-white hover:bg-pine/90' : 'bg-line/50 text-taupe cursor-not-allowed'}`}
+                              >
+                                Verify
+                              </button>
+                            </div>
+                            <span className="text-[10px] text-taupe mt-1">Hint: Enter any 4 digits to verify (Mock OTP)</span>
+                          </motion.div>
+                        )}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
 
                 {/* Terms and Submit */}

@@ -778,16 +778,16 @@ export default function Home() {
             <div className="cinfo">
               <div>
                 <div className="ct">Phone</div>
-                <a href="tel:+918408008001">+91 840 800 8001</a>
-                <a href="tel:+918408008002">+91 840 800 8002</a>
+                <a href="tel:+918408008001" className="block w-fit transition-transform duration-300 hover:scale-105 hover:text-brass-deep origin-left">+91 840 800 8001</a>
+                <a href="tel:+918408008002" className="block w-fit transition-transform duration-300 hover:scale-105 hover:text-brass-deep origin-left">+91 840 800 8002</a>
               </div>
               <div>
                 <div className="ct">Email</div>
-                <a href="mailto:sales@agarwalrealties.com">sales@agarwalrealties.com</a>
+                <a href="mailto:sales@agarwalrealties.com" className="block w-fit transition-transform duration-300 hover:scale-105 hover:text-brass-deep origin-left">sales@agarwalrealties.com</a>
               </div>
               <div>
                 <div className="ct">WhatsApp</div>
-                <a href="https://api.whatsapp.com/send?phone=918530081105&amp;text=Hello%2C%20I%27m%20interested%20in%20Agarwal%20Group%20projects">+91 853 008 1105</a>
+                <a href="https://api.whatsapp.com/send?phone=918530081105&amp;text=Hello%2C%20I%27m%20interested%20in%20Agarwal%20Group%20projects" className="block w-fit transition-transform duration-300 hover:scale-105 hover:text-brass-deep origin-left">+91 853 008 1105</a>
               </div>
               <div>
                 <div className="ct">Corporate Office</div>
@@ -798,15 +798,15 @@ export default function Home() {
 
           {/* Right form Card - matches original 3-field callback form exactly */}
           <div className="form reveal" style={{ background: 'var(--color-ivory)', border: '1px solid var(--color-line)', borderRadius: '8px', padding: 'clamp(26px, 4vw, 42px)', paddingBottom: '24px' }}>
-            <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '12px', lineHeight: 1.4 }}>
+            <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '4px', lineHeight: 1.4 }}>
               Request an Immediate Callback for Exclusive Offers.
             </div>
-            <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingBottom: '20px', marginBottom: '24px', fontWeight: 300, borderBottom: '1px solid var(--color-line)' }}>
+            <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingBottom: '20px', marginBottom: '20px', fontWeight: 300, borderBottom: '1px solid var(--color-line)' }}>
               Share your details and our relationship manager will contact you with special offer.
             </div>
             <AnimatePresence mode="wait">
               {!contactSubmitted ? (
-                <form onSubmit={handleContactSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                <form onSubmit={handleContactSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                     <label style={{ display: 'block', fontSize: '.7rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-taupe)', fontWeight: 600 }}>Full Name*</label>
                     <input
@@ -837,7 +837,7 @@ export default function Home() {
                   </div>
 
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ display: 'block', fontSize: '.7rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-taupe)', fontWeight: 600 }}>Email Address*</label>
+                    <label style={{ display: 'block', fontSize: '.7rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-taupe)', fontWeight: 600 }}>Email Address</label>
                     <input
                       type="email"
                       required
@@ -851,14 +851,13 @@ export default function Home() {
                   <button
                     type="submit"
                     className="pcta-btn btn-enquire"
-                    style={{ width: '100%', marginTop: '10px' }}
+                    style={{ width: '100%' }}
                   >
                     <span>Get Best Offers</span>
                     <span className="arr">→</span>
                   </button>
-                  <br />
-                  <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', marginTop: '10px', lineHeight: 1.4 }}>
-                    I Authorize Agarwal Group And Its Representatives To Call, SMS, Email Or Whatsapp Me About Its Products And Offers. This Consent Overrides Any Registration For DND NDNC.
+                  <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', lineHeight: 1.4 }}>
+                    I Authorize Agarwal Group And Its Representatives To Call, SMS, Email Or Whatsapp Me About Its Products And Offers. <br />This Consent Overrides Any Registration For DND NDNC.
                   </div>
                 </form>
               ) : (

@@ -3,6 +3,11 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import ProjectDetails from './pages/ProjectDetails';
 import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
+import AdminLayout from './pages/admin/AdminLayout';
+import BlogList from './pages/admin/BlogList';
+import AddBlog from './pages/admin/AddBlog';
+import { BlogProvider } from './context/BlogContext';
 import ChannelPartner from './pages/ChannelPartner';
 import CustomerRegistration from './pages/CustomerRegistration';
 import TermsConditions from './pages/TermsConditions';
@@ -13,24 +18,34 @@ import CompletedProjects from './pages/CompletedProjects';
 
 export default function App() {
   return (
-    <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/story" element={<Home />} />
-          <Route path="/projects" element={<Home />} />
-          <Route path="/contact" element={<Home />} />
-          <Route path="/projects/:slug" element={<ProjectDetails />} />
-          <Route path="/blogs" element={<Blog />} />
-          <Route path="/channel-partner" element={<ChannelPartner />} />
-          <Route path="/customer-registration" element={<CustomerRegistration />} />
-          <Route path="/terms-conditions" element={<TermsConditions />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/careers" element={<Careers />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/completed-projects" element={<CompletedProjects />} />
-        </Routes>
-      </Layout>
-    </Router>
+    <BlogProvider>
+      <Router>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/story" element={<Home />} />
+            <Route path="/projects" element={<Home />} />
+            <Route path="/contact" element={<Home />} />
+            <Route path="/projects/:slug" element={<ProjectDetails />} />
+            <Route path="/blogs" element={<Blog />} />
+            <Route path="/blogs/:id" element={<BlogPost />} />
+            <Route path="/channel-partner" element={<ChannelPartner />} />
+            <Route path="/customer-registration" element={<CustomerRegistration />} />
+            <Route path="/terms-conditions" element={<TermsConditions />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/completed-projects" element={<CompletedProjects />} />
+            
+            {/* Admin Routes */}
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<BlogList />} />
+              <Route path="blogs" element={<BlogList />} />
+              <Route path="blogs/new" element={<AddBlog />} />
+            </Route>
+          </Routes>
+        </Layout>
+      </Router>
+    </BlogProvider>
   );
 }
