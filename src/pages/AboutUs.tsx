@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  ArrowLeft, Building2, MapPin, Award,
-  Clock, ShieldCheck, Heart, Linkedin, Mail, ChevronLeft, ChevronRight
+  ArrowLeft, Hammer, Map, Trophy,
+  CalendarCheck, BadgeCheck, Users, Linkedin, Mail, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import heroImage from '../assets/gallery-pool.jpg';
 import storyImage from '../assets/gallery-living.jpg';
@@ -122,7 +122,7 @@ export default function AboutUs() {
               <img
                 src={storyImage}
                 alt="Agarwal Group Heritage"
-                style={{ width: '100%', height: 'auto', aspectRatio: '4/5', objectFit: 'cover' }}
+                style={{ width: '80%', height: 'auto', aspectRatio: '4/5', objectFit: 'cover' }}
               />
               <div className="story-badge">
                 <b>48+</b>
@@ -147,8 +147,8 @@ export default function AboutUs() {
             </div>
             <div className="values" style={{ marginTop: '4rem' }}>
               <div className="vcard">
-                <div className="vcard-icon">
-                  <Award className="w-5 h-5" strokeWidth={1.8} />
+                <div className="vcard-icon-clear">
+                  <Trophy className="w-5 h-5" strokeWidth={1.8} />
                 </div>
                 <div className="vcard-content">
                   <b>48+ Years of Excellence</b>
@@ -156,8 +156,8 @@ export default function AboutUs() {
                 </div>
               </div>
               <div className="vcard">
-                <div className="vcard-icon">
-                  <MapPin className="w-5 h-5" strokeWidth={1.8} />
+                <div className="vcard-icon-clear">
+                  <Map className="w-5 h-5" strokeWidth={1.8} />
                 </div>
                 <div className="vcard-content">
                   <b>Prime Locations</b>
@@ -165,8 +165,8 @@ export default function AboutUs() {
                 </div>
               </div>
               <div className="vcard">
-                <div className="vcard-icon">
-                  <Building2 className="w-5 h-5" strokeWidth={1.8} />
+                <div className="vcard-icon-clear">
+                  <Hammer className="w-5 h-5" strokeWidth={1.8} />
                 </div>
                 <div className="vcard-content">
                   <b>Quality Construction</b>
@@ -174,8 +174,8 @@ export default function AboutUs() {
                 </div>
               </div>
               <div className="vcard">
-                <div className="vcard-icon">
-                  <Clock className="w-5 h-5" strokeWidth={1.8} />
+                <div className="vcard-icon-clear">
+                  <CalendarCheck className="w-5 h-5" strokeWidth={1.8} />
                 </div>
                 <div className="vcard-content">
                   <b>On-Time Delivery</b>
@@ -183,8 +183,8 @@ export default function AboutUs() {
                 </div>
               </div>
               <div className="vcard">
-                <div className="vcard-icon">
-                  <ShieldCheck className="w-5 h-5" strokeWidth={1.8} />
+                <div className="vcard-icon-clear">
+                  <BadgeCheck className="w-5 h-5" strokeWidth={1.8} />
                 </div>
                 <div className="vcard-content">
                   <b>RERA Approved</b>
@@ -192,8 +192,8 @@ export default function AboutUs() {
                 </div>
               </div>
               <div className="vcard">
-                <div className="vcard-icon">
-                  <Heart className="w-5 h-5" strokeWidth={1.8} />
+                <div className="vcard-icon-clear">
+                  <Users className="w-5 h-5" strokeWidth={1.8} />
                 </div>
                 <div className="vcard-content">
                   <b>Customer-First Approach</b>
@@ -221,7 +221,7 @@ export default function AboutUs() {
               <img
                 src={visionImage}
                 alt="Agarwal Group Vision"
-                style={{ width: '100%', height: 'auto', aspectRatio: '4/5', objectFit: 'cover' }}
+                style={{ width: '80%', height: 'auto', aspectRatio: '4/5', objectFit: 'cover' }}
               />
             </div>
           </div>
@@ -249,7 +249,7 @@ export default function AboutUs() {
                 <ChevronLeft size={24} />
               </button>
 
-              <motion.div 
+              <motion.div
                 className="flex justify-center gap-4 md:gap-6 w-full h-[450px] items-center cursor-grab active:cursor-grabbing"
                 drag="x"
                 dragConstraints={{ left: 0, right: 0 }}

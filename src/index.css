@@ -1407,7 +1407,6 @@ input[type="radio"] {
 .story p {
   color: var(--color-ink-soft);
   font-weight: 300;
-  max-width: 54ch;
 }
 
 .story p+p {
@@ -1498,7 +1497,6 @@ input[type="radio"] {
   font-size: clamp(1.4rem, 2.8vw, 2.1rem);
   line-height: 1.4;
   color: var(--color-ink);
-  max-width: 30ch;
 }
 
 @media(max-width:900px) {

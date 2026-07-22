@@ -570,7 +570,12 @@ export default function ProjectDetails() {
             >
               <X className="w-4 h-4" />
             </button>
-            <h3 className="font-serif text-[20px] text-ink mb-6 font-semibold pr-4">Request an Immediate Callback.</h3>
+            <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '12px', lineHeight: 1.4 }}>
+              Request an Immediate Callback for Exclusive Offers.
+            </div>
+            <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingBottom: '20px', marginBottom: '24px', fontWeight: 300, borderBottom: '1px solid var(--color-line)' }}>
+              Share your details and our relationship manager will contact you with special offer.
+            </div>
             <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
               <div className="flex flex-col">
                 <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Full Name</label>
@@ -591,7 +596,9 @@ export default function ProjectDetails() {
                 GET BEST OFFERS &rarr;
               </button>
             </form>
-            <p className="text-[9px] text-taupe text-center mt-4">By submitting, you agree to our Terms & Privacy Policy.</p>
+            <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', marginTop: '10px', lineHeight: 1.4 }}>
+              I Authorize Agarwal Group And Its Representatives To Call, SMS, Email Or Whatsapp Me About Its Products And Offers. This Consent Overrides Any Registration For DND NDNC.
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
