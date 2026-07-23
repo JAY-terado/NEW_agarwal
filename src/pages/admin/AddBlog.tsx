@@ -51,18 +51,18 @@ export default function AddBlog() {
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-serif text-ink">Add New Blog</h1>
         <div className="flex items-center gap-3">
-          <button 
+          <button
             type="button"
             onClick={() => setShowPreview(!showPreview)}
             className="flex items-center gap-2 bg-ivory border border-line hover:border-brass text-ink px-4 py-2.5 rounded-lg text-sm font-bold tracking-wide transition-colors shadow-sm"
           >
             <Eye className="w-4 h-4" /> {showPreview ? 'Hide Preview' : 'Show Preview'}
           </button>
-          <button 
+          <button
             onClick={handleSubmit}
             className="flex items-center gap-2 bg-pine hover:bg-pine-deep text-white px-5 py-2.5 rounded-lg text-sm font-bold tracking-wide transition-colors shadow-md"
           >
-            <Save className="w-4 h-4" /> Publish Blog
+            <Save className="w-4 h-4" /> Publish Blogs
           </button>
         </div>
       </div>
@@ -77,8 +77,8 @@ export default function AddBlog() {
               {image ? (
                 <div className="relative w-full h-48 rounded-lg overflow-hidden">
                   <img src={image} alt="Preview" className="w-full h-full object-cover" />
-                  <button 
-                    type="button" 
+                  <button
+                    type="button"
                     onClick={() => setImage('')}
                     className="absolute top-2 right-2 w-8 h-8 rounded-full bg-rose-500 text-white flex items-center justify-center shadow-md hover:bg-rose-600 transition-colors"
                   >
@@ -87,10 +87,10 @@ export default function AddBlog() {
                 </div>
               ) : (
                 <>
-                  <input 
-                    type="file" 
-                    accept="image/*" 
-                    onChange={handleImageUpload} 
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                   />
                   <div className="flex flex-col items-center justify-center text-taupe">
@@ -106,8 +106,8 @@ export default function AddBlog() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="flex flex-col gap-2">
               <label className="text-xs uppercase tracking-widest font-bold text-taupe">Title</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 value={title}
                 onChange={e => setTitle(e.target.value)}
                 placeholder="e.g. The Future of Real Estate"
@@ -116,8 +116,8 @@ export default function AddBlog() {
             </div>
             <div className="flex flex-col gap-2">
               <label className="text-xs uppercase tracking-widest font-bold text-taupe">Category</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 value={category}
                 onChange={e => setCategory(e.target.value)}
                 placeholder="e.g. Market Trends"
@@ -128,7 +128,7 @@ export default function AddBlog() {
 
           <div className="flex flex-col gap-2">
             <label className="text-xs uppercase tracking-widest font-bold text-taupe">Excerpt (Short Summary)</label>
-            <textarea 
+            <textarea
               value={excerpt}
               onChange={e => setExcerpt(e.target.value)}
               placeholder="A brief summary that appears on the blog card..."
@@ -140,7 +140,7 @@ export default function AddBlog() {
           <div className="flex flex-col gap-2">
             <label className="text-xs uppercase tracking-widest font-bold text-taupe">Full Article Content</label>
             <p className="text-[10px] text-taupe/80 -mt-1 mb-1">Separate paragraphs with a blank line (Enter).</p>
-            <textarea 
+            <textarea
               value={content}
               onChange={e => setContent(e.target.value)}
               placeholder="Write your amazing article here..."
@@ -157,11 +157,11 @@ export default function AddBlog() {
               Live Preview
             </div>
             <div className="mt-8 flex-1 overflow-y-auto bg-white rounded-lg shadow-sm border border-line p-6">
-              
+
               <h1 className="font-serif text-3xl sm:text-4xl font-light leading-[1.1] text-ink mb-4">
                 {title || 'Your Article Title'}
               </h1>
-              
+
               <div className="flex flex-wrap gap-3 items-center text-[10px] uppercase tracking-wider text-ink-soft font-semibold border-y border-line py-3 mb-6">
                 <span>By <span className="text-ink font-bold border-b border-ink">Editorial Team</span></span>
                 <span className="w-1 h-1 rounded-full bg-line"></span>
@@ -181,7 +181,7 @@ export default function AddBlog() {
               <p className="text-base font-serif text-ink font-medium leading-relaxed mb-6 italic">
                 {excerpt || 'Your excerpt will appear here as a styled intro quote.'}
               </p>
-              
+
               <article className="flex flex-col gap-4">
                 {content ? content.split('\\n').filter(p => p.trim() !== '').map((paragraph, index) => (
                   <p key={index} className="text-sm text-ink-soft leading-relaxed font-light">
