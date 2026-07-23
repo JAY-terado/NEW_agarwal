@@ -439,8 +439,8 @@ input[type="radio"] {
   position: absolute;
   left: 14px;
   bottom: 14px;
-  background: rgba(20, 20, 18, .66);
-  color: var(--color-brass-bright);
+  background: #fff;
+  color: #000;
   font-size: .6rem;
   letter-spacing: .12em;
   text-transform: uppercase;
