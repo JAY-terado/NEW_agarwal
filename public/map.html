@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map</title>
+    <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" />
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { width: 100vw; height: 100vh; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const lat = parseFloat(urlParams.get('lat')) || 19.4259;
+        const lng = parseFloat(urlParams.get('lng')) || 72.8027;
+        const zoom = parseFloat(urlParams.get('zoom')) || 12;
+
+        const map = new maplibregl.Map({
+            container: 'map',
+            style: 'https://tiles.openfreemap.org/styles/liberty',
+            center: [lng, lat],
+            zoom: zoom,
+            attributionControl: false
+        });
+
+        map.addControl(new maplibregl.AttributionControl({
+            compact: true
+        }));
+
+        new maplibregl.Marker({ color: '#B68E3F' })
+            .setLngLat([lng, lat])
+            .addTo(map);
+    </script>
+</body>
+</html>

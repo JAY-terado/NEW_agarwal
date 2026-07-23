@@ -51,7 +51,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
 }
 
 body {
@@ -1136,9 +1135,10 @@ input[type="radio"] {
   letter-spacing: .14em;
   text-transform: uppercase;
   font-weight: 600;
-  padding: 15px 20px;
+  padding: 15px 10px;
   border-radius: 50px;
   cursor: pointer;
+  white-space: nowrap;
   transition: transform .4s var(--ease), color .45s var(--ease), border-color .45s var(--ease), box-shadow .45s var(--ease);
 }
 
@@ -1532,15 +1532,6 @@ input[type="radio"] {
   color: var(--color-brass);
   display: inline-flex;
   align-items: center;
-  gap: .7em;
-}
-
-.eyebrow::before {
-  content: "";
-  width: 30px;
-  height: 1px;
-  background: var(--color-brass);
-  opacity: .7;
 }
 
 .section {

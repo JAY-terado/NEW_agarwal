@@ -9,7 +9,12 @@ import {
   Leaf,
   Dumbbell,
   Car,
-  Sun
+  Sun,
+  Train,
+  GraduationCap,
+  Stethoscope,
+  ShoppingBag,
+  Coffee
 } from 'lucide-react';
 
 const iconComponents: Record<string, React.ElementType> = {
@@ -18,6 +23,7 @@ const iconComponents: Record<string, React.ElementType> = {
   Car,
   Sun,
 };
+
 import { projects } from '../data/projects';
 
 // Gallery Asset Imports
@@ -38,7 +44,12 @@ import skyriseHero from '../assets/agarwal-skyrise-hero.jpg';
 import skyHeightsHero from '../assets/agarwal-sky-heights-hero.jpg';
 import horizonHero from '../assets/agarwal-horizon-hero.jpg';
 
+import agarwalInfinityMRQR from '../assets/agarwalInfinityMRQR.jpeg';
+
 import qrSample from '../assets/qrSample.svg';
+
+// Brochure import (placeholder for all projects currently)
+import palmPremiereBrochure from '../assets/brochures/palm-premiere-brochure.pdf';
 
 const projectHeroMap: Record<string, string> = {
   infinity: infinityHero,
@@ -170,7 +181,10 @@ export default function ProjectDetails() {
 
   const [showFloater, setShowFloater] = useState(false);
   const [hasClosedFloater, setHasClosedFloater] = useState(false);
+  const [isManualFloater, setIsManualFloater] = useState(false);
   const [isContactVisible, setIsContactVisible] = useState(false);
+  const [isBrochureDrawerOpen, setIsBrochureDrawerOpen] = useState(false);
+  const [brochureFormSubmitted, setBrochureFormSubmitted] = useState(false);
   const contactRef = useRef<HTMLElement>(null);
   const [activeAmenityTab, setActiveAmenityTab] = useState<'Elevation' | 'Podium Amenities' | 'Terrace Amenities'>('Podium Amenities');
 
@@ -180,6 +194,9 @@ export default function ProjectDetails() {
     setLightbox(null);
     setShowFloater(false);
     setHasClosedFloater(false);
+    setIsManualFloater(false);
+    setIsBrochureDrawerOpen(false);
+    setBrochureFormSubmitted(false);
     window.scrollTo(0, 0);
 
     const timer = setTimeout(() => {
@@ -219,6 +236,11 @@ export default function ProjectDetails() {
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setFormSubmitted(true);
+  };
+
+  const handleBrochureSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setBrochureFormSubmitted(true);
   };
 
   return (
@@ -450,18 +472,28 @@ export default function ProjectDetails() {
 
                 {/* Details Area */}
                 <div className="p-6 md:p-8 flex flex-col gap-6">
-                  {/* <div className="flex flex-col gap-1.5">
-                    <div className="text-[11px] text-brass-deep font-semibold tracking-widest uppercase">SKY DECK RESIDENCE</div>
-                    <div className="font-serif text-[28px] text-ink tracking-tight">{p.type}</div>
-                  </div> */}
-                  <div className="grid grid-cols-2 gap-4 mt-2">
+                  <div className="grid grid-cols-3 gap-4">
                     <div className="flex flex-col gap-1.5">
-                      <div className="font-bold text-ink text-[17px] font-sans tracking-tight">~{p.carpetArea.replace(' sq.ft', '')}</div>
-                      <div className="text-[11px] text-ink-soft font-medium">Carpet Area (sq.ft.)</div>
+                      <div className="text-[11px] text-ink-soft font-medium">Configuration</div>
+                      <div className="font-bold text-ink text-[15px] sm:text-[17px] font-sans tracking-tight">{p.type}</div>
                     </div>
                     <div className="flex flex-col gap-1.5">
-                      <div className="font-bold text-ink text-[17px] font-sans tracking-tight">Price on Request</div>
+                      <div className="text-[11px] text-ink-soft font-medium">Carpet Area</div>
+                      <div className="font-bold text-ink text-[15px] sm:text-[17px] font-sans tracking-tight">~{p.carpetArea.replace(' sq.ft', '')} <span className="text-[11px] font-normal text-ink-soft">sq.ft.</span></div>
+                    </div>
+                    <div className="flex flex-col gap-1.5">
                       <div className="text-[11px] text-ink-soft font-medium">Starting Price</div>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setShowFloater(true);
+                          setHasClosedFloater(false);
+                          setIsManualFloater(true);
+                        }}
+                        className="bg-brass text-pine hover:bg-brass-deep hover:text-white px-4 py-2 rounded text-[10px] sm:text-[11px] font-bold uppercase tracking-widest transition-colors w-fit whitespace-nowrap"
+                      >
+                        Price On Request
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -495,18 +527,18 @@ export default function ProjectDetails() {
 
       {/* 6. LOCATION */}
       <section id="location" className="section pt-24 pb-24 bg-ivory">
-        <div className="wrap-widescreen max-w-5xl mx-auto">
+        <div className="wrap-widescreen max-w-6xl mx-auto">
           <div className="section-head mb-14">
-            <span className="eyebrow">Location</span>
+            <span className="eyebrow">Location Advantages</span>
             <h2 className="serif mt-2">Connected to Everything</h2>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="aspect-[4/3] bg-white border border-line-light rounded-2xl overflow-hidden shadow-sm flex items-center justify-center relative">
+          <div className="grid lg:grid-cols-5 gap-8 lg:gap-16 items-start">
+            <div className="lg:col-span-3 aspect-[4/3] bg-white border border-line-light rounded-2xl overflow-hidden shadow-sm flex items-center justify-center relative">
               {(project as any).mapEmbedUrl ? (
                 <iframe
                   src={(project as any).mapEmbedUrl}
-                  className="w-full h-full border-0"
+                  className="w-full h-full border-0 absolute inset-0"
                   allowFullScreen={false}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
@@ -535,14 +567,32 @@ export default function ProjectDetails() {
               )}
             </div>
 
-            <ul className="grid gap-3 font-medium">
-              {project.connectivity.map((conn, idx) => (
-                <li key={idx} className="flex justify-between items-center py-4 border-b border-line text-sm">
-                  <span className="text-ink-soft text-base">{conn.key}</span>
-                  <span className="text-brass-deep font-bold text-base">{conn.value}</span>
-                </li>
-              ))}
-            </ul>
+            <div className="lg:col-span-2">
+              <ul className="grid grid-cols-1 gap-4 font-medium">
+                {project.connectivity.map((conn, idx) => {
+                  let Icon = MapPin;
+                  const k = conn.key.toLowerCase();
+                  if (k.includes('station') || k.includes('train') || k.includes('metro')) Icon = Train;
+                  else if (k.includes('highway') || k.includes('road')) Icon = Car;
+                  else if (k.includes('school') || k.includes('college')) Icon = GraduationCap;
+                  else if (k.includes('hospital')) Icon = Stethoscope;
+                  else if (k.includes('shop') || k.includes('mall')) Icon = ShoppingBag;
+                  else if (k.includes('restaurant') || k.includes('cafe')) Icon = Coffee;
+
+                  return (
+                    <li key={idx} className="flex items-center gap-5 p-5 rounded-2xl border border-line-light bg-white hover:border-brass-light transition-colors shadow-sm hover:shadow-md group cursor-default">
+                      <div className="bg-paper p-3 rounded-full text-brass-deep group-hover:bg-brass-deep group-hover:text-white transition-colors">
+                        <Icon className="w-6 h-6" />
+                      </div>
+                      <div className="flex flex-col flex-1">
+                        <span className="text-ink text-[15px] font-bold">{conn.key}</span>
+                        <span className="text-taupe font-medium text-sm mt-0.5">{conn.value}</span>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -590,7 +640,7 @@ export default function ProjectDetails() {
 
       {/* WHY CHOOSE US */}
       {project.whyChoseUs && project.whyChoseUs.length > 0 && (
-        <section className="section pt-24 pb-0 bg-ivory border-t border-line-light">
+        <section id="highlights" className="section pt-24 pb-0 bg-ivory border-t border-line-light">
           <div className="wrap-widescreen">
             <div className="section-head mb-16 text-center max-w-2xl mx-auto">
               <span className="eyebrow">Highlights</span>
@@ -615,67 +665,184 @@ export default function ProjectDetails() {
         </section>
       )}
 
-      {/* Sticky Side Button */}
+      {/* Sticky Side Buttons */}
       <AnimatePresence>
         {!isContactVisible && (
-          <motion.button
+          <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 50 }}
-            onClick={() => contactRef.current?.scrollIntoView({ behavior: 'smooth' })}
-            className="fixed top-1/2 right-0 -translate-y-1/2 z-[98] bg-brass-deep text-white text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase py-4 md:py-6 px-2 md:px-2.5 rounded-l-lg shadow-[-4px_0_15px_rgba(0,0,0,0.1)] hover:bg-[#b59254] hover:pr-3 md:hover:pr-4 transition-all duration-300 flex items-center justify-center cursor-pointer"
-            style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+            className="fixed top-1/2 right-0 -translate-y-1/2 z-[98] flex flex-col items-end gap-2"
           >
-            Enquire Now
-          </motion.button>
+            <button
+              onClick={() => { setShowFloater(true); setHasClosedFloater(false); setIsManualFloater(true); }}
+              className="bg-brass-deep text-white text-[10px] md:text-[11px] font-bold tracking-[0.2em] uppercase p-2 md:p-3 hover:bg-[#b59254] hover:pr-3 md:hover:pr-4 transition-all duration-300 flex items-center justify-center cursor-pointer shadow-[-4px_0_15px_rgba(0,0,0,0.1)]"
+              style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+            >
+              Enquire Now
+            </button>
+            <button
+              onClick={() => setIsBrochureDrawerOpen(true)}
+              className="bg-pine text-white text-[10px] md:text-[11px] font-bold tracking-[0.2em] uppercase p-2 md:p-3 hover:bg-pine/90 hover:pr-3 md:hover:pr-4 transition-all duration-300 flex items-center justify-center cursor-pointer shadow-[-4px_0_15px_rgba(0,0,0,0.1)]"
+              style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+            >
+              Brochure
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Brochure Drawer */}
+      <AnimatePresence>
+        {isBrochureDrawerOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsBrochureDrawerOpen(false)}
+              className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm"
+            />
+
+            {/* Drawer */}
+            <motion.div
+              initial={{ x: '100%', y: '-50%' }}
+              animate={{ x: 0, y: '-50%' }}
+              exit={{ x: '100%', y: '-50%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed top-1/2 right-0 md:right-6 w-full max-w-[360px] bg-paper z-[101] p-6 md:p-8 shadow-2xl overflow-y-auto flex flex-col rounded-l-[24px] md:rounded-[24px]"
+              style={{ maxHeight: 'calc(100vh - 4rem)' }}
+            >
+              <div className="flex items-center justify-between mb-8">
+                <h3 className="font-serif text-2xl text-ink">Download Brochure</h3>
+                <button
+                  onClick={() => setIsBrochureDrawerOpen(false)}
+                  className="p-2 hover:bg-black/5 rounded-full transition-colors"
+                >
+                  <X className="w-6 h-6 text-ink-soft" />
+                </button>
+              </div>
+
+              {!brochureFormSubmitted ? (
+                <form onSubmit={handleBrochureSubmit} className="flex flex-col gap-6 flex-1">
+                  <div>
+                    <label className="block text-xs uppercase tracking-widest text-ink-soft mb-2 font-semibold">Full Name *</label>
+                    <input
+                      type="text"
+                      required
+                      className="w-full border-b border-line-light bg-transparent py-2 outline-none focus:border-brass-deep transition-colors text-ink"
+                      placeholder="Enter your name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs uppercase tracking-widest text-ink-soft mb-2 font-semibold">Phone Number *</label>
+                    <input
+                      type="tel"
+                      required
+                      className="w-full border-b border-line-light bg-transparent py-2 outline-none focus:border-brass-deep transition-colors text-ink"
+                      placeholder="+91"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs uppercase tracking-widest text-ink-soft mb-2 font-semibold">Email Address *</label>
+                    <input
+                      type="email"
+                      required
+                      className="w-full border-b border-line-light bg-transparent py-2 outline-none focus:border-brass-deep transition-colors text-ink"
+                      placeholder="Enter your email"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="mt-auto bg-brass-deep text-white font-bold tracking-widest uppercase text-sm py-4 rounded-full hover:bg-[#b59254] transition-colors shadow-lg hover:shadow-xl"
+                  >
+                    Submit &amp; Download
+                  </button>
+                </form>
+              ) : (
+                <div className="flex flex-col items-center justify-center flex-1 text-center h-full">
+                  <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center text-green-600 mb-6">
+                    <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h4 className="font-serif text-2xl text-ink mb-3">Thank You!</h4>
+                  <p className="text-ink-soft mb-8">Your brochure is ready to download.</p>
+
+                  {/* Dynamic Brochure Link */}
+                  <a
+                    href={palmPremiereBrochure}
+                    download={`${project.name}-Brochure.pdf`}
+                    className="bg-pine text-white font-bold tracking-widest uppercase text-sm py-3 px-8 rounded-full hover:bg-pine/90 transition-colors shadow-lg hover:shadow-xl"
+                  >
+                    Click to Download
+                  </a>
+                </div>
+              )}
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
 
       {/* Floating Callback Form Widget */}
       <AnimatePresence>
         {showFloater && !hasClosedFloater && !isContactVisible && (
-          <motion.div
-            initial={{ opacity: 0, y: 50, x: 20 }}
-            animate={{ opacity: 1, y: 0, x: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="fixed bottom-40 right-6 z-[99] w-[360px] bg-white rounded-[24px] shadow-[0_20px_40px_rgba(0,0,0,0.15)] p-8 border border-line-light flex flex-col"
-          >
-            <button
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               onClick={() => setHasClosedFloater(true)}
-              className="absolute top-5 right-5 text-taupe hover:text-ink transition-colors bg-paper hover:bg-line-light rounded-full p-1"
+              className={`fixed inset-0 z-[100] bg-black/50 ${isManualFloater ? 'backdrop-blur-sm' : ''}`}
+            />
+            <motion.div
+              initial={{ x: '100%', y: '-50%' }}
+              animate={{ x: 0, y: '-50%' }}
+              exit={{ x: '100%', y: '-50%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed top-1/2 right-0 md:right-6 z-[101] w-full max-w-[360px] bg-white rounded-l-[24px] md:rounded-[24px] shadow-[0_20px_40px_rgba(0,0,0,0.25)] p-6 md:p-8 border border-line-light flex flex-col overflow-y-auto"
+              style={{ maxHeight: 'calc(100vh - 4rem)' }}
             >
-              <X className="w-4 h-4" />
-            </button>
-            <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '12px', lineHeight: 1.4 }}>
-              Request an Immediate Callback for Exclusive Offers.
-            </div>
-            <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingBottom: '20px', marginBottom: '24px', fontWeight: 300, borderBottom: '1px solid var(--color-line)' }}>
-              Share your details and our relationship manager will contact you with special offer.
-            </div>
-            <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
-              <div className="flex flex-col">
-                <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Full Name</label>
-                <input type="text" placeholder="Full Name" className="border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors bg-white" required />
-              </div>
-              <div className="flex flex-col">
-                <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Mobile Number</label>
-                <div className="flex">
-                  <div className="bg-paper border border-line border-r-0 rounded-l-xl px-4 flex items-center justify-center font-bold text-sm text-ink">+91</div>
-                  <input type="text" placeholder="00000 00000" className="border border-line rounded-r-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors flex-1 bg-white" required />
-                </div>
-              </div>
-              <div className="flex flex-col">
-                <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Email Address</label>
-                <input type="email" placeholder="you@email.com" className="border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors bg-white" required />
-              </div>
-              <button type="submit" className="bg-[#cca968] text-pine font-bold uppercase tracking-widest text-[11px] py-3.5 rounded-full mt-2 hover:bg-[#b59254] transition-colors w-full flex items-center justify-center gap-2">
-                GET BEST OFFERS &rarr;
+              <button
+                onClick={() => setHasClosedFloater(true)}
+                className="absolute top-5 right-5 text-taupe hover:text-ink transition-colors bg-paper hover:bg-line-light rounded-full p-1"
+              >
+                <X className="w-4 h-4" />
               </button>
-            </form>
-            <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', marginTop: '10px', lineHeight: 1.4 }}>
-              I Authorize Agarwal Group And Its Representatives To Call, SMS, Email Or Whatsapp Me About Its Products And Offers. This Consent Overrides Any Registration For DND NDNC.
-            </div>
-          </motion.div>
+              <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '12px', lineHeight: 1.4 }}>
+                Request an Immediate Callback for Exclusive Offers.
+              </div>
+              <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingBottom: '20px', marginBottom: '24px', fontWeight: 300, borderBottom: '1px solid var(--color-line)' }}>
+                Share your details and our relationship manager will contact you with special offer.
+              </div>
+              <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
+                <div className="flex flex-col">
+                  <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Full Name</label>
+                  <input type="text" placeholder="Full Name" className="border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors bg-white" required />
+                </div>
+                <div className="flex flex-col">
+                  <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Mobile Number</label>
+                  <div className="flex">
+                    <div className="bg-paper border border-line border-r-0 rounded-l-xl px-4 flex items-center justify-center font-bold text-sm text-ink">+91</div>
+                    <input type="text" placeholder="00000 00000" className="border border-line rounded-r-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors flex-1 bg-white" required />
+                  </div>
+                </div>
+                <div className="flex flex-col">
+                  <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Email Address</label>
+                  <input type="email" placeholder="you@email.com" className="border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors bg-white" required />
+                </div>
+                <button type="submit" className="bg-[#cca968] text-pine font-bold uppercase tracking-widest text-[11px] py-3.5 rounded-full mt-2 hover:bg-[#b59254] transition-colors w-full flex items-center justify-center gap-2">
+                  GET BEST OFFERS &rarr;
+                </button>
+              </form>
+              <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', marginTop: '10px', lineHeight: 1.4 }}>
+                By Clicking Button, I Authorize Agarwal Group And Its Representatives To Call, SMS, Email Or Whatsapp Me About Its Products And Offers. This Consent Overrides Any Registration For DND NDNC.
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
 
@@ -692,12 +859,19 @@ export default function ProjectDetails() {
               </p>
             </div>
 
-            <div className="border border-line-light rounded-2xl p-8 bg-white shadow-sm flex flex-col gap-3">
-              <h4 className="font-serif text-sm font-bold text-brass-deep uppercase tracking-wider">MahaRERA Registration Details</h4>
-              <div className="text-sm text-ink font-semibold">Registration Number: {project.rera}</div>
-              <p className="text-xs text-taupe leading-relaxed mt-2 font-light">
-                This project is registered under the Maharashtra Real Estate Regulatory Authority (MahaRERA). Detailed information is available on the official portal at maharera.mahaonline.gov.in. All layouts, illustrations, and dimensions shown here are conceptual models and subject to final municipal clearances.
-              </p>
+            <div className="border border-line-light rounded-2xl p-6 sm:p-8 bg-white shadow-sm flex flex-col sm:flex-row gap-6 items-center">
+              {project.slug === 'infinity' && (
+                <div className="w-32 h-32 shrink-0 overflow-hidden flex items-center justify-center border border-line-light rounded bg-white p-1">
+                  <img src={agarwalInfinityMRQR} alt="MahaRERA QR Code" className="w-full h-full object-contain mix-blend-multiply" />
+                </div>
+              )}
+              <div className="flex flex-col gap-3 flex-1">
+                <h4 className="font-serif text-sm font-bold text-brass-deep uppercase tracking-wider">MahaRERA Registration Details</h4>
+                <div className="text-sm text-ink font-semibold">MahaRERA Number: {project.rera}</div>
+                <p className="text-xs text-taupe leading-relaxed mt-2 font-light">
+                  This project is registered under the Maharashtra Real Estate Regulatory Authority (MahaRERA). Detailed information is available on the official portal at <a href="https://maharera.maharashtra.gov.in/" target="_blank" rel="noopener noreferrer" className="text-brass hover:underline transition-all">maharera.mahaonline.gov.in</a>. All layouts, illustrations, and dimensions shown here are conceptual models and subject to final municipal clearances.
+                </p>
+              </div>
             </div>
           </div>
 
@@ -762,7 +936,7 @@ export default function ProjectDetails() {
                     <span className="arr">→</span>
                   </button>
                   <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', marginTop: '10px', lineHeight: 1.4 }}>
-                    I Authorize Agarwal Group And Its Representatives To Call, SMS, Email Or Whatsapp Me About Its Products And Offers. This Consent Overrides Any Registration For DND NDNC.
+                    By Clicking Button, I Authorize Agarwal Group And Its Representatives To Call, SMS, Email Or Whatsapp Me About Its Products And Offers. This Consent Overrides Any Registration For DND NDNC.
                   </div>
                 </form>
               ) : (
@@ -795,17 +969,10 @@ export default function ProjectDetails() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center cursor-zoom-out"
+            className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-md flex items-center justify-center cursor-zoom-out"
             onClick={() => setLightbox(null)}
           >
-            <div className="absolute top-4 right-4 z-[101]">
-              <button
-                onClick={(e) => { e.stopPropagation(); setLightbox(null); }}
-                className="text-white/50 hover:text-white transition-colors bg-white/10 hover:bg-white/20 rounded-full p-2"
-              >
-                <X className="w-6 h-6" />
-              </button>
-            </div>
+
 
             {lightbox.images.length > 1 && (
               <>
@@ -832,14 +999,12 @@ export default function ProjectDetails() {
 
             <div className="w-full h-full flex flex-col items-center justify-center p-4 sm:p-12 overflow-hidden relative">
               <AnimatePresence mode="wait">
-                <motion.img
+                <motion.div
                   key={lightbox.index}
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -50 }}
                   transition={{ type: "tween", duration: 0.3 }}
-                  src={lightbox.images[lightbox.index]}
-                  alt="Lightbox View"
                   drag={lightbox.images.length > 1 ? "x" : false}
                   dragConstraints={{ left: 0, right: 0 }}
                   dragElastic={1}
@@ -852,9 +1017,22 @@ export default function ProjectDetails() {
                     }
                   }}
                   onClick={(e) => e.stopPropagation()}
-                  className="max-w-full max-h-[85vh] rounded-lg shadow-2xl object-contain select-none touch-none"
+                  className="relative max-w-full max-h-[85vh] inline-flex items-center justify-center"
                   style={{ cursor: lightbox.images.length > 1 ? "grab" : "auto" }}
-                />
+                >
+                  <img
+                    src={lightbox.images[lightbox.index]}
+                    alt="Lightbox View"
+                    className="max-w-full max-h-[85vh] rounded-lg shadow-2xl object-contain select-none touch-none"
+                    draggable={false}
+                  />
+                  <button
+                    onClick={(e) => { e.stopPropagation(); setLightbox(null); }}
+                    className="absolute top-3 right-3 md:top-4 md:right-4 z-[102] text-white hover:text-white transition-colors bg-black/40 hover:bg-black/70 rounded-full p-1.5 md:p-2 backdrop-blur-sm"
+                  >
+                    <X className="w-4 h-4 md:w-5 md:h-5" />
+                  </button>
+                </motion.div>
               </AnimatePresence>
 
               {lightbox.images.length > 1 && (

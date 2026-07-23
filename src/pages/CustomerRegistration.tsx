@@ -1,22 +1,108 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, User, Home, FileText, Send, Building } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import heroImage from '../assets/gallery-exterior.jpg';
+
+const schema = z.object({
+  applicantName: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email address").optional().or(z.literal('')),
+  project: z.string().min(1, "Please select a project"),
+  mobileNumber: z.string().regex(/^[0-9]{10}$/, "Mobile number must be exactly 10 digits"),
+  alternateMobileNumber: z.string().regex(/^[0-9]{10}$/, "Mobile number must be exactly 10 digits").optional().or(z.literal('')),
+
+  // Address
+  houseNo: z.string().optional(),
+  buildingName: z.string().min(2, "Building name is required"),
+  streetName: z.string().optional(),
+  city: z.string().min(2, "City is required"),
+  pincode: z.string().regex(/^[0-9]{6}$/, "Pincode must be exactly 6 digits"),
+  state: z.string().min(2, "State is required"),
+  country: z.string().min(2, "Country is required"),
+
+  // Occupation
+  occupation: z.string().min(1, "Please select an occupation"),
+  companyName: z.string().optional(),
+  designation: z.string().optional(),
+
+  // Requirements & Budget
+  config: z.string().min(1, "Please select a configuration"),
+  budget: z.string().min(1, "Please select a budget"),
+
+  // Sources
+  source: z.string().min(1, "Please select how you heard about us"),
+  visitSource: z.string().min(1, "Please select source of visit"),
+
+  // Channel Partner details
+  cpName: z.string().optional(),
+  cpAgencyName: z.string().optional(),
+  cpLocation: z.string().optional(),
+  cpMobileNumber: z.string().optional(),
+
+  termsAccepted: z.boolean().refine(val => val === true, "You must accept the terms and conditions"),
+}).superRefine((data, ctx) => {
+  if (data.visitSource === 'Channel Partner') {
+    if (!data.cpName || data.cpName.length < 2) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Channel Partner name is required", path: ['cpName'] });
+    }
+    if (!data.cpAgencyName || data.cpAgencyName.length < 2) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Agency name is required", path: ['cpAgencyName'] });
+    }
+    if (!data.cpLocation || data.cpLocation.length < 2) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Location is required", path: ['cpLocation'] });
+    }
+    if (!data.cpMobileNumber || !/^[0-9]{10}$/.test(data.cpMobileNumber)) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Valid 10-digit mobile number is required", path: ['cpMobileNumber'] });
+    }
+  }
+});
+
+type FormData = z.infer<typeof schema>;
+
+const ErrorMessage = ({ message }: { message?: string }) => {
+  if (!message) return null;
+  return <span className="text-[10px] text-rose-500 font-bold mt-1 tracking-wide">{message}</span>;
+};
 
 export default function CustomerRegistration() {
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [showApplicant2, setShowApplicant2] = useState(false);
 
   const [otpSent, setOtpSent] = useState(false);
-  const [source, setSource] = useState('');
   const [cpOtpSent, setCpOtpSent] = useState(false);
   const [cpOtpVerified, setCpOtpVerified] = useState(false);
   const [cpOtp, setCpOtp] = useState('');
 
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      state: "Maharashtra",
+      country: "India",
+    }
+  });
+
+  const visitSource = watch('visitSource');
+
+  const onSubmit = (data: FormData) => {
+    console.log("Form Submitted:", data);
     setFormSubmitted(true);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const getInputStyle = (error?: any) => {
+    return `border rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium transition-colors ${error ? 'border-rose-500 bg-rose-50/30' : 'border-line bg-ivory/20 focus:bg-white'
+      }`;
+  };
+
+  const getSelectStyle = (error?: any) => {
+    return `border rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-white transition-colors ${error ? 'border-rose-500 bg-rose-50/30' : 'border-line'
+      }`;
   };
 
   return (
@@ -62,7 +148,7 @@ export default function CustomerRegistration() {
                 </p>
               </div>
 
-              <form onSubmit={handleFormSubmit} className="flex flex-col gap-8">
+              <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8">
                 {/* 1. Applicant Section */}
                 <div className="flex flex-col gap-4">
                   <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brass-deep pb-2 border-b border-line/40">
@@ -70,38 +156,16 @@ export default function CustomerRegistration() {
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1">
-                      <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Applicant 1 Name <span className="text-rose-500">*</span></label>
+                      <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Applicant Name*</label>
                       <input
                         type="text"
-                        required
                         placeholder="Full Name"
-                        className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-ivory/20"
+                        className={getInputStyle(errors.applicantName)}
+                        {...register('applicantName')}
                       />
+                      <ErrorMessage message={errors.applicantName?.message} />
                     </div>
-                    {showApplicant2 && (
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0.98 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="flex flex-col gap-1"
-                      >
-                        <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Applicant 2 Name</label>
-                        <input
-                          type="text"
-                          placeholder="Full Name"
-                          className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-ivory/20"
-                        />
-                      </motion.div>
-                    )}
                   </div>
-                  {!showApplicant2 && (
-                    <button
-                      type="button"
-                      onClick={() => setShowApplicant2(true)}
-                      className="self-start text-[10px] tracking-wider uppercase font-bold text-brass-deep hover:text-pine transition-colors mt-1"
-                    >
-                      + Add second applicant
-                    </button>
-                  )}
                 </div>
 
                 {/* 2. Project Selector & Core Contacts */}
@@ -111,14 +175,17 @@ export default function CustomerRegistration() {
                     <input
                       type="email"
                       placeholder="you@email.com"
-                      className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-ivory/20"
+                      className={getInputStyle(errors.email)}
+                      {...register('email')}
                     />
+                    <ErrorMessage message={errors.email?.message} />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Preferred Project</label>
+                    <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Preferred Project*</label>
                     <select
-                      className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass bg-white text-ink font-medium"
+                      className={getSelectStyle(errors.project)}
                       defaultValue=""
+                      {...register('project')}
                     >
                       <option value="" disabled hidden>
                         Select Preferred Project
@@ -129,6 +196,7 @@ export default function CustomerRegistration() {
                       <option value="horizon">Agarwal Horizon — Virar West</option>
                       <option value="general inquiry">General Inquiry</option>
                     </select>
+                    <ErrorMessage message={errors.project?.message} />
                   </div>
                 </div>
 
@@ -136,29 +204,48 @@ export default function CustomerRegistration() {
                 <div className="flex flex-col gap-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1">
-                      <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Mobile Number <span className="text-rose-500">*</span></label>
-                      <div className="flex border border-line rounded overflow-hidden bg-ivory/20 focus-within:border-brass">
+                      <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Mobile Number*</label>
+                      <div className={`flex border rounded overflow-hidden focus-within:border-brass ${errors.mobileNumber ? 'border-rose-500 bg-rose-50/30' : 'border-line bg-ivory/20'}`}>
                         <span className="bg-ivory border-r border-line text-[10px] font-bold text-taupe flex items-center px-4">+91</span>
                         <input
                           type="tel"
-                          required
-                          pattern="[0-9]{10}"
                           placeholder="10 digit number"
                           className="px-4 py-3 text-xs focus:outline-none w-full text-ink font-medium bg-transparent"
+                          {...(() => {
+                            const { onChange, ...rest } = register('mobileNumber');
+                            return {
+                              ...rest,
+                              onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                                e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
+                                onChange(e);
+                              }
+                            };
+                          })()}
                         />
                       </div>
+                      <ErrorMessage message={errors.mobileNumber?.message} />
                     </div>
                     <div className="flex flex-col gap-1">
                       <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Alternate Mobile Number</label>
-                      <div className="flex border border-line rounded overflow-hidden bg-ivory/20 focus-within:border-brass">
+                      <div className={`flex border rounded overflow-hidden focus-within:border-brass ${errors.alternateMobileNumber ? 'border-rose-500 bg-rose-50/30' : 'border-line bg-ivory/20'}`}>
                         <span className="bg-ivory border-r border-line text-[10px] font-bold text-taupe flex items-center px-4">+91</span>
                         <input
                           type="tel"
-                          pattern="[0-9]{10}"
                           placeholder="10 digit number"
                           className="px-4 py-3 text-xs focus:outline-none w-full text-ink font-medium bg-transparent"
+                          {...(() => {
+                            const { onChange, ...rest } = register('alternateMobileNumber');
+                            return {
+                              ...rest,
+                              onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                                e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
+                                onChange(e);
+                              }
+                            };
+                          })()}
                         />
                       </div>
+                      <ErrorMessage message={errors.alternateMobileNumber?.message} />
                     </div>
                   </div>
                   <div className="flex flex-col gap-2">
@@ -188,16 +275,19 @@ export default function CustomerRegistration() {
                       <input
                         type="text"
                         placeholder="e.g., A/102"
-                        className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-ivory/20"
+                        className={getInputStyle(errors.houseNo)}
+                        {...register('houseNo')}
                       />
+                      <ErrorMessage message={errors.houseNo?.message} />
                     </div>
                     <div className="flex flex-col gap-1">
-                      <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Building/Society Name <span className="text-rose-500">*</span></label>
+                      <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Building/Society Name*</label>
                       <input
                         type="text"
-                        required
-                        className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-ivory/20"
+                        className={getInputStyle(errors.buildingName)}
+                        {...register('buildingName')}
                       />
+                      <ErrorMessage message={errors.buildingName?.message} />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -205,46 +295,58 @@ export default function CustomerRegistration() {
                       <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Street Name / Locality</label>
                       <input
                         type="text"
-                        className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-ivory/20"
+                        className={getInputStyle(errors.streetName)}
+                        {...register('streetName')}
                       />
+                      <ErrorMessage message={errors.streetName?.message} />
                     </div>
                     <div className="flex flex-col gap-1">
-                      <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">City <span className="text-rose-500">*</span></label>
+                      <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">City*</label>
                       <input
                         type="text"
-                        required
-                        className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-ivory/20"
+                        className={getInputStyle(errors.city)}
+                        {...register('city')}
                       />
+                      <ErrorMessage message={errors.city?.message} />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="flex flex-col gap-1">
-                      <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Pincode <span className="text-rose-500">*</span></label>
+                      <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Pincode*</label>
                       <input
                         type="text"
-                        required
                         maxLength={6}
-                        pattern="[0-9]{6}"
-                        className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-ivory/20"
+                        className={getInputStyle(errors.pincode)}
+                        {...(() => {
+                          const { onChange, ...rest } = register('pincode');
+                          return {
+                            ...rest,
+                            onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                              e.target.value = e.target.value.replace(/\D/g, '').slice(0, 6);
+                              onChange(e);
+                            }
+                          };
+                        })()}
                       />
+                      <ErrorMessage message={errors.pincode?.message} />
                     </div>
                     <div className="flex flex-col gap-1">
-                      <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">State <span className="text-rose-500">*</span></label>
+                      <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">State*</label>
                       <input
                         type="text"
-                        required
-                        defaultValue="Maharashtra"
-                        className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-ivory/20"
+                        className={getInputStyle(errors.state)}
+                        {...register('state')}
                       />
+                      <ErrorMessage message={errors.state?.message} />
                     </div>
                     <div className="flex flex-col gap-1">
-                      <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Country <span className="text-rose-500">*</span></label>
+                      <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Country*</label>
                       <input
                         type="text"
-                        required
-                        defaultValue="India"
-                        className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-ivory/20"
+                        className={getInputStyle(errors.country)}
+                        {...register('country')}
                       />
+                      <ErrorMessage message={errors.country?.message} />
                     </div>
                   </div>
                 </div>
@@ -255,15 +357,16 @@ export default function CustomerRegistration() {
                     <Building className="w-4 h-4" /> Occupation details
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Occupation Category <span className="text-rose-500">*</span></label>
+                    <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Occupation Category*</label>
                     <div className="flex flex-wrap gap-3">
                       {['Business', 'Service', 'Professional', 'Others'].map((occ) => (
-                        <label key={occ} className="flex items-center gap-2 border border-line rounded-lg px-4 py-2 text-xs font-semibold cursor-pointer hover:bg-ivory/30 transition-colors">
-                          <input type="radio" name="occupation" value={occ} required className="text-brass focus:ring-brass" />
+                        <label key={occ} className={`flex items-center gap-2 border rounded-lg px-4 py-2 text-xs font-semibold cursor-pointer hover:bg-ivory/30 transition-colors ${errors.occupation ? 'border-rose-500' : 'border-line'}`}>
+                          <input type="radio" value={occ} className="text-brass focus:ring-brass" {...register('occupation')} />
                           <span>{occ}</span>
                         </label>
                       ))}
                     </div>
+                    <ErrorMessage message={errors.occupation?.message} />
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-1">
@@ -271,72 +374,23 @@ export default function CustomerRegistration() {
                       <input
                         type="text"
                         placeholder="Company name"
-                        className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-ivory/20"
+                        className={getInputStyle(errors.companyName)}
+                        {...register('companyName')}
                       />
+                      <ErrorMessage message={errors.companyName?.message} />
                     </div>
                     <div className="flex flex-col gap-1">
                       <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Designation</label>
                       <input
                         type="text"
                         placeholder="Your title"
-                        className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-ivory/20"
+                        className={getInputStyle(errors.designation)}
+                        {...register('designation')}
                       />
+                      <ErrorMessage message={errors.designation?.message} />
                     </div>
                   </div>
                 </div>
-
-                {/* 6. Contact Person Info
-                <div className="flex flex-col gap-4">
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Is the contact person same as Applicant 1? <span className="text-rose-500">*</span></label>
-                    <div className="flex gap-3">
-                      <label className="flex items-center gap-2 border border-line rounded-lg px-4 py-2 text-xs font-semibold cursor-pointer hover:bg-ivory/30">
-                        <input
-                          type="radio"
-                          name="samecontact"
-                          value="Yes"
-                          defaultChecked
-                          onClick={() => setShowContactPerson(false)}
-                        />
-                        <span>Yes</span>
-                      </label>
-                      <label className="flex items-center gap-2 border border-line rounded-lg px-4 py-2 text-xs font-semibold cursor-pointer hover:bg-ivory/30">
-                        <input
-                          type="radio"
-                          name="samecontact"
-                          value="No"
-                          onClick={() => setShowContactPerson(true)}
-                        />
-                        <span>No</span>
-                      </label>
-                    </div>
-                  </div>
-
-                  {showContactPerson && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2 overflow-hidden"
-                    >
-                      <div className="flex flex-col gap-1">
-                        <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Contact Person Name</label>
-                        <input
-                          type="text"
-                          required
-                          className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-ivory/20"
-                        />
-                      </div>
-                      <div className="flex flex-col gap-1">
-                        <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Relation / Designation</label>
-                        <input
-                          type="text"
-                          required
-                          className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-ivory/20"
-                        />
-                      </div>
-                    </motion.div>
-                  )}
-                </div> */}
 
                 {/* 7. Requirements & Budget Categories */}
                 <div className="flex flex-col gap-6">
@@ -346,46 +400,61 @@ export default function CustomerRegistration() {
 
                   {/* Requirements */}
                   <div className="flex flex-col gap-2">
-                    <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Preferred Configuration <span className="text-rose-500">*</span></label>
+                    <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Preferred Configuration*</label>
                     <div className="flex gap-2.5">
-                      {['1 BHK', '2 BHK', '3 BHK', '4 BHK',].map((c) => (
-                        <label key={c} className="flex items-center gap-2 border border-line rounded-lg px-4 py-2 text-xs font-semibold cursor-pointer hover:bg-ivory/30">
-                          <input type="radio" name="config" value={c} required />
+                      {['1 BHK', '2 BHK', '3 BHK', '4 BHK'].map((c) => (
+                        <label key={c} className={`flex items-center gap-2 border rounded-lg px-4 py-2 text-xs font-semibold cursor-pointer hover:bg-ivory/30 ${errors.config ? 'border-rose-500' : 'border-line'}`}>
+                          <input type="radio" value={c} {...register('config')} />
                           <span>{c}</span>
                         </label>
                       ))}
                     </div>
+                    <ErrorMessage message={errors.config?.message} />
                   </div>
 
                   {/* Budget */}
                   <div className="flex flex-col gap-2">
-                    <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Estimated Budget <span className="text-rose-500">*</span></label>
+                    <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Estimated Budget*</label>
                     <div className="flex flex-wrap gap-2.5">
                       {['Below ₹30 L', '₹30–40 L', '₹40–55 L', '₹55–70 L', '₹70 L & Above'].map((b) => (
-                        <label key={b} className="flex items-center gap-2 border border-line rounded-lg px-3 py-2 text-xs font-semibold cursor-pointer hover:bg-ivory/30">
-                          <input type="radio" name="budget" value={b} required />
+                        <label key={b} className={`flex items-center gap-2 border rounded-lg px-3 py-2 text-xs font-semibold cursor-pointer hover:bg-ivory/30 ${errors.budget ? 'border-rose-500' : 'border-line'}`}>
+                          <input type="radio" value={b} {...register('budget')} />
                           <span>{b}</span>
                         </label>
                       ))}
                     </div>
+                    <ErrorMessage message={errors.budget?.message} />
                   </div>
 
                   {/* Source */}
                   <div className="flex flex-col gap-2">
-                    <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">How did you hear about us? <span className="text-rose-500">*</span></label>
+                    <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">How did you hear about us?*</label>
                     <div className="flex flex-wrap gap-2.5">
                       {['Hoardings', 'Friends & Relatives', 'Channel Partner', 'Print Media', 'Social Media', 'Website', 'WhatsApp', 'Other'].map((s) => (
-                        <label key={s} className={`flex items-center gap-2 border rounded-lg px-3 py-2 text-xs font-semibold cursor-pointer transition-colors ${source === s ? 'border-brass bg-ivory/50 text-pine' : 'border-line hover:bg-ivory/30'}`}>
-                          <input type="radio" name="source" value={s} onChange={(e) => setSource(e.target.value)} required className="hidden" />
+                        <label key={s} className={`flex items-center gap-2 border rounded-lg px-3 py-2 text-xs font-semibold cursor-pointer transition-colors ${errors.source ? 'border-rose-500' : 'border-line hover:bg-ivory/30'}`}>
+                          <input type="radio" value={s} {...register('source')} />
                           <span>{s}</span>
                         </label>
                       ))}
                     </div>
+                    <ErrorMessage message={errors.source?.message} />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Source of Visit*</label>
+                    <div className="flex flex-wrap gap-2.5">
+                      {['Direct', 'Channel Partner'].map((s) => (
+                        <label key={s} className={`flex items-center gap-2 border rounded-lg px-3 py-2 text-xs font-semibold cursor-pointer transition-colors ${errors.visitSource ? 'border-rose-500' : 'border-line hover:bg-ivory/30'}`}>
+                          <input type="radio" value={s} {...register('visitSource')} />
+                          <span>{s}</span>
+                        </label>
+                      ))}
+                    </div>
+                    <ErrorMessage message={errors.visitSource?.message} />
                   </div>
 
                   {/* Channel Partner Fields */}
                   <AnimatePresence>
-                    {source === 'Channel Partner' && (
+                    {visitSource === 'Channel Partner' && (
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
@@ -397,55 +466,76 @@ export default function CustomerRegistration() {
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div className="flex flex-col gap-1">
-                            <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Name of Channel Partner <span className="text-rose-500">*</span></label>
+                            <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Name of Channel Partner*</label>
                             <input
                               type="text"
-                              required
                               placeholder="Full Name"
-                              className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-white"
+                              className={getInputStyle(errors.cpName)}
+                              {...register('cpName')}
                             />
+                            <ErrorMessage message={errors.cpName?.message} />
                           </div>
                           <div className="flex flex-col gap-1">
-                            <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Agency Name <span className="text-rose-500">*</span></label>
+                            <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Agency Name*</label>
                             <input
                               type="text"
-                              required
                               placeholder="Agency Name"
-                              className="border border-line rounded px-4 py-3 text-xs focus:outline-none focus:border-brass text-ink font-medium bg-white"
+                              className={getInputStyle(errors.cpAgencyName)}
+                              {...register('cpAgencyName')}
                             />
+                            <ErrorMessage message={errors.cpAgencyName?.message} />
                           </div>
-                        </div>
+                          <div className="flex flex-col gap-1">
+                            <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Location*</label>
+                            <input
+                              type="text"
+                              placeholder="City / Area"
+                              className={getInputStyle(errors.cpLocation)}
+                              {...register('cpLocation')}
+                            />
+                            <ErrorMessage message={errors.cpLocation?.message} />
+                          </div>
 
-                        <div className="flex flex-col gap-1 mt-2">
-                          <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Contact Number of Channel Partner <span className="text-rose-500">*</span></label>
-                          <div className="flex flex-col md:flex-row gap-3 items-start md:items-center">
-                            <div className="flex border border-line rounded overflow-hidden bg-white focus-within:border-brass flex-1 w-full">
-                              <span className="bg-ivory border-r border-line text-[10px] font-bold text-taupe flex items-center px-4">+91</span>
-                              <input
-                                type="tel"
-                                required
-                                disabled={cpOtpVerified}
-                                pattern="[0-9]{10}"
-                                placeholder="10 digit number"
-                                className="px-4 py-3 text-xs focus:outline-none w-full text-ink font-medium bg-transparent disabled:opacity-50"
-                              />
-                            </div>
-
-                            {!cpOtpVerified && (
-                              <button
-                                type="button"
-                                onClick={() => setCpOtpSent(true)}
-                                className="whitespace-nowrap bg-brass text-pine px-4 py-3 rounded text-[10px] font-bold uppercase tracking-wider hover:bg-brass-deep transition-colors w-full md:w-auto"
-                              >
-                                {cpOtpSent ? 'Resend OTP' : 'Send OTP'}
-                              </button>
-                            )}
-
-                            {cpOtpVerified && (
-                              <div className="flex items-center gap-1.5 text-emerald-600 text-xs font-bold uppercase tracking-wider bg-emerald-50 px-3 py-2.5 rounded border border-emerald-200">
-                                <CheckCircle2 className="w-4 h-4" /> Verified
+                          <div className="flex flex-col gap-1">
+                            <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">Contact Number of Channel Partner *</label>
+                            <div className="flex flex-col md:flex-row gap-3 items-start md:items-center">
+                              <div className={`flex border rounded overflow-hidden focus-within:border-brass flex-1 w-full bg-white ${errors.cpMobileNumber ? 'border-rose-500' : 'border-line'}`}>
+                                <span className="bg-ivory border-r border-line text-[10px] font-bold text-taupe flex items-center px-4">+91</span>
+                                <input
+                                  type="tel"
+                                  disabled={cpOtpVerified}
+                                  placeholder="10 digit number"
+                                  className="px-4 py-3 text-xs focus:outline-none w-full text-ink font-medium bg-transparent disabled:opacity-50"
+                                  {...(() => {
+                                    const { onChange, ...rest } = register('cpMobileNumber');
+                                    return {
+                                      ...rest,
+                                      onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                                        e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
+                                        onChange(e);
+                                      }
+                                    };
+                                  })()}
+                                />
                               </div>
-                            )}
+
+                              {!cpOtpVerified && (
+                                <button
+                                  type="button"
+                                  onClick={() => setCpOtpSent(true)}
+                                  className="whitespace-nowrap bg-brass text-pine px-4 py-3 rounded text-[10px] font-bold uppercase tracking-wider hover:bg-brass-deep transition-colors w-full md:w-auto"
+                                >
+                                  {cpOtpSent ? 'Resend OTP' : 'Send OTP'}
+                                </button>
+                              )}
+
+                              {cpOtpVerified && (
+                                <div className="flex items-center gap-1.5 text-emerald-600 text-xs font-bold uppercase tracking-wider bg-emerald-50 px-3 py-2.5 rounded border border-emerald-200">
+                                  <CheckCircle2 className="w-4 h-4" /> Verified
+                                </div>
+                              )}
+                            </div>
+                            <ErrorMessage message={errors.cpMobileNumber?.message} />
                           </div>
                         </div>
 
@@ -486,15 +576,16 @@ export default function CustomerRegistration() {
                 {/* Terms and Submit */}
                 <div className="flex flex-col gap-4 mt-4">
                   <label className="flex items-start gap-2.5 text-xs text-taupe font-medium cursor-pointer">
-                    <input type="checkbox" required className="text-brass focus:ring-brass mt-0.5" />
+                    <input type="checkbox" className="text-brass focus:ring-brass mt-0.5" {...register('termsAccepted')} />
                     <span>
                       I declare that all the information provided above is correct. I agree to the{' '}
                       <a href="#" className="text-brass-deep underline font-bold">
                         Terms &amp; Conditions
                       </a>{' '}
-                      and allow sales executives to reach out. <span className="text-rose-500">*</span>
+                      and allow sales executives to reach out. *
                     </span>
                   </label>
+                  <ErrorMessage message={errors.termsAccepted?.message} />
 
                   <button
                     type="submit"

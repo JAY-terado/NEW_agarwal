@@ -721,7 +721,7 @@ export default function Home() {
       <section className="section bloghome" id="insights">
         <div className="wrap-widescreen">
           <div className="section-head reveal">
-            <span className="eyebrow">From the Blog</span>
+            <span className="eyebrow">Blogs</span>
             <h2 className="serif">Property <em>Insights</em></h2>
             <p>Guides, stories and perspectives on living well across Vasai–Virar &amp; Mumbai.</p>
           </div>
@@ -857,7 +857,7 @@ export default function Home() {
                     <span className="arr">→</span>
                   </button>
                   <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', lineHeight: 1.4 }}>
-                    I Authorize Agarwal Group And Its Representatives To Call, SMS, Email Or Whatsapp Me About Its Products And Offers. <br />This Consent Overrides Any Registration For DND NDNC.
+                    By Clicking Button, I Authorize Agarwal Group And Its Representatives To Call, SMS, Email Or Whatsapp Me About Its Products And Offers. <br />This Consent Overrides Any Registration For DND NDNC.
                   </div>
                 </form>
               ) : (

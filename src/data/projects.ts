@@ -95,6 +95,7 @@ export const projects: Project[] = [
       { key: 'Schools & Colleges', value: '5–10 mins' },
       { key: 'Hospitals', value: '8 mins' },
       { key: 'Shopping & Malls', value: '10 mins' },
+      { key: 'Restaurants & Cafes', value: '2 mins' },
       { key: 'Upcoming Metro', value: 'Nearby' }
     ],
     gallery: [
@@ -163,6 +164,7 @@ export const projects: Project[] = [
       { key: 'Schools & Colleges', value: '5–10 mins' },
       { key: 'Hospitals', value: '8 mins' },
       { key: 'Shopping & Malls', value: '10 mins' },
+      { key: 'Restaurants & Cafes', value: '2 mins' },
       { key: 'Upcoming Metro', value: 'Nearby' }
     ],
     gallery: [
@@ -231,6 +233,7 @@ export const projects: Project[] = [
       { key: 'Schools & Colleges', value: '5–10 mins' },
       { key: 'Hospitals', value: '8 mins' },
       { key: 'Shopping & Malls', value: '10 mins' },
+      { key: 'Restaurants & Cafes', value: '2 mins' },
       { key: 'Upcoming Metro', value: 'Nearby' }
     ],
     gallery: [
@@ -299,6 +302,7 @@ export const projects: Project[] = [
       { key: 'Schools & Colleges', value: '5–10 mins' },
       { key: 'Hospitals', value: '8 mins' },
       { key: 'Shopping & Malls', value: '10 mins' },
+      { key: 'Restaurants & Cafes', value: '2 mins' },
       { key: 'Upcoming Metro', value: 'Nearby' }
     ],
     gallery: [

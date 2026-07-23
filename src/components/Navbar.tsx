@@ -55,21 +55,7 @@ export default function Navbar() {
     setDdOpen(false);
   }, [location]);
 
-  // Scroll to section or scroll to top on path change (useful when navigating from other pages to home anchors)
-  useEffect(() => {
-    const paths = ['/story', '/projects', '/contact'];
-    if (paths.includes(location.pathname)) {
-      const id = location.pathname.replace('/', '');
-      const el = document.getElementById(id);
-      if (el) {
-        setTimeout(() => {
-          el.scrollIntoView({ behavior: 'smooth' });
-        }, 150);
-      }
-    } else if (location.pathname === '/') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  }, [location.pathname]);
+  // Removed automatic scroll on path change to allow AnimatedRoutes to reset scroll to top instantly during transitions.
 
   const handleNavClick = (pathId: string) => {
     if (location.pathname === `/${pathId}`) {
@@ -393,8 +379,8 @@ export default function Navbar() {
                   <h4 style={{ fontFamily: '"Fraunces", serif', fontWeight: 500, fontSize: '1.04rem', color: 'var(--ink)', lineHeight: 1.16, transition: 'color .3s' }}>{proj.name}</h4>
                   <div style={{ fontSize: '.74rem', color: 'var(--taupe)', marginTop: '2px' }}>{proj.location}</div>
                   <div style={{ fontSize: '.78rem', color: 'var(--ink-soft)', marginTop: '7px', display: 'flex', gap: '12px', alignItems: 'baseline' }}>
-                    <span style={{ color: 'var(--brass-deep)', fontWeight: 600, fontFamily: '"Fraunces", serif', fontSize: '.92rem' }}>{proj.startingPrice}</span>
-                    <span>{proj.config}</span>
+                    <span style={{ color: 'var(--brass-deep)', fontWeight: 600, fontFamily: '"Fraunces", serif', fontSize: '.92rem' }}>{proj.config}</span>
+                    <span>{proj.startingPrice}</span>
                   </div>
                 </Link>
               ))}
