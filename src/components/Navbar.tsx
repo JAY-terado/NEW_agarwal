@@ -389,9 +389,6 @@ export default function Navbar() {
                       style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform .9s', display: 'block' }}
                       onError={e => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
                     />
-                    <span style={{ position: 'absolute', bottom: '8px', left: '8px', background: 'rgba(20,20,18,.66)', color: '#fff', fontSize: '.58rem', letterSpacing: '.1em', textTransform: 'uppercase', padding: '4px 8px', borderRadius: '3px' }}>
-                      {proj.status}
-                    </span>
                   </div>
                   <h4 style={{ fontFamily: '"Fraunces", serif', fontWeight: 500, fontSize: '1.04rem', color: 'var(--ink)', lineHeight: 1.16, transition: 'color .3s' }}>{proj.name}</h4>
                   <div style={{ fontSize: '.74rem', color: 'var(--taupe)', marginTop: '2px' }}>{proj.location}</div>
