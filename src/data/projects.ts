@@ -36,6 +36,7 @@ export interface Project {
   connectivity: ConnectivityRow[];
   gallery: string[];
   mapEmbedUrl: string;
+  faqs?: { q: string; a: string; }[];
 }
 
 export const projects: Project[] = [
@@ -97,6 +98,48 @@ export const projects: Project[] = [
       { key: 'Shopping & Malls', value: '10 mins' },
       { key: 'Restaurants & Cafes', value: '2 mins' },
       { key: 'Upcoming Metro', value: 'Nearby' }
+    ],
+    faqs: [
+      {
+        q: "Where is Agarwal Infinity located?",
+        a: "Agarwal Infinity is located near D-Mart in Virar West, offering excellent connectivity to Virar Railway Station, schools, hospitals, shopping destinations, and major upcoming infrastructure projects like the Mira Road–Virar Metro and Bhayandar–Vasai Sea Link. Its strategic location makes it an ideal choice for both end-users and investors."
+      },
+      {
+        q: "What configurations are available at Agarwal Infinity?",
+        a: "Agarwal Infinity offers spacious 2 BHK, 3 BHK, and 4 BHK deck homes thoughtfully designed with modern layouts, premium finishes, and ample natural light to suit the needs of growing families."
+      },
+      {
+        q: "What is the starting price of homes at Agarwal Infinity?",
+        a: "The starting price at Agarwal Infinity is ₹88.50 Lakhs* for premium residences. Pricing varies depending on the apartment configuration and floor selection. Contact our sales team for the latest price list, payment plans, and exclusive offers."
+      },
+      {
+        q: "Is Agarwal Infinity a RERA-registered project?",
+        a: "Yes. Agarwal Infinity is a RERA-registered project. The RERA Registration Number is PR1240002502497, ensuring transparency and compliance with regulatory guidelines."
+      },
+      {
+        q: "What amenities are available at Agarwal Infinity?",
+        a: "Agarwal Infinity offers a range of modern lifestyle amenities designed for comfort, recreation, and wellness. Residents can enjoy thoughtfully planned spaces that enhance everyday living while creating a vibrant community atmosphere."
+      },
+      {
+        q: "How well connected is Agarwal Infinity to important locations?",
+        a: "Agarwal Infinity enjoys excellent connectivity:<br/><br/><ul><li>D-Mart – 1 minute</li><li>McDonald’s – 2 minutes</li><li>Rustomjee Cambridge International School – 3 minutes</li><li>Star Bazaar – 3 minutes</li><li>Virar Railway Station – 7 minutes</li><li>Prakriti Hospital – 10 minutes</li></ul><br/>Its location also benefits from several upcoming infrastructure developments expected to improve future connectivity."
+      },
+      {
+        q: "Why should I invest in Agarwal Infinity, Virar West?",
+        a: "Agarwal Infinity combines a prime location, premium deck homes, quality construction by Agarwal Group, and proximity to major upcoming infrastructure projects. These factors make it an attractive option for homebuyers looking for long-term value, lifestyle, and future appreciation."
+      },
+      {
+        q: "Are flexible payment plans and booking offers available?",
+        a: "Yes. Agarwal Infinity offers easy payment plans, spot booking offers, and exclusive early buyer benefits for a limited period. Our sales team can help you choose the most suitable payment option based on your requirements."
+      },
+      {
+        q: "Who is the developer of Agarwal Infinity?",
+        a: "Agarwal Infinity is developed by Agarwal Group, a trusted real estate developer with decades of experience in the Vasai–Virar region. The group is known for quality construction, timely delivery, transparent business practices, and customer-centric developments."
+      },
+      {
+        q: "How can I book a home or schedule a site visit at Agarwal Infinity?",
+        a: "You can fill out the enquiry form on our website to pre-register, request the latest pricing, download the brochure, or schedule a guided site visit. Our sales consultants will assist you with apartment availability, floor plans, home loan guidance, and the complete booking process."
+      }
     ],
     gallery: [
       'gallery-exterior.jpg',

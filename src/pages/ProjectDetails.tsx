@@ -46,7 +46,7 @@ import horizonHero from '../assets/agarwal-horizon-hero.jpg';
 
 import agarwalInfinityMRQR from '../assets/agarwalInfinityMRQR.jpeg';
 
-import qrSample from '../assets/qrSample.svg';
+// import qrSample from '../assets/qrSample.svg';
 
 // Brochure import (placeholder for all projects currently)
 import palmPremiereBrochure from '../assets/brochures/palm-premiere-brochure.pdf';
@@ -94,84 +94,84 @@ const amenityImageMap: Record<string, string> = {
   'Rooftop Sky Lounge': amenityRooftop
 };
 
-function ReraDetailsWidget({ project }: { project: any }) {
-  const [isExpanded, setIsExpanded] = useState(false);
+// function ReraDetailsWidget({ project }: { project: any }) {
+//   const [isExpanded, setIsExpanded] = useState(false);
 
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
+//   const toggleExpand = () => {
+//     setIsExpanded(!isExpanded);
+//   };
 
-  return (
-    <div className="absolute top-[82px] right-0 z-[40]">
-      {/* The Expandable Panel */}
-      <div
-        className={`
-          text-white shadow-lg transition-all duration-300 ease-in-out overflow-hidden origin-top-right
-          w-[280px] sm:w-[320px] /* Fixed width for both states to prevent leftward movement */
-          border border-white/10 backdrop-blur-[14px]
-          ${isExpanded ? 'h-[420px] p-6 bg-black/40' : 'h-[50px] cursor-pointer bg-black/15 hover:bg-black/25'}
-        `}
-        onClick={!isExpanded ? toggleExpand : undefined}
-      >
-        {/* Collapsed State Content */}
-        <div
-          className={`h-[50px] flex items-center justify-center transition-opacity duration-200 absolute top-0 left-0 right-0
-            ${isExpanded ? 'opacity-0 pointer-events-none' : 'opacity-100'}
-          `}
-        >
-          <span className="text-xs sm:text-sm tracking-[0.1em] font-medium text-white/90">MAHARERA DETAILS</span>
-        </div>
+//   return (
+//     <div className="absolute top-[82px] right-0 z-[40]">
+//       {/* The Expandable Panel */}
+//       <div
+//         className={`
+//           text-white shadow-lg transition-all duration-300 ease-in-out overflow-hidden origin-top-right
+//           w-[280px] sm:w-[320px] /* Fixed width for both states to prevent leftward movement */
+//           border border-white/10 backdrop-blur-[14px]
+//           ${isExpanded ? 'h-[420px] p-6 bg-black/40' : 'h-[50px] cursor-pointer bg-black/15 hover:bg-black/25'}
+//         `}
+//         onClick={!isExpanded ? toggleExpand : undefined}
+//       >
+//         {/* Collapsed State Content */}
+//         <div
+//           className={`h-[50px] flex items-center justify-center transition-opacity duration-200 absolute top-0 left-0 right-0
+//             ${isExpanded ? 'opacity-0 pointer-events-none' : 'opacity-100'}
+//           `}
+//         >
+//           <span className="text-xs sm:text-sm tracking-[0.1em] font-medium text-white/90">MAHARERA DETAILS</span>
+//         </div>
 
-        {/* Expanded State Content */}
-        <div
-          className={`flex flex-col items-center pt-2 transition-opacity duration-500 delay-100
-            ${isExpanded ? 'opacity-100' : 'opacity-0 pointer-events-none'}
-          `}
-        >
-          {/* Close Button */}
-          <button
-            onClick={toggleExpand}
-            className="absolute top-4 right-4 p-1 rounded-full border border-white/40 hover:bg-white/10 transition-colors"
-            aria-label="Close details"
-          >
-            <X size={16} strokeWidth={1.5} className="text-white/80" />
-          </button>
+//         {/* Expanded State Content */}
+//         <div
+//           className={`flex flex-col items-center pt-2 transition-opacity duration-500 delay-100
+//             ${isExpanded ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+//           `}
+//         >
+//           {/* Close Button */}
+//           <button
+//             onClick={toggleExpand}
+//             className="absolute top-4 right-4 p-1 rounded-full border border-white/40 hover:bg-white/10 transition-colors"
+//             aria-label="Close details"
+//           >
+//             <X size={16} strokeWidth={1.5} className="text-white/80" />
+//           </button>
 
-          {/* Logo Area */}
-          <div className="mt-4 mb-4 flex flex-col items-center text-center">
-            <h2 className="text-xl sm:text-2xl tracking-[0.2em] font-light mb-1 uppercase">{project.name}</h2>
-            <p className="text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-white/80">{project.location.split(',')[0]}</p>
-          </div>
+//           {/* Logo Area */}
+//           <div className="mt-4 mb-4 flex flex-col items-center text-center">
+//             <h2 className="text-xl sm:text-2xl tracking-[0.2em] font-light mb-1 uppercase">{project.name}</h2>
+//             <p className="text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-white/80">{project.location.split(',')[0]}</p>
+//           </div>
 
-          {/* QR Code Container */}
-          <div className="bg-white p-2 mb-4 rounded-sm">
-            <img
-              src={qrSample}
-              alt="RERA QR Code"
-              className="w-24 h-24 sm:w-28 sm:h-28 object-contain"
-            />
-          </div>
+//           {/* QR Code Container */}
+//           <div className="bg-white p-2 mb-4 rounded-sm">
+//             <img
+//               src={qrSample}
+//               alt="RERA QR Code"
+//               className="w-24 h-24 sm:w-28 sm:h-28 object-contain"
+//             />
+//           </div>
 
-          {/* Registration Details */}
-          <div className="text-center mb-6 flex flex-col gap-1">
-            <p className="text-[10px] sm:text-xs uppercase tracking-[0.1em] text-white/90">RERA Registration Number</p>
-            <p className="text-sm sm:text-lg tracking-widest font-light">{project.rera || 'N/A'}</p>
-          </div>
+//           {/* Registration Details */}
+//           <div className="text-center mb-6 flex flex-col gap-1">
+//             <p className="text-[10px] sm:text-xs uppercase tracking-[0.1em] text-white/90">RERA Registration Number</p>
+//             <p className="text-sm sm:text-lg tracking-widest font-light">{project.rera || 'N/A'}</p>
+//           </div>
 
-          {/* Link */}
-          <a
-            href="https://maharera.mahaonline.gov.in/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs sm:text-sm tracking-[0.1em] pb-1 border-b border-white hover:text-white/80 hover:border-white/80 transition-colors"
-          >
-            MAHARERA WEBSITE
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-}
+//           {/* Link */}
+//           <a
+//             href="https://maharera.mahaonline.gov.in/"
+//             target="_blank"
+//             rel="noopener noreferrer"
+//             className="text-xs sm:text-sm tracking-[0.1em] pb-1 border-b border-white hover:text-white/80 hover:border-white/80 transition-colors"
+//           >
+//             MAHARERA WEBSITE
+//           </a>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
 
 export default function ProjectDetails() {
   const { slug } = useParams<{ slug: string }>();
@@ -187,6 +187,7 @@ export default function ProjectDetails() {
   const [brochureFormSubmitted, setBrochureFormSubmitted] = useState(false);
   const contactRef = useRef<HTMLElement>(null);
   const [activeAmenityTab, setActiveAmenityTab] = useState<'Elevation' | 'Podium Amenities' | 'Terrace Amenities'>('Podium Amenities');
+  const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
   useEffect(() => {
     setProject(projects.find((p) => p.slug === slug));
@@ -258,7 +259,7 @@ export default function ProjectDetails() {
             <div className="absolute inset-0 bg-gradient-to-t from-pine via-pine/40 to-pine/10" />
           </div>
 
-          <ReraDetailsWidget project={project} />
+          {/* <ReraDetailsWidget project={project} /> */}
 
           {/* Hero Title & Breadcrumb */}
           <div className="wrap-widescreen relative z-10 w-full text-ivory pb-12">
@@ -363,7 +364,7 @@ export default function ProjectDetails() {
         <div className="wrap-widescreen">
           <div className="section-head mb-10">
             <span className="eyebrow">Lifestyle</span>
-            <h2 className="serif mt-2">Amenities Designed for Every Generation</h2>
+            <h2 className="serif mt-2 whitespace-nowrap">Amenities Designed for <em>Every Generation</em></h2>
           </div>
 
           {/* Tabs */}
@@ -438,7 +439,7 @@ export default function ProjectDetails() {
           <div className="mb-14">
             <div className="section-head mb-0 max-w-full text-left">
               <span className="eyebrow">Plans & Pricing</span>
-              <h2 className="serif whitespace-nowrap">Configurations & Indicative Pricing</h2>
+              <h2 className="serif whitespace-nowrap">Configurations & Indicative <em>Pricing</em></h2>
             </div>
           </div>
 
@@ -530,7 +531,7 @@ export default function ProjectDetails() {
         <div className="wrap-widescreen max-w-6xl mx-auto">
           <div className="section-head mb-14">
             <span className="eyebrow">Location Advantages</span>
-            <h2 className="serif mt-2">Connected to Everything</h2>
+            <h2 className="serif mt-2">Connected to <em>Everything</em></h2>
           </div>
 
           <div className="grid lg:grid-cols-5 gap-8 lg:gap-16 items-start">
@@ -602,7 +603,7 @@ export default function ProjectDetails() {
         <div className="wrap-widescreen">
           <div className="section-head mb-14">
             <span className="eyebrow">Gallery</span>
-            <h2 className="serif whitespace-nowrap tracking-tight" style={{ fontSize: 'min(6vw, clamp(2.1rem, 4.6vw, 3.6rem))' }}>A Closer Look at {project.name}</h2>
+            <h2 className="serif whitespace-nowrap tracking-tight" style={{ fontSize: 'min(6vw, clamp(2.1rem, 4.6vw, 3.6rem))' }}>A Closer Look at <em>{project.name}</em></h2>
           </div>
 
           <div className="grid grid-cols-12 gap-1 md:gap-2">
@@ -638,9 +639,88 @@ export default function ProjectDetails() {
         </div>
       </section>
 
+      {/* FAQ SECTION */}
+      <section className="section bg-ivory pt-24 pb-24" id="faq">
+        <div className="wrap-widescreen">
+          <div className="section-head">
+            <span className="eyebrow">FAQ</span>
+            <h2 className="serif">Questions, <em>Answered</em></h2>
+            <p>Everything you need to know before making an Agarwal address your home.</p>
+          </div>
+
+          <div className="faq-wrap">
+            {(project.faqs || [
+              {
+                q: "How long has Agarwal Group been building homes?",
+                a: "Since 1978, Agarwal Group has been developing residential projects across Mumbai, Vasai, and Virar. With over 47 years of experience, the company has earned the trust of thousands of families through quality construction, timely delivery, and customer-focused developments."
+              },
+              {
+                q: "Where are Agarwal Group's residential projects located?",
+                a: "Agarwal Group has residential projects in key locations across Mumbai, Vasai, and Virar, offering excellent connectivity to railway stations, highways, schools, hospitals, and daily conveniences."
+              },
+              {
+                q: "What types of residential properties does Agarwal Group offer?",
+                a: "Agarwal Group offers thoughtfully planned 1 BHK, 2 BHK, and 3 BHK apartments designed to meet the needs of first-time homebuyers, growing families, and property investors."
+              },
+              {
+                q: "Are Agarwal Group projects RERA registered?",
+                a: "Yes. All applicable Agarwal Group residential projects are registered under the Real Estate Regulatory Authority (RERA), ensuring transparency, regulatory compliance, and greater confidence for homebuyers."
+              },
+              {
+                q: "What makes Agarwal Group different from other builders in Mumbai?",
+                a: "Agarwal Group stands apart through its legacy of over four decades, commitment to quality construction, prime project locations, transparent practices, and thoughtfully designed homes. Every project is built to offer long-term value, modern amenities, and a comfortable lifestyle for families."
+              },
+              {
+                q: "Does Agarwal Group offer ready-to-move homes?",
+                a: "Agarwal Group offers a mix of ready-to-move and under-construction residential projects, depending on the development. Availability varies by project."
+              },
+              {
+                q: "Can I book a site visit for an Agarwal Group project?",
+                a: "Yes. You can schedule a site visit by contacting the sales team through the website or by calling the customer support numbers."
+              },
+              {
+                q: "Are home loans available for Agarwal Group projects?",
+                a: "Yes. Agarwal Group projects are approved by leading banks and financial institutions, making it easier for eligible buyers to avail home loan assistance with a smooth financing process."
+              },
+              {
+                q: "Are Agarwal Group projects suitable for investment?",
+                a: "Agarwal Group develops projects in well-connected locations across Mumbai, Vasai, and Virar, making them attractive for both end-users and long-term property investors."
+              },
+              {
+                q: "How can I contact Agarwal Group?",
+                a: "You can connect with Agarwal Group through the contact form on the website, call the sales team, or visit the corporate office in Virar for personalized assistance."
+              }
+            ]).map((item, idx) => {
+              const isOpen = activeFaq === idx;
+              return (
+                <div key={idx} className={`faq-item ${isOpen ? 'open' : ''}`}>
+                  <button
+                    className="faq-q"
+                    aria-expanded={isOpen ? "true" : "false"}
+                    onClick={() => setActiveFaq(isOpen ? null : idx)}
+                  >
+                    <span>{item.q}</span>
+                    <span className="faq-ic" aria-hidden="true"></span>
+                  </button>
+                  <div
+                    className="faq-a"
+                    style={{
+                      maxHeight: isOpen ? '200px' : '0px',
+                      transition: 'max-height .45s var(--ease)',
+                    }}
+                  >
+                    <div className="faq-a-inner" dangerouslySetInnerHTML={{ __html: item.a }} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* WHY CHOOSE US */}
       {project.whyChoseUs && project.whyChoseUs.length > 0 && (
-        <section id="highlights" className="section pt-24 pb-0 bg-ivory border-t border-line-light">
+        <section id="highlights" className="section pt-24 pb-0 bg-paper border-t border-line-light">
           <div className="wrap-widescreen">
             <div className="section-head mb-16 text-center max-w-2xl mx-auto">
               <span className="eyebrow">Highlights</span>
@@ -847,7 +927,7 @@ export default function ProjectDetails() {
       </AnimatePresence>
 
       {/* 8. ENQUIRY & RERA */}
-      <section id="contact" ref={contactRef} className="section pt-24 pb-24 bg-paper">
+      <section id="contact" ref={contactRef} className="section pt-24 pb-24 bg-ivory">
         <div className="wrap-widescreen grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
           <div className="flex flex-col gap-12">
@@ -875,7 +955,7 @@ export default function ProjectDetails() {
             </div>
           </div>
 
-          <div className="bg-ivory border border-line-light rounded-3xl p-8 shadow-xl ">
+          <div className="bg-paper border border-line-light rounded-3xl p-8 shadow-xl ">
             <AnimatePresence mode="wait">
               {!formSubmitted ? (
                 <form onSubmit={handleFormSubmit} className="flex flex-col gap-5">

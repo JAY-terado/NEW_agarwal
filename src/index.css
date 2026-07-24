@@ -1532,6 +1532,19 @@ input[type="radio"] {
   color: var(--color-brass);
   display: inline-flex;
   align-items: center;
+  gap: .7em;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 30px;
+  height: 1px;
+  background: var(--color-brass);
+  opacity: .7;
+}
+
+#highlights .eyebrow::before {
+  display: none;
 }
 
 .section {

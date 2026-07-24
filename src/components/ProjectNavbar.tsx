@@ -62,8 +62,9 @@ export default function ProjectNavbar() {
     { label: 'Overview', id: 'overview' },
     { label: 'Amenities', id: 'amenities' },
     { label: 'Floor Plans', id: 'configurations' },
-    { label: 'Location', id: 'location' },
+    { label: 'Location Advantages', id: 'location' },
     { label: 'Gallery', id: 'gallery' },
+    { label: 'FAQs', id: 'faq' },
     { label: 'Highlights', id: 'highlights' },
   ];
 
