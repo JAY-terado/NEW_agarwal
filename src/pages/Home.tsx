@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Gem, Timer, BadgeCheck, HeartHandshake, Instagram } from 'lucide-react';
+import { Instagram } from 'lucide-react';
 import { projects } from '../data/projects';
 
 // Asset Imports
