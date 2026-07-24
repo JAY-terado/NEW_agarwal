@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+
 import heroImage from '../assets/agarwal-horizon-hero.jpg';
 
 export default function ChannelPartner() {
@@ -18,13 +18,10 @@ export default function ChannelPartner() {
         <div className="page-hero-bg">
           <img src={heroImage} alt="Channel Partner network" />
         </div>
-        <div className="wrap-widescreen">
+        <div className="wrap-widescreen relative z-10">
           <span className="eyebrow light">Channel Partners</span>
-          <h1 className="serif">Grow With <em>Agarwal Group</em></h1>
-          <p>Partner with one of Vasai-Virar's most trusted developers — and turn our 47-year legacy into your next closing.</p>
-          <div className="crumb">
-            <Link to="/">Home</Link> / Channel Partner
-          </div>
+          <h1 className="serif">Become an <em>Agarwal Group</em> Channel Partner</h1>
+          <p>Partner with one of the most trusted real estate developers in Vasai–Virar &amp; Mumbai. Access premium residential projects, competitive brokerage, dedicated sales support, and exclusive pre-launch opportunities to grow your business.</p>
         </div>
       </header>
 
@@ -32,7 +29,7 @@ export default function ChannelPartner() {
       <section className="section">
         <div className="wrap-widescreen channel-grid">
           <div>
-            <span className="eyebrow">Why Partner With Us</span>
+            <span className="eyebrow">Why Partner with Agarwal Group?</span>
             <h2 className="serif" style={{ fontFamily: "'Fraunces', serif", fontWeight: 300, fontSize: 'clamp(1.9rem, 3.8vw, 2.8rem)', lineHeight: 1.12, margin: '.4em 0 .5em' }}>
               A partnership built on <em style={{ fontStyle: 'italic', color: 'var(--brass-deep)' }}>trust &amp; returns</em>
             </h2>
@@ -42,49 +39,49 @@ export default function ChannelPartner() {
 
             <ul className="ch-benefits">
               <li>
-                <b>Best-in-Class Brokerage</b>
-                <span>Industry-leading commissions on every closing.</span>
+                <b>Competitive Brokerage</b>
+                <span>Earn attractive commissions on every successful booking.</span>
               </li>
               <li>
                 <b>Timely Payouts</b>
-                <span>Transparent, on-time settlements — every time.</span>
+                <span>Transparent and hassle-free brokerage settlements.</span>
               </li>
               <li>
-                <b>RERA-Registered Inventory</b>
-                <span>Sell with complete confidence and clarity.</span>
+                <b>RERA-Registered Projects</b>
+                <span>Promote trusted residential developments with confidence.</span>
               </li>
               <li>
                 <b>Dedicated Relationship Manager</b>
-                <span>A single point of contact for your team.</span>
+                <span>Get expert support from enquiry to booking.</span>
               </li>
               <li>
-                <b>Marketing Collateral</b>
-                <span>Brochures, renders &amp; digital assets on tap.</span>
+                <b>Marketing Support</b>
+                <span>Access brochures, floor plans, pricing, and digital creatives.</span>
               </li>
               <li>
-                <b>Exclusive Previews</b>
-                <span>First access to new launches and offers.</span>
+                <b>Exclusive Launch Access</b>
+                <span>Receive priority access to new project launches and special offers.</span>
               </li>
             </ul>
 
             <div style={{ marginTop: '48px' }}>
               <span className="eyebrow">How It Works</span>
-              
+
               <div className="steps">
                 <div className="step">
                   <div className="n serif">01</div>
                   <h4 className="serif">Register</h4>
-                  <p>Share your firm and RERA details through the form.</p>
+                  <p> Submit your details and MahaRERA registration.</p>
                 </div>
                 <div className="step">
                   <div className="n serif">02</div>
                   <h4 className="serif">Get Onboarded</h4>
-                  <p>Our team verifies and activates you within 24 hours.</p>
+                  <p>Our team verifies and activates your profile within 24 hours.</p>
                 </div>
                 <div className="step">
                   <div className="n serif">03</div>
                   <h4 className="serif">Start Earning</h4>
-                  <p>Access live inventory and close with full support.</p>
+                  <p>Access project inventory, marketing support, and start earning.</p>
                 </div>
               </div>
             </div>
@@ -95,7 +92,7 @@ export default function ChannelPartner() {
             {!formSubmitted ? (
               <form onSubmit={handleFormSubmit}>
                 <div className="ft serif">Register as a Channel Partner</div>
-                <div className="fsub">Join our network — we'll onboard you within 24 hours.</div>
+                <div className="fsub">Join our growing network of real estate consultants, brokers, and channel partners across Mumbai, Vasai, Virar, and the MMR.</div>
 
                 <div className="frow">
                   <div className="field">
