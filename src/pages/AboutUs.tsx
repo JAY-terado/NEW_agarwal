@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft, Hammer, Map, Trophy,
-  CalendarCheck, BadgeCheck, Users, Linkedin, Mail, ChevronLeft, ChevronRight
+  CalendarCheck, BadgeCheck, Users, Linkedin, Mail, ChevronLeft, ChevronRight, Trees
 } from 'lucide-react';
 import heroImage from '../assets/gallery-pool.jpg';
 import storyImage from '../assets/gallery-living.jpg';
@@ -91,10 +91,10 @@ export default function AboutUs() {
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 pb-16 w-full text-ivory flex flex-col items-center text-center">
           <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl font-light tracking-tight mb-4">
-            About <span className="italic font-serif text-brass-bright font-normal">Us</span>
+            About <span className="italic font-serif text-brass-bright font-normal">Agarwal Group</span>
           </h1>
           <p className="text-sm sm:text-base md:text-lg text-ivory/90 font-light leading-relaxed max-w-2xl">
-            A Legacy of Trust. A Future Built for Generations.
+            Trusted Real Estate Developer in Vasai, Virar & Mumbai Since 1969
           </p>
         </div>
       </section>
@@ -107,15 +107,18 @@ export default function AboutUs() {
           <div className="wrap-widescreen story-grid">
             <div>
               <span className="eyebrow">Our Legacy</span>
-              <h2 className="serif">Built on Principles of <em>Trust & Excellence.</em></h2>
+              <h2 className="serif">A Legacy Built on <em>Trust, Quality &amp; Excellence</em></h2>
               <p>
-                Established in <strong>1978</strong>, the Agarwal Group has grown into one of the most trusted names in real estate, delivering thoughtfully designed residential developments across <strong>Mumbai, Vasai, Virar, and the MMR</strong>.
+                Established in <strong>1978</strong>, Agarwal Group has become one of the most respected real estate developers in <strong>Vasai–Virar and Mumbai</strong>, with a legacy of delivering thoughtfully planned residential communities.
               </p>
               <p>
-                For over <strong>48 years</strong>, we have remained committed to creating homes that combine exceptional construction quality, intelligent planning, and enduring value.
+                From affordable homes to premium apartments, every project reflects our commitment to exceptional construction quality, intelligent space planning, modern lifestyle amenities, and timely delivery.
+              </p>
+              <p>
+                With <strong>30+</strong> completed residential projects and <strong>5,000+</strong> happy families, we continue to create homes that offer comfort today and appreciation for the future.
               </p>
               <div className="quote">
-                <p className="serif">"Every development reflects our dedication to building communities that inspire better living today while creating value for tomorrow."</p>
+                <p className="serif">"Every Agarwal development is designed to build not just homes, but thriving communities where families grow, memories are created, and investments gain lasting value."</p>
               </div>
             </div>
             <div className="story-media">
@@ -136,14 +139,13 @@ export default function AboutUs() {
         <section className="section folio pt-24" style={{ backgroundColor: '#F8F6F0' }}>
           <div className="wrap-widescreen">
             <div className="section-head" style={{ position: 'relative' }}>
-              <div className="folio-watermark" style={{ top: '-60px' }}>
-                <div style={{ transform: 'translateX(0.1em)' }}>choose</div>
-                <div style={{ transform: 'translateX(0.15em)' }}>agarwal</div>
+              <div className="folio-watermark" style={{ top: '-60px', whiteSpace: 'nowrap', left: 'auto', right: '-100%' }}>
+                <div>choose agarwal</div>
               </div>
-              <span className="eyebrow" style={{ position: 'relative', zIndex: 1 }}>Why Choose Us?</span>
-              <h2 className="serif" style={{ position: 'relative', zIndex: 1 }}>
+              <span className="eyebrow" style={{ position: 'relative', zIndex: 1 }}>Why Homebuyers Choose Agarwal Group</span>
+              {/* <h2 className="serif" style={{ position: 'relative', zIndex: 1 }}>
                 Uncompromising <br /><em>Quality & Trust</em>
-              </h2>
+              </h2> */}
             </div>
             <div className="values" style={{ marginTop: '4rem' }}>
               <div className="vcard">
@@ -151,8 +153,8 @@ export default function AboutUs() {
                   <Trophy className="w-5 h-5" strokeWidth={1.8} />
                 </div>
                 <div className="vcard-content">
-                  <b>48+ Years of Excellence</b>
-                  <span>Since 1978, successfully delivering quality residential developments built on trust and reliability.</span>
+                  <b>48+ Years of Trusted Experience</b>
+                  <span>Nearly five decades of delivering residential projects with consistent quality, transparency, and customer satisfaction.</span>
                 </div>
               </div>
               <div className="vcard">
@@ -160,8 +162,8 @@ export default function AboutUs() {
                   <Map className="w-5 h-5" strokeWidth={1.8} />
                 </div>
                 <div className="vcard-content">
-                  <b>Prime Locations</b>
-                  <span>Strategically located across Mumbai, Vasai, Virar, and MMR with seamless connectivity.</span>
+                  <b>Prime Locations Across Mumbai, Vasai & Virar</b>
+                  <span>Our developments are strategically located near railway stations, highways, schools, hospitals, business hubs, and everyday conveniences.</span>
                 </div>
               </div>
               <div className="vcard">
@@ -169,8 +171,8 @@ export default function AboutUs() {
                   <Hammer className="w-5 h-5" strokeWidth={1.8} />
                 </div>
                 <div className="vcard-content">
-                  <b>Quality Construction</b>
-                  <span>Crafted using premium materials, modern engineering, and superior construction standards.</span>
+                  <b>Superior Construction Quality</b>
+                  <span>Every home is built using premium materials, advanced engineering practices, and strict quality control standards.</span>
                 </div>
               </div>
               <div className="vcard">
@@ -178,8 +180,8 @@ export default function AboutUs() {
                   <CalendarCheck className="w-5 h-5" strokeWidth={1.8} />
                 </div>
                 <div className="vcard-content">
-                  <b>On-Time Delivery</b>
-                  <span>Committed to delivering projects within promised timelines with complete transparency.</span>
+                  <b>Timely Project Delivery</b>
+                  <span>We are committed to delivering homes within promised timelines while maintaining the highest construction standards.</span>
                 </div>
               </div>
               <div className="vcard">
@@ -187,8 +189,8 @@ export default function AboutUs() {
                   <BadgeCheck className="w-5 h-5" strokeWidth={1.8} />
                 </div>
                 <div className="vcard-content">
-                  <b>RERA Approved</b>
-                  <span>All our developments comply with regulatory requirements, giving total confidence.</span>
+                  <b>RERA Registered Projects</b>
+                  <span>All ongoing developments comply with MahaRERA regulations, ensuring transparency, legal compliance, and buyer confidence. </span>
                 </div>
               </div>
               <div className="vcard">
@@ -196,8 +198,17 @@ export default function AboutUs() {
                   <Users className="w-5 h-5" strokeWidth={1.8} />
                 </div>
                 <div className="vcard-content">
-                  <b>Customer-First Approach</b>
-                  <span>Prioritizing customers by creating thoughtfully planned communities and open spaces.</span>
+                  <b>Customer-Centric Approach</b>
+                  <span>From site visits to possession and after-sales support, we strive to make every home-buying journey smooth, transparent, and rewarding.</span>
+                </div>
+              </div>
+              <div className="vcard">
+                <div className="vcard-icon-clear">
+                  <Trees className="w-5 h-5" strokeWidth={1.8} />
+                </div>
+                <div className="vcard-content">
+                  <b>Modern Lifestyle Amenities</b>
+                  <span>Our residential projects feature landscaped gardens, clubhouses, swimming pools, fitness centres, children's play areas, and thoughtfully designed community spaces.</span>
                 </div>
               </div>
             </div>
@@ -211,16 +222,74 @@ export default function AboutUs() {
               <span className="eyebrow">Our Vision</span>
               <h2 className="serif">Shaping <em>Tomorrows.</em></h2>
               <p>
-                To be one of India's most respected and trusted real estate developers by creating exceptional residential communities that enhance the quality of life for generations.
+                To be one of India's most trusted real estate developers by creating sustainable residential communities that enrich lives through quality construction, innovative design, transparency, and long-term value.
               </p>
               <p>
-                We envision shaping vibrant neighbourhoods through innovation, sustainable development, and uncompromising quality. Our goal is to foster meaningful connections and deliver enduring value.
+                We aspire to build homes and integrated townships that enhance everyday living while contributing to the future growth of Mumbai, Vasai, Virar, and the Mumbai Metropolitan Region.
               </p>
             </div>
             <div className="story-media" style={{ direction: 'ltr' }}>
               <img
                 src={visionImage}
                 alt="Agarwal Group Vision"
+                style={{ width: '80%', height: 'auto', aspectRatio: '4/5', objectFit: 'cover' }}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Section 4: Our Mission */}
+        <section className="section story py-24" style={{ backgroundColor: '#F8F6F0' }}>
+          <div className="wrap-widescreen story-grid">
+            <div>
+              <span className="eyebrow">Our Mission</span>
+              <h2 className="serif">Delivering <em>Lasting Value</em></h2>
+              <p>
+                Our mission is to develop premium residential projects that combine thoughtful architecture, modern amenities, strategic connectivity, and exceptional quality while delivering lasting value to homeowners and investors.
+              </p>
+              <p>We remain committed to:</p>
+              <ul style={{ listStyleType: 'disc', paddingLeft: '1.5rem', marginTop: '1rem', marginBottom: '1.5rem', color: 'var(--color-ink-soft)', fontWeight: 300 }}>
+                <li>Delivering quality homes on time</li>
+                <li>Maintaining complete transparency in every transaction</li>
+                <li>Creating sustainable communities</li>
+                <li>Building long-term customer relationships</li>
+                <li>Continuously improving through innovation and technology</li>
+              </ul>
+            </div>
+            <div className="story-media">
+              <img
+                src={heroImage}
+                alt="Agarwal Group Mission"
+                style={{ width: '80%', height: 'auto', aspectRatio: '4/5', objectFit: 'cover' }}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Section 5: Our Presence */}
+        <section className="section story py-24">
+          <div className="wrap-widescreen story-grid" style={{ direction: 'rtl' }}>
+            <div style={{ direction: 'ltr' }}>
+              <span className="eyebrow">Our Presence</span>
+              <h2 className="serif">Building Across <em>The MMR</em></h2>
+              <p>
+                For more than four decades, Agarwal Group has developed residential communities across:
+              </p>
+              <ul style={{ listStyleType: 'none', padding: 0, marginTop: '1rem', marginBottom: '1.5rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', color: 'var(--color-ink-soft)', fontWeight: 300 }}>
+                <li>• Virar West</li>
+                <li>• Virar East</li>
+                <li>• Vasai East</li>
+                <li>• Vasai West</li>
+                <li style={{ gridColumn: 'span 2' }}>• Mumbai Metropolitan Region (MMR)</li>
+              </ul>
+              <p>
+                Our portfolio includes premium apartments, integrated townships, and lifestyle-focused residential developments designed for modern families.
+              </p>
+            </div>
+            <div className="story-media" style={{ direction: 'ltr' }}>
+              <img
+                src={visionImage}
+                alt="Agarwal Group Presence"
                 style={{ width: '80%', height: 'auto', aspectRatio: '4/5', objectFit: 'cover' }}
               />
             </div>
@@ -236,7 +305,7 @@ export default function AboutUs() {
                 <div style={{ transform: 'translateX(0.3em)' }}>team</div>
               </div> */}
               <span className="eyebrow" style={{ position: 'relative', zIndex: 1 }}>Our People</span>
-              <h2 className="serif" style={{ position: 'relative', zIndex: 1 }}>Driving Operational <em>Excellence</em></h2>
+              <h2 className="serif" style={{ position: 'relative', zIndex: 1, whiteSpace: 'nowrap' }}>The Team Behind <em>Every Landmark</em></h2>
             </div>
             <div className="relative w-full flex items-center justify-center group my-12">
               <button

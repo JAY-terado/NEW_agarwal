@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -343,7 +344,7 @@ export default function Home() {
   return (
     <div className="relative">
       {/* 1. HERO SECTION - matches original: video bg, absolute bottom search only */}
-      <header className="relative min-h-[100svh] overflow-hidden text-white" style={{ display: 'flex', alignItems: 'flex-end', minHeight: '100svh' }}>
+      <header className="relative min-h-[100svh] overflow-hidden text-white" style={{ display: 'flex', alignItems: 'center', minHeight: '100svh' }}>
         <div className="absolute inset-0 z-0">
           <video
             className="w-full h-full object-cover block"
@@ -358,34 +359,75 @@ export default function Home() {
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(18, 18, 16, .5) 0%, rgba(18, 18, 16, .2) 36%, rgba(18, 18, 16, .85) 100%)' }} />
         </div>
 
+        <div className="relative z-10 w-full wrap-widescreen pt-24 pb-16 flex flex-col items-start text-left">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex flex-col items-start"
+          >
+            <h1 className="serif drop-shadow-2xl" style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 300, lineHeight: 1.15, marginBottom: '1.2rem' }}>
+              Trusted Real Estate Developer <br className="hidden md:block" />
+              in Vasai–Virar &amp; Mumbai <br />
+              <em className="serif italic block mt-2" style={{ color: 'var(--color-brass)', fontSize: 'clamp(2rem, 4.5vw, 3.8rem)' }}>Since 1969</em>
+            </h1>
 
+            <p className="flex flex-col md:flex-row items-start md:items-center justify-start gap-2 md:gap-4 mb-10 max-w-4xl drop-shadow-md opacity-90" style={{ fontSize: 'clamp(1rem, 1.2vw, 1.25rem)', fontWeight: 400 }}>
+              <span>Premium 1, 2, 3 &amp; 4 BHK Apartments</span>
+              <span className="hidden md:inline opacity-50">|</span>
+              <span>RERA Registered Projects</span>
+              <span className="hidden md:inline opacity-50">|</span>
+              <span>48+ Years of Trust</span>
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-start gap-4 w-full sm:w-auto">
+              <Link
+                className="group flex items-center justify-center gap-2 px-8 h-14 rounded font-medium tracking-wide uppercase transition-all duration-300 w-full sm:w-auto hover:shadow-lg hover:-translate-y-0.5"
+                to="/projects"
+                style={{ background: 'var(--color-brass)', color: '#fff', fontSize: '0.85rem' }}
+              >
+                <span>Explore Ongoing Projects</span>
+                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+              </Link>
+              <Link
+                className="group flex items-center justify-center gap-2 px-8 h-14 rounded font-medium tracking-wide uppercase transition-all duration-300 w-full sm:w-auto border backdrop-blur-sm hover:shadow-lg hover:-translate-y-0.5 hover:bg-white/20 hover:border-white/50"
+                to="/contact"
+                style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', borderColor: 'rgba(255,255,255,0.3)', fontSize: '0.85rem' }}
+              >
+                <span>Book Site Visit</span>
+                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
       </header>
 
       <section ref={statsRef} className="stats">
         <div className="wrap-widescreen stats-grid">
           <div className="sbox">
             <div className="num">{countYears}+</div>
-            <div className="lbl">Years Crafting Excellence</div>
+            <div className="lbl">Years of Excellence in Real Estate Development</div>
           </div>
           <div className="sbox">
             <div className="num">{countProjects}+</div>
-            <div className="lbl">Projects Completed</div>
+            <div className="lbl">Successfully Delivered Residential Projects</div>
           </div>
           <div className="sbox">
             <div className="num">{countFamilies.toLocaleString('en-IN')}+</div>
-            <div className="lbl">Happy Families</div>
+            <div className="lbl">Happy Families Living in Agarwal Homes</div>
           </div>
         </div>
       </section>
+
 
       {/* 3. STORY (ABOUT US) - matches original design */}
       <section className="section story" id="story">
         <div className="wrap-widescreen story-grid">
           <div className="reveal">
             <span className="eyebrow">About Us</span>
-            <h2 className="serif">A Legacy Built on <em>Trust &amp; Craftsmanship</em></h2>
-            <p>Since 1978, the Agarwal Group has been the cornerstone of residential development across the Vasai–Virar sub-region of Mumbai. What began as a vision to create thoughtfully designed homes has evolved into a legacy of excellence spanning generations of families.</p>
-            <p>Each Agarwal residence is a testament to our unwavering commitment — spaces that blend intelligent architecture with world-class amenities, positioned in the most promising locations of the Mumbai Metropolitan Region.</p>
+            <h2 className="serif">About Agarwal Group – Leading Builder in <em>Vasai–Virar Since 1969</em></h2>
+            <p>For over 48 years, Agarwal Group has been one of the most trusted real estate developers in Virar, Vasai and the Mumbai Metropolitan Region (MMR). Since 1969, we have successfully delivered thoughtfully planned residential projects that combine quality construction, prime locations, modern amenities and long-term value.</p>
+            <p>From affordable 1 BHK homes to spacious 2, 3 and 4 BHK apartments, every Agarwal development is designed around the needs of modern families. Our projects are RERA registered, strategically located near railway stations, schools, hospitals and major highways, making everyday life more convenient.</p>
 
             <Link className="custom-read-more" to="/about-us">
               <span className="custom-read-more__label">Read More</span>
@@ -403,7 +445,7 @@ export default function Home() {
                 </span>
               </span>
             </Link>
-
+            {/* 
             <div className="values">
               <div className="vcard">
                 <div className="vcard-icon-clear">
@@ -445,13 +487,13 @@ export default function Home() {
 
             <div className="quote">
               <p className="serif">"We don't just build structures — we build the places where life's greatest chapters unfold."</p>
-            </div>
+            </div> */}
           </div>
           <div className="story-media reveal">
             <img
               src={storyImage}
               alt="Agarwal Group architecture"
-              style={{ width: '100%', height: 'auto', aspectRatio: '4/5', objectFit: 'cover' }}
+              style={{ width: '80%', height: 'auto', aspectRatio: '4/5', objectFit: 'cover' }}
             />
             <div className="story-badge">
               <b>48+</b>
@@ -470,8 +512,8 @@ export default function Home() {
               <div style={{ transform: 'translateX(0.3em)' }}>projects</div>
             </div>
             <span className="eyebrow" style={{ position: 'relative', zIndex: 1 }}>Ongoing Projects</span>
-            <h2 className="serif" style={{ position: 'relative', zIndex: 1 }}>Residences Crafted for <em>Discerning Lives</em></h2>
-            <p style={{ position: 'relative', zIndex: 1 }}>Four exceptional developments across Vasai–Virar &amp; Mumbai — each offering a distinct vision of elevated living, with seamless connectivity to Mumbai.</p>
+            <h2 className="serif" style={{ position: 'relative', zIndex: 1 }}>Ongoing Residential Projects in <em>Vasai, Virar & Mumbai</em></h2>
+            <p style={{ position: 'relative', zIndex: 1 }}>Explore our premium collection of residential projects offering luxury apartments and affordable homes across Virar and Vasai.</p>
           </div>
 
           <div className="pgrid">
@@ -507,7 +549,7 @@ export default function Home() {
               };
 
               return (
-                <article key={proj.slug} className="pcard reveal">
+                <article key={proj.slug} className="pcard">
                   <div className="pcard-media">
                     <span className="pbadge">{projectMeta.badge}</span>
                     <img src={imageSrc} alt={proj.name} />
@@ -543,13 +585,109 @@ export default function Home() {
         </div>
       </section>
 
+
+      {/* 5. FEATURES SECTION - 4-column strip, matches original */}
+      <section className="section feat" style={{ backgroundColor: 'var(--color-paper)' }}>
+        <div className="wrap-widescreen feat-grid">
+          <div className="fitem reveal">
+            <div className="fitem-ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 21h18" />
+                <path d="M5 21V7l6-3v17" />
+                <path d="M11 21V9l6 3v9" />
+                <path d="M8 9h.01M8 13h.01M8 17h.01" />
+              </svg>
+            </div>
+            <h4 className="serif">Landmark Townships</h4>
+            <p>Self-sufficient communities with schools, temples, clubs and lush green spaces — all within your neighbourhood.</p>
+          </div>
+          <div className="fitem reveal">
+            <div className="fitem-ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z" />
+                <circle cx="12" cy="9" r="2.6" />
+              </svg>
+            </div>
+            <h4 className="serif">Prime Connectivity</h4>
+            <p>Strategically located near Vasai–Virar &amp; Mumbai railway stations, with seamless access to the Western Express Highway.</p>
+          </div>
+          <div className="fitem reveal">
+            <div className="fitem-ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0l-6.6-6.6A2 2 0 0 1 3.4 12.6V5.4A2 2 0 0 1 5.4 3.4h7.2a2 2 0 0 1 1.4.6l6.6 6.6a2 2 0 0 1 0 2.8z" />
+                <circle cx="8" cy="8" r="1.4" />
+              </svg>
+            </div>
+            <h4 className="serif">Value Advantage</h4>
+            <p>Own a premium home with financial benefits that make your purchase even more rewarding.</p>
+          </div>
+          <div className="fitem reveal">
+            <div className="fitem-ic">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 21h18" />
+                <path d="M4 21v-9M8 21v-9M12 21v-9M16 21v-9M20 21v-9" />
+                <path d="M2 12l10-7 10 7" />
+                <path d="M2 12h20" />
+              </svg>
+            </div>
+            <h4 className="serif">Bank Approved</h4>
+            <p>All projects are approved by leading national banks and institutions, enabling hassle-free home loans.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. CLIENTS (TESTIMONIAL REELS) - matches original horizontal scroll */}
+      <section className="section clients" id="testimonials" style={{ backgroundColor: 'var(--color-ivory)' }}>
+        <div className="wrap-widescreen">
+          <div className="section-head reveal">
+            <span className="eyebrow">Testimonials</span>
+            <h2 className="serif">What Our <em>Clients Say</em></h2>
+            <p>Real stories from the families who now call an Agarwal address home.</p>
+          </div>
+          <div className="reels-wrap reveal">
+            <div className="reels" id="reels" ref={reelsRef}>
+              {[...testimonialsData, ...testimonialsData, ...testimonialsData].map((item, index) => (
+                <article
+                  key={index}
+                  className="reel"
+                  style={{ backgroundImage: `url(${item.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+                >
+                  <button className="reel-play" aria-label="Play client reel">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </button>
+                  <div className="reel-cap">
+                    <div className="reel-stars">★★★★★</div>
+                    <b>{item.title}</b>
+                    <span>{item.project}</span>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <div className="reels-nav">
+              <button aria-label="Previous reels" onClick={() => scrollReels(-1, true)}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+              </button>
+              <button aria-label="Next reels" onClick={() => scrollReels(1, true)}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 9. FAQ SECTION - matches original white background */}
       <section className="section faq" id="faq">
         <div className="wrap-widescreen">
           <div className="section-head reveal">
             <span className="eyebrow">FAQ</span>
             <h2 className="serif">Questions, <em>Answered</em></h2>
-            <p>Everything you need to know before making an Agarwal address your home.</p>
+            <p>Frequently Asked Questions About Agarwal Group</p>
           </div>
 
           <div className="faq-wrap reveal">
@@ -622,101 +760,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. FEATURES SECTION - 4-column strip, matches original */}
-      <section className="section feat">
-        <div className="wrap-widescreen feat-grid">
-          <div className="fitem reveal">
-            <div className="fitem-ic">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M3 21h18" />
-                <path d="M5 21V7l6-3v17" />
-                <path d="M11 21V9l6 3v9" />
-                <path d="M8 9h.01M8 13h.01M8 17h.01" />
-              </svg>
-            </div>
-            <h4 className="serif">Landmark Townships</h4>
-            <p>Self-sufficient communities with schools, temples, clubs and lush green spaces — all within your neighbourhood.</p>
-          </div>
-          <div className="fitem reveal">
-            <div className="fitem-ic">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z" />
-                <circle cx="12" cy="9" r="2.6" />
-              </svg>
-            </div>
-            <h4 className="serif">Prime Connectivity</h4>
-            <p>Strategically located near Vasai–Virar &amp; Mumbai railway stations, with seamless access to the Western Express Highway.</p>
-          </div>
-          <div className="fitem reveal">
-            <div className="fitem-ic">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0l-6.6-6.6A2 2 0 0 1 3.4 12.6V5.4A2 2 0 0 1 5.4 3.4h7.2a2 2 0 0 1 1.4.6l6.6 6.6a2 2 0 0 1 0 2.8z" />
-                <circle cx="8" cy="8" r="1.4" />
-              </svg>
-            </div>
-            <h4 className="serif">Value Advantage</h4>
-            <p>Own a premium home with financial benefits that make your purchase even more rewarding.</p>
-          </div>
-          <div className="fitem reveal">
-            <div className="fitem-ic">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M3 21h18" />
-                <path d="M4 21v-9M8 21v-9M12 21v-9M16 21v-9M20 21v-9" />
-                <path d="M2 12l10-7 10 7" />
-                <path d="M2 12h20" />
-              </svg>
-            </div>
-            <h4 className="serif">Bank Approved</h4>
-            <p>All projects are approved by leading national banks and institutions, enabling hassle-free home loans.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. CLIENTS (TESTIMONIAL REELS) - matches original horizontal scroll */}
-      <section className="section clients" id="testimonials">
-        <div className="wrap-widescreen">
-          <div className="section-head reveal">
-            <span className="eyebrow">Testimonials</span>
-            <h2 className="serif">What Our <em>Clients Say</em></h2>
-            <p>Real stories from the families who now call an Agarwal address home.</p>
-          </div>
-          <div className="reels-wrap reveal">
-            <div className="reels" id="reels" ref={reelsRef}>
-              {[...testimonialsData, ...testimonialsData, ...testimonialsData].map((item, index) => (
-                <article
-                  key={index}
-                  className="reel"
-                  style={{ backgroundImage: `url(${item.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-                >
-                  <button className="reel-play" aria-label="Play client reel">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </button>
-                  <div className="reel-cap">
-                    <div className="reel-stars">★★★★★</div>
-                    <b>{item.title}</b>
-                    <span>{item.project}</span>
-                  </div>
-                </article>
-              ))}
-            </div>
-            <div className="reels-nav">
-              <button aria-label="Previous reels" onClick={() => scrollReels(-1, true)}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M15 18l-6-6 6-6" />
-                </svg>
-              </button>
-              <button aria-label="Next reels" onClick={() => scrollReels(1, true)}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 18l6-6-6-6" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* 7. PROPERTY INSIGHTS (BLOGS) - matches original layout */}
       <section className="section bloghome" id="insights">
         <div className="wrap-widescreen">
@@ -770,10 +813,14 @@ export default function Home() {
           <div className="reveal">
             <span className="eyebrow" style={{ fontSize: '.64rem', letterSpacing: '.24em', textTransform: 'uppercase', color: 'var(--color-brass-deep)', fontWeight: 700, display: 'block', marginBottom: '8px' }}>Contact Us</span>
             <h2 className="serif" style={{ fontFamily: '"Fraunces", serif', fontSize: 'clamp(2.1rem, 4.6vw, 3.6rem)', fontWeight: 300, lineHeight: 1.08, margin: '.4em 0 0', letterSpacing: '-.01em', color: 'var(--color-ink)' }}>
-              Find Your <em>Perfect Home</em> With Us
+              Contact <em>Agarwal Group</em>
+
             </h2>
             <p className="lead" style={{ marginTop: '1.2em', color: 'var(--color-ink-soft)', fontSize: '1.1rem', fontWeight: 300, lineHeight: 1.6 }}>
-              Let our expert advisors guide you through the finest residences in Vasai–Virar — the right home, at the right price, with unmatched ease.
+              Looking for the best residential project in Virar or Vasai?
+            </p>
+            <p className="lead" style={{ marginTop: '1.2em', color: 'var(--color-ink-soft)', fontSize: '1.1rem', fontWeight: 300, lineHeight: 1.6 }}>
+              Speak with our property experts to explore premium 1, 2, 3 and 4 BHK apartments, schedule a site visit, compare projects and receive exclusive launch offers.
             </p>
             <div className="cinfo">
               <div>

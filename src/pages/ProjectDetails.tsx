@@ -305,7 +305,7 @@ export default function ProjectDetails() {
 
       {/* 2. OVERVIEW */}
       <section id="overview" className="section story pt-24 pb-12">
-        <div className="wrap-widescreen story-grid" style={{ alignItems: 'flex-start' }}>
+        <div className="wrap-widescreen story-grid items-start lg:items-stretch">
           <div>
             <div className="section-head !mb-4 lg:!mb-6">
               <span className="eyebrow">Overview</span>
@@ -343,14 +343,14 @@ export default function ProjectDetails() {
 
           {/* Right: Asymmetric Image Grid */}
           <div className="flex flex-col gap-1 md:gap-2 h-full mt-10 lg:mt-0">
-            <div className="w-full aspect-[2/1] lg:aspect-[21/9] bg-line-light overflow-hidden">
+            <div className="w-full aspect-[2/1] lg:aspect-auto lg:flex-[1.2] bg-line-light overflow-hidden">
               <img src={galleryMap[project.gallery[0]]} alt="Overview 1" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
             </div>
-            <div className="flex gap-1 md:gap-2 w-full">
-              <div className="flex-1 aspect-[4/3] lg:aspect-[16/10] bg-line-light overflow-hidden">
+            <div className="flex gap-1 md:gap-2 w-full lg:flex-1">
+              <div className="flex-1 aspect-[4/3] lg:aspect-auto bg-line-light overflow-hidden">
                 <img src={galleryMap[project.gallery[1]]} alt="Overview 2" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
               </div>
-              <div className="flex-1 aspect-[4/3] lg:aspect-[16/10] bg-line-light overflow-hidden">
+              <div className="flex-1 aspect-[4/3] lg:aspect-auto bg-line-light overflow-hidden">
                 <img src={galleryMap[project.gallery[2]]} alt="Overview 3" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
               </div>
             </div>
@@ -473,14 +473,16 @@ export default function ProjectDetails() {
 
                 {/* Details Area */}
                 <div className="p-6 md:p-8 flex flex-col gap-6">
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="flex flex-col gap-1.5">
-                      <div className="text-[11px] text-ink-soft font-medium">Configuration</div>
-                      <div className="font-bold text-ink text-[15px] sm:text-[17px] font-sans tracking-tight">{p.type}</div>
-                    </div>
-                    <div className="flex flex-col gap-1.5">
-                      <div className="text-[11px] text-ink-soft font-medium">Carpet Area</div>
-                      <div className="font-bold text-ink text-[15px] sm:text-[17px] font-sans tracking-tight">~{p.carpetArea.replace(' sq.ft', '')} <span className="text-[11px] font-normal text-ink-soft">sq.ft.</span></div>
+                  <div className="flex flex-wrap items-end justify-between gap-y-4 gap-x-2">
+                    <div className="flex gap-6 sm:gap-8">
+                      <div className="flex flex-col gap-1.5">
+                        <div className="text-[11px] text-ink-soft font-medium">Configuration</div>
+                        <div className="font-bold text-ink text-[15px] sm:text-[17px] font-sans tracking-tight">{p.type}</div>
+                      </div>
+                      <div className="flex flex-col gap-1.5">
+                        <div className="text-[11px] text-ink-soft font-medium">Carpet Area</div>
+                        <div className="font-bold text-ink text-[15px] sm:text-[17px] font-sans tracking-tight">~{p.carpetArea.replace(' sq.ft', '')} <span className="text-[11px] font-normal text-ink-soft">sq.ft.</span></div>
+                      </div>
                     </div>
                     <div className="flex flex-col gap-1.5">
                       <div className="text-[11px] text-ink-soft font-medium">Starting Price</div>
@@ -491,7 +493,7 @@ export default function ProjectDetails() {
                           setHasClosedFloater(false);
                           setIsManualFloater(true);
                         }}
-                        className="bg-brass text-pine hover:bg-brass-deep hover:text-white px-4 py-2 rounded text-[10px] sm:text-[11px] font-bold uppercase tracking-widest transition-colors w-fit whitespace-nowrap"
+                        className="bg-brass text-pine hover:bg-brass-deep hover:text-white px-3 sm:px-4 py-2 rounded text-[10px] sm:text-[11px] font-bold uppercase tracking-wider transition-colors w-fit whitespace-nowrap"
                       >
                         Price On Request
                       </button>
@@ -534,8 +536,8 @@ export default function ProjectDetails() {
             <h2 className="serif mt-2">Connected to <em>Everything</em></h2>
           </div>
 
-          <div className="grid lg:grid-cols-5 gap-8 lg:gap-16 items-start">
-            <div className="lg:col-span-3 aspect-[4/3] bg-white border border-line-light rounded-2xl overflow-hidden shadow-sm flex items-center justify-center relative">
+          <div className="grid lg:grid-cols-5 gap-8 lg:gap-16 items-start lg:items-stretch">
+            <div className="lg:col-span-3 aspect-[4/3] lg:aspect-auto h-full w-full bg-white border border-line-light rounded-2xl overflow-hidden shadow-sm flex items-center justify-center relative">
               {(project as any).mapEmbedUrl ? (
                 <iframe
                   src={(project as any).mapEmbedUrl}
@@ -928,9 +930,9 @@ export default function ProjectDetails() {
 
       {/* 8. ENQUIRY & RERA */}
       <section id="contact" ref={contactRef} className="section pt-24 pb-24 bg-ivory">
-        <div className="wrap-widescreen grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div className="wrap-widescreen grid grid-cols-1 lg:grid-cols-2 gap-16 items-start lg:items-stretch">
 
-          <div className="flex flex-col gap-12">
+          <div className="flex flex-col justify-between gap-12 h-full lg:py-2">
             <div className="section-head">
               <span className="eyebrow">Contact Us</span>
               <h2 className="serif">Register Your Interest</h2>
