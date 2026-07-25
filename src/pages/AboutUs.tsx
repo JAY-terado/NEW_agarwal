@@ -128,7 +128,7 @@ export default function AboutUs() {
                 style={{ width: '80%', height: 'auto', aspectRatio: '4/5', objectFit: 'cover' }}
               />
               <div className="story-badge">
-                <b>48+</b>
+                <b>50+</b>
                 <small>Years of Trust</small>
               </div>
             </div>
@@ -153,8 +153,8 @@ export default function AboutUs() {
                   <Trophy className="w-5 h-5" strokeWidth={1.8} />
                 </div>
                 <div className="vcard-content">
-                  <b>48+ Years of Trusted Experience</b>
-                  <span>Nearly five decades of delivering residential projects with consistent quality, transparency, and customer satisfaction.</span>
+                  <b>50+ Years of Trusted Experience</b>
+                  <span>Over five decades of delivering residential projects with consistent quality, transparency, and customer satisfaction.</span>
                 </div>
               </div>
               <div className="vcard">
@@ -273,7 +273,7 @@ export default function AboutUs() {
               <span className="eyebrow">Our Presence</span>
               <h2 className="serif">Building Across <em>The MMR</em></h2>
               <p>
-                For more than four decades, Agarwal Group has developed residential communities across:
+                For more than Five decades, Agarwal Group has developed residential communities across:
               </p>
               <ul style={{ listStyleType: 'none', padding: 0, marginTop: '1rem', marginBottom: '1.5rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', color: 'var(--color-ink-soft)', fontWeight: 300 }}>
                 <li>• Virar West</li>

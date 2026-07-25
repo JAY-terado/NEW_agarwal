@@ -332,7 +332,7 @@ export default function Home() {
 
 
 
-  const countYears = useCountUp(48, 1500, statsTriggered);
+  const countYears = useCountUp(50, 1500, statsTriggered);
   const countProjects = useCountUp(30, 1500, statsTriggered);
   const countFamilies = useCountUp(5000, 2000, statsTriggered);
 
@@ -377,7 +377,7 @@ export default function Home() {
               <span className="hidden md:inline opacity-50">|</span>
               <span>RERA Registered Projects</span>
               <span className="hidden md:inline opacity-50">|</span>
-              <span>48+ Years of Trust</span>
+              <span>50+ Years of Trust</span>
             </p>
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-start gap-4 w-full sm:w-auto">
@@ -426,7 +426,7 @@ export default function Home() {
           <div className="reveal">
             <span className="eyebrow">About Us</span>
             <h2 className="serif">About Agarwal Group – Leading Builder in <em>Vasai–Virar Since 1969</em></h2>
-            <p>For over 48 years, Agarwal Group has been one of the most trusted real estate developers in Virar, Vasai and the Mumbai Metropolitan Region (MMR). Since 1969, we have successfully delivered thoughtfully planned residential projects that combine quality construction, prime locations, modern amenities and long-term value.</p>
+            <p>For over 50 years, Agarwal Group has been one of the most trusted real estate developers in Virar, Vasai and the Mumbai Metropolitan Region (MMR). Since 1969, we have successfully delivered thoughtfully planned residential projects that combine quality construction, prime locations, modern amenities and long-term value.</p>
             <p>From affordable 1 BHK homes to spacious 2, 3 and 4 BHK apartments, every Agarwal development is designed around the needs of modern families. Our projects are RERA registered, strategically located near railway stations, schools, hospitals and major highways, making everyday life more convenient.</p>
 
             <Link className="custom-read-more" to="/about-us">
@@ -496,7 +496,7 @@ export default function Home() {
               style={{ width: '80%', height: 'auto', aspectRatio: '4/5', objectFit: 'cover' }}
             />
             <div className="story-badge">
-              <b>48+</b>
+              <b>50+</b>
               <small>Years of Trust</small>
             </div>
           </div>
@@ -694,7 +694,7 @@ export default function Home() {
             {[
               {
                 q: "How long has Agarwal Group been building homes?",
-                a: "Since 1978, Agarwal Group has been developing residential projects across Mumbai, Vasai, and Virar. With over 47 years of experience, the company has earned the trust of thousands of families through quality construction, timely delivery, and customer-focused developments."
+                a: "Since 1969, Agarwal Group has been developing residential projects across Mumbai, Vasai, and Virar. With over 50+ years of experience, the company has earned the trust of thousands of families through quality construction, timely delivery, and customer-focused developments."
               },
               {
                 q: "Where are Agarwal Group's residential projects located?",
