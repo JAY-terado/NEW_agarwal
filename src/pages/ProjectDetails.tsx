@@ -40,6 +40,7 @@ import layout3Bhk from '../assets/layout-3bhk.png';
 
 // Project Hero Imports
 import infinityHero from '../assets/agarwal-infinity-hero.jpg';
+import infinityHeroVideo from '../assets/agarwalInfinityHero.mp4';
 import skyriseHero from '../assets/agarwal-skyrise-hero.jpg';
 import skyHeightsHero from '../assets/agarwal-sky-heights-hero.jpg';
 import horizonHero from '../assets/agarwal-horizon-hero.jpg';
@@ -251,11 +252,22 @@ export default function ProjectDetails() {
         <section className="hero relative w-full min-h-[70svh] lg:min-h-0 lg:aspect-[16/7] flex items-end overflow-hidden">
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
-            <img
-              src={heroImage}
-              alt={project.name}
-              className="w-full h-full object-cover"
-            />
+            {project.slug === 'infinity' ? (
+              <video
+                src={infinityHeroVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <img
+                src={heroImage}
+                alt={project.name}
+                className="w-full h-full object-cover"
+              />
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-pine via-pine/40 to-pine/10" />
           </div>
 
