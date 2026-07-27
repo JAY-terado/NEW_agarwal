@@ -12,7 +12,7 @@ export default function Footer() {
             <img
               src={Logo}
               alt="Agarwal Group"
-              style={{ height: '54px', width: 'auto', display: 'block', borderRadius: '8px', marginBottom: '2px' }}
+              style={{ height: '42px', width: 'auto', display: 'block', borderRadius: '8px', marginBottom: '2px' }}
             />
             <p style={{ marginTop: '18px', fontSize: '.92rem', fontWeight: 300, fontStyle: 'italic', fontFamily: '"Fraunces", serif', maxWidth: '36ch', color: 'var(--ink-soft)' }}>
               "Agarwal Group is a trusted real estate developer in Vasai–Virar with over 50+ years of experience delivering RERA-registered residential projects. Explore premium 1, 2, 3 & 4 BHK apartments in Virar, Vasai and Mumbai designed for modern families."
