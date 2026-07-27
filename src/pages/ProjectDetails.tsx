@@ -908,7 +908,7 @@ export default function ProjectDetails() {
               animate={{ x: 0, y: '-50%' }}
               exit={{ x: '100%', y: '-50%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-1/2 right-0 md:right-6 z-[101] w-full max-w-[360px] bg-white rounded-l-[24px] md:rounded-[24px] shadow-[0_20px_40px_rgba(0,0,0,0.25)] p-6 md:p-8 border border-line-light flex flex-col overflow-y-auto"
+              className="fixed top-1/2 right-0 md:right-6 z-[101] w-full max-w-[360px] bg-white rounded-l-[24px] md:rounded-[24px] shadow-[0_20px_40px_rgba(0,0,0,0.25)] p-6 md:p-8 border border-line-light flex flex-col"
               style={{ maxHeight: 'calc(100vh - 4rem)' }}
             >
               <button

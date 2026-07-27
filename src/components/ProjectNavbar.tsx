@@ -71,14 +71,14 @@ export default function ProjectNavbar() {
   return (
     <>
       <nav style={navStyle} id="nav" className={forceScrolledStyle ? 'nav scrolled' : 'nav'}>
-        <div className="wrap-widescreen" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'clamp(12px, 2vw, 24px)' }}>
+        <div className="wrap-widescreen" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'clamp(12px, 2vw, 24px)', flexWrap: 'nowrap' }}>
           {/* Brand */}
-          <Link to="/" style={{ textDecoration: 'none', color: brandColor, lineHeight: 1 }}>
-            <img src={Logo} alt="Agarwal Group" style={{ height: '38px', width: 'auto', display: 'block', borderRadius: '6px', filter: forceScrolledStyle ? 'none' : 'brightness(0) invert(1)', transition: 'filter 0.3s ease' }} />
+          <Link to="/" style={{ textDecoration: 'none', color: brandColor, lineHeight: 1, flexShrink: 0 }}>
+            <img src={Logo} alt="Agarwal Group" style={{ height: '30px', width: 'auto', display: 'block', borderRadius: '6px', filter: forceScrolledStyle ? 'none' : 'brightness(0) invert(1)', transition: 'filter 0.3s ease' }} />
           </Link>
 
           {/* Desktop Nav Links */}
-          <div className="nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: 'clamp(10px, 1.8vw, 26px)' }}>
+          <div className="nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: 'clamp(10px, 1.8vw, 26px)', whiteSpace: 'nowrap' }}>
             {navLinks.map((link) => (
               <a
                 key={link.id}
