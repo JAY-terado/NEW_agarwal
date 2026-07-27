@@ -146,6 +146,15 @@ export default function Home() {
   const [statsTriggered, setStatsTriggered] = useState(false);
   const [contactSubmitted, setContactSubmitted] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isInitialVisible, setIsInitialVisible] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsInitialVisible(false);
+    }, 10000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const statsRef = useRef<HTMLDivElement>(null);
 
@@ -359,11 +368,15 @@ export default function Home() {
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(18, 18, 16, .5) 0%, rgba(18, 18, 16, .2) 36%, rgba(18, 18, 16, .85) 100%)' }} />
         </div>
 
-        <div className="relative z-10 w-full wrap-widescreen pt-24 pb-16 flex flex-col items-start text-left">
+        <div 
+          className="relative z-10 w-full wrap-widescreen pt-24 pb-16 flex flex-col items-start text-left"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            animate={{ opacity: isInitialVisible || isHovered ? 1 : 0, y: 0 }}
+            transition={{ duration: 0.8 }}
             className="flex flex-col items-start"
           >
             <h1 className="serif drop-shadow-2xl" style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 300, lineHeight: 1.15, marginBottom: '1.2rem' }}>
@@ -587,7 +600,7 @@ export default function Home() {
 
 
       {/* 5. FEATURES SECTION - 4-column strip, matches original */}
-      <section className="section feat" style={{ backgroundColor: 'var(--color-paper)' }}>
+      {/* <section className="section feat" style={{ backgroundColor: 'var(--color-paper)' }}>
         <div className="wrap-widescreen feat-grid">
           <div className="fitem reveal">
             <div className="fitem-ic">
@@ -634,10 +647,10 @@ export default function Home() {
             <p>All projects are approved by leading national banks and institutions, enabling hassle-free home loans.</p>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* 6. CLIENTS (TESTIMONIAL REELS) - matches original horizontal scroll */}
-      <section className="section clients" id="testimonials" style={{ backgroundColor: 'var(--color-ivory)' }}>
+      <section className="section clients" id="testimonials" style={{ backgroundColor: 'var(--color-paper)' }}>
         <div className="wrap-widescreen">
           <div className="section-head reveal">
             <span className="eyebrow">Testimonials</span>
@@ -682,7 +695,7 @@ export default function Home() {
       </section>
 
       {/* 9. FAQ SECTION - matches original white background */}
-      <section className="section faq" id="faq">
+      <section className="section faq" id="faq" style={{ backgroundColor: 'var(--color-ivory)' }}>
         <div className="wrap-widescreen">
           <div className="section-head reveal">
             <span className="eyebrow">FAQ</span>
@@ -761,7 +774,7 @@ export default function Home() {
       </section>
 
       {/* 7. PROPERTY INSIGHTS (BLOGS) - matches original layout */}
-      <section className="section bloghome" id="insights">
+      <section className="section bloghome" id="insights" style={{ background: 'var(--color-paper)' }}>
         <div className="wrap-widescreen">
           <div className="section-head reveal">
             <span className="eyebrow">Blogs</span>
@@ -803,6 +816,76 @@ export default function Home() {
                 </svg>
               </button>
             </div>
+          </div>
+        </div>
+      </section>
+
+
+      {/* 8. INSTAGRAM FEED SECTION - matches original profile & grid */}
+      <section className="section insta" id="social" style={{ background: 'var(--color-ivory)' }}>
+        <div className="wrap-widescreen">
+          <div className="section-head reveal" style={{ marginBottom: 'clamp(34px, 5vh, 52px)' }}>
+            <span className="eyebrow">Instagram</span>
+            <h2 className="serif">Follow Our <em>Journey</em></h2>
+          </div>
+          <div className="ig-profile reveal">
+            <div className="ig-avatar serif">A</div>
+            <div className="ig-id">
+              <h3 className="serif">Agarwal Group</h3>
+              <div className="handle">@agarwalrealties · Virar, Maharashtra</div>
+              <div className="ig-counts">
+                <span><b>148</b> Posts</span>
+                <span><b>12.4K</b> Followers</span>
+                <span><b>326</b> Following</span>
+              </div>
+            </div>
+            <a className="ig-follow flex items-center justify-center gap-2" href="https://www.instagram.com/agarwalrealties" target="_blank" rel="noopener">
+              <Instagram className="w-4 h-4" />
+              Follow @agarwalrealties
+            </a>
+          </div>
+          <div className="highlights reveal">
+            <div className="hl">
+              <div className="ring"><span>🏠</span></div>
+              <small>Infinity</small>
+            </div>
+            <div className="hl">
+              <div className="ring"><span>🌿</span></div>
+              <small>Skyrise</small>
+            </div>
+            <div className="hl">
+              <div className="ring"><span>✨</span></div>
+              <small>Sky Heights</small>
+            </div>
+            <div className="hl">
+              <div className="ring"><span>🏡</span></div>
+              <small>Township</small>
+            </div>
+            <div className="hl">
+              <div className="ring"><span>🏆</span></div>
+              <small>Awards</small>
+            </div>
+          </div>
+          <div className="grid grid-cols-3 gap-1 md:gap-2 lg:gap-4 reveal">
+            {instagramPosts.slice(0, 6).map((post) => (
+              <a
+                key={post.id}
+                className="relative block overflow-hidden bg-line-light group w-full"
+                style={{ aspectRatio: '4/5' }}
+                href="https://www.instagram.com/agarwalrealties"
+                target="_blank"
+                rel="noopener"
+                aria-label="View on Instagram"
+              >
+                <img
+                  src={post.image}
+                  alt={`Instagram post ${post.id}`}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none" />
+              </a>
+            ))}
           </div>
         </div>
       </section>
@@ -929,74 +1012,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 8. INSTAGRAM FEED SECTION - matches original profile & grid */}
-      <section className="section insta" id="social">
-        <div className="wrap-widescreen">
-          <div className="section-head reveal" style={{ marginBottom: 'clamp(34px, 5vh, 52px)' }}>
-            <span className="eyebrow">Instagram</span>
-            <h2 className="serif">Follow Our <em>Journey</em></h2>
-          </div>
-          <div className="ig-profile reveal">
-            <div className="ig-avatar serif">A</div>
-            <div className="ig-id">
-              <h3 className="serif">Agarwal Group</h3>
-              <div className="handle">@agarwalrealties · Virar, Maharashtra</div>
-              <div className="ig-counts">
-                <span><b>148</b> Posts</span>
-                <span><b>12.4K</b> Followers</span>
-                <span><b>326</b> Following</span>
-              </div>
-            </div>
-            <a className="ig-follow flex items-center justify-center gap-2" href="https://www.instagram.com/agarwalrealties" target="_blank" rel="noopener">
-              <Instagram className="w-4 h-4" />
-              Follow @agarwalrealties
-            </a>
-          </div>
-          <div className="highlights reveal">
-            <div className="hl">
-              <div className="ring"><span>🏠</span></div>
-              <small>Infinity</small>
-            </div>
-            <div className="hl">
-              <div className="ring"><span>🌿</span></div>
-              <small>Skyrise</small>
-            </div>
-            <div className="hl">
-              <div className="ring"><span>✨</span></div>
-              <small>Sky Heights</small>
-            </div>
-            <div className="hl">
-              <div className="ring"><span>🏡</span></div>
-              <small>Township</small>
-            </div>
-            <div className="hl">
-              <div className="ring"><span>🏆</span></div>
-              <small>Awards</small>
-            </div>
-          </div>
-          <div className="grid grid-cols-3 gap-1 md:gap-2 lg:gap-4 reveal">
-            {instagramPosts.slice(0, 6).map((post) => (
-              <a
-                key={post.id}
-                className="relative block overflow-hidden bg-line-light group w-full"
-                style={{ aspectRatio: '4/5' }}
-                href="https://www.instagram.com/agarwalrealties"
-                target="_blank"
-                rel="noopener"
-                aria-label="View on Instagram"
-              >
-                <img
-                  src={post.image}
-                  alt={`Instagram post ${post.id}`}
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none" />
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
 
     </div>
   );

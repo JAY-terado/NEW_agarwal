@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Logo from '../assets/Agarwal_Group_Logo.png';
+import Logo from '../assets/Agarwal Logo.svg';
 
 export default function Footer() {
   return (
@@ -21,7 +21,7 @@ export default function Footer() {
               9, Gokul Annexe, Agarwal Gardens,<br />
               Opp. Muljibhai Mehta School,<br />
               Gokul Township, Virar (W),<br />
-              Maharashtra — 401303
+              Maharashtra - 401303
             </address>
             <div style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '5px' }}>
               <a href="tel:+918408008002" style={{ fontWeight: 300, color: 'var(--ink-soft)', transition: 'color .3s', fontFamily: '"Fraunces", serif', fontSize: '1.05rem' }}

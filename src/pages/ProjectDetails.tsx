@@ -246,9 +246,9 @@ export default function ProjectDetails() {
 
   return (
     <div className="bg-ivory text-ink">
-      <div className="min-h-[100svh] flex flex-col">
+      <div className="flex flex-col">
         {/* 1. PROJECT HERO */}
-        <section className="hero relative flex-1 flex items-end overflow-hidden">
+        <section className="hero relative w-full min-h-[70svh] lg:min-h-0 lg:aspect-[16/7] flex items-end overflow-hidden">
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <img
@@ -282,22 +282,45 @@ export default function ProjectDetails() {
 
         {/* 2. FACTS SUMMARY STRIP */}
         <section className="stats relative z-20">
-          <div className="wrap-widescreen grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-line-light">
-            <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center">
-              <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.config}</div>
-              <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Configuration</div>
-            </div>
-            <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center">
-              <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.startingPrice}</div>
-              <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Starting Price</div>
-            </div>
-            <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center">
-              <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.carpetAreaRange}</div>
-              <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Carpet Area</div>
-            </div>
-            <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center">
-              <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.status}</div>
-              <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Possession</div>
+          <div className="wrap-widescreen">
+            <div className="grid grid-cols-1 lg:grid-cols-3">
+
+              <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center border-b lg:border-r border-line-light bg-[var(--color-ivory)]">
+                <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Configuration</div>
+                <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.config}</div>
+              </div>
+
+              <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center border-b lg:border-r border-line-light bg-[var(--color-ivory)]">
+                <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Starting Price</div>
+                <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.startingPrice}</div>
+              </div>
+
+              <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center border-b border-line-light bg-[var(--color-ivory)]">
+                <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Carpet Area</div>
+                <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.carpetAreaRange}</div>
+              </div>
+
+              <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center border-b lg:border-b-0 lg:border-r border-line-light bg-[var(--color-ivory)]">
+                <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Possession</div>
+                <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.status}</div>
+              </div>
+
+              <div className="lg:col-span-2 bg-[var(--color-ivory)] text-ink flex flex-col sm:flex-row items-center justify-center sm:justify-evenly py-10 lg:py-0 gap-6 sm:gap-0">
+                <div className="flex flex-col items-center justify-center text-center">
+                  <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Maharera Details</div>
+                  <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.rera}</div>
+                </div>
+                <div className="flex items-center justify-center">
+                  <div className="w-28 h-28 lg:w-[120px] lg:h-[120px] bg-white border border-line-light p-2 flex items-center justify-center rounded-sm shadow-sm">
+                    {project.slug === 'infinity' ? (
+                      <img src={agarwalInfinityMRQR} alt={`MahaRERA QR Code for ${project.name}`} className="w-full h-full object-contain mix-blend-multiply" />
+                    ) : (
+                      <div className="text-black/50 text-sm tracking-wider">No QR</div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </section>

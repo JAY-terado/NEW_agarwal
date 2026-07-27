@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { projects } from '../data/projects';
-import Logo from '../assets/Agarwal_Group_Logo.png';
+import Logo from '../assets/Agarwal Logo.svg';
 
 import infinityHero from '../assets/agarwal-infinity-hero.jpg';
 import skyriseHero from '../assets/agarwal-skyrise-hero.jpg';
@@ -141,7 +141,7 @@ export default function Navbar() {
         <div className="wrap-widescreen" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'clamp(12px, 2vw, 24px)' }}>
           {/* Brand */}
           <Link to="/" onClick={handleLogoClick} style={{ textDecoration: 'none', color: brandColor, lineHeight: 1 }}>
-            <img src={Logo} alt="Agarwal Group" style={{ height: '42px', width: 'auto', display: 'block', borderRadius: '6px' }} />
+            <img src={Logo} alt="Agarwal Group" style={{ height: '38px', width: 'auto', display: 'block', borderRadius: '6px', filter: forceScrolledStyle ? 'none' : 'brightness(0) invert(1)', transition: 'filter 0.3s ease' }} />
           </Link>
 
           {/* Desktop Nav Links */}
