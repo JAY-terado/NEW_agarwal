@@ -51,7 +51,7 @@ export const projects: Project[] = [
     carpetAreaRange: '395 – 720 sq.ft',
     heroImage: 'agarwal-infinity-hero.jpg',
     overviewTitle: 'A landmark address where everyday life feels elevated.',
-    overviewText1: 'Agarwal Infinity brings thoughtfully designed 1, 2 & 3 BHK homes to the heart of Virar West. Every residence is planned for abundant natural light, cross-ventilation and efficient carpet areas — wrapped in a gated community with resort-grade amenities and seamless connectivity to Mumbai.',
+    overviewText1: 'Agarwal Infinity brings thoughtfully designed 1, 2 & 3 BHK homes to the heart of Virar West. Every residence is planned for abundant natural light, cross-ventilation and efficient carpet areas, wrapped in a gated community with resort-grade amenities and seamless connectivity to Mumbai.',
     overviewText2: 'Backed by four decades of Agarwal Group craftsmanship, Infinity is built to hold its value and grow with your family for generations.',
     overviewFeatures: [
       { title: "Landscaped Gardens", desc: "Lush green spaces to unwind in", icon: "Leaf" },

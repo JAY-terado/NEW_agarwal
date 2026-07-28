@@ -152,7 +152,7 @@ export default function Home() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsInitialVisible(false);
-    }, 10000);
+    }, 2000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -160,6 +160,23 @@ export default function Home() {
 
   const reelsRef = useRef<HTMLDivElement>(null);
   const btrackRef = useRef<HTMLDivElement>(null);
+
+  // Handle initial scroll if navigating directly to a section URL
+  useEffect(() => {
+    const path = window.location.pathname;
+    const validPaths = ['/story', '/projects', '/contact'];
+
+    if (validPaths.includes(path)) {
+      const sectionId = path.substring(1);
+      // Small delay to ensure DOM is ready and any initial animations don't interfere
+      setTimeout(() => {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, []);
 
   // Intersection observer to trigger stats counting
   useEffect(() => {
@@ -368,7 +385,7 @@ export default function Home() {
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(18, 18, 16, .5) 0%, rgba(18, 18, 16, .2) 36%, rgba(18, 18, 16, .85) 100%)' }} />
         </div>
 
-        <div 
+        <div
           className="relative z-10 w-full wrap-widescreen pt-24 pb-16 flex flex-col items-start text-left"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -397,6 +414,10 @@ export default function Home() {
               <Link
                 className="group flex items-center justify-center gap-2 px-8 h-14 rounded font-medium tracking-wide uppercase transition-all duration-300 w-full sm:w-auto hover:shadow-lg hover:-translate-y-0.5"
                 to="/projects"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                }}
                 style={{ background: 'var(--color-brass)', color: '#fff', fontSize: '0.85rem' }}
               >
                 <span>Explore Ongoing Projects</span>
@@ -405,6 +426,10 @@ export default function Home() {
               <Link
                 className="group flex items-center justify-center gap-2 px-8 h-14 rounded font-medium tracking-wide uppercase transition-all duration-300 w-full sm:w-auto border backdrop-blur-sm hover:shadow-lg hover:-translate-y-0.5 hover:bg-white/20 hover:border-white/50"
                 to="/contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
                 style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', borderColor: 'rgba(255,255,255,0.3)', fontSize: '0.85rem' }}
               >
                 <span>Book Site Visit</span>
