@@ -200,12 +200,18 @@ export default function ProjectDetails() {
     setIsBrochureDrawerOpen(false);
     setBrochureFormSubmitted(false);
     window.scrollTo(0, 0);
-
-    const timer = setTimeout(() => {
-      setShowFloater(true);
-    }, 15000);
-    return () => clearTimeout(timer);
   }, [slug]);
+
+  useEffect(() => {
+    if (!showFloater || hasClosedFloater) {
+      const timer = setTimeout(() => {
+        setShowFloater(true);
+        setHasClosedFloater(false);
+        setIsManualFloater(false);
+      }, 20000);
+      return () => clearTimeout(timer);
+    }
+  }, [showFloater, hasClosedFloater]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -317,7 +323,7 @@ export default function ProjectDetails() {
                 <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Amenities</div>
                 <div className="font-serif text-brass-deep flex items-baseline justify-center gap-1.5 mt-1">
                   <span className="text-4xl sm:text-5xl lg:text-5xl font-normal leading-none">30+</span>
-                  <span className="text-lg sm:text-xl lg:text-2xl font-light">Premium</span>
+                  <span className="text-lg sm:text-xl lg:text-2xl font-light">Premium Amenities</span>
                 </div>
               </div>
 
@@ -417,7 +423,7 @@ export default function ProjectDetails() {
 
           {/* Tabs */}
           <div className="flex flex-wrap gap-3 md:gap-4 mb-10 justify-center md:justify-start">
-            {['Elevation', 'Podium Amenities', 'Terrace Amenities'].map((tab) => (
+            {['Project Elevation', 'Podium Amenities', 'Rooftop Amenities'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveAmenityTab(tab as any)}
@@ -697,7 +703,7 @@ export default function ProjectDetails() {
           <div className="section-head">
             <span className="eyebrow">FAQ</span>
             <h2 className="serif">Questions, <em>Answered</em></h2>
-            <p>Everything you need to know before making an Agarwal address your home.</p>
+            <p>Everything you need to know before making <em className='text-brass'>{project.name}</em> your home.</p>
           </div>
 
           <div className="faq-wrap">
@@ -818,7 +824,7 @@ export default function ProjectDetails() {
               className="bg-pine text-white text-[10px] md:text-[11px] font-bold tracking-[0.2em] uppercase p-2 md:p-3 hover:bg-pine/90 hover:pr-3 md:hover:pr-4 transition-all duration-300 flex items-center justify-center cursor-pointer shadow-[-4px_0_15px_rgba(0,0,0,0.1)]"
               style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
             >
-              Brochure
+              Get Brochure
             </button>
           </motion.div>
         )}
@@ -846,11 +852,16 @@ export default function ProjectDetails() {
               className="fixed top-1/2 right-0 md:right-6 w-full max-w-[360px] bg-paper z-[101] p-6 md:p-8 shadow-2xl overflow-y-auto flex flex-col rounded-l-[24px] md:rounded-[24px]"
               style={{ maxHeight: 'calc(100vh - 4rem)' }}
             >
-              <div className="flex items-center justify-between mb-8">
-                <h3 className="font-serif text-2xl text-ink">Download Brochure</h3>
+              <div className="flex items-start justify-between mb-8">
+                <div>
+                  <h3 className="font-serif text-2xl text-ink mb-2">Download Brochure</h3>
+                  <p className="text-xs text-taupe leading-relaxed pr-4">
+                    Share your details to receive the complete project brochure instantly.
+                  </p>
+                </div>
                 <button
                   onClick={() => setIsBrochureDrawerOpen(false)}
-                  className="p-2 hover:bg-black/5 rounded-full transition-colors"
+                  className="p-2 hover:bg-black/5 rounded-full transition-colors shrink-0 -mt-2 -mr-2"
                 >
                   <X className="w-6 h-6 text-ink-soft" />
                 </button>

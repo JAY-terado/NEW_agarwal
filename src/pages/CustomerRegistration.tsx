@@ -523,7 +523,7 @@ export default function CustomerRegistration() {
                                 <button
                                   type="button"
                                   onClick={() => setCpOtpSent(true)}
-                                  className="whitespace-nowrap bg-brass text-pine px-4 py-3 rounded text-[10px] font-bold uppercase tracking-wider hover:bg-brass-deep transition-colors w-full md:w-auto"
+                                  className="whitespace-nowrap bg-brass text-pine px-4 py-3 rounded text-[10px] font-bold uppercase tracking-wider hover:text-white hover:bg-brass-deep transition-colors w-full md:w-auto"
                                 >
                                   {cpOtpSent ? 'Resend OTP' : 'Send OTP'}
                                 </button>

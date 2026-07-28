@@ -92,12 +92,12 @@ export const projects: Project[] = [
     ],
     connectivity: [
       { key: 'Railway Station', value: '5 mins' },
-      { key: 'Western Express Highway', value: '12 mins' },
-      { key: 'Schools & Colleges', value: '5–10 mins' },
-      { key: 'Hospitals', value: '8 mins' },
-      { key: 'Shopping & Malls', value: '10 mins' },
-      { key: 'Restaurants & Cafes', value: '2 mins' },
-      { key: 'Upcoming Metro', value: 'Nearby' }
+      { key: 'Western Express Highway', value: '19 mins' },
+      { key: 'Schools & Colleges', value: '1 mins' },
+      { key: 'Hospitals', value: '2 mins' },
+      { key: 'Shopping & Malls', value: '2 mins' },
+      { key: 'Restaurants & Cafes', value: '1 mins' },
+      { key: 'Daily Essentials', value: '1 mins' }
     ],
     faqs: [
       {
