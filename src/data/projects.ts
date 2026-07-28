@@ -43,7 +43,7 @@ export const projects: Project[] = [
   {
     slug: 'infinity',
     name: 'Agarwal Infinity',
-    location: 'Opp. D-Mart, Virar(W), MMR Mumbai',
+    location: 'Opp. D-Mart, Virar (W), MMR Mumbai',
     status: 'Ready to Move',
     rera: 'P9900052695',
     config: '2, 3 & 4 BHK',
@@ -154,7 +154,7 @@ export const projects: Project[] = [
   {
     slug: 'sky-heights',
     name: 'Agarwal Sky Heights',
-    location: 'Gokhiware, Vasai(E), MMR Mumbai',
+    location: 'Gokhiware, Vasai (E), MMR Mumbai',
     status: 'OC Received',
     rera: 'P99000004474',
     config: '1, 2 & 3 BHK',
@@ -223,7 +223,7 @@ export const projects: Project[] = [
   {
     slug: 'skyrise',
     name: 'Agarwal Skyrise',
-    location: 'Y.K Nagar, Virar(W), MMR Mumbai',
+    location: 'Y.K Nagar, Virar (W), MMR Mumbai',
     status: 'OC Received',
     rera: 'P99000006929',
     config: '1, 2 & 3 BHK',
@@ -292,7 +292,7 @@ export const projects: Project[] = [
   {
     slug: 'horizon',
     name: 'Agarwal Horizon',
-    location: 'Virar-Nsp Link Road, Virar(W), MMR Mumbai',
+    location: 'Virar-Nsp Link Road, Virar (W), MMR Mumbai',
     status: 'Ready to Move',
     rera: 'P99000024516',
     config: '1, 2 & 3 BHK',

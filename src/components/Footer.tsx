@@ -23,20 +23,21 @@ export default function Footer() {
               Gokul Township, Virar (W),<br />
               Maharashtra - 401303
             </address>
-            <div style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '5px' }}>
-              <a href="tel:+918408008002" style={{ fontWeight: 300, color: 'var(--ink-soft)', transition: 'color .3s', fontFamily: '"Fraunces", serif', fontSize: '1.05rem' }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'var(--brass-deep)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>
-                +91 84080 08002
-              </a>
-              <a href="tel:+918408008001" style={{ fontWeight: 300, color: 'var(--ink-soft)', transition: 'color .3s', fontFamily: '"Fraunces", serif', fontSize: '1.05rem' }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'var(--brass-deep)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>
+            <div style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '5px', alignItems: 'flex-start' }}>
+              <a href="tel:+918408008001" style={{ display: 'inline-block', fontWeight: 300, color: 'var(--ink-soft)', transition: 'all 0.3s ease', fontFamily: '"Fraunces", serif', fontSize: '1.05rem', transform: 'translateX(0)' }}
+                onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass-deep)'; e.currentTarget.style.transform = 'translateX(6px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.color = 'var(--ink-soft)'; e.currentTarget.style.transform = 'translateX(0)'; }}>
                 +91 84080 08001
               </a>
-              <a href="mailto:sales@agarwalrealties.com" style={{ fontSize: '.9rem', fontWeight: 300, color: 'var(--ink-soft)', transition: 'color .3s' }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'var(--brass-deep)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>
+
+              <a href="tel:+918408008002" style={{ display: 'inline-block', fontWeight: 300, color: 'var(--ink-soft)', transition: 'all 0.3s ease', fontFamily: '"Fraunces", serif', fontSize: '1.05rem', transform: 'translateX(0)' }}
+                onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass-deep)'; e.currentTarget.style.transform = 'translateX(6px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.color = 'var(--ink-soft)'; e.currentTarget.style.transform = 'translateX(0)'; }}>
+                +91 84080 08002
+              </a>
+              <a href="mailto:sales@agarwalrealties.com" style={{ display: 'inline-block', fontSize: '.9rem', fontWeight: 300, color: 'var(--ink-soft)', transition: 'all 0.3s ease', transform: 'translateX(0)' }}
+                onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass-deep)'; e.currentTarget.style.transform = 'translateX(6px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.color = 'var(--ink-soft)'; e.currentTarget.style.transform = 'translateX(0)'; }}>
                 sales@agarwalrealties.com
               </a>
             </div>

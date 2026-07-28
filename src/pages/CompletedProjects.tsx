@@ -37,7 +37,7 @@ export default function CompletedProjects() {
       <div className="wrap-widescreen">
         <div className="text-left mb-16">
           <span className="eyebrow block mb-4">Our Legacy</span>
-          <h1 className="serif text-4xl md:text-5xl">Completed Projects</h1>
+          <h1 className="serif text-4xl md:text-5xl">Completed <em className='text-brass-deep'>Projects</em></h1>
           <p className="mt-6 text-ink-soft max-w-2xl">
             Explore our portfolio of delivered landmarks. Each project stands as a testament to our commitment to quality, timely delivery, and customer satisfaction.
           </p>
