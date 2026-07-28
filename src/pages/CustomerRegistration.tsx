@@ -144,7 +144,7 @@ export default function CustomerRegistration() {
                 <span className="text-[10px] tracking-widest uppercase font-bold text-brass">Customer Details</span>
                 <h2 className="font-serif text-2xl sm:text-3xl text-ink font-light mt-1">Tell us about yourself</h2>
                 <p className="text-[11px] text-taupe mt-1 leading-relaxed font-light">
-                  Fields marked <span className="text-rose-500 font-bold">*</span> are required. Verified details will be registered into our CRM system within 24 hours.
+                  Fields marked * are required. Verified details will be registered into our CRM system within 24 hours.
                 </p>
               </div>
 
@@ -252,7 +252,7 @@ export default function CustomerRegistration() {
                     <button
                       type="button"
                       onClick={() => setOtpSent(true)}
-                      className="self-start bg-ivory border border-line hover:bg-brass hover:border-brass hover:text-pine px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-wider text-ink transition-all"
+                      className="self-start bg-brass text-pine hover:bg-brass-deep hover:text-white rounded px-5 py-2.5 text-[10px] font-bold uppercase tracking-wider transition-all"
                     >
                       Send Verification OTP
                     </button>
@@ -430,7 +430,7 @@ export default function CustomerRegistration() {
                   <div className="flex flex-col gap-2">
                     <label className="text-[10px] tracking-widest uppercase font-bold text-taupe">How did you hear about us?*</label>
                     <div className="flex flex-wrap gap-2.5">
-                      {['Hoardings', 'Friends & Relatives', 'Channel Partner', 'Print Media', 'Social Media', 'Website', 'WhatsApp', 'Other'].map((s) => (
+                      {['Hoardings', 'Friends & Relatives', 'Print Media', 'Social Media', 'Website', 'WhatsApp', 'Other'].map((s) => (
                         <label key={s} className={`flex items-center gap-2 border rounded-lg px-3 py-2 text-xs font-semibold cursor-pointer transition-colors ${errors.source ? 'border-rose-500' : 'border-line hover:bg-ivory/30'}`}>
                           <input type="radio" value={s} {...register('source')} />
                           <span>{s}</span>
@@ -560,7 +560,7 @@ export default function CustomerRegistration() {
                                 onClick={() => {
                                   if (cpOtp.length === 4) setCpOtpVerified(true);
                                 }}
-                                className={`px-4 py-3 rounded text-[10px] font-bold uppercase tracking-wider transition-colors ${cpOtp.length === 4 ? 'bg-pine text-white hover:bg-pine/90' : 'bg-line/50 text-taupe cursor-not-allowed'}`}
+                                className={`px-4 py-3 rounded text-[10px] font-bold uppercase tracking-wider transition-colors ${cpOtp.length === 4 ? 'bg-brass text-pine hover:bg-brass-deep hover:text-white' : 'bg-line/50 text-taupe cursor-not-allowed'}`}
                               >
                                 Verify
                               </button>
@@ -576,23 +576,24 @@ export default function CustomerRegistration() {
                 {/* Terms and Submit */}
                 <div className="flex flex-col gap-4 mt-4">
                   <label className="flex items-start gap-2.5 text-xs text-taupe font-medium cursor-pointer">
-                    <input type="checkbox" className="text-brass focus:ring-brass mt-0.5" {...register('termsAccepted')} />
+                    <input type="checkbox" className="accent-brass text-brass focus:ring-brass mt-0.5" style={{ accentColor: 'var(--brass-deep)' }} {...register('termsAccepted')} />
                     <span>
-                      I declare that all the information provided above is correct. I agree to the{' '}
+                      I declare that all the information provided above by me is correct. I agree to the{' '}
                       <a href="#" className="text-brass-deep underline font-bold">
                         Terms &amp; Conditions
                       </a>{' '}
-                      and allow sales executives to reach out. *
+                      and allow sales executives to reach out to us. *
                     </span>
                   </label>
                   <ErrorMessage message={errors.termsAccepted?.message} />
 
                   <button
                     type="submit"
-                    className="w-full bg-brass hover:bg-brass-deep text-pine hover:text-white py-4 rounded-full font-bold uppercase tracking-widest text-xs transition-colors flex items-center justify-center gap-2 shadow-lg mt-2"
+                    className="pcta-btn btn-enquire"
+                    style={{ width: '100%', marginTop: '8px' }}
                   >
-                    Submit Registration Details
-                    <Send className="w-3.5 h-3.5" />
+                    <span>Submit Registration Details</span>
+                    <span className="arr">→</span>
                   </button>
                 </div>
               </form>

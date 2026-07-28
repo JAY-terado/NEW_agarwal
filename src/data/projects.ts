@@ -44,7 +44,7 @@ export const projects: Project[] = [
     slug: 'infinity',
     name: 'Agarwal Infinity',
     location: 'Opp. D-Mart, Virar (W), MMR Mumbai',
-    status: 'Ready to Move',
+    status: 'Under Construction',
     rera: 'P9900052695',
     config: '2, 3 & 4 BHK',
     startingPrice: 'Price on Request',

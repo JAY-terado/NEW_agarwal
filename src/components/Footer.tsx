@@ -89,9 +89,9 @@ export default function Footer() {
             </h5>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {[
-                { to: '/projects/skyrise', label: 'Agarwal Skyrise' },
                 { to: '/projects/infinity', label: 'Agarwal Infinity' },
                 { to: '/projects/sky-heights', label: 'Agarwal Sky Heights' },
+                { to: '/projects/skyrise', label: 'Agarwal Skyrise' },
                 { to: '/projects/horizon', label: 'Agarwal Horizon' },
               ].map(link => (
                 <Link key={link.to} to={link.to}

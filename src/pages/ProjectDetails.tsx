@@ -303,27 +303,40 @@ export default function ProjectDetails() {
               </div>
 
               <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center border-b lg:border-r border-line-light bg-[var(--color-ivory)]">
-                <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Starting Price</div>
-                <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.startingPrice}</div>
-              </div>
-
-              <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center border-b border-line-light bg-[var(--color-ivory)]">
                 <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Carpet Area</div>
                 <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.carpetAreaRange}</div>
               </div>
 
-              <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center border-b lg:border-b-0 lg:border-r border-line-light bg-[var(--color-ivory)]">
+              <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center border-b border-line-light bg-[var(--color-ivory)]">
                 <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Possession</div>
                 <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.status}</div>
               </div>
 
-              <div className="lg:col-span-2 bg-[var(--color-ivory)] text-ink flex flex-col sm:flex-row items-center justify-center sm:justify-evenly py-10 lg:py-0 gap-6 sm:gap-0">
-                <div className="flex flex-col items-center justify-center text-center">
-                  <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Maharera Details</div>
-                  <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.rera}</div>
+
+              <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center border-b lg:border-b-0 lg:border-r border-line-light bg-[var(--color-ivory)]">
+                <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Amenities</div>
+                <div className="font-serif text-brass-deep flex items-baseline justify-center gap-1.5 mt-1">
+                  <span className="text-4xl sm:text-5xl lg:text-5xl font-normal leading-none">30+</span>
+                  <span className="text-lg sm:text-xl lg:text-2xl font-light">Premium</span>
+                </div>
+              </div>
+
+              <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center border-b lg:border-b-0 lg:border-r border-line-light bg-[var(--color-ivory)]">
+                <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Offer Price</div>
+                <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.startingPrice}</div>
+              </div>
+
+
+              <div className="lg:col-span-1 bg-[var(--color-ivory)] text-ink flex flex-row items-center justify-center py-10 lg:py-4 px-2 gap-4 sm:gap-6">
+                <div className="flex flex-col items-center lg:items-end justify-center text-center lg:text-right">
+                  <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft">Maharera Details</div>
+                  <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl mt-1">{project.rera}</div>
+                  <div className="text-[9px] sm:text-[10px] text-ink-soft tracking-wide mt-2">
+                    https://maharera.maharashtra.gov.in/
+                  </div>
                 </div>
                 <div className="flex items-center justify-center">
-                  <div className="w-28 h-28 lg:w-[120px] lg:h-[120px] bg-white border border-line-light p-2 flex items-center justify-center rounded-sm shadow-sm">
+                  <div className="w-20 h-20 lg:w-24 lg:h-24 bg-white border border-line-light p-1.5 flex items-center justify-center rounded-sm shadow-sm">
                     {project.slug === 'infinity' ? (
                       <img src={agarwalInfinityMRQR} alt={`MahaRERA QR Code for ${project.name}`} className="w-full h-full object-contain mix-blend-multiply" />
                     ) : (
@@ -528,9 +541,11 @@ export default function ProjectDetails() {
                           setHasClosedFloater(false);
                           setIsManualFloater(true);
                         }}
-                        className="bg-brass text-pine hover:bg-brass-deep hover:text-white px-3 sm:px-4 py-2 rounded text-[10px] sm:text-[11px] font-bold uppercase tracking-wider transition-colors w-fit whitespace-nowrap"
+                        className="pcta-btn btn-enquire"
+                        style={{ width: 'fit-content', padding: '10px 16px', minHeight: '36px', fontSize: '10px' }}
                       >
-                        Price On Request
+                        <span>Price On Request</span>
+                        <span className="arr">→</span>
                       </button>
                     </div>
                   </div>
@@ -951,12 +966,17 @@ export default function ProjectDetails() {
                   <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Email Address</label>
                   <input type="email" placeholder="you@email.com" className="border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors bg-white" required />
                 </div>
-                <button type="submit" className="bg-[#cca968] text-pine font-bold uppercase tracking-widest text-[11px] py-3.5 rounded-full mt-2 hover:bg-[#b59254] transition-colors w-full flex items-center justify-center gap-2">
-                  GET BEST OFFERS &rarr;
+                <button
+                  type="submit"
+                  className="pcta-btn btn-enquire"
+                  style={{ width: '100%', marginTop: '8px' }}
+                >
+                  <span>Get Best Offers</span>
+                  <span className="arr">→</span>
                 </button>
               </form>
               <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', marginTop: '10px', lineHeight: 1.4 }}>
-                By Clicking Button, I Authorize Agarwal Group And Its Representatives To Call, SMS, Email Or Whatsapp Me About Its Products And Offers. This Consent Overrides Any Registration For DND NDNC.
+                By Clicking Above Button, I Authorize Agarwal Group And Its Representatives To Call, SMS, Email Or Whatsapp Me About Its Products And Offers. This Consent Overrides Any Registration For DND NDNC.
               </div>
             </motion.div>
           </>
@@ -1053,7 +1073,7 @@ export default function ProjectDetails() {
                     <span className="arr">→</span>
                   </button>
                   <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', marginTop: '10px', lineHeight: 1.4 }}>
-                    By Clicking Button, I Authorize Agarwal Group And Its Representatives To Call, SMS, Email Or Whatsapp Me About Its Products And Offers. This Consent Overrides Any Registration For DND NDNC.
+                    And Its Representatives To Call, SMS, Email Or Whatsapp Me About Its Products And Offers. This Consent Overrides Any Registration For DND NDNC.
                   </div>
                 </form>
               ) : (
