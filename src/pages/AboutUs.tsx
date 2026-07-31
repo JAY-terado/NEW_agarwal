@@ -94,7 +94,7 @@ export default function AboutUs() {
             About <span className="italic font-serif text-brass-bright font-normal">Agarwal Group</span>
           </h1>
           <p className="text-sm sm:text-base md:text-lg text-ivory/90 font-light leading-relaxed max-w-2xl">
-            Trusted Real Estate Developer in Vasai, Virar & Mumbai Since 1969
+            Trusted Real Estate Developer in Vasai, Virar & Mumbai Since 1978
           </p>
         </div>
       </section>
@@ -128,7 +128,7 @@ export default function AboutUs() {
                 style={{ width: '80%', height: 'auto', aspectRatio: '4/5', objectFit: 'cover' }}
               />
               <div className="story-badge">
-                <b>50+</b>
+                <b>48+</b>
                 <small>Years of Trust</small>
               </div>
             </div>
@@ -153,7 +153,7 @@ export default function AboutUs() {
                   <Trophy className="w-5 h-5" strokeWidth={1.8} />
                 </div>
                 <div className="vcard-content">
-                  <b>50+ Years of Trusted Experience</b>
+                  <b>48+ Years of Trusted Experience</b>
                   <span>Over five decades of delivering residential projects with consistent quality, transparency, and customer satisfaction.</span>
                 </div>
               </div>

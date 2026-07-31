@@ -88,7 +88,7 @@ export default function ChannelPartner() {
           </div>
 
           {/* Right Column: Form */}
-          <div className="form">
+          <div className="form" style={{ background: 'var(--color-paper)' }}>
             {!formSubmitted ? (
               <form onSubmit={handleFormSubmit}>
                 <div className="ft serif">Register as a Channel Partner</div>
@@ -112,7 +112,22 @@ export default function ChannelPartner() {
                   </div>
                   <div className="field">
                     <label htmlFor="mobile">Mobile</label>
-                    <input type="tel" id="mobile" required placeholder="+91 00000 00000" />
+                    <div style={{ display: 'flex', border: '1px solid var(--color-line)', borderRadius: '4px', overflow: 'hidden', background: '#ffffff' }}>
+                      <span style={{ display: 'flex', alignItems: 'center', background: 'var(--color-ivory)', borderRight: '1px solid var(--color-line)', fontSize: '.95rem', fontWeight: 500, color: 'var(--color-ink)', padding: '0 13px', userSelect: 'none' }}>+91</span>
+                      <input
+                        type="tel"
+                        id="mobile"
+                        required
+                        maxLength={10}
+                        pattern="[0-9]{10}"
+                        title="Please enter a valid 10-digit mobile number"
+                        onInput={(e) => {
+                          e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '').slice(0, 10);
+                        }}
+                        placeholder="00000 00000"
+                        style={{ width: '100%', flex: 1, border: 'none', padding: '13px 15px', fontSize: '.95rem', fontFamily: 'inherit', color: 'var(--color-ink)', outline: 'none', background: 'transparent' }}
+                      />
+                    </div>
                   </div>
                 </div>
 
@@ -126,8 +141,13 @@ export default function ChannelPartner() {
                   <input type="text" id="city" required placeholder="e.g. Mumbai, Thane, Palghar" />
                 </div>
 
-                <button className="btn btn-brass" type="submit" style={{ width: '100%', border: 'none', cursor: 'pointer' }}>
-                  Become a Partner →
+                <button
+                  type="submit"
+                  className="pcta-btn btn-enquire"
+                  style={{ width: '100%' }}
+                >
+                  <span>Become a Partner</span>
+                  <span className="arr">→</span>
                 </button>
 
                 <p className="form-note">

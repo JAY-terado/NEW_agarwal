@@ -14,7 +14,11 @@ import {
   GraduationCap,
   Stethoscope,
   ShoppingBag,
-  Coffee
+  Coffee,
+  Building2,
+  Home,
+  Trees,
+  Trophy
 } from 'lucide-react';
 
 const iconComponents: Record<string, React.ElementType> = {
@@ -22,6 +26,16 @@ const iconComponents: Record<string, React.ElementType> = {
   Dumbbell,
   Car,
   Sun,
+  MapPin,
+  Train,
+  GraduationCap,
+  Stethoscope,
+  ShoppingBag,
+  Coffee,
+  Building2,
+  Home,
+  Trees,
+  Trophy
 };
 
 import { projects } from '../data/projects';
@@ -37,6 +51,10 @@ import galleryAerial from '../assets/gallery-aerial.jpg';
 import layout1Bhk from '../assets/layout-1bhk.png';
 import layout2Bhk from '../assets/layout-2bhk.png';
 import layout3Bhk from '../assets/layout-3bhk.png';
+
+import skyrise1Bhk from '../assets/Skyrise 1BHK.jpg.jpeg';
+import skyrise2Bhk from '../assets/Skyrise 2BHK.jpg.jpeg';
+import skyrise3Bhk from '../assets/Skyrise 3BHK.jpg.jpeg';
 
 // Project Hero Imports
 import infinityHero from '../assets/agarwal-infinity-hero.jpg';
@@ -63,6 +81,18 @@ const layoutImages = {
   '1 BHK': layout1Bhk,
   '2 BHK': layout2Bhk,
   '3 BHK': layout3Bhk,
+};
+
+const projectLayoutImages: Record<string, Record<string, string>> = {
+  skyrise: {
+    '1 BHK': skyrise1Bhk,
+    '2 BHK': skyrise2Bhk,
+    '3 BHK': skyrise3Bhk,
+  }
+};
+
+const getLayoutImage = (slug: string, type: string) => {
+  return (projectLayoutImages[slug] && projectLayoutImages[slug][type]) || layoutImages[type as '1 BHK' | '2 BHK' | '3 BHK'];
 };
 
 const galleryMap: Record<string, string> = {
@@ -226,7 +256,19 @@ export default function ProjectDetails() {
     return () => observer.disconnect();
   }, []);
 
-
+  // Prevent scrolling when a modal or floater is open
+  useEffect(() => {
+    const isModalOpen = (showFloater && !hasClosedFloater && !isContactVisible) || isBrochureDrawerOpen || lightbox !== null;
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [showFloater, hasClosedFloater, isContactVisible, isBrochureDrawerOpen, lightbox]);
 
   if (!project) {
     return (
@@ -418,7 +460,7 @@ export default function ProjectDetails() {
         <div className="wrap-widescreen">
           <div className="section-head mb-10">
             <span className="eyebrow">Lifestyle</span>
-            <h2 className="serif mt-2 whitespace-nowrap">Amenities Designed for <em>Every Generation</em></h2>
+            <h2 className="serif mt-2">Amenities Designed for <em>Every Generation</em></h2>
           </div>
 
           {/* Tabs */}
@@ -493,7 +535,7 @@ export default function ProjectDetails() {
           <div className="mb-14">
             <div className="section-head mb-0 max-w-full text-left">
               <span className="eyebrow">Plans & Pricing</span>
-              <h2 className="serif whitespace-nowrap">Configurations & Indicative <em>Pricing</em></h2>
+              <h2 className="serif">Configurations & Indicative <em>Pricing</em></h2>
             </div>
           </div>
 
@@ -501,59 +543,51 @@ export default function ProjectDetails() {
             {project.pricing.map((p, idx) => (
               <div
                 key={idx}
-                className="bg-white border border-line-light flex flex-col cursor-pointer group hover:shadow-xl transition-shadow duration-300"
+                className="bg-ivory border border-line-light flex flex-col cursor-pointer group hover:shadow-xl transition-shadow duration-300"
                 onClick={() => {
-                  const images = project.pricing.map(p => layoutImages[p.type as '1 BHK' | '2 BHK' | '3 BHK']).filter(Boolean);
-                  const imgIdx = images.indexOf(layoutImages[p.type as '1 BHK' | '2 BHK' | '3 BHK']);
+                  const images = project.pricing.map(p => getLayoutImage(project.slug, p.type)).filter(Boolean);
+                  const imgIdx = images.indexOf(getLayoutImage(project.slug, p.type));
                   setLightbox({ images, index: imgIdx >= 0 ? imgIdx : 0 });
                 }}
               >
                 {/* Image Area */}
-                <div className="w-full relative overflow-hidden border-b border-line-light bg-white">
-                  <div className="absolute top-6 left-6 flex items-center gap-2 z-10">
-                    <div className="text-brass-deep flex items-center gap-1.5">
-                      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 stroke-current stroke-[1.5]">
-                        <path d="M12 2L14.4 7.6L20.5 8.5L16.1 12.8L17.1 18.9L12 16.2L6.9 18.9L7.9 12.8L3.5 8.5L9.6 7.6L12 2Z" />
-                      </svg>
-                      <span className="font-serif font-bold text-[11px] uppercase tracking-wider">{p.type}</span>
-                    </div>
-                  </div>
+                <div className="w-full relative overflow-hidden border-b border-line-light bg-ivory">
+
                   <img
-                    src={layoutImages[p.type as '1 BHK' | '2 BHK' | '3 BHK']}
+                    src={getLayoutImage(project.slug, p.type)}
                     alt={`${p.type} Floor Plan`}
                     className="w-full h-auto object-contain group-hover:scale-[1.03] transition-transform duration-700 block"
                   />
                 </div>
 
                 {/* Details Area */}
-                <div className="p-6 md:p-8 flex flex-col gap-6">
-                  <div className="flex flex-wrap items-end justify-between gap-y-4 gap-x-2">
-                    <div className="flex gap-6 sm:gap-8">
-                      <div className="flex flex-col gap-1.5">
-                        <div className="text-[11px] text-ink-soft font-medium">Configuration</div>
-                        <div className="font-bold text-ink text-[15px] sm:text-[17px] font-sans tracking-tight">{p.type}</div>
-                      </div>
-                      <div className="flex flex-col gap-1.5">
-                        <div className="text-[11px] text-ink-soft font-medium">Carpet Area</div>
-                        <div className="font-bold text-ink text-[15px] sm:text-[17px] font-sans tracking-tight">~{p.carpetArea.replace(' sq.ft', '')} <span className="text-[11px] font-normal text-ink-soft">sq.ft.</span></div>
+                <div className="flex flex-col bg-ivory">
+                  <div className="grid grid-cols-2 border-b border-line-light">
+                    <div className="py-6 px-2 flex flex-col justify-center items-center text-center border-r border-line-light">
+                      <div className="text-[9px] sm:text-[10px] tracking-[0.18em] uppercase text-ink-soft mb-1.5">Configuration</div>
+                      <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl">{p.type}</div>
+                    </div>
+                    <div className="py-6 px-2 flex flex-col justify-center items-center text-center">
+                      <div className="text-[9px] sm:text-[10px] tracking-[0.18em] uppercase text-ink-soft mb-1.5">Carpet Area</div>
+                      <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl">
+                        {p.carpetArea.replace(/sq\.ft/i, '').trim()} <span className="text-base sm:text-lg">sq.ft</span>
                       </div>
                     </div>
-                    <div className="flex flex-col gap-1.5">
-                      <div className="text-[11px] text-ink-soft font-medium">Starting Price</div>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setShowFloater(true);
-                          setHasClosedFloater(false);
-                          setIsManualFloater(true);
-                        }}
-                        className="pcta-btn btn-enquire"
-                        style={{ width: 'fit-content', padding: '10px 16px', minHeight: '36px', fontSize: '10px' }}
-                      >
-                        <span>Price On Request</span>
-                        <span className="arr">→</span>
-                      </button>
-                    </div>
+                  </div>
+                  <div className="p-5 md:p-6 flex justify-center">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowFloater(true);
+                        setHasClosedFloater(false);
+                        setIsManualFloater(true);
+                      }}
+                      className="pcta-btn btn-enquire"
+                      style={{ width: '100%', padding: '12px 20px', minHeight: '44px' }}
+                    >
+                      <span>Price On Request</span>
+                      <span className="arr">→</span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -661,7 +695,7 @@ export default function ProjectDetails() {
         <div className="wrap-widescreen">
           <div className="section-head mb-14">
             <span className="eyebrow">Gallery</span>
-            <h2 className="serif whitespace-nowrap tracking-tight" style={{ fontSize: 'min(6vw, clamp(2.1rem, 4.6vw, 3.6rem))' }}>A Closer Look at <em>{project.name}</em></h2>
+            <h2 className="serif tracking-tight" style={{ fontSize: 'min(6vw, clamp(2.1rem, 4.6vw, 3.6rem))' }}>A Closer Look at <em>{project.name}</em></h2>
           </div>
 
           <div className="grid grid-cols-12 gap-1 md:gap-2">
@@ -814,17 +848,33 @@ export default function ProjectDetails() {
           >
             <button
               onClick={() => { setShowFloater(true); setHasClosedFloater(false); setIsManualFloater(true); }}
-              className="bg-brass-deep text-white text-[10px] md:text-[11px] font-bold tracking-[0.2em] uppercase p-2 md:p-3 hover:bg-[#b59254] hover:pr-3 md:hover:pr-4 transition-all duration-300 flex items-center justify-center cursor-pointer shadow-[-4px_0_15px_rgba(0,0,0,0.1)]"
+              className="group relative bg-brass-deep text-white text-[10px] md:text-[11px] font-bold tracking-[0.2em] uppercase p-2 md:p-3 hover:pr-3 md:hover:pr-4 transition-all duration-300 flex items-center justify-center cursor-pointer shadow-[-4px_0_15px_rgba(0,0,0,0.1)] overflow-hidden"
               style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
             >
-              Enquire Now
+              <div className="absolute inset-0 bg-[#b59254] -translate-y-[101%] group-hover:translate-y-0 transition-transform duration-[600ms] ease-[var(--ease)] z-0" />
+              <div className="absolute inset-0 w-full h-[45%] bg-gradient-to-b from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0 pointer-events-none" />
+              
+              <div className="relative z-10 flex items-center">
+                <span>Enquire Now</span>
+                <span className="flex items-center justify-center overflow-hidden max-h-0 opacity-0 -translate-y-2 group-hover:max-h-[20px] group-hover:mt-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-[var(--ease)]">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14"></path><path d="M5 12l7 7 7-7"></path></svg>
+                </span>
+              </div>
             </button>
             <button
               onClick={() => setIsBrochureDrawerOpen(true)}
-              className="bg-pine text-white text-[10px] md:text-[11px] font-bold tracking-[0.2em] uppercase p-2 md:p-3 hover:bg-pine/90 hover:pr-3 md:hover:pr-4 transition-all duration-300 flex items-center justify-center cursor-pointer shadow-[-4px_0_15px_rgba(0,0,0,0.1)]"
+              className="group relative bg-pine text-white text-[10px] md:text-[11px] font-bold tracking-[0.2em] uppercase p-2 md:p-3 hover:pr-3 md:hover:pr-4 transition-all duration-300 flex items-center justify-center cursor-pointer shadow-[-4px_0_15px_rgba(0,0,0,0.1)] overflow-hidden"
               style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
             >
-              Get Brochure
+              <div className="absolute inset-0 bg-[#253229] -translate-y-[101%] group-hover:translate-y-0 transition-transform duration-[600ms] ease-[var(--ease)] z-0" />
+              <div className="absolute inset-0 w-full h-[45%] bg-gradient-to-b from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0 pointer-events-none" />
+
+              <div className="relative z-10 flex items-center">
+                <span>Get Brochure</span>
+                <span className="flex items-center justify-center overflow-hidden max-h-0 opacity-0 -translate-y-2 group-hover:max-h-[20px] group-hover:mt-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-[var(--ease)]">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14"></path><path d="M5 12l7 7 7-7"></path></svg>
+                </span>
+              </div>
             </button>
           </motion.div>
         )}

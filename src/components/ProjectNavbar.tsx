@@ -1,13 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Logo from '../assets/Agarwal Logo.svg';
+import { projects } from '../data/projects';
 
 export default function ProjectNavbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -65,7 +78,7 @@ export default function ProjectNavbar() {
     { label: 'Location Advantages', id: 'location' },
     { label: 'Gallery', id: 'gallery' },
     { label: 'FAQs', id: 'faq' },
-    { label: 'Highlights', id: 'highlights' },
+    // { label: 'Highlights', id: 'highlights' },
   ];
 
   return (
@@ -90,35 +103,101 @@ export default function ProjectNavbar() {
               </a>
             ))}
 
-            {/* CTA Button */}
-            <button
-              onClick={handleEnquireClick}
-              style={{
-                border: `1px solid ${ctaBorder}`,
-                color: ctaColor,
-                background: 'transparent',
-                padding: 'clamp(8px, 1vw, 11px) clamp(12px, 1.5vw, 22px)',
-                borderRadius: '50px',
-                fontSize: 'clamp(0.7rem, 0.8vw, 0.76rem)',
-                letterSpacing: '.12em',
-                textTransform: 'uppercase',
-                fontWeight: 600,
-                cursor: 'pointer',
-                transition: '.35s',
-              }}
-              onMouseEnter={e => {
-                const el = e.currentTarget;
-                el.style.background = scrolled ? 'var(--ink)' : 'var(--brass)';
-                el.style.color = scrolled ? '#fff' : 'var(--pine)';
-              }}
-              onMouseLeave={e => {
-                const el = e.currentTarget;
-                el.style.background = 'transparent';
-                el.style.color = ctaColor;
-              }}
+            {/* Projects Dropdown */}
+            <div 
+              ref={dropdownRef}
+              style={{ position: 'relative' }}
             >
-              Enquire Now
-            </button>
+              <button
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                style={{
+                  border: `1px solid ${ctaBorder}`,
+                  color: ctaColor,
+                  background: 'transparent',
+                  padding: 'clamp(8px, 1vw, 11px) clamp(12px, 1.5vw, 22px)',
+                  borderRadius: '50px',
+                  fontSize: 'clamp(0.7rem, 0.8vw, 0.76rem)',
+                  letterSpacing: '.12em',
+                  textTransform: 'uppercase',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  transition: '.35s',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget;
+                  el.style.background = scrolled ? 'var(--ink)' : 'var(--brass)';
+                  el.style.color = scrolled ? '#fff' : 'var(--pine)';
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget;
+                  el.style.background = 'transparent';
+                  el.style.color = ctaColor;
+                }}
+              >
+                Our Ongoing Projects
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+              </button>
+
+              <AnimatePresence>
+                {dropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    transition={{ duration: 0.2 }}
+                    style={{
+                      position: 'absolute',
+                      top: '100%',
+                      right: 0,
+                      marginTop: '12px',
+                      background: scrolled ? 'var(--color-paper, #fdfcfa)' : 'rgba(30, 31, 26, 0.4)',
+                      backdropFilter: scrolled ? 'none' : 'blur(16px)',
+                      WebkitBackdropFilter: scrolled ? 'none' : 'blur(16px)',
+                      border: scrolled ? '1px solid var(--color-line-light, #eaeaea)' : '1px solid rgba(220, 188, 124, 0.25)',
+                      borderRadius: '16px',
+                      padding: '8px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '4px',
+                      minWidth: '220px',
+                      boxShadow: scrolled ? '0 20px 40px -10px rgba(0,0,0,0.1)' : '0 20px 40px -10px rgba(0,0,0,0.3)',
+                      zIndex: 101,
+                    }}
+                  >
+                    {projects.filter(p => !location.pathname.includes(p.slug)).map(p => (
+                      <Link
+                        key={p.slug}
+                        to={`/projects/${p.slug}`}
+                        style={{
+                          padding: '12px 16px',
+                          color: scrolled ? 'var(--color-brass-deep, #94762f)' : 'var(--color-brass-bright, #d4bc7c)',
+                          textDecoration: 'none',
+                          fontSize: '0.85rem',
+                          fontWeight: 600,
+                          borderRadius: '8px',
+                          transition: 'background 0.2s, color 0.2s',
+                          display: 'block',
+                        }}
+                        onMouseEnter={e => {
+                          e.currentTarget.style.background = scrolled ? 'var(--color-brass, #d4af37)' : 'rgba(220, 188, 124, 0.15)';
+                          e.currentTarget.style.color = scrolled ? 'var(--color-pine, #26302b)' : '#fff';
+                        }}
+                        onMouseLeave={e => {
+                          e.currentTarget.style.background = 'transparent';
+                          e.currentTarget.style.color = scrolled ? 'var(--color-brass-deep, #94762f)' : 'var(--color-brass-bright, #d4bc7c)';
+                        }}
+                        onClick={() => setDropdownOpen(false)}
+                      >
+                        {p.name}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
 
           {/* Mobile Burger */}

@@ -60,10 +60,10 @@ export const projects: Project[] = [
       { title: "Sky Deck Views", desc: "Panoramic vistas from the rooftop", icon: "Sun" }
     ],
     whyChoseUs: [
-      { title: "Prime Locations", desc: "Nestled in thriving neighbourhoods with excellent connectivity", icon: "Car" },
-      { title: "Premium Amenities", desc: "Thoughtfully curated lifestyle amenities for every age", icon: "Dumbbell" },
-      { title: "Quality Craftsmanship", desc: "Built with trust and attention to detail, ensuring lasting value", icon: "Leaf" },
-      { title: "Hassle-Free Living", desc: "Ready-to-move-in homes with OC received, making your transition seamless", icon: "Sun" }
+      { title: "Luxury Residences with Deck", desc: "Spacious homes with private decks for panoramic views", icon: "Home" },
+      { title: "Exclusive Jodi Flats", desc: "Flexible layouts perfect for growing families", icon: "Building2" },
+      { title: "Grand Lifestyle Amenities", desc: "Premium facilities for recreation and relaxation", icon: "Coffee" },
+      { title: "Prime Location", desc: "Excellent connectivity to essential destinations", icon: "MapPin" }
     ],
     amenities: [
       'Grand Entrance Lobby',
@@ -171,10 +171,10 @@ export const projects: Project[] = [
       { title: "Sky Deck Views", desc: "Panoramic vistas from the rooftop", icon: "Sun" }
     ],
     whyChoseUs: [
-      { title: "Prime Locations", desc: "Nestled in thriving neighbourhoods with excellent connectivity", icon: "Car" },
-      { title: "Premium Amenities", desc: "Thoughtfully curated lifestyle amenities for every age", icon: "Dumbbell" },
-      { title: "Quality Craftsmanship", desc: "Built with trust and attention to detail, ensuring lasting value", icon: "Leaf" },
-      { title: "Hassle-Free Living", desc: "Ready-to-move-in homes with OC received, making your transition seamless", icon: "Sun" }
+      { title: "Iconic High-Rise Living", desc: "Elevated lifestyle with stunning cityscapes", icon: "Building2" },
+      { title: "Grand Clubhouse Experience", desc: "A luxurious retreat for leisure and gatherings", icon: "Coffee" },
+      { title: "Exclusive Rooftop Amenities", desc: "Stargazing and recreation atop the city", icon: "Sun" },
+      { title: "Grand Podium Amenities", desc: "Thoughtfully designed spaces for every age", icon: "Trees" }
     ],
     amenities: [
       'Grand Entrance Lobby',
@@ -240,10 +240,10 @@ export const projects: Project[] = [
       { title: "Sky Deck Views", desc: "Panoramic vistas from the rooftop", icon: "Sun" }
     ],
     whyChoseUs: [
-      { title: "Prime Locations", desc: "Nestled in thriving neighbourhoods with excellent connectivity", icon: "Car" },
-      { title: "Premium Amenities", desc: "Thoughtfully curated lifestyle amenities for every age", icon: "Dumbbell" },
-      { title: "Quality Craftsmanship", desc: "Built with trust and attention to detail, ensuring lasting value", icon: "Leaf" },
-      { title: "Hassle-Free Living", desc: "Ready-to-move-in homes with OC received, making your transition seamless", icon: "Sun" }
+      { title: "Grand Clubhouse", desc: "State-of-the-art facility for social and wellness activities", icon: "Coffee" },
+      { title: "Sky-High Rooftop Amenities", desc: "Experience unmatched leisure high above the ground", icon: "Sun" },
+      { title: "Multipurpose Turf", desc: "Dedicated sporting areas for active lifestyles", icon: "Trophy" },
+      { title: "Excellent Connectivity", desc: "Seamless travel with nearby transit hubs", icon: "Train" }
     ],
     amenities: [
       'Grand Entrance Lobby',

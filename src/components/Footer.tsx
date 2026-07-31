@@ -15,7 +15,7 @@ export default function Footer() {
               style={{ height: '42px', width: 'auto', display: 'block', borderRadius: '8px', marginBottom: '2px' }}
             />
             <p style={{ marginTop: '18px', fontSize: '.92rem', fontWeight: 300, fontStyle: 'italic', fontFamily: '"Fraunces", serif', maxWidth: '36ch', color: 'var(--ink-soft)' }}>
-              "Agarwal Group is a trusted real estate developer in Vasai–Virar with over 50+ years of experience delivering RERA-registered residential projects. Explore premium 1, 2, 3 & 4 BHK apartments in Virar, Vasai and Mumbai designed for modern families."
+              "Agarwal Group is a trusted real estate developer in Vasai–Virar with over 48+ years of experience delivering RERA-registered residential projects. Explore premium 1, 2, 3 & 4 BHK apartments in Virar, Vasai and Mumbai designed for modern families."
             </p>
             <address style={{ marginTop: '18px', fontStyle: 'normal', fontSize: '.86rem', fontWeight: 300, lineHeight: 1.7 }}>
               9, Gokul Annexe, Agarwal Gardens,<br />
@@ -120,7 +120,6 @@ export default function Footer() {
                 { to: '/channel-partner', label: 'Channel Partner' },
                 { to: '/contact', label: 'Contact Us' },
                 { to: '/careers', label: 'Careers' },
-                { to: '/story', label: 'Our Vision' },
                 // { to: '/projects', label: 'RERA Details' },
               ].map((link, i) => (
                 <Link key={i} to={link.to}
