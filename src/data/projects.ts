@@ -516,12 +516,12 @@ export const projects: Project[] = [
       }
     ],
     gallery: [
-      'gallery-exterior.jpg',
-      'gallery-lobby.jpg',
-      'gallery-living.jpg',
-      'gallery-bedroom.jpg',
-      'gallery-pool.jpg',
-      'gallery-aerial.jpg'
+      'skyrise-elev1.png',
+      'skyrise-living.png',
+      'skyrise-bedroom.png',
+      'skyrise-kitchen.png',
+      'skyrise-dining.png',
+      'skyrise-balcony.png'
     ],
     mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.7471885210675!2d72.8020161!3d19.4664638!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ab98fe48e75f%3A0x3677f404d52a5136!2sAgarwal%20skyrise!5e0!3m2!1sen!2sin!4v1784611565341!5m2!1sen!2sin'
   },

@@ -102,7 +102,21 @@ const galleryMap: Record<string, string> = {
   'gallery-bedroom.jpg': galleryBedroom,
   'gallery-pool.jpg': galleryPool,
   'gallery-aerial.jpg': galleryAerial,
+  // Skyrise specific
+  'skyrise-elev1.png': skyriseElev1,
+  'skyrise-living.png': skyriseLiving,
+  'skyrise-bedroom.png': skyriseBedroom,
+  'skyrise-kitchen.png': skyriseKitchen,
+  'skyrise-dining.png': skyriseDining,
+  'skyrise-balcony.png': skyriseBalcony,
 };
+
+// Skyrise Interior Images
+import skyriseLiving from '../assets/skyrise interior/livingRoom.png';
+import skyriseBedroom from '../assets/skyrise interior/bedroom1.png';
+import skyriseKitchen from '../assets/skyrise interior/kitchen.png';
+import skyriseDining from '../assets/skyrise interior/dining.png';
+import skyriseBalcony from '../assets/skyrise interior/balcony.png';
 
 // Amenity Images
 import amenityGym from '../assets/gymA.png';
@@ -113,6 +127,25 @@ import amenityMultipurpose from '../assets/multipurposeA.png';
 import amenityPlay from '../assets/playA.png';
 import amenityRooftop from '../assets/rooftopA.png';
 import amenitySwim from '../assets/swimmingA.png';
+
+// Skyrise Elevation Images
+import skyriseElev1 from '../assets/skyrise elevations/elev1.png';
+import skyriseElev2 from '../assets/skyrise elevations/elev2.png';
+import skyriseElev3 from '../assets/skyrise elevations/elev3.png';
+import skyriseElev4 from '../assets/skyrise elevations/elev4.png';
+import skyriseElev5 from '../assets/skyrise elevations/elev5.png';
+import skyriseElev6 from '../assets/skyrise elevations/elev6.png';
+import skyriseGate from '../assets/skyrise elevations/gate.png';
+
+// Skyrise Rooftop Amenities
+import rooftopGym from '../assets/skyrise amenities/gym.png';
+import rooftopGames from '../assets/skyrise amenities/outdoorGames.png';
+import rooftopPlayArea from '../assets/skyrise amenities/playArea.png';
+import rooftopSittingDeck from '../assets/skyrise amenities/sittingDeck.png';
+import rooftopPromenade from '../assets/skyrise amenities/ChatGPT Image Aug 1, 2026, 01_01_21 PM.png';
+import rooftopYoga from '../assets/skyrise amenities/ChatGPT Image Aug 1, 2026, 01_05_01 PM.png';
+import rooftopLounge from '../assets/skyrise amenities/ChatGPT Image Aug 1, 2026, 03_28_08 PM.png';
+import rooftopLawn from '../assets/skyrise amenities/ChatGPT Image Aug 1, 2026, 03_43_30 PM.png';
 
 const amenityImageMap: Record<string, string> = {
   'Grand Entrance Lobby': amenityLobby,
@@ -217,7 +250,7 @@ export default function ProjectDetails() {
   const [isBrochureDrawerOpen, setIsBrochureDrawerOpen] = useState(false);
   const [brochureFormSubmitted, setBrochureFormSubmitted] = useState(false);
   const contactRef = useRef<HTMLElement>(null);
-  const [activeAmenityTab, setActiveAmenityTab] = useState<'Elevation' | 'Podium Amenities' | 'Terrace Amenities'>('Podium Amenities');
+  const [activeAmenityTab, setActiveAmenityTab] = useState<'Project Elevation' | 'Podium Amenities' | 'Rooftop Amenities'>('Podium Amenities');
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
   useEffect(() => {
@@ -438,17 +471,10 @@ export default function ProjectDetails() {
           </div>
 
           {/* Right: Asymmetric Image Grid */}
-          <div className="flex flex-col gap-1 md:gap-2 h-full mt-10 lg:mt-0">
-            <div className="w-full aspect-[2/1] lg:aspect-auto lg:flex-[1.2] bg-line-light overflow-hidden">
-              <img src={galleryMap[project.gallery[0]]} alt="Overview 1" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
-            </div>
-            <div className="flex gap-1 md:gap-2 w-full lg:flex-1">
-              <div className="flex-1 aspect-[4/3] lg:aspect-auto bg-line-light overflow-hidden">
-                <img src={galleryMap[project.gallery[1]]} alt="Overview 2" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
-              </div>
-              <div className="flex-1 aspect-[4/3] lg:aspect-auto bg-line-light overflow-hidden">
-                <img src={galleryMap[project.gallery[2]]} alt="Overview 3" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
-              </div>
+          <div className="flex flex-col gap-1 md:gap-2 h-full mt-10 lg:mt-0 cursor-pointer">
+            <div className="w-full h-full bg-line-light overflow-hidden relative group">
+              <img src={galleryMap[project.gallery[0]]} alt="Overview" className="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-105" />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none" />
             </div>
           </div>
 
@@ -492,7 +518,7 @@ export default function ProjectDetails() {
               else if (patternIdx === 4) spanClass = 'col-span-1 md:col-span-1';
               else if (patternIdx === 5) {
                 spanClass = 'col-span-1 md:col-span-2 md:row-span-2';
-                heightClass = 'h-[250px] md:h-full';
+                heightClass = 'h-[250px] md:h-[504px] lg:h-[644px]';
               }
               else if (patternIdx === 6) spanClass = 'col-span-1 md:col-span-1';
               else if (patternIdx === 7) spanClass = 'col-span-1 md:col-span-1';
@@ -500,9 +526,43 @@ export default function ProjectDetails() {
               let imageSrc = `https://placehold.co/600x600/e2e0d8/8a867d?text=${project.slug}+${activeAmenityTab.split(' ')[0]}+${idx + 1}`;
               let displayText = `${activeAmenityTab} ${idx + 1}`;
 
+              if (activeAmenityTab === 'Project Elevation' && project.slug === 'skyrise') {
+                const elevImages = [
+                  { src: skyriseElev1, text: 'Street View' },
+                  { src: skyriseElev2, text: 'Front Elevation' },
+                  { src: skyriseElev3, text: 'Side Elevation' },
+                  { src: skyriseElev4, text: 'Podium Layout View' },
+                  { src: skyriseElev5, text: 'Terrace Seating Area' },
+                  { src: skyriseElev6, text: 'Bird\'s Eye View' },
+                  { src: skyriseGate, text: 'Grand Entrance Gate' },
+                  { src: skyriseElev1, text: 'Perspective View' }, // Fallback for 8th grid item
+                ];
+                if (elevImages[idx]) {
+                  imageSrc = elevImages[idx].src;
+                  displayText = elevImages[idx].text;
+                }
+              }
+
               if (activeAmenityTab === 'Podium Amenities' && project.amenities[idx]) {
                 displayText = project.amenities[idx];
                 imageSrc = amenityImageMap[displayText] || imageSrc;
+              }
+
+              if (activeAmenityTab === 'Rooftop Amenities' && project.slug === 'skyrise') {
+                const rooftopImages = [
+                  { src: rooftopYoga, text: 'Yoga & Meditation Zone' },
+                  { src: rooftopGym, text: 'Open Air Gym' },
+                  { src: rooftopPlayArea, text: 'Kids Play Area' },
+                  { src: rooftopGames, text: 'Giant Board Games' },
+                  { src: rooftopLounge, text: 'Family Seating & Lounge' },
+                  { src: rooftopPromenade, text: 'Walking Promenade' },
+                  { src: rooftopSittingDeck, text: 'Senior Citizen Deck' },
+                  { src: rooftopLawn, text: 'Multi-purpose Lawn' },
+                ];
+                if (rooftopImages[idx]) {
+                  imageSrc = rooftopImages[idx].src;
+                  displayText = rooftopImages[idx].text;
+                }
               }
 
               return (
