@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Instagram } from 'lucide-react';
 import { projects } from '../data/projects';
+import { contactEmailAxios } from '../_api/user';
 
 // Asset Imports
 import heroVideo from '../assets/hero.mp4';
@@ -356,9 +357,20 @@ export default function Home() {
   const countProjects = useCountUp(30, 1500, statsTriggered);
   const countFamilies = useCountUp(5000, 2000, statsTriggered);
 
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setContactSubmitted(true);
+    const formData = new FormData(e.currentTarget);
+    try {
+      await contactEmailAxios({
+        name: formData.get('name') as string,
+        mobile_number: formData.get('mobile_number') as string,
+        email: formData.get('email') as string,
+      });
+      setContactSubmitted(true);
+    } catch (err) {
+      console.error(err);
+      alert('Failed to submit. Please try again.');
+    }
   };
 
   return (
@@ -997,6 +1009,7 @@ export default function Home() {
                     <label style={{ display: 'block', fontSize: '.7rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-taupe)', fontWeight: 600 }}>Full Name*</label>
                     <input
                       type="text"
+                      name="name"
                       required
                       placeholder="Full Name"
                       style={{ width: '100%', border: '1px solid var(--color-line)', borderRadius: '4px', padding: '13px 15px', fontSize: '.95rem', fontFamily: 'inherit', color: 'var(--color-ink)', outline: 'none', background: '#ffffff' }}
@@ -1009,6 +1022,7 @@ export default function Home() {
                       <span style={{ display: 'flex', alignItems: 'center', background: 'var(--color-ivory)', borderRight: '1px solid var(--color-line)', fontSize: '.95rem', fontWeight: 500, color: 'var(--color-ink)', padding: '0 13px', userSelect: 'none' }}>+91</span>
                       <input
                         type="tel"
+                        name="mobile_number"
                         required
                         maxLength={10}
                         pattern="[0-9]{10}"
@@ -1026,6 +1040,7 @@ export default function Home() {
                     <label style={{ display: 'block', fontSize: '.7rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-taupe)', fontWeight: 600 }}>Email Address</label>
                     <input
                       type="email"
+                      name="email"
                       required
                       pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
                       title="Please enter a valid email address (e.g. name@example.com)"

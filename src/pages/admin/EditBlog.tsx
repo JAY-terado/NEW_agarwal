@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Save, X, Eye } from 'lucide-react';
 import { useBlogContext } from '../../context/BlogContext';
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
-import { createBlogAxios } from '../../_api/admin';
+import { updateBlogAxios, getBlogByIdAxios } from '../../_api/admin';
 import Swal from 'sweetalert2';
 
-export default function AddBlog() {
+export default function EditBlog() {
   const navigate = useNavigate();
+  const { id } = useParams();
   const { refreshBlogs } = useBlogContext();
 
   const [title, setTitle] = useState('');
@@ -33,11 +34,37 @@ export default function AddBlog() {
     }
   }, []);
 
+  useEffect(() => {
+    if (id) {
+      getBlogByIdAxios(Number(id)).then((response) => {
+        const data = response.data || response;
+        if (data) {
+          setTitle(data.titlename || '');
+          setCategory(data.category || '');
+          setExcerpt(data.summary || '');
+          setContent(data.article || '');
+          setImage(data.imageurl?.[0] || '');
+          if (quillRef.current && data.article) {
+            quillRef.current.root.innerHTML = data.article;
+          }
+        }
+      }).catch((e) => {
+        console.error("Failed to load blog", e);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to load blog data.',
+          confirmButtonColor: '#2b5a50',
+        });
+      });
+    }
+  }, [id]);
+
 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title || !category || !excerpt || !content || !image) {
+    if (!title || !category || !excerpt || !content || !image || !id) {
       Swal.fire({
         icon: 'error',
         title: 'Missing Information',
@@ -48,7 +75,8 @@ export default function AddBlog() {
     }
 
     try {
-      await createBlogAxios({
+      await updateBlogAxios({
+        id: Number(id),
         titlename: title,
         category,
         summary: excerpt,
@@ -58,7 +86,7 @@ export default function AddBlog() {
       Swal.fire({
         icon: 'success',
         title: 'Success!',
-        text: 'Blog published successfully!',
+        text: 'Blog updated successfully!',
         confirmButtonColor: '#2b5a50',
         timer: 2000,
         showConfirmButton: false
@@ -69,8 +97,8 @@ export default function AddBlog() {
       console.error(error);
       Swal.fire({
         icon: 'error',
-        title: 'Failed to Publish',
-        text: error?.response?.data?.message || 'There was an error publishing the blog.',
+        title: 'Failed to Update',
+        text: error?.response?.data?.message || 'There was an error updating the blog.',
         confirmButtonColor: '#2b5a50',
       });
     }
@@ -79,7 +107,7 @@ export default function AddBlog() {
   return (
     <div className="max-w-7xl mx-auto">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-serif text-ink">Add New Blog</h1>
+        <h1 className="text-3xl font-serif text-ink">Edit Blog</h1>
         <div className="flex items-center gap-3">
           <button
             type="button"
@@ -92,7 +120,7 @@ export default function AddBlog() {
             onClick={handleSubmit}
             className="flex items-center gap-2 bg-pine hover:bg-pine-deep text-white px-5 py-2.5 rounded-lg text-sm font-bold tracking-wide transition-colors shadow-md"
           >
-            <Save className="w-4 h-4" /> Publish Blogs
+            <Save className="w-4 h-4" /> Update Blog
           </button>
         </div>
       </div>

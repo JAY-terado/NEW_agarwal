@@ -1,25 +1,29 @@
 import { Link } from 'react-router-dom';
-import { useBlogContext } from '../context/BlogContext';
-
-// Blog Asset Imports
+import { useState, useEffect } from 'react';
+import { getAllBlogsAxios } from '../_api/admin';
+import type { BlogPost as BlogPostType } from '../data/blogs';
 import blogGreen from '../assets/blog-green.jpg';
-import blogClub from '../assets/blog-club.jpg';
-import blogInteriors from '../assets/blog-interiors.jpg';
-import blogInvest from '../assets/blog-invest.jpg';
-import blogCraft from '../assets/blog-craft.jpg';
-import blogFestival from '../assets/blog-festival.jpg';
-
-const blogImageMap: Record<string, string> = {
-  'blog-green.jpg': blogGreen,
-  'blog-club.jpg': blogClub,
-  'blog-interiors.jpg': blogInteriors,
-  'blog-invest.jpg': blogInvest,
-  'blog-craft.jpg': blogCraft,
-  'blog-festival.jpg': blogFestival,
-};
 
 export default function Blog() {
-  const { blogs } = useBlogContext();
+  const [blogs, setBlogs] = useState<BlogPostType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    getAllBlogsAxios().then(response => {
+      const apiData = Array.isArray(response.data) ? response.data : Array.isArray(response) ? response : [];
+      const mappedBlogs: BlogPostType[] = apiData.map((b: any) => ({
+        id: b.id.toString(),
+        title: b.titlename,
+        category: b.category,
+        excerpt: b.summary,
+        content: b.article,
+        image: b.imageurl && b.imageurl.length > 0 ? b.imageurl[0] : '',
+        date: new Date(b.createdAt || Date.now()).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+      }));
+      setBlogs(mappedBlogs);
+    }).catch(e => console.error(e))
+      .finally(() => setIsLoading(false));
+  }, []);
 
   return (
     <div style={{ background: 'var(--color-ivory)', minHeight: '100vh' }}>
@@ -57,9 +61,14 @@ export default function Blog() {
       {/* Blog Post Grid Section */}
       <section className="section">
         <div className="wrap-widescreen">
-          <div className="blog-grid">
-            {blogs.map((post) => {
-              const blogImg = blogImageMap[post.image] || post.image;
+          {isLoading ? (
+            <div className="text-center py-20 text-taupe">Loading stories...</div>
+          ) : blogs.length === 0 ? (
+            <div className="text-center py-20 text-taupe">No stories available at the moment.</div>
+          ) : (
+            <div className="blog-grid">
+              {blogs.map((post) => {
+                const blogImg = post.image || 'https://via.placeholder.com/600x400?text=No+Image';
               return (
                 <article key={post.id} className="bcard">
                   <div className="bcard-media">
@@ -83,7 +92,8 @@ export default function Blog() {
                 </article>
               );
             })}
-          </div>
+            </div>
+          )}
         </div>
       </section>
     </div>

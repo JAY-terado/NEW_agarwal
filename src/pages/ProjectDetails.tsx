@@ -39,6 +39,7 @@ const iconComponents: Record<string, React.ElementType> = {
 };
 
 import { projects } from '../data/projects';
+import { contactEmailAxios, createLeadAxios } from '../_api/user';
 
 // Gallery Asset Imports
 import galleryExterior from '../assets/gallery-exterior.jpg';
@@ -67,8 +68,8 @@ import agarwalInfinityMRQR from '../assets/agarwalInfinityMRQR.jpeg';
 
 // import qrSample from '../assets/qrSample.svg';
 
-// Brochure import (placeholder for all projects currently)
-import palmPremiereBrochure from '../assets/brochures/palm-premiere-brochure.pdf';
+// // Brochure import (placeholder for all projects currently)
+// import palmPremiereBrochure from '../assets/brochures/palm-premiere-brochure.pdf';
 
 const projectHeroMap: Record<string, string> = {
   infinity: infinityHero,
@@ -297,7 +298,7 @@ export default function ProjectDetails() {
     } else {
       document.body.style.overflow = '';
     }
-    
+
     return () => {
       document.body.style.overflow = '';
     };
@@ -316,14 +317,38 @@ export default function ProjectDetails() {
 
   const heroImage = projectHeroMap[project.slug];
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setFormSubmitted(true);
+    const formData = new FormData(e.currentTarget);
+    try {
+      await contactEmailAxios({
+        name: formData.get('name') as string,
+        mobile_number: formData.get('mobile_number') as string,
+        email: formData.get('email') as string,
+      });
+      setFormSubmitted(true);
+    } catch (err) {
+      console.error(err);
+      alert('Failed to submit. Please try again.');
+    }
   };
 
-  const handleBrochureSubmit = (e: React.FormEvent) => {
+  const handleBrochureSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setBrochureFormSubmitted(true);
+    const formData = new FormData(e.currentTarget);
+    try {
+      await createLeadAxios({
+        name: formData.get('name') as string,
+        mobile_number: formData.get('mobile_number') as string,
+        email: formData.get('email') as string,
+        requirement: 'Brochure Download',
+        company: project?.name?.replace(/agarwal /i, '')?.replace(/\s+/g, '')?.toLowerCase() || 'unknown'
+      });
+      setBrochureFormSubmitted(true);
+    } catch (err) {
+      console.error(err);
+      alert('Failed to submit. Please try again.');
+    }
   };
 
   return (
@@ -913,7 +938,7 @@ export default function ProjectDetails() {
             >
               <div className="absolute inset-0 bg-[#b59254] -translate-y-[101%] group-hover:translate-y-0 transition-transform duration-[600ms] ease-[var(--ease)] z-0" />
               <div className="absolute inset-0 w-full h-[45%] bg-gradient-to-b from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0 pointer-events-none" />
-              
+
               <div className="relative z-10 flex items-center">
                 <span>Enquire Now</span>
                 <span className="flex items-center justify-center overflow-hidden max-h-0 opacity-0 -translate-y-2 group-hover:max-h-[20px] group-hover:mt-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-[var(--ease)]">
@@ -983,6 +1008,7 @@ export default function ProjectDetails() {
                     <label className="block text-xs uppercase tracking-widest text-ink-soft mb-2 font-semibold">Full Name *</label>
                     <input
                       type="text"
+                      name="name"
                       required
                       className="w-full border-b border-line-light bg-transparent py-2 outline-none focus:border-brass-deep transition-colors text-ink"
                       placeholder="Enter your name"
@@ -992,6 +1018,7 @@ export default function ProjectDetails() {
                     <label className="block text-xs uppercase tracking-widest text-ink-soft mb-2 font-semibold">Phone Number *</label>
                     <input
                       type="tel"
+                      name="mobile_number"
                       required
                       className="w-full border-b border-line-light bg-transparent py-2 outline-none focus:border-brass-deep transition-colors text-ink"
                       placeholder="+91"
@@ -1001,6 +1028,7 @@ export default function ProjectDetails() {
                     <label className="block text-xs uppercase tracking-widest text-ink-soft mb-2 font-semibold">Email Address *</label>
                     <input
                       type="email"
+                      name="email"
                       required
                       className="w-full border-b border-line-light bg-transparent py-2 outline-none focus:border-brass-deep transition-colors text-ink"
                       placeholder="Enter your email"
@@ -1022,16 +1050,8 @@ export default function ProjectDetails() {
                     </svg>
                   </div>
                   <h4 className="font-serif text-2xl text-ink mb-3">Thank You!</h4>
-                  <p className="text-ink-soft mb-8">Your brochure is ready to download.</p>
+                  <p className="text-ink-soft mb-8">Your brochure is sent successfully via email.</p>
 
-                  {/* Dynamic Brochure Link */}
-                  <a
-                    href={palmPremiereBrochure}
-                    download={`${project.name}-Brochure.pdf`}
-                    className="bg-pine text-white font-bold tracking-widest uppercase text-sm py-3 px-8 rounded-full hover:bg-pine/90 transition-colors shadow-lg hover:shadow-xl"
-                  >
-                    Click to Download
-                  </a>
                 </div>
               )}
             </motion.div>
@@ -1065,40 +1085,60 @@ export default function ProjectDetails() {
               >
                 <X className="w-4 h-4" />
               </button>
-              <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '12px', lineHeight: 1.4 }}>
-                Request an Immediate Callback for Exclusive Offers.
-              </div>
-              <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingBottom: '20px', marginBottom: '24px', fontWeight: 300, borderBottom: '1px solid var(--color-line)' }}>
-                Share your details and our relationship manager will contact you with special offer.
-              </div>
-              <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
-                <div className="flex flex-col">
-                  <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Full Name</label>
-                  <input type="text" placeholder="Full Name" className="border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors bg-white" required />
-                </div>
-                <div className="flex flex-col">
-                  <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Mobile Number</label>
-                  <div className="flex">
-                    <div className="bg-paper border border-line border-r-0 rounded-l-xl px-4 flex items-center justify-center font-bold text-sm text-ink">+91</div>
-                    <input type="text" placeholder="00000 00000" className="border border-line rounded-r-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors flex-1 bg-white" required />
+              {!formSubmitted ? (
+                <>
+                  <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '12px', lineHeight: 1.4 }}>
+                    Request an Immediate Callback for Exclusive Offers.
                   </div>
+                  <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingBottom: '20px', marginBottom: '24px', fontWeight: 300, borderBottom: '1px solid var(--color-line)' }}>
+                    Share your details and our relationship manager will contact you with special offer.
+                  </div>
+                  <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
+                    <div className="flex flex-col">
+                      <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Full Name</label>
+                      <input type="text" name="name" placeholder="Full Name" className="border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors bg-white" required />
+                    </div>
+                    <div className="flex flex-col">
+                      <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Mobile Number</label>
+                      <div className="flex">
+                        <div className="bg-paper border border-line border-r-0 rounded-l-xl px-4 flex items-center justify-center font-bold text-sm text-ink">+91</div>
+                        <input type="text" name="mobile_number" placeholder="00000 00000" className="border border-line rounded-r-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors flex-1 bg-white" required />
+                      </div>
+                    </div>
+                    <div className="flex flex-col">
+                      <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Email Address</label>
+                      <input type="email" name="email" placeholder="you@email.com" className="border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors bg-white" required />
+                    </div>
+                    <button
+                      type="submit"
+                      className="pcta-btn btn-enquire"
+                      style={{ width: '100%', marginTop: '8px' }}
+                    >
+                      <span>Get Best Offers</span>
+                      <span className="arr">→</span>
+                    </button>
+                  </form>
+                  <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', marginTop: '10px', lineHeight: 1.4 }}>
+                    By Clicking Above Button, I Authorize Agarwal Group And Its Representatives To Call, SMS, Email Or Whatsapp Me About Its Products And Offers. This Consent Overrides Any Registration For DND NDNC.
+                  </div>
+                </>
+              ) : (
+                <div className="flex flex-col items-center justify-center text-center h-full py-8">
+                  <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center text-green-600 mb-6">
+                    <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h4 className="font-serif text-2xl text-ink mb-3">Callback Requested!</h4>
+                  <p className="text-ink-soft mb-8">Thank you! Your details have been submitted. Our relationship manager will reach out shortly.</p>
+                  <button
+                    onClick={() => setHasClosedFloater(true)}
+                    className="bg-brass-deep text-white font-bold tracking-widest uppercase text-sm py-3 px-8 rounded-full hover:bg-[#b59254] transition-colors shadow-lg hover:shadow-xl"
+                  >
+                    Close
+                  </button>
                 </div>
-                <div className="flex flex-col">
-                  <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Email Address</label>
-                  <input type="email" placeholder="you@email.com" className="border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors bg-white" required />
-                </div>
-                <button
-                  type="submit"
-                  className="pcta-btn btn-enquire"
-                  style={{ width: '100%', marginTop: '8px' }}
-                >
-                  <span>Get Best Offers</span>
-                  <span className="arr">→</span>
-                </button>
-              </form>
-              <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', marginTop: '10px', lineHeight: 1.4 }}>
-                By Clicking Above Button, I Authorize Agarwal Group And Its Representatives To Call, SMS, Email Or Whatsapp Me About Its Products And Offers. This Consent Overrides Any Registration For DND NDNC.
-              </div>
+              )}
             </motion.div>
           </>
         )}
@@ -1150,6 +1190,7 @@ export default function ProjectDetails() {
                     <label className="block text-xs tracking-widest uppercase text-taupe font-bold">Full Name*</label>
                     <input
                       type="text"
+                      name="name"
                       required
                       placeholder="Full Name"
                       className="w-full border border-line-light rounded-xl p-4 text-sm text-ink outline-none bg-paper focus:border-brass transition-colors"
@@ -1162,6 +1203,7 @@ export default function ProjectDetails() {
                       <span className="flex items-center bg-ivory border-r border-line-light text-sm font-medium text-ink px-4 select-none">+91</span>
                       <input
                         type="tel"
+                        name="mobile_number"
                         required
                         maxLength={10}
                         pattern="[0-9]{10}"
@@ -1179,6 +1221,7 @@ export default function ProjectDetails() {
                     <label className="block text-xs tracking-widest uppercase text-taupe font-bold">Email Address</label>
                     <input
                       type="email"
+                      name="email"
                       pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
                       title="Please enter a valid email address (e.g. name@example.com)"
                       placeholder="you@email.com"

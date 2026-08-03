@@ -1,49 +1,67 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
-import { blogs as initialBlogs, type BlogPost } from '../data/blogs';
+import { type BlogPost } from '../data/blogs';
+import { getAllBlogsAxios, deleteBlogAxios } from '../_api/admin';
+import toast from 'react-hot-toast';
 
 interface BlogContextType {
   blogs: BlogPost[];
-  addBlog: (blog: BlogPost) => void;
-  deleteBlog: (id: string) => void;
+  isLoading: boolean;
+  refreshBlogs: () => Promise<void>;
+  deleteBlog: (id: string | number) => Promise<void>;
 }
 
 const BlogContext = createContext<BlogContextType | undefined>(undefined);
 
 export const BlogProvider = ({ children }: { children: ReactNode }) => {
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    // On mount, load any custom blogs from localStorage and merge with static blogs
-    const customBlogsStr = localStorage.getItem('agarwal_custom_blogs');
-    const customBlogs: BlogPost[] = customBlogsStr ? JSON.parse(customBlogsStr) : [];
-    
-    // Custom blogs go first so they appear at the top
-    setBlogs([...customBlogs, ...initialBlogs]);
-  }, []);
+  const fetchBlogs = async () => {
+    setIsLoading(true);
+    try {
+      const response = await getAllBlogsAxios();
+      // Adjust based on your API response structure, assuming response.data or response directly is the array
+      const apiData = Array.isArray(response.data) ? response.data : Array.isArray(response) ? response : [];
+      
+      const mappedBlogs: BlogPost[] = apiData.map((b: any) => ({
+        id: b.id.toString(),
+        title: b.titlename,
+        category: b.category,
+        excerpt: b.summary,
+        content: b.article,
+        image: b.imageurl && b.imageurl.length > 0 ? b.imageurl[0] : '',
+        date: new Date(b.createdAt || Date.now()).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+      }));
 
-  const addBlog = (newBlog: BlogPost) => {
-    const customBlogsStr = localStorage.getItem('agarwal_custom_blogs');
-    const customBlogs: BlogPost[] = customBlogsStr ? JSON.parse(customBlogsStr) : [];
-    
-    const updatedCustomBlogs = [newBlog, ...customBlogs];
-    localStorage.setItem('agarwal_custom_blogs', JSON.stringify(updatedCustomBlogs));
-    
-    setBlogs([...updatedCustomBlogs, ...initialBlogs]);
+      // Set API blogs directly
+      setBlogs(mappedBlogs);
+    } catch (error) {
+      console.error("Failed to fetch blogs:", error);
+      // Fallback on error
+      setBlogs([]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const deleteBlog = (id: string) => {
-    // Only allow deleting custom blogs for safety
-    const customBlogsStr = localStorage.getItem('agarwal_custom_blogs');
-    if (customBlogsStr) {
-      const customBlogs: BlogPost[] = JSON.parse(customBlogsStr);
-      const updatedCustomBlogs = customBlogs.filter(b => b.id !== id);
-      localStorage.setItem('agarwal_custom_blogs', JSON.stringify(updatedCustomBlogs));
-      setBlogs([...updatedCustomBlogs, ...initialBlogs]);
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
+
+  const deleteBlog = async (id: string | number) => {
+    
+    try {
+      await deleteBlogAxios(Number(id));
+      toast.success("Blog deleted successfully");
+      await fetchBlogs();
+    } catch (error) {
+      console.error("Failed to delete blog:", error);
+      toast.error("Failed to delete blog");
     }
   };
 
   return (
-    <BlogContext.Provider value={{ blogs, addBlog, deleteBlog }}>
+    <BlogContext.Provider value={{ blogs, isLoading, refreshBlogs: fetchBlogs, deleteBlog }}>
       {children}
     </BlogContext.Provider>
   );

@@ -7,8 +7,10 @@ import ProjectDetails from './pages/ProjectDetails';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import AdminLayout from './pages/admin/AdminLayout';
+import AdminLogin from './pages/admin/AdminLogin';
 import BlogList from './pages/admin/BlogList';
 import AddBlog from './pages/admin/AddBlog';
+import EditBlog from './pages/admin/EditBlog';
 import { BlogProvider } from './context/BlogContext';
 import ChannelPartner from './pages/ChannelPartner';
 import CustomerRegistration from './pages/CustomerRegistration';
@@ -53,10 +55,12 @@ function AnimatedRoutes() {
           <Route path="/completed-projects" element={<CompletedProjects />} />
           
           {/* Admin Routes */}
+          <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<BlogList />} />
             <Route path="blogs" element={<BlogList />} />
             <Route path="blogs/new" element={<AddBlog />} />
+            <Route path="blogs/edit/:id" element={<EditBlog />} />
           </Route>
         </Routes>
       </motion.div>

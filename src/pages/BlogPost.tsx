@@ -1,41 +1,46 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Clock, ArrowLeft } from 'lucide-react';
-import { useBlogContext } from '../context/BlogContext';
+import { getBlogByIdAxios } from '../_api/admin';
 import { type BlogPost as BlogPostType } from '../data/blogs';
-
-// Blog Asset Imports
-import blogGreen from '../assets/blog-green.jpg';
-import blogClub from '../assets/blog-club.jpg';
-import blogInteriors from '../assets/blog-interiors.jpg';
-import blogInvest from '../assets/blog-invest.jpg';
-import blogCraft from '../assets/blog-craft.jpg';
-import blogFestival from '../assets/blog-festival.jpg';
-
-const blogImageMap: Record<string, string> = {
-  'blog-green.jpg': blogGreen,
-  'blog-club.jpg': blogClub,
-  'blog-interiors.jpg': blogInteriors,
-  'blog-invest.jpg': blogInvest,
-  'blog-craft.jpg': blogCraft,
-  'blog-festival.jpg': blogFestival,
-};
 
 export default function BlogPost() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { blogs } = useBlogContext();
+  const [isLoading, setIsLoading] = useState(true);
   const [post, setPost] = useState<BlogPostType | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const foundPost = blogs.find(b => b.id === id);
-    if (foundPost) {
-      setPost(foundPost);
-    } else {
+    if (!id) return;
+    
+    setIsLoading(true);
+    getBlogByIdAxios(Number(id)).then(response => {
+      const data = response.data || response;
+      if (data && data.titlename) { // Check if valid blog exists
+        setPost({
+          id: data.id.toString(),
+          title: data.titlename,
+          category: data.category,
+          excerpt: data.summary,
+          content: data.article,
+          image: data.imageurl && data.imageurl.length > 0 ? data.imageurl[0] : '',
+          date: new Date(data.createdAt || Date.now()).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+        });
+      } else {
+        navigate('/blogs');
+      }
+    }).catch(e => {
+      console.error(e);
       navigate('/blogs');
-    }
+    }).finally(() => {
+      setIsLoading(false);
+    });
   }, [id, navigate]);
+
+  if (isLoading) {
+    return <div className="bg-white min-h-screen text-ink pb-24 pt-32 text-center text-taupe">Loading story...</div>;
+  }
 
   if (!post) return null;
 
@@ -76,7 +81,7 @@ export default function BlogPost() {
       <section className="w-full max-w-5xl mx-auto px-6 mb-12">
         <div className="w-full h-[40vh] sm:h-[60vh] bg-ivory rounded-lg overflow-hidden">
           <img
-            src={blogImageMap[post.image] || post.image}
+            src={post.image || 'https://via.placeholder.com/1200x800?text=No+Image'}
             alt={post.title}
             className="w-full h-full object-cover"
           />
@@ -94,11 +99,18 @@ export default function BlogPost() {
         </p>
         
         <article className="flex flex-col gap-6">
-          {post.content.map((paragraph, index) => (
-            <p key={index} className="text-[15px] sm:text-[17px] text-ink-soft leading-[1.8] font-light">
-              {paragraph}
-            </p>
-          ))}
+          {Array.isArray(post.content) ? (
+            post.content.map((paragraph, index) => (
+              <p key={index} className="text-[15px] sm:text-[17px] text-ink-soft leading-[1.8] font-light">
+                {paragraph}
+              </p>
+            ))
+          ) : (
+            <div 
+              className="prose prose-lg max-w-none text-[15px] sm:text-[17px] text-ink-soft leading-[1.8] font-light [&>p]:mb-6"
+              dangerouslySetInnerHTML={{ __html: post.content }} 
+            />
+          )}
         </article>
       </section>
     </div>

@@ -120,7 +120,7 @@ export default function Footer() {
                 { to: '/channel-partner', label: 'Channel Partner' },
                 { to: '/contact', label: 'Contact Us' },
                 { to: '/careers', label: 'Careers' },
-                // { to: '/projects', label: 'RERA Details' },
+                { to: '/admin/login', label: 'Admin Panel' },
               ].map((link, i) => (
                 <Link key={i} to={link.to}
                   onClick={() => window.scrollTo(0, 0)}

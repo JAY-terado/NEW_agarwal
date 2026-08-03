@@ -1,13 +1,30 @@
-import { Outlet, Link, useLocation } from 'react-router-dom';
-import { Home, FileText, PlusCircle, Settings } from 'lucide-react';
+import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
+import { Home, Settings, LogOut } from 'lucide-react';
+import { logoutAxios } from '../../_api/admin';
+import Cookies from 'js-cookie';
 
 export default function AdminLayout() {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    const token = Cookies.get("token");
+    if (token) {
+      try {
+        await logoutAxios(token);
+      } catch (e) {
+        console.error("Logout failed", e);
+      }
+    }
+    Cookies.remove("token");
+    Cookies.remove("userToken");
+    navigate('/admin/login');
+  };
 
   const menu = [
     { name: 'Dashboard', path: '/admin', icon: <Home className="w-5 h-5" /> },
-    { name: 'All Blogs', path: '/admin/blogs', icon: <FileText className="w-5 h-5" /> },
-    { name: 'Add New Blog', path: '/admin/blogs/new', icon: <PlusCircle className="w-5 h-5" /> },
+    // { name: 'All Blogs', path: '/admin/blogs', icon: <FileText className="w-5 h-5" /> },
+    // { name: 'Add New Blog', path: '/admin/blogs/new', icon: <PlusCircle className="w-5 h-5" /> },
     { name: 'Back to Website', path: '/', icon: <Settings className="w-5 h-5" /> },
   ];
 
@@ -25,11 +42,10 @@ export default function AdminLayout() {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                  isActive 
-                    ? 'bg-pine text-white shadow-md' 
-                    : 'text-ink-soft hover:bg-ivory/50 hover:text-ink'
-                }`}
+                className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${isActive
+                  ? 'bg-pine text-white shadow-md'
+                  : 'text-ink-soft hover:bg-ivory/50 hover:text-ink'
+                  }`}
               >
                 {item.icon}
                 {item.name}
@@ -43,11 +59,21 @@ export default function AdminLayout() {
       <main className="flex-1 flex flex-col overflow-hidden">
         <header className="h-16 bg-white border-b border-line px-8 flex items-center justify-between shadow-sm z-10">
           <h2 className="text-lg font-medium text-ink">Content Management</h2>
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-brass-bright flex items-center justify-center text-pine font-bold text-sm">
-              AD
+          <div className="flex items-center gap-5">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-brass-bright flex items-center justify-center text-pine font-bold text-sm">
+                AD
+              </div>
+              <span className="text-sm font-medium text-ink-soft">Admin User</span>
             </div>
-            <span className="text-sm font-medium text-ink-soft">Admin User</span>
+            <div className="h-6 w-px bg-line"></div>
+            <button 
+              onClick={handleLogout}
+              className="text-rose-500 hover:text-rose-600 flex items-center gap-2 text-sm font-medium transition-colors"
+            >
+              <LogOut className="w-4 h-4" />
+              <span>Logout</span>
+            </button>
           </div>
         </header>
         <div className="flex-1 overflow-y-auto p-8">
