@@ -15,7 +15,7 @@ export default function Footer() {
               style={{ height: '42px', width: 'auto', display: 'block', borderRadius: '8px', marginBottom: '2px' }}
             />
             <p style={{ marginTop: '18px', fontSize: '.92rem', fontWeight: 300, fontStyle: 'italic', fontFamily: '"Fraunces", serif', maxWidth: '36ch', color: 'var(--ink-soft)' }}>
-              "Agarwal Group is a trusted real estate developer in Vasai–Virar with over 48+ years of experience delivering RERA-registered residential projects. Explore premium 1, 2, 3 & 4 BHK apartments in Virar, Vasai and Mumbai designed for modern families."
+              "Agarwal Group is a trusted real estate developer in Vasai–Virar and MMR Mumbai with over 48+ years of experience delivering RERA-registered residential and commercial projects. Explore premium 1, 2, 3 & 4 BHK apartments in Virar, Vasai and Mumbai designed for modern families."
             </p>
             <address style={{ marginTop: '18px', fontStyle: 'normal', fontSize: '.86rem', fontWeight: 300, lineHeight: 1.7 }}>
               9, Gokul Annexe, Agarwal Gardens,<br />
@@ -35,6 +35,13 @@ export default function Footer() {
                 onMouseLeave={e => { e.currentTarget.style.color = 'var(--ink-soft)'; e.currentTarget.style.transform = 'translateX(0)'; }}>
                 +91 84080 08002
               </a>
+
+              <a href="tel:+918408008003" style={{ display: 'inline-block', fontWeight: 300, color: 'var(--ink-soft)', transition: 'all 0.3s ease', fontFamily: '"Fraunces", serif', fontSize: '1.05rem', transform: 'translateX(0)' }}
+                onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass-deep)'; e.currentTarget.style.transform = 'translateX(6px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.color = 'var(--ink-soft)'; e.currentTarget.style.transform = 'translateX(0)'; }}>
+                +91 84080 08003
+              </a>
+
               <a href="mailto:sales@agarwalrealties.com" style={{ display: 'inline-block', fontSize: '.9rem', fontWeight: 300, color: 'var(--ink-soft)', transition: 'all 0.3s ease', transform: 'translateX(0)' }}
                 onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass-deep)'; e.currentTarget.style.transform = 'translateX(6px)'; }}
                 onMouseLeave={e => { e.currentTarget.style.color = 'var(--ink-soft)'; e.currentTarget.style.transform = 'translateX(0)'; }}>
@@ -112,15 +119,15 @@ export default function Footer() {
             </h5>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {[
-                { to: '/customer-registration', label: 'Customer Registration' },
+                { to: '/channel-partner', label: 'Channel Partner' },
                 { to: '/about-us', label: 'About Us' },
                 { to: '/projects', label: 'Ongoing Projects' },
                 { to: '/projects', label: 'Completed Projects' },
                 { to: '/blogs', label: 'Blogs' },
-                { to: '/channel-partner', label: 'Channel Partner' },
                 { to: '/contact', label: 'Contact Us' },
                 { to: '/careers', label: 'Careers' },
                 { to: '/admin/login', label: 'Admin Panel' },
+                { to: '/customer-registration', label: 'Customer Registration' },
               ].map((link, i) => (
                 <Link key={i} to={link.to}
                   onClick={() => window.scrollTo(0, 0)}

@@ -268,11 +268,12 @@ export default function ProjectDetails() {
 
   useEffect(() => {
     if (!showFloater || hasClosedFloater) {
+      const delay = (!showFloater && !hasClosedFloater) ? 20000 : 30000;
       const timer = setTimeout(() => {
         setShowFloater(true);
         setHasClosedFloater(false);
         setIsManualFloater(false);
-      }, 20000);
+      }, delay);
       return () => clearTimeout(timer);
     }
   }, [showFloater, hasClosedFloater]);
@@ -747,7 +748,7 @@ export default function ProjectDetails() {
 
             <div className="lg:col-span-2">
               <ul className="grid grid-cols-1 gap-4 font-medium">
-                {project.connectivity.map((conn, idx) => {
+                {[...project.connectivity].sort((a, b) => (parseInt(a.value) || 0) - (parseInt(b.value) || 0)).map((conn, idx) => {
                   let Icon = MapPin;
                   const k = conn.key.toLowerCase();
                   if (k.includes('station') || k.includes('train') || k.includes('metro')) Icon = Train;
@@ -822,7 +823,7 @@ export default function ProjectDetails() {
           <div className="section-head">
             <span className="eyebrow">FAQ</span>
             <h2 className="serif">Questions, <em>Answered</em></h2>
-            <p>Everything you need to know before making <em className='text-brass'>{project.name}</em> your home.</p>
+            <p>Everything you need to know before making <em className='text-brass font-bold'>{project.name}</em> your home.</p>
           </div>
 
           <div className="faq-wrap">
@@ -882,7 +883,8 @@ export default function ProjectDetails() {
                   <div
                     className="faq-a"
                     style={{
-                      maxHeight: isOpen ? '200px' : '0px',
+                      maxHeight: isOpen ? '500px' : '0px',
+                      overflowY: isOpen ? 'auto' : 'hidden',
                       transition: 'max-height .45s var(--ease)',
                     }}
                   >
@@ -1088,7 +1090,7 @@ export default function ProjectDetails() {
               {!formSubmitted ? (
                 <>
                   <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '12px', lineHeight: 1.4 }}>
-                    Request an Immediate Callback for Exclusive Offers.
+                    Request an <span className="text-brass">Immediate Callback</span> for Exclusive Offers.
                   </div>
                   <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingBottom: '20px', marginBottom: '24px', fontWeight: 300, borderBottom: '1px solid var(--color-line)' }}>
                     Share your details and our relationship manager will contact you with special offer.
@@ -1179,7 +1181,7 @@ export default function ProjectDetails() {
                 <form onSubmit={handleFormSubmit} className="flex flex-col gap-5">
                   <div className="flex flex-col">
                     <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '4px', lineHeight: 1.4 }}>
-                      Request an Immediate Callback for Exclusive Offers.
+                      Request an <span className="text-brass">Immediate Callback</span> for Exclusive Offers.
                     </div>
                     <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingBottom: '20px', marginBottom: '0px', fontWeight: 300, borderBottom: '1px solid var(--color-line)' }}>
                       Share your details and our relationship manager will contact you with special offer.

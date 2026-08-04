@@ -324,7 +324,7 @@ export const projects: Project[] = [
         a: "The spacious 2 BHK residences at Agarwal Sky Heights are ideal for growing families seeking premium living, excellent connectivity and modern amenities in Vasai East."
       },
       {
-        q: "Is Agarwal Sky Heights a good choice for 3 BHK luxury homes in Virar West?",
+        q: "Is Agarwal Sky Heights a good choice for 3 BHK luxury homes in Vasai East?",
         a: "Yes. The spacious 3 BHK residences at Agarwal Sky Heights offers luxury residences, designed for buyers looking for spacious homes with premium lifestyle features in Vasai East."
       },
       {

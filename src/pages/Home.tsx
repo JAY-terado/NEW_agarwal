@@ -820,6 +820,7 @@ export default function Home() {
                     className="faq-a"
                     style={{
                       maxHeight: isOpen ? '500px' : '0px',
+                      overflowY: isOpen ? 'auto' : 'hidden',
                       transition: 'max-height .45s var(--ease)',
                     }}
                   >
@@ -856,8 +857,21 @@ export default function Home() {
                     <div className="bpost-date">{post.date}</div>
                     <h3 className="serif">{post.title}</h3>
                     <p>{post.excerpt}</p>
-                    <Link className="bread" to="/blogs">
-                      Read More <span className="arr">→</span>
+                    <Link className="custom-read-more" to="/blogs" style={{ marginTop: 'auto' }}>
+                      <span className="custom-read-more__label">Read More</span>
+                      <span className="custom-read-more__icon">
+                        <span className="custom-read-more__icon-small">
+                          <svg viewBox="0 0 100 100">
+                            <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50"></polygon>
+                          </svg>
+                        </span>
+                        <span className="custom-read-more__icon-circle">
+                          <svg viewBox="0 0 100 100">
+                            <path className="bottomcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                            <path pathLength="100" className="topcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                          </svg>
+                        </span>
+                      </span>
                     </Link>
                   </div>
                 </article>
@@ -964,20 +978,21 @@ export default function Home() {
           <div className="reveal">
             <span className="eyebrow">Contact Us</span>
             <h2 className="serif" style={{ fontFamily: '"Fraunces", serif', fontSize: 'clamp(2.1rem, 4.6vw, 3.6rem)', fontWeight: 300, lineHeight: 1.08, margin: '.4em 0 0', letterSpacing: '-.01em', color: 'var(--color-ink)' }}>
-              Contact <em>Agarwal Group</em>
+              Contact <em className='text-brass'>Agarwal Group</em>
 
             </h2>
             <p className="lead" style={{ marginTop: '1.2em', color: 'var(--color-ink-soft)', fontSize: '1.1rem', fontWeight: 300, lineHeight: 1.6 }}>
-              Looking for the best residential project in Virar or Vasai?
+              Looking for the best residential project in Virar, Vasai or MMR Mumbai?
             </p>
             <p className="lead" style={{ marginTop: '1.2em', color: 'var(--color-ink-soft)', fontSize: '1.1rem', fontWeight: 300, lineHeight: 1.6 }}>
-              Speak with our property experts to explore premium 1, 2, 3 and 4 BHK apartments, schedule a site visit, compare projects and receive exclusive launch offers.
+              Speak with our property experts to explore premium 1, 2, 3 and 4 BHK apartments, schedule a site visit, compare projects and receive exclusive offers.
             </p>
             <div className="cinfo">
               <div>
                 <div className="ct">Phone</div>
                 <a href="tel:+918408008001" className="block w-fit transition-transform duration-300 hover:scale-105 hover:text-brass-deep origin-left">+91 840 800 8001</a>
                 <a href="tel:+918408008002" className="block w-fit transition-transform duration-300 hover:scale-105 hover:text-brass-deep origin-left">+91 840 800 8002</a>
+                <a href="tel:+918408008003" className="block w-fit transition-transform duration-300 hover:scale-105 hover:text-brass-deep origin-left">+91 840 800 8003</a>
               </div>
               <div>
                 <div className="ct">Email</div>
@@ -997,7 +1012,7 @@ export default function Home() {
           {/* Right form Card - matches original 3-field callback form exactly */}
           <div className="form reveal" style={{ background: 'var(--color-ivory)', border: '1px solid var(--color-line)', borderRadius: '8px', padding: 'clamp(26px, 4vw, 42px)', paddingBottom: '24px' }}>
             <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '4px', lineHeight: 1.4 }}>
-              Request an Immediate Callback for Exclusive Offers.
+              Request an <span className="text-brass">Immediate Callback</span> for Exclusive Offers.
             </div>
             <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingBottom: '20px', marginBottom: '20px', fontWeight: 300, borderBottom: '1px solid var(--color-line)' }}>
               Share your details and our relationship manager will contact you with special offer.
