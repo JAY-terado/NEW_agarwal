@@ -39,6 +39,7 @@ const iconComponents: Record<string, React.ElementType> = {
 };
 
 import { projects } from '../data/projects';
+import { defaultProjectFaqs } from '../data/faqs';
 import { contactEmailAxios, createLeadAxios } from '../_api/user';
 
 // Gallery Asset Imports
@@ -251,6 +252,7 @@ export default function ProjectDetails() {
   const [isBrochureDrawerOpen, setIsBrochureDrawerOpen] = useState(false);
   const [brochureFormSubmitted, setBrochureFormSubmitted] = useState(false);
   const contactRef = useRef<HTMLElement>(null);
+  const otherProjectsRef = useRef<HTMLDivElement>(null);
   const [activeAmenityTab, setActiveAmenityTab] = useState<'Project Elevation' | 'Podium Amenities' | 'Rooftop Amenities'>('Podium Amenities');
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
@@ -827,48 +829,7 @@ export default function ProjectDetails() {
           </div>
 
           <div className="faq-wrap">
-            {(project.faqs || [
-              {
-                q: "How long has Agarwal Group been building homes?",
-                a: "Since 1978, Agarwal Group has been developing residential projects across Mumbai, Vasai, and Virar. With over 47 years of experience, the company has earned the trust of thousands of families through quality construction, timely delivery, and customer-focused developments."
-              },
-              {
-                q: "Where are Agarwal Group's residential projects located?",
-                a: "Agarwal Group has residential projects in key locations across Mumbai, Vasai, and Virar, offering excellent connectivity to railway stations, highways, schools, hospitals, and daily conveniences."
-              },
-              {
-                q: "What types of residential properties does Agarwal Group offer?",
-                a: "Agarwal Group offers thoughtfully planned 1 BHK, 2 BHK, and 3 BHK apartments designed to meet the needs of first-time homebuyers, growing families, and property investors."
-              },
-              {
-                q: "Are Agarwal Group projects RERA registered?",
-                a: "Yes. All applicable Agarwal Group residential projects are registered under the Real Estate Regulatory Authority (RERA), ensuring transparency, regulatory compliance, and greater confidence for homebuyers."
-              },
-              {
-                q: "What makes Agarwal Group different from other builders in Mumbai?",
-                a: "Agarwal Group stands apart through its legacy of over four decades, commitment to quality construction, prime project locations, transparent practices, and thoughtfully designed homes. Every project is built to offer long-term value, modern amenities, and a comfortable lifestyle for families."
-              },
-              {
-                q: "Does Agarwal Group offer ready-to-move homes?",
-                a: "Agarwal Group offers a mix of ready-to-move and under-construction residential projects, depending on the development. Availability varies by project."
-              },
-              {
-                q: "Can I book a site visit for an Agarwal Group project?",
-                a: "Yes. You can schedule a site visit by contacting the sales team through the website or by calling the customer support numbers."
-              },
-              {
-                q: "Are home loans available for Agarwal Group projects?",
-                a: "Yes. Agarwal Group projects are approved by leading banks and financial institutions, making it easier for eligible buyers to avail home loan assistance with a smooth financing process."
-              },
-              {
-                q: "Are Agarwal Group projects suitable for investment?",
-                a: "Agarwal Group develops projects in well-connected locations across Mumbai, Vasai, and Virar, making them attractive for both end-users and long-term property investors."
-              },
-              {
-                q: "How can I contact Agarwal Group?",
-                a: "You can connect with Agarwal Group through the contact form on the website, call the sales team, or visit the corporate office in Virar for personalized assistance."
-              }
-            ]).map((item, idx) => {
+            {(project.faqs || defaultProjectFaqs).slice(0, 7).map((item, idx) => {
               const isOpen = activeFaq === idx;
               return (
                 <div key={idx} className={`faq-item ${isOpen ? 'open' : ''}`}>
@@ -923,6 +884,108 @@ export default function ProjectDetails() {
           </div>
         </section>
       )}
+
+      {/* OTHER ONGOING PROJECTS */}
+      <section className="section py-24 bg-ivory border-t border-line-light overflow-hidden">
+        <div className="wrap-widescreen relative">
+          <div className="section-head mb-14 text-center max-w-2xl mx-auto flex flex-col items-center">
+            <span className="eyebrow">Explore More</span>
+            <h2 className="serif">Other Ongoing <em>Projects</em></h2>
+          </div>
+
+          <div className="relative">
+            {/* Arrows */}
+            <button
+              onClick={() => {
+                if (otherProjectsRef.current) {
+                  otherProjectsRef.current.scrollBy({ left: -380, behavior: 'smooth' });
+                }
+              }}
+              className="absolute -left-4 md:-left-16 top-[40%] -translate-y-1/2 z-10 p-4 rounded-full bg-paper border border-line-light text-brass-deep hover:bg-brass-bright hover:text-paper hover:border-transparent transition-all shadow-md hidden xl:flex items-center justify-center cursor-pointer"
+            >
+              <ChevronLeft size={28} />
+            </button>
+            <button
+              onClick={() => {
+                if (otherProjectsRef.current) {
+                  otherProjectsRef.current.scrollBy({ left: 380, behavior: 'smooth' });
+                }
+              }}
+              className="absolute -right-4 md:-right-16 top-[40%] -translate-y-1/2 z-10 p-4 rounded-full bg-paper border border-line-light text-brass-deep hover:bg-brass-bright hover:text-paper hover:border-transparent transition-all shadow-md hidden xl:flex items-center justify-center cursor-pointer"
+            >
+              <ChevronRight size={28} />
+            </button>
+
+            {/* Scroll Container */}
+            <div
+              ref={otherProjectsRef}
+              className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-12 pt-4 px-4 -mx-4 hide-scrollbar lg:justify-center"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {projects.filter(p => p.slug !== project.slug).map(proj => {
+                const imageSrc = projectHeroMap[proj.slug];
+                const projectMeta = {
+                  infinity: {
+                    badge: 'Featured · Ready to Move',
+                    location: 'Opp. D-Mart, New Viva College Road, Virar (W), MMR Mumbai',
+                    tags: ['⁠Luxury Residences with Deck', '⁠Exclusive Jodi Flats', '⁠Grand Lifestyle Amenities', 'Prime Location']
+                  },
+                  skyrise: {
+                    badge: 'Ready · OC Received',
+                    location: 'Yashwant Smart City, Gokhiware, Vasai (E), MMR Mumbai',
+                    tags: ['Grand Clubhouses', 'Sky-High Rooftop Amenities', 'Multipurpose Turf', 'Excellent Connectivity']
+                  },
+                  'sky-heights': {
+                    badge: 'Club Membership Free',
+                    location: 'Y.K Nagar NX, Near Global City, Virar (W), MMR Mumbai',
+                    tags: ['Iconic High-Rise Living', 'Grand Clubhouse Experience', '⁠Exclusive Rooftop Amenities', '⁠Grand Podium Amenities']
+                  },
+                  horizon: {
+                    badge: 'Township Living',
+                    location: 'Opp. Balaji Hanuman Temple, Virar-Nsp Link Road, Nilemore, Virar (W), MMR Mumbai',
+                    tags: ['Grand Clubhouses', 'Sky-High Rooftop Amenities', 'Multipurpose Turf', 'Excellent Connectivity']
+                  }
+                }[proj.slug as 'infinity' | 'skyrise' | 'sky-heights' | 'horizon'] || {
+                  badge: proj.status,
+                  location: proj.location,
+                  tags: []
+                };
+
+                return (
+                  <article key={proj.slug} className="pcard snap-center shrink-0 w-[85vw] sm:w-[350px] md:w-[380px]">
+                    <div className="pcard-media">
+                      <img src={imageSrc} alt={proj.name} />
+                    </div>
+                    <div className="pbody">
+                      <h3>{proj.name}</h3>
+                      <span className="loc">{projectMeta.location}</span>
+                      <div className="pmeta">
+                        <span className="price">{proj.startingPrice}</span>
+                        <span className="cfg">{proj.config}</span>
+                      </div>
+                      <div className="ptags">
+                        {projectMeta.tags.slice(0, 2).map((t, idx) => (
+                          <span key={idx} className="ptag">{t}</span>
+                        ))}
+                      </div>
+                      <div className="pcta mt-auto">
+                        <Link className="btn-enquire" to="/customer-registration">
+                          <span>Enquire Now</span>
+                          <span className="arr">→</span>
+                        </Link>
+                        <Link className="btn-explore" to={`/projects/${proj.slug}`}>
+                          <span>Explore</span>
+                          <span className="arr">→</span>
+                        </Link>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Sticky Side Buttons */}
       <AnimatePresence>
@@ -1147,7 +1210,7 @@ export default function ProjectDetails() {
       </AnimatePresence>
 
       {/* 8. ENQUIRY & RERA */}
-      <section id="contact" ref={contactRef} className="section pt-24 pb-24 bg-ivory">
+      <section id="contact" ref={contactRef} className="section pt-24 pb-24 bg-paper">
         <div className="wrap-widescreen grid grid-cols-1 lg:grid-cols-2 gap-16 items-start lg:items-stretch">
 
           <div className="flex flex-col justify-between gap-12 h-full lg:py-2">
@@ -1159,7 +1222,7 @@ export default function ProjectDetails() {
               </p>
             </div>
 
-            <div className="border border-line-light rounded-2xl p-6 sm:p-8 bg-white shadow-sm flex flex-col sm:flex-row gap-6 items-center">
+            <div className="border border-line-light rounded-2xl p-6 sm:p-8 bg-ivory shadow-sm flex flex-col sm:flex-row gap-6 items-center">
               {project.slug === 'infinity' && (
                 <div className="w-32 h-32 shrink-0 overflow-hidden flex items-center justify-center border border-line-light rounded bg-white p-1">
                   <img src={agarwalInfinityMRQR} alt="MahaRERA QR Code" className="w-full h-full object-contain mix-blend-multiply" />
@@ -1175,7 +1238,7 @@ export default function ProjectDetails() {
             </div>
           </div>
 
-          <div className="bg-paper border border-line-light rounded-3xl p-8 shadow-xl ">
+          <div className="bg-ivory border border-line-light rounded-3xl p-8 shadow-xl ">
             <AnimatePresence mode="wait">
               {!formSubmitted ? (
                 <form onSubmit={handleFormSubmit} className="flex flex-col gap-5">

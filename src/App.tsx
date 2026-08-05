@@ -19,6 +19,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import Careers from './pages/Careers';
 import AboutUs from './pages/AboutUs';
 import CompletedProjects from './pages/CompletedProjects';
+import FaqPage from './pages/FaqPage';
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -53,6 +54,8 @@ function AnimatedRoutes() {
           <Route path="/careers" element={<Careers />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/completed-projects" element={<CompletedProjects />} />
+          <Route path="/faqs" element={<FaqPage />} />
+          <Route path="/projects/:slug/faqs" element={<FaqPage />} />
           
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />

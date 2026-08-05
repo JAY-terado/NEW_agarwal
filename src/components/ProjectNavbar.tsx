@@ -49,7 +49,8 @@ export default function ProjectNavbar() {
     }
   };
 
-  const forceScrolledStyle = scrolled;
+  const isFaqPage = location.pathname.endsWith('/faqs');
+  const forceScrolledStyle = scrolled || isFaqPage;
 
   const navStyle: React.CSSProperties = {
     position: 'fixed',
@@ -57,7 +58,7 @@ export default function ProjectNavbar() {
     left: 0,
     right: 0,
     zIndex: 100,
-    background: forceScrolledStyle ? 'rgba(255,255,255,.9)' : 'rgba(0, 0, 0, 0.15)',
+    background: scrolled ? 'rgba(255,255,255,.9)' : (isFaqPage ? 'transparent' : 'rgba(0, 0, 0, 0.15)'),
     backdropFilter: 'blur(14px)',
     WebkitBackdropFilter: 'blur(14px)',
     transition: 'background .5s, box-shadow .5s, padding .5s, top .45s cubic-bezier(.22,.61,.36,1)',
@@ -90,24 +91,36 @@ export default function ProjectNavbar() {
             <img src={Logo} alt="Agarwal Group" style={{ height: '30px', width: 'auto', display: 'block', borderRadius: '6px', filter: forceScrolledStyle ? 'none' : 'brightness(0) invert(1)', transition: 'filter 0.3s ease' }} />
           </Link>
 
-          {/* Desktop Nav Links */}
-          <div className="nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: 'clamp(10px, 1.8vw, 26px)', whiteSpace: 'nowrap' }}>
+          {/* Right Side Group */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(12px, 2vw, 24px)' }}>
+            {/* Desktop Nav Links */}
+            <div className="nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: 'clamp(10px, 1.8vw, 26px)', whiteSpace: 'nowrap' }}>
             {navLinks.map((link) => (
               <a
                 key={link.id}
                 href={`#${link.id}`}
-                onClick={(e) => { e.preventDefault(); handleNavClick(link.id); }}
+                onClick={(e) => { 
+                  e.preventDefault(); 
+                  if (isFaqPage) {
+                    navigate(`/projects/${location.pathname.split('/')[2]}#${link.id}`);
+                  } else {
+                    handleNavClick(link.id); 
+                  }
+                }}
                 className="lk"
               >
                 {link.label}
               </a>
             ))}
+            </div>
 
-            {/* Projects Dropdown */}
-            <div 
-              ref={dropdownRef}
-              style={{ position: 'relative' }}
-            >
+            {/* Projects Dropdown & Mobile Burger */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              {/* Projects Dropdown */}
+              <div 
+                ref={dropdownRef}
+                style={{ position: 'relative' }}
+              >
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 style={{
@@ -198,7 +211,6 @@ export default function ProjectNavbar() {
                 )}
               </AnimatePresence>
             </div>
-          </div>
 
           {/* Mobile Burger */}
           <button
@@ -222,10 +234,12 @@ export default function ProjectNavbar() {
             className="burger-btn"
             aria-label="Open menu"
           >
-            <span style={{ width: '18px', height: '1.6px', background: burgerColor, display: 'block', transition: '.3s' }} />
-            <span style={{ width: '18px', height: '1.6px', background: burgerColor, display: 'block', transition: '.3s' }} />
-            <span style={{ width: '18px', height: '1.6px', background: burgerColor, display: 'block', transition: '.3s' }} />
-          </button>
+              <span style={{ width: '18px', height: '1.6px', background: burgerColor, display: 'block', transition: '.3s' }} />
+              <span style={{ width: '18px', height: '1.6px', background: burgerColor, display: 'block', transition: '.3s' }} />
+              <span style={{ width: '18px', height: '1.6px', background: burgerColor, display: 'block', transition: '.3s' }} />
+            </button>
+            </div>
+          </div>
         </div>
       </nav>
 

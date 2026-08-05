@@ -110,7 +110,7 @@ export default function Navbar() {
   };
 
   // Check if current page needs light navbar by default
-  const isLightHero = location.pathname === '/completed-projects' || (location.pathname.startsWith('/blogs/') && location.pathname !== '/blogs');
+  const isLightHero = location.pathname === '/completed-projects' || (location.pathname.startsWith('/blogs/') && location.pathname !== '/blogs') || location.pathname.endsWith('/faqs');
   const forceScrolledStyle = scrolled || isLightHero;
 
   // Nav base: transparent/blur; scrolled: white glass
@@ -120,7 +120,7 @@ export default function Navbar() {
     left: 0,
     right: 0,
     zIndex: 100,
-    background: forceScrolledStyle ? 'rgba(255,255,255,.9)' : 'rgba(0, 0, 0, 0.15)',
+    background: scrolled ? 'rgba(255,255,255,.9)' : (location.pathname.endsWith('/faqs') ? 'transparent' : 'rgba(0, 0, 0, 0.15)'),
     backdropFilter: 'blur(14px)',
     WebkitBackdropFilter: 'blur(14px)',
     transition: 'background .5s, box-shadow .5s, padding .5s, top .45s cubic-bezier(.22,.61,.36,1)',
@@ -144,9 +144,11 @@ export default function Navbar() {
             <img src={Logo} alt="Agarwal Group" style={{ height: '30px', width: 'auto', display: 'block', borderRadius: '6px', filter: forceScrolledStyle ? 'none' : 'brightness(0) invert(1)', transition: 'filter 0.3s ease' }} />
           </Link>
 
-          {/* Desktop Nav Links */}
-          <div className="nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: 'clamp(10px, 1.8vw, 26px)', whiteSpace: 'nowrap' }}>
-            <Link
+          {/* Right Side Group */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(12px, 2vw, 24px)' }}>
+            {/* Desktop Nav Links */}
+            <div className="nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: 'clamp(10px, 1.8vw, 26px)', whiteSpace: 'nowrap' }}>
+              <Link
               to="/about-us"
               onClick={() => handleNavClick('about-us')}
               className={`lk ${location.pathname === '/about-us' ? 'active' : ''}`}
@@ -262,8 +264,12 @@ export default function Navbar() {
               Contact Us
             </Link>
 
-            {/* CTA Button */}
-            <button
+            </div>
+
+            {/* CTA & Burger - Desktop & Mobile */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              {/* CTA Button */}
+              <button
               onClick={handleEnquireClick}
               style={{
                 border: `1px solid ${ctaBorder}`,
@@ -291,7 +297,6 @@ export default function Navbar() {
             >
               Enquire Now
             </button>
-          </div>
 
           {/* Mobile Burger */}
           <button
@@ -319,9 +324,11 @@ export default function Navbar() {
             <span style={{ width: '18px', height: '1.6px', background: burgerColor, display: 'block', transition: '.3s' }} />
             <span style={{ width: '18px', height: '1.6px', background: burgerColor, display: 'block', transition: '.3s' }} />
           </button>
+          </div>
         </div>
+      </div>
 
-        {/* MEGA PANEL for Ongoing Projects */}
+      {/* MEGA PANEL for Ongoing Projects */}
         <div
           onMouseEnter={openMega}
           onMouseLeave={closeMega}

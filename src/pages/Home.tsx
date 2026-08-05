@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Instagram } from 'lucide-react';
 import { projects } from '../data/projects';
+import { homeFaqs } from '../data/faqs';
 import { contactEmailAxios } from '../_api/user';
 
 // Asset Imports
@@ -474,7 +475,7 @@ export default function Home() {
           <div className="reveal">
             <span className="eyebrow">About Us</span>
             <h2 className="serif">About Agarwal Group – Leading Builder in <em>Vasai–Virar Since 1978</em></h2>
-            <p>For over 50 years, Agarwal Group has been one of the most trusted real estate developers in Virar, Vasai and the Mumbai Metropolitan Region (MMR). Since 1978, we have successfully delivered thoughtfully planned residential projects that combine quality construction, prime locations, modern amenities and long-term value.</p>
+            <p>For over 48 years, Agarwal Group has been one of the most trusted real estate developers in Virar, Vasai and the Mumbai Metropolitan Region (MMR). Since 1978, we have successfully delivered thoughtfully planned residential projects that combine quality construction, prime locations, modern amenities and long-term value.</p>
             <p>From affordable 1 BHK homes to spacious 2, 3 and 4 BHK apartments, every Agarwal development is designed around the needs of modern families. Our projects are RERA registered, strategically located near railway stations, schools, hospitals and major highways, making everyday life more convenient.</p>
 
             <Link className="custom-read-more" to="/about-us">
@@ -572,22 +573,22 @@ export default function Home() {
               const projectMeta = {
                 infinity: {
                   badge: 'Featured · Ready to Move',
-                  location: 'Opp. D-Mart, Virar (W), MMR Mumbai',
+                  location: 'Opp. D-Mart, New Viva College Road, Virar (W), MMR Mumbai',
                   tags: ['⁠Luxury Residences with Deck', '⁠Exclusive Jodi Flats', '⁠Grand Lifestyle Amenities', 'Prime Location']
                 },
                 skyrise: {
                   badge: 'Ready · OC Received',
-                  location: 'Gokhiware, Vasai (E), MMR Mumbai',
+                  location: 'Yashwant Smart City, Gokhiware, Vasai (E), MMR Mumbai',
                   tags: ['Grand Clubhouses', 'Sky-High Rooftop Amenities', 'Multipurpose Turf', 'Excellent Connectivity']
                 },
                 'sky-heights': {
                   badge: 'Club Membership Free',
-                  location: 'Y.K Nagar, Virar (W), MMR Mumbai',
+                  location: 'Y.K Nagar NX, Near Global City, Virar (W), MMR Mumbai',
                   tags: ['Iconic High-Rise Living', 'Grand Clubhouse Experience', '⁠Exclusive Rooftop Amenities', '⁠Grand Podium Amenities']
                 },
                 horizon: {
                   badge: 'Township Living',
-                  location: 'Virar-Nsp Link Road, Virar (W), MMR Mumbai',
+                  location: 'Opp. Balaji Hanuman Temple, Virar-Nsp Link Road, Nilemore, Virar (W), MMR Mumbai',
                   tags: ['Grand Clubhouses', 'Sky-High Rooftop Amenities', 'Multipurpose Turf', 'Excellent Connectivity']
                 }
               }[proj.slug as 'infinity' | 'skyrise' | 'sky-heights' | 'horizon'] || {
@@ -599,7 +600,7 @@ export default function Home() {
               return (
                 <article key={proj.slug} className="pcard">
                   <div className="pcard-media">
-                    <span className="pbadge">{projectMeta.badge}</span>
+                    {/* <span className="pbadge">{projectMeta.badge}</span> */}
                     <img src={imageSrc} alt={proj.name} />
                   </div>
                   <div className="pbody">
@@ -739,72 +740,7 @@ export default function Home() {
           </div>
 
           <div className="faq-wrap reveal">
-            {[
-              {
-                q: "How long has Agarwal Group been building homes?",
-                a: "Since 1978, Agarwal Group has been developing residential projects across Virar, Vasai, MMR Mumbai region. With over 48+ years of experience, the company has earned the trust of thousands of families through quality construction, timely delivery, and customer-focused developments."
-              },
-              {
-                q: "Is Agarwal Group a reliable brand for long-term investment?",
-                a: "Yes, with over 48+ years of experience and 50+ completed projects, the brand Agarwal Group offers unmatched reliability. Their history of timely delivery and premium quality ensures high capital appreciation for investors."
-              },
-              {
-                q: "Where are Agarwal Group's residential projects located?",
-                a: "Agarwal Group has residential projects in key locations across Mumbai, Vasai, and Virar, offering excellent connectivity to railway stations, highways, schools, hospitals, and daily conveniences."
-              },
-              {
-                q: "What property types does Agarwal Group specialize in?",
-                a: "The group is a multi-dimensional developer specializing in luxury residential townships, ultra-premium apartments, and commercial office spaces tailored for high-growth businesses."
-              },
-              {
-                q: "What types of residential properties does Agarwal Group offer?",
-                a: "Agarwal Group offers thoughtfully planned 1 BHK, 2 BHK, 3 BHK and 4 BHK apartments designed to meet the needs of first-time homebuyers, growing families, and property investors."
-              },
-              {
-                q: "Are Agarwal Group projects RERA registered?",
-                a: "Yes. All applicable Agarwal Group residential projects are registered under the MahaRERA, ensuring transparency, regulatory compliance, and greater confidence for homebuyers."
-              },
-              {
-                q: "What makes Agarwal Group different from other builders in Mumbai?",
-                a: "Agarwal Group stands apart through its legacy of over four decades, commitment to quality construction, prime project locations, transparent practices, and thoughtfully designed homes. Every project is built to offer long-term value, modern amenities, and a comfortable lifestyle for families."
-              },
-              {
-                q: "Does Agarwal Group offer ready-to-move homes in Virar, Vasai or Mumbai?",
-                a: "Agarwal Group offers a mix of ready-to-move and under-construction residential projects, depending on the development. Availability varies by project."
-              },
-              {
-                q: "Are home loans available for Agarwal Group projects?",
-                a: "Yes, all Agarwal Group projects are approved by leading banks and financial institutions, making it easier for eligible buyers to avail home loan assistance with a smooth financing process."
-              },
-              {
-                q: "Are Agarwal Group projects suitable for investment?",
-                a: "Agarwal Group develops projects in well-connected locations across Mumbai, Vasai, and Virar, making them attractive for both end-users and long-term property investors."
-              },
-              {
-                q: "Can I book a site visit for an Agarwal Group project?",
-                a: "Yes. You can schedule an exclusive site visit or receive project brochures, by contacting the sales team through the website or by calling the customer support numbers + 91 84080 08001 / + 91 84080 08002 / + 91 84080 08003 for immediate assistance and personalized property consultation."
-              },
-              {
-                q: "How can I contact Agarwal Group?",
-                a: "You can connect with Agarwal Group through the contact form on the website, visit the corporate office in Virar for personalized assistance, or by calling the customer support numbers + 91 84080 08001 / + 91 84080 08002 / + 91 84080 08003."
-              },
-              {
-                q: "What documents are required to buy a property in Agarwal Group?",
-                a: "You typically need basic documents such as identity proof (Aadhaar/PAN), address proof, passport-size photographs to buy a property in Agarwal Group."
-              },
-              {
-                q: "Is it better to buy an under-construction or ready-to-move property?",
-                a: "Under-construction properties are usually cheaper but may involve waiting time, while ready-to-move properties allow immediate possession with no GST."
-              },
-              {
-                q: "What is the process of property registration?",
-                a: "Property registration involves signing the sale deed, paying stamp duty, and registering the property at the local sub-registrar office."
-              },
-              {
-                q: "What factors should I consider before buying a property?",
-                a: "You should consider location, connectivity, builder reputation, legal approvals, amenities, resale value, and future infrastructure development."
-              }
-            ].map((item, idx) => {
+            {homeFaqs.slice(0, 7).map((item, idx) => {
               const isOpen = activeFaq === idx;
               return (
                 <div key={idx} className={`faq-item ${isOpen ? 'open' : ''}`}>
@@ -829,6 +765,29 @@ export default function Home() {
                 </div>
               );
             })}
+          </div>
+
+          <div className="mt-12 text-center reveal">
+            <Link
+              className="custom-read-more"
+              to="/faqs"
+              state={{ faqs: homeFaqs, title: "Questions, Answered", subtitle: "Frequently Asked Questions About Agarwal Group" }}
+            >
+              <span className="custom-read-more__label">Read More FAQs</span>
+              <span className="custom-read-more__icon">
+                <span className="custom-read-more__icon-small">
+                  <svg viewBox="0 0 100 100">
+                    <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50"></polygon>
+                  </svg>
+                </span>
+                <span className="custom-read-more__icon-circle">
+                  <svg viewBox="0 0 100 100">
+                    <path className="bottomcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                    <path pathLength="100" className="topcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                  </svg>
+                </span>
+              </span>
+            </Link>
           </div>
         </div>
       </section>
