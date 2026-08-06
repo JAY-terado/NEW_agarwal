@@ -616,7 +616,14 @@ export default function Home() {
                       ))}
                     </div>
                     <div className="pcta">
-                      <Link className="btn-enquire" to="/customer-registration">
+                      <Link 
+                        className="btn-enquire" 
+                        to="/contact"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                      >
                         <span>Enquire Now</span>
                         <span className="arr">→</span>
                       </Link>
@@ -773,7 +780,7 @@ export default function Home() {
               to="/faqs"
               state={{ faqs: homeFaqs, title: "Questions, Answered", subtitle: "Frequently Asked Questions About Agarwal Group" }}
             >
-              <span className="custom-read-more__label">Read More FAQs</span>
+              <span className="custom-read-more__label">Read More FAQ's</span>
               <span className="custom-read-more__icon">
                 <span className="custom-read-more__icon-small">
                   <svg viewBox="0 0 100 100">

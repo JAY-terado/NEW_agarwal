@@ -855,6 +855,29 @@ export default function ProjectDetails() {
               );
             })}
           </div>
+
+          <div className="mt-12 text-center">
+            <Link
+              className="custom-read-more"
+              to={`/projects/${project.slug}/faqs`}
+              state={{ faqs: project.faqs || defaultProjectFaqs, title: `${project.name} FAQs`, subtitle: `Frequently Asked Questions About ${project.name}` }}
+            >
+              <span className="custom-read-more__label">Read More FAQ's</span>
+              <span className="custom-read-more__icon">
+                <span className="custom-read-more__icon-small">
+                  <svg viewBox="0 0 100 100">
+                    <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50"></polygon>
+                  </svg>
+                </span>
+                <span className="custom-read-more__icon-circle">
+                  <svg viewBox="0 0 100 100">
+                    <path className="bottomcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                    <path pathLength="100" className="topcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                  </svg>
+                </span>
+              </span>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -969,7 +992,7 @@ export default function ProjectDetails() {
                         ))}
                       </div>
                       <div className="pcta mt-auto">
-                        <Link className="btn-enquire" to="/customer-registration">
+                        <Link className="btn-enquire" to="/contact">
                           <span>Enquire Now</span>
                           <span className="arr">→</span>
                         </Link>

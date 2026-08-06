@@ -208,7 +208,7 @@ export default function AboutUs() {
               <span className="eyebrow">Our Presence</span>
               <h2 className="serif">Building Across <em>The MMR</em></h2>
               <p>
-                For more than Five decades, Agarwal Group has developed residential communities across Vasai, Virar and MMR Mumbai.
+                For more than Four decades, Agarwal Group has developed residential communities across Vasai, Virar and MMR Mumbai.
               </p>
               <p>
                 Our portfolio includes premium apartments, integrated townships, and lifestyle-focused residential developments designed for modern families.
