@@ -50,7 +50,7 @@ export default function AboutUs() {
                 From affordable homes to premium apartments, every project reflects our commitment to exceptional construction quality, intelligent space planning, modern lifestyle amenities, and timely delivery.
               </p>
               <p>
-                With <strong>30+</strong> completed residential projects, <strong>5,000+</strong> happy families and <strong>1Cr+</strong> Square Feets Developed, we continue to create homes that offer comfort today and appreciation for the future.
+                With <strong>30+</strong> completed residential projects, <strong>5,000+</strong> happy families and <strong>1Cr+</strong> square feet developed, we continue to create homes that offer comfort today and appreciation for the future.
               </p>
               <div className="quote">
                 <p className="serif">"Every Agarwal development is designed to build not just homes, but thriving communities where families grow, memories are created, and investments gain lasting value."</p>
@@ -74,9 +74,9 @@ export default function AboutUs() {
         <section className="section folio pt-24" style={{ backgroundColor: '#F8F6F0' }}>
           <div className="wrap-widescreen">
             <div className="section-head" style={{ position: 'relative' }}>
-              <div className="folio-watermark" style={{ top: '-60px', whiteSpace: 'nowrap', left: 'auto', right: '-100%' }}>
+              {/* <div className="folio-watermark" style={{ top: '-60px', whiteSpace: 'nowrap', left: 'auto', right: '-100%' }}>
                 <div>choose agarwal</div>
-              </div>
+              </div> */}
               <span className="eyebrow" style={{ position: 'relative', zIndex: 1 }}>Why Homebuyers Choose Agarwal Group</span>
               {/* <h2 className="serif" style={{ position: 'relative', zIndex: 1 }}>
                 Uncompromising <br /><em>Quality & Trust</em>
@@ -208,7 +208,7 @@ export default function AboutUs() {
               <span className="eyebrow">Our Presence</span>
               <h2 className="serif">Building Across <em>The MMR</em></h2>
               <p>
-                For more than Four decades, Agarwal Group has developed residential communities across Vasai, Virar and MMR Mumbai.
+                For more than Four decades, Agarwal Group has developed commercial and residential communities across Mumbai and Vasai-Virar MMR Mumbai Metropolitan Region.
               </p>
               <p>
                 Our portfolio includes premium apartments, integrated townships, and lifestyle-focused residential developments designed for modern families.

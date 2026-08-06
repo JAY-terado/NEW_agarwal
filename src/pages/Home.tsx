@@ -131,6 +131,7 @@ export default function Home() {
   const [statsTriggered, setStatsTriggered] = useState(false);
   const [contactSubmitted, setContactSubmitted] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [showAllFaqs, setShowAllFaqs] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isInitialVisible, setIsInitialVisible] = useState(true);
 
@@ -475,7 +476,7 @@ export default function Home() {
           <div className="reveal">
             <span className="eyebrow">About Us</span>
             <h2 className="serif">About Agarwal Group – Leading Builder in <em>Vasai–Virar Since 1978</em></h2>
-            <p>For over 48 years, Agarwal Group has been one of the most trusted real estate developers in Virar, Vasai and the Mumbai Metropolitan Region (MMR). Since 1978, we have successfully delivered thoughtfully planned residential projects that combine quality construction, prime locations, modern amenities and long-term value.</p>
+            <p>For over 48 years, Agarwal Group has been one of the most trusted real estate developers in Mumbai and Vasai-Virar MMR Mumbai Metropolitan Region. Since 1978, we have successfully delivered thoughtfully planned residential projects that combine quality construction, prime locations, modern amenities and long-term value.</p>
             <p>From affordable 1 BHK homes to spacious 2, 3 and 4 BHK apartments, every Agarwal development is designed around the needs of modern families. Our projects are RERA registered, strategically located near railway stations, schools, hospitals and major highways, making everyday life more convenient.</p>
 
             <Link className="custom-read-more" to="/about-us">
@@ -578,12 +579,12 @@ export default function Home() {
                 },
                 skyrise: {
                   badge: 'Ready · OC Received',
-                  location: 'Yashwant Smart City, Gokhiware, Vasai (E), MMR Mumbai',
+                  location: 'Y.K Nagar NX, Near Global City, Virar (W), MMR Mumbai',
                   tags: ['Grand Clubhouses', 'Sky-High Rooftop Amenities', 'Multipurpose Turf', 'Excellent Connectivity']
                 },
                 'sky-heights': {
                   badge: 'Club Membership Free',
-                  location: 'Y.K Nagar NX, Near Global City, Virar (W), MMR Mumbai',
+                  location: 'Yashwant Smart City, Gokhiware, Vasai (E), MMR Mumbai',
                   tags: ['Iconic High-Rise Living', 'Grand Clubhouse Experience', '⁠Exclusive Rooftop Amenities', '⁠Grand Podium Amenities']
                 },
                 horizon: {
@@ -616,8 +617,8 @@ export default function Home() {
                       ))}
                     </div>
                     <div className="pcta">
-                      <Link 
-                        className="btn-enquire" 
+                      <Link
+                        className="btn-enquire"
                         to="/contact"
                         onClick={(e) => {
                           e.preventDefault();
@@ -747,7 +748,7 @@ export default function Home() {
           </div>
 
           <div className="faq-wrap reveal">
-            {homeFaqs.slice(0, 7).map((item, idx) => {
+            {homeFaqs.slice(0, showAllFaqs ? homeFaqs.length : 7).map((item, idx) => {
               const isOpen = activeFaq === idx;
               return (
                 <div key={idx} className={`faq-item ${isOpen ? 'open' : ''}`}>
@@ -775,26 +776,48 @@ export default function Home() {
           </div>
 
           <div className="mt-12 text-center reveal">
-            <Link
-              className="custom-read-more"
-              to="/faqs"
-              state={{ faqs: homeFaqs, title: "Questions, Answered", subtitle: "Frequently Asked Questions About Agarwal Group" }}
-            >
-              <span className="custom-read-more__label">Read More FAQ's</span>
-              <span className="custom-read-more__icon">
-                <span className="custom-read-more__icon-small">
-                  <svg viewBox="0 0 100 100">
-                    <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50"></polygon>
-                  </svg>
+            {!showAllFaqs && homeFaqs.length > 7 && (
+              <button
+                className="custom-read-more border-none bg-transparent cursor-pointer p-0 font-inherit"
+                onClick={() => setShowAllFaqs(true)}
+              >
+                <span className="custom-read-more__label">Read More FAQ's</span>
+                <span className="custom-read-more__icon">
+                  <span className="custom-read-more__icon-small">
+                    <svg viewBox="0 0 100 100">
+                      <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50"></polygon>
+                    </svg>
+                  </span>
+                  <span className="custom-read-more__icon-circle">
+                    <svg viewBox="0 0 100 100">
+                      <path className="bottomcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                      <path pathLength="100" className="topcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                    </svg>
+                  </span>
                 </span>
-                <span className="custom-read-more__icon-circle">
-                  <svg viewBox="0 0 100 100">
-                    <path className="bottomcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
-                    <path pathLength="100" className="topcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
-                  </svg>
+              </button>
+            )}
+            {showAllFaqs && (
+              <button
+                className="custom-read-more border-none bg-transparent cursor-pointer p-0 font-inherit"
+                onClick={() => setShowAllFaqs(false)}
+              >
+                <span className="custom-read-more__label">Show Less FAQ's</span>
+                <span className="custom-read-more__icon" style={{ transform: 'rotate(-90deg)' }}>
+                  <span className="custom-read-more__icon-small">
+                    <svg viewBox="0 0 100 100">
+                      <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50"></polygon>
+                    </svg>
+                  </span>
+                  <span className="custom-read-more__icon-circle">
+                    <svg viewBox="0 0 100 100">
+                      <path className="bottomcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                      <path pathLength="100" className="topcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                    </svg>
+                  </span>
                 </span>
-              </span>
-            </Link>
+              </button>
+            )}
           </div>
         </div>
       </section>
@@ -948,7 +971,7 @@ export default function Home() {
 
             </h2>
             <p className="lead" style={{ marginTop: '1.2em', color: 'var(--color-ink-soft)', fontSize: '1.1rem', fontWeight: 300, lineHeight: 1.6 }}>
-              Looking for the best residential project in Virar, Vasai or MMR Mumbai?
+              Looking for the best residential project in Mumbai and Vasai-Virar MMR Mumbai Metropolitan Region?
             </p>
             <p className="lead" style={{ marginTop: '1.2em', color: 'var(--color-ink-soft)', fontSize: '1.1rem', fontWeight: 300, lineHeight: 1.6 }}>
               Speak with our property experts to explore premium 1, 2, 3 and 4 BHK apartments, schedule a site visit, compare projects and receive exclusive offers.

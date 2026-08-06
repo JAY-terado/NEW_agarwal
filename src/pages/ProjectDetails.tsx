@@ -255,6 +255,7 @@ export default function ProjectDetails() {
   const otherProjectsRef = useRef<HTMLDivElement>(null);
   const [activeAmenityTab, setActiveAmenityTab] = useState<'Project Elevation' | 'Podium Amenities' | 'Rooftop Amenities'>('Podium Amenities');
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [showAllFaqs, setShowAllFaqs] = useState(false);
 
   useEffect(() => {
     setProject(projects.find((p) => p.slug === slug));
@@ -829,7 +830,7 @@ export default function ProjectDetails() {
           </div>
 
           <div className="faq-wrap">
-            {(project.faqs || defaultProjectFaqs).slice(0, 7).map((item, idx) => {
+            {(project.faqs || defaultProjectFaqs).slice(0, showAllFaqs ? (project.faqs || defaultProjectFaqs).length : 7).map((item, idx) => {
               const isOpen = activeFaq === idx;
               return (
                 <div key={idx} className={`faq-item ${isOpen ? 'open' : ''}`}>
@@ -857,26 +858,48 @@ export default function ProjectDetails() {
           </div>
 
           <div className="mt-12 text-center">
-            <Link
-              className="custom-read-more"
-              to={`/projects/${project.slug}/faqs`}
-              state={{ faqs: project.faqs || defaultProjectFaqs, title: `${project.name} FAQs`, subtitle: `Frequently Asked Questions About ${project.name}` }}
-            >
-              <span className="custom-read-more__label">Read More FAQ's</span>
-              <span className="custom-read-more__icon">
-                <span className="custom-read-more__icon-small">
-                  <svg viewBox="0 0 100 100">
-                    <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50"></polygon>
-                  </svg>
+            {!showAllFaqs && (project.faqs || defaultProjectFaqs).length > 7 && (
+              <button
+                className="custom-read-more border-none bg-transparent cursor-pointer p-0 font-inherit"
+                onClick={() => setShowAllFaqs(true)}
+              >
+                <span className="custom-read-more__label">Read More FAQ's</span>
+                <span className="custom-read-more__icon">
+                  <span className="custom-read-more__icon-small">
+                    <svg viewBox="0 0 100 100">
+                      <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50"></polygon>
+                    </svg>
+                  </span>
+                  <span className="custom-read-more__icon-circle">
+                    <svg viewBox="0 0 100 100">
+                      <path className="bottomcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                      <path pathLength="100" className="topcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                    </svg>
+                  </span>
                 </span>
-                <span className="custom-read-more__icon-circle">
-                  <svg viewBox="0 0 100 100">
-                    <path className="bottomcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
-                    <path pathLength="100" className="topcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
-                  </svg>
+              </button>
+            )}
+            {showAllFaqs && (
+              <button
+                className="custom-read-more border-none bg-transparent cursor-pointer p-0 font-inherit"
+                onClick={() => setShowAllFaqs(false)}
+              >
+                <span className="custom-read-more__label">Show Less FAQ's</span>
+                <span className="custom-read-more__icon" style={{ transform: 'rotate(-90deg)' }}>
+                  <span className="custom-read-more__icon-small">
+                    <svg viewBox="0 0 100 100">
+                      <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50"></polygon>
+                    </svg>
+                  </span>
+                  <span className="custom-read-more__icon-circle">
+                    <svg viewBox="0 0 100 100">
+                      <path className="bottomcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                      <path pathLength="100" className="topcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                    </svg>
+                  </span>
                 </span>
-              </span>
-            </Link>
+              </button>
+            )}
           </div>
         </div>
       </section>
@@ -1036,10 +1059,10 @@ export default function ProjectDetails() {
             </button>
             <button
               onClick={() => setIsBrochureDrawerOpen(true)}
-              className="group relative bg-pine text-white text-[10px] md:text-[11px] font-bold tracking-[0.2em] uppercase p-2 md:p-3 hover:pr-3 md:hover:pr-4 transition-all duration-300 flex items-center justify-center cursor-pointer shadow-[-4px_0_15px_rgba(0,0,0,0.1)] overflow-hidden"
+              className="group relative bg-brass-deep text-white text-[10px] md:text-[11px] font-bold tracking-[0.2em] uppercase p-2 md:p-3 hover:pr-3 md:hover:pr-4 transition-all duration-300 flex items-center justify-center cursor-pointer shadow-[-4px_0_15px_rgba(0,0,0,0.1)] overflow-hidden"
               style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
             >
-              <div className="absolute inset-0 bg-[#253229] -translate-y-[101%] group-hover:translate-y-0 transition-transform duration-[600ms] ease-[var(--ease)] z-0" />
+              <div className="absolute inset-0 bg-[#b59254] -translate-y-[101%] group-hover:translate-y-0 transition-transform duration-[600ms] ease-[var(--ease)] z-0" />
               <div className="absolute inset-0 w-full h-[45%] bg-gradient-to-b from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0 pointer-events-none" />
 
               <div className="relative z-10 flex items-center">
