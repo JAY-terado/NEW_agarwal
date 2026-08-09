@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import Logo from '../assets/Agarwal Logo.svg';
+import LogoHero from '../assets/logo1.png';
+import LogoOther from '../assets/logo2.png';
 import { projects } from '../data/projects';
 
 export default function ProjectNavbar() {
@@ -88,7 +89,7 @@ export default function ProjectNavbar() {
         <div className="wrap-widescreen" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'clamp(12px, 2vw, 24px)', flexWrap: 'nowrap' }}>
           {/* Brand */}
           <Link to="/" style={{ textDecoration: 'none', color: brandColor, lineHeight: 1, flexShrink: 0 }}>
-            <img src={Logo} alt="Agarwal Group" style={{ height: '30px', width: 'auto', display: 'block', borderRadius: '6px', filter: forceScrolledStyle ? 'none' : 'brightness(0) invert(1)', transition: 'filter 0.3s ease' }} />
+            <img src={forceScrolledStyle ? LogoOther : LogoHero} alt="Agarwal Group" style={{ height: '60px', width: 'auto', display: 'block', borderRadius: '6px', transition: 'filter 0.3s ease' }} />
           </Link>
 
           {/* Right Side Group */}
@@ -287,7 +288,7 @@ export default function ProjectNavbar() {
         {/* Drawer Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '36px' }}>
           <Link to="/" onClick={() => setMobileMenuOpen(false)}>
-            <img src={Logo} alt="Agarwal Group" style={{ height: '36px', width: 'auto', display: 'block', borderRadius: '4px' }} />
+            <img src={LogoHero} alt="Agarwal Group" style={{ height: '60px', width: 'auto', display: 'block', borderRadius: '4px' }} />
           </Link>
           <button
             onClick={() => setMobileMenuOpen(false)}

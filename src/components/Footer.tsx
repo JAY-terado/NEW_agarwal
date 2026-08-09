@@ -1,18 +1,18 @@
 import { Link } from 'react-router-dom';
-import Logo from '../assets/Agarwal Logo.svg';
+import Logo from '../assets/logo2.png';
 
 export default function Footer() {
   return (
     <footer style={{ background: 'var(--ivory)', color: 'var(--ink-soft)', borderTop: '1px solid var(--line)', padding: 'clamp(64px, 9vh, 100px) 0 30px' }}>
       <div className="wrap-widescreen">
-        {/* foot-top: 1.6fr 1fr 1fr 1fr */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr 1fr 1fr', gap: '40px', paddingBottom: '48px', borderBottom: '1px solid rgba(20,20,18,.12)' }} className="footer-top-grid">
+        {/* foot-top: 1.6fr 1fr 1fr 1fr 1fr 1fr */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr 1fr 1fr 1fr 1fr', gap: '40px', paddingBottom: '48px', borderBottom: '1px solid rgba(20,20,18,.12)' }} className="footer-top-grid">
           {/* Brand Column */}
           <div className="foot-brand">
             <img
               src={Logo}
               alt="Agarwal Group"
-              style={{ height: '42px', width: 'auto', display: 'block', borderRadius: '8px', marginBottom: '2px' }}
+              style={{ height: '60px', width: 'auto', display: 'block', borderRadius: '8px', marginBottom: '2px' }}
             />
             <p style={{ marginTop: '18px', fontSize: '.92rem', fontWeight: 300, fontStyle: 'italic', fontFamily: '"Fraunces", serif', maxWidth: '36ch', color: 'var(--ink-soft)' }}>
               "Agarwal Group is a trusted real estate developer in Mumbai and Vasai-Virar MMR Mumbai Metropolitan Region with over 48+ years of experience delivering RERA-registered residential and commercial projects. Explore premium 1, 2, 3 & 4 BHK apartments in Virar, Vasai and Mumbai designed for modern families."
@@ -112,22 +112,20 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 3: Company */}
+          {/* Column 3: Quick Links */}
           <div className="foot-col">
             <h5 style={{ fontSize: '.72rem', letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--brass)', marginBottom: '18px' }}>
               Quick Links
             </h5>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {[
-                { to: '/channel-partner', label: 'Channel Partner' },
+                { to: '/', label: 'Home' },
                 { to: '/about-us', label: 'About Us' },
                 { to: '/projects', label: 'Ongoing Projects' },
-                { to: '/projects', label: 'Completed Projects' },
+                { to: '/projects-completed', label: 'Completed Projects' },
                 { to: '/blogs', label: 'Blogs' },
-                { to: '/contact', label: 'Contact Us' },
                 { to: '/careers', label: 'Careers' },
-                { to: '/admin/login', label: 'Admin Panel' },
-                { to: '/customer-registration', label: 'Customer Registration' },
+                { to: '/supplier-registration', label: 'Supplier/Contractor Registration' },
               ].map((link, i) => (
                 <Link key={i} to={link.to}
                   onClick={() => window.scrollTo(0, 0)}
@@ -140,32 +138,70 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 4: Legal */}
+          {/* Column 4: Channel Partners */}
+          <div className="foot-col">
+            <h5 style={{ fontSize: '.72rem', letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--brass)', marginBottom: '18px' }}>
+              Channel Partners
+            </h5>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              {[
+                { to: '/channel-partner-registration', label: 'Register' },
+                { to: '/channel-partner-faqs', label: 'FAQs' },
+              ].map((link, i) => (
+                <Link key={i} to={link.to}
+                  onClick={() => window.scrollTo(0, 0)}
+                  style={{ display: 'block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'color .25s', textDecoration: 'none' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Column 5: Customer Care */}
+          <div className="foot-col">
+            <h5 style={{ fontSize: '.72rem', letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--brass)', marginBottom: '18px' }}>
+              Customer Care
+            </h5>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              {[
+                { to: '/faqs', label: 'FAQs' },
+                { to: '/book-site-visit', label: 'Book Site Visit' },
+                { to: '/downloads', label: 'Downloads' },
+                { to: '/contact', label: 'Contact Us' },
+              ].map((link, i) => (
+                <Link key={i} to={link.to}
+                  onClick={() => window.scrollTo(0, 0)}
+                  style={{ display: 'block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'color .25s', textDecoration: 'none' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Column 6: Legal */}
           <div className="foot-col">
             <h5 style={{ fontSize: '.72rem', letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--brass)', marginBottom: '18px' }}>
               Legal
             </h5>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <Link to="/terms-conditions"
-                onClick={() => window.scrollTo(0, 0)}
-                style={{ display: 'block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'color .25s', textDecoration: 'none' }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>
-                Terms &amp; Conditions
-              </Link>
-              <Link to="/privacy-policy"
-                onClick={() => window.scrollTo(0, 0)}
-                style={{ display: 'block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'color .25s', textDecoration: 'none' }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>
-                Privacy Policy
-              </Link>
-              <a href="#"
-                style={{ display: 'block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'color .25s', textDecoration: 'none' }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
-                onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>
-                Sitemap
-              </a>
+              {[
+                { to: '/privacy-policy', label: 'Privacy Policy' },
+                { to: '/terms-conditions', label: 'Terms & Condition' },
+                { to: '/disclaimer', label: 'Disclaimer' },
+                { to: '/sitemap', label: 'Sitemap' },
+              ].map((link, i) => (
+                <Link key={i} to={link.to}
+                  onClick={() => window.scrollTo(0, 0)}
+                  style={{ display: 'block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'color .25s', textDecoration: 'none' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>
+                  {link.label}
+                </Link>
+              ))}
             </div>
           </div>
         </div>
