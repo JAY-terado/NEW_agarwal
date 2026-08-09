@@ -341,12 +341,12 @@ export const projects: Project[] = [
       }
     ],
     gallery: [
-      'gallery-exterior.jpg',
-      'gallery-lobby.jpg',
-      'gallery-living.jpg',
-      'gallery-bedroom.jpg',
-      'gallery-pool.jpg',
-      'gallery-aerial.jpg'
+      'sh-gallery-1.png',
+      'sh-gallery-2.png',
+      'sh-gallery-3.png',
+      'sh-gallery-4.png',
+      'sh-gallery-5.png',
+      'sh-gallery-6.png'
     ],
     mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.463647118351!2d72.8469149759992!3d19.392363241963135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7afe1180f68cd%3A0xcc8573a1e7dd76ab!2sAgarwal%20Sky%20Heights!5e0!3m2!1sen!2sin!4v1784611689586!5m2!1sen!2sin'
   },

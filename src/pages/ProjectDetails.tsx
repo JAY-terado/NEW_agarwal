@@ -111,6 +111,13 @@ const galleryMap: Record<string, string> = {
   'skyrise-kitchen.png': skyriseKitchen,
   'skyrise-dining.png': skyriseDining,
   'skyrise-balcony.png': skyriseBalcony,
+  // Sky Heights specific
+  'sh-gallery-1.png': shGallery1,
+  'sh-gallery-2.png': shGallery2,
+  'sh-gallery-3.png': shGallery3,
+  'sh-gallery-4.png': shGallery4,
+  'sh-gallery-5.png': shGallery5,
+  'sh-gallery-6.png': shGallery6,
 };
 
 // Skyrise Interior Images
@@ -138,6 +145,24 @@ import skyriseElev4 from '../assets/skyrise elevations/elev4.png';
 import skyriseElev5 from '../assets/skyrise elevations/elev5.png';
 import skyriseElev6 from '../assets/skyrise elevations/elev6.png';
 import skyriseGate from '../assets/skyrise elevations/gate.png';
+
+// Sky Heights Elevation Images
+import skyheightElev1 from '../assets/skyheight elevation/elev1.png';
+import skyheightElev2 from '../assets/skyheight elevation/elev2.png';
+import skyheightElev3 from '../assets/skyheight elevation/elev3.png';
+import skyheightElev4 from '../assets/skyheight elevation/elev4.png';
+import skyheightElev5 from '../assets/skyheight elevation/elev5.png';
+import skyheightElev6 from '../assets/skyheight elevation/elev6.png';
+import skyheightElev7 from '../assets/skyheight elevation/elev7.png';
+import skyheightElev8 from '../assets/skyheight elevation/elev8.png';
+
+// Sky Heights Gallery Images
+import shGallery1 from '../assets/skyheight aminities/ChatGPT Image Aug 3, 2026, 03_52_50 PM.png';
+import shGallery2 from '../assets/skyheight aminities/magnific_reduce-sunlight_s7gk3NDl8e.jpg';
+import shGallery3 from '../assets/skyheight aminities/ChatGPT Image Aug 3, 2026, 03_53_09 PM.png';
+import shGallery4 from '../assets/skyheight interior/ChatGPT Image Aug 3, 2026, 03_54_07 PM.png';
+import shGallery5 from '../assets/skyheight interior/magnific_make-this-image-super-rea_YMcZaKLWeC.jpg';
+import shGallery6 from '../assets/skyheight interior/ChatGPT Image Aug 3, 2026, 03_55_22 PM.png';
 
 // Skyrise Rooftop Amenities
 import rooftopGym from '../assets/skyrise amenities/gym.png';
@@ -535,85 +560,111 @@ export default function ProjectDetails() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-1">
-            {Array.from({ length: 8 }).map((_, idx) => {
-              let spanClass = 'col-span-1';
-              let heightClass = 'h-[250px] lg:h-[320px]';
+            {(() => {
+              const currentTabItems = Array.from({ length: 8 }).map((_, idx) => {
+                let imageSrc = `https://placehold.co/600x600/e2e0d8/8a867d?text=${project.slug}+${activeAmenityTab.split(' ')[0]}+${idx + 1}`;
+                let displayText = `${activeAmenityTab} ${idx + 1}`;
 
-              const patternIdx = idx % 8;
-              if (patternIdx === 0) spanClass = 'col-span-1 md:col-span-2';
-              else if (patternIdx === 1) spanClass = 'col-span-1 md:col-span-1';
-              else if (patternIdx === 2) spanClass = 'col-span-1 md:col-span-1';
-              else if (patternIdx === 3) spanClass = 'col-span-1 md:col-span-1';
-              else if (patternIdx === 4) spanClass = 'col-span-1 md:col-span-1';
-              else if (patternIdx === 5) {
-                spanClass = 'col-span-1 md:col-span-2 md:row-span-2';
-                heightClass = 'h-[250px] md:h-[504px] lg:h-[644px]';
-              }
-              else if (patternIdx === 6) spanClass = 'col-span-1 md:col-span-1';
-              else if (patternIdx === 7) spanClass = 'col-span-1 md:col-span-1';
-
-              let imageSrc = `https://placehold.co/600x600/e2e0d8/8a867d?text=${project.slug}+${activeAmenityTab.split(' ')[0]}+${idx + 1}`;
-              let displayText = `${activeAmenityTab} ${idx + 1}`;
-
-              if (activeAmenityTab === 'Project Elevation' && project.slug === 'skyrise') {
-                const elevImages = [
-                  { src: skyriseElev1, text: 'Street View' },
-                  { src: skyriseElev2, text: 'Front Elevation' },
-                  { src: skyriseElev3, text: 'Side Elevation' },
-                  { src: skyriseElev4, text: 'Podium Layout View' },
-                  { src: skyriseElev5, text: 'Terrace Seating Area' },
-                  { src: skyriseElev6, text: 'Bird\'s Eye View' },
-                  { src: skyriseGate, text: 'Grand Entrance Gate' },
-                  { src: skyriseElev1, text: 'Perspective View' }, // Fallback for 8th grid item
-                ];
-                if (elevImages[idx]) {
-                  imageSrc = elevImages[idx].src;
-                  displayText = elevImages[idx].text;
+                if (activeAmenityTab === 'Project Elevation' && project.slug === 'skyrise') {
+                  const elevImages = [
+                    { src: skyriseElev1, text: 'Street View' },
+                    { src: skyriseElev2, text: 'Front Elevation' },
+                    { src: skyriseElev3, text: 'Side Elevation' },
+                    { src: skyriseElev4, text: 'Podium Layout View' },
+                    { src: skyriseElev5, text: 'Terrace Seating Area' },
+                    { src: skyriseElev6, text: 'Bird\'s Eye View' },
+                    { src: skyriseGate, text: 'Grand Entrance Gate' },
+                    { src: skyriseElev1, text: 'Perspective View' }, // Fallback for 8th grid item
+                  ];
+                  if (elevImages[idx]) {
+                    imageSrc = elevImages[idx].src;
+                    displayText = elevImages[idx].text;
+                  }
                 }
-              }
 
-              if (activeAmenityTab === 'Podium Amenities' && project.amenities[idx]) {
-                displayText = project.amenities[idx];
-                imageSrc = amenityImageMap[displayText] || imageSrc;
-              }
-
-              if (activeAmenityTab === 'Rooftop Amenities' && project.slug === 'skyrise') {
-                const rooftopImages = [
-                  { src: rooftopYoga, text: 'Yoga & Meditation Zone' },
-                  { src: rooftopGym, text: 'Open Air Gym' },
-                  { src: rooftopPlayArea, text: 'Kids Play Area' },
-                  { src: rooftopGames, text: 'Giant Board Games' },
-                  { src: rooftopLounge, text: 'Family Seating & Lounge' },
-                  { src: rooftopPromenade, text: 'Walking Promenade' },
-                  { src: rooftopSittingDeck, text: 'Senior Citizen Deck' },
-                  { src: rooftopLawn, text: 'Multi-purpose Lawn' },
-                ];
-                if (rooftopImages[idx]) {
-                  imageSrc = rooftopImages[idx].src;
-                  displayText = rooftopImages[idx].text;
+                if (activeAmenityTab === 'Project Elevation' && project.slug === 'sky-heights') {
+                  const elevImages = [
+                    { src: skyheightElev1, text: 'Elevation View 1' },
+                    { src: skyheightElev2, text: 'Elevation View 2' },
+                    { src: skyheightElev3, text: 'Elevation View 3' },
+                    { src: skyheightElev4, text: 'Elevation View 4' },
+                    { src: skyheightElev5, text: 'Elevation View 5' },
+                    { src: skyheightElev6, text: 'Elevation View 6' },
+                    { src: skyheightElev7, text: 'Elevation View 7' },
+                    { src: skyheightElev8, text: 'Elevation View 8' },
+                  ];
+                  if (elevImages[idx]) {
+                    imageSrc = elevImages[idx].src;
+                    displayText = elevImages[idx].text;
+                  }
                 }
-              }
 
-              return (
-                <motion.div
-                  key={`${activeAmenityTab}-${idx}`}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  className={`relative overflow-hidden group bg-line-light ${spanClass} ${heightClass}`}
-                >
-                  <img
-                    src={imageSrc}
-                    alt={displayText}
-                    className="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-700 z-10" />
-                  <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-6 text-left z-20">
-                    <span className="font-serif text-sm md:text-base text-ivory tracking-wide">{displayText}</span>
-                  </div>
-                </motion.div>
-              );
-            })}
+                if (activeAmenityTab === 'Podium Amenities' && project.amenities[idx]) {
+                  displayText = project.amenities[idx];
+                  imageSrc = amenityImageMap[displayText] || imageSrc;
+                }
+
+                if (activeAmenityTab === 'Rooftop Amenities' && project.slug === 'skyrise') {
+                  const rooftopImages = [
+                    { src: rooftopYoga, text: 'Yoga & Meditation Zone' },
+                    { src: rooftopGym, text: 'Open Air Gym' },
+                    { src: rooftopPlayArea, text: 'Kids Play Area' },
+                    { src: rooftopGames, text: 'Giant Board Games' },
+                    { src: rooftopLounge, text: 'Family Seating & Lounge' },
+                    { src: rooftopPromenade, text: 'Walking Promenade' },
+                    { src: rooftopSittingDeck, text: 'Senior Citizen Deck' },
+                    { src: rooftopLawn, text: 'Multi-purpose Lawn' },
+                  ];
+                  if (rooftopImages[idx]) {
+                    imageSrc = rooftopImages[idx].src;
+                    displayText = rooftopImages[idx].text;
+                  }
+                }
+
+                return { imageSrc, displayText };
+              });
+
+              const currentImagesForLightbox = currentTabItems.map(item => item.imageSrc);
+
+              return currentTabItems.map((item, idx) => {
+                let spanClass = 'col-span-1';
+                let heightClass = 'h-[250px] lg:h-[320px]';
+
+                const patternIdx = idx % 8;
+                if (patternIdx === 0) spanClass = 'col-span-1 md:col-span-2';
+                else if (patternIdx === 1) spanClass = 'col-span-1 md:col-span-1';
+                else if (patternIdx === 2) spanClass = 'col-span-1 md:col-span-1';
+                else if (patternIdx === 3) spanClass = 'col-span-1 md:col-span-1';
+                else if (patternIdx === 4) spanClass = 'col-span-1 md:col-span-1';
+                else if (patternIdx === 5) {
+                  spanClass = 'col-span-1 md:col-span-2 md:row-span-2';
+                  heightClass = 'h-[250px] md:h-[504px] lg:h-[644px]';
+                }
+                else if (patternIdx === 6) spanClass = 'col-span-1 md:col-span-1';
+                else if (patternIdx === 7) spanClass = 'col-span-1 md:col-span-1';
+
+                return (
+                  <motion.div
+                    key={`${activeAmenityTab}-${idx}`}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: idx * 0.05 }}
+                    onClick={() => setLightbox({ images: currentImagesForLightbox, index: idx })}
+                    className={`relative overflow-hidden group bg-line-light cursor-zoom-in ${spanClass} ${heightClass}`}
+                  >
+                    <img
+                      src={item.imageSrc}
+                      alt={item.displayText}
+                      className="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-700 z-10" />
+                    <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-6 text-left z-20">
+                      <span className="font-serif text-sm md:text-base text-ivory tracking-wide">{item.displayText}</span>
+                    </div>
+                  </motion.div>
+                );
+              });
+            })()}
           </div>
         </div>
       </section>
