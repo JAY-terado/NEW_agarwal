@@ -157,12 +157,12 @@ import skyheightElev7 from '../assets/skyheight elevation/elev7.png';
 import skyheightElev8 from '../assets/skyheight elevation/elev8.png';
 
 // Sky Heights Gallery Images
-import shGallery1 from '../assets/skyheight aminities/ChatGPT Image Aug 3, 2026, 03_52_50 PM.png';
-import shGallery2 from '../assets/skyheight aminities/magnific_reduce-sunlight_s7gk3NDl8e.jpg';
-import shGallery3 from '../assets/skyheight aminities/ChatGPT Image Aug 3, 2026, 03_53_09 PM.png';
-import shGallery4 from '../assets/skyheight interior/ChatGPT Image Aug 3, 2026, 03_54_07 PM.png';
-import shGallery5 from '../assets/skyheight interior/magnific_make-this-image-super-rea_YMcZaKLWeC.jpg';
-import shGallery6 from '../assets/skyheight interior/ChatGPT Image Aug 3, 2026, 03_55_22 PM.png';
+import shGallery1 from '../assets/skyheight amenities gallery/ChatGPT Image Aug 10, 2026, 10_38_18 AM.png';
+import shGallery2 from '../assets/skyheight amenities gallery/ChatGPT Image Aug 10, 2026, 10_41_16 AM.png';
+import shGallery3 from '../assets/skyheight amenities gallery/ChatGPT Image Aug 10, 2026, 03_25_56 PM.png';
+import shGallery4 from '../assets/skyheight interior gallery/hall.png';
+import shGallery5 from '../assets/skyheight interior gallery/bedroom.png';
+import shGallery6 from '../assets/skyheight interior gallery/kitvhen.png';
 
 // Skyrise Rooftop Amenities
 import rooftopGym from '../assets/skyrise amenities/gym.png';

@@ -16,6 +16,7 @@ import ChannelPartner from './pages/ChannelPartner';
 import CustomerRegistration from './pages/CustomerRegistration';
 import TermsConditions from './pages/TermsConditions';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import Disclaimer from './pages/Disclaimer';
 import Careers from './pages/Careers';
 import AboutUs from './pages/AboutUs';
 import CompletedProjects from './pages/CompletedProjects';
@@ -51,6 +52,7 @@ function AnimatedRoutes() {
           <Route path="/customer-registration" element={<CustomerRegistration />} />
           <Route path="/terms-conditions" element={<TermsConditions />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/disclaimer" element={<Disclaimer />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/completed-projects" element={<CompletedProjects />} />
