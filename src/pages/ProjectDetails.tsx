@@ -180,6 +180,16 @@ import rooftopYoga from '../assets/skyrise amenities/ChatGPT Image Aug 1, 2026, 
 import rooftopLounge from '../assets/skyrise amenities/ChatGPT Image Aug 1, 2026, 03_28_08 PM.png';
 import rooftopLawn from '../assets/skyrise amenities/ChatGPT Image Aug 1, 2026, 03_43_30 PM.png';
 
+// Sky Heights Rooftop Amenities
+import shRooftop1 from '../assets/skyheight-rooftop/skyheight-rooftop-1.png';
+import shRooftop2 from '../assets/skyheight-rooftop/skyheight-rooftop-2.png';
+import shRooftop3 from '../assets/skyheight-rooftop/skyheight-rooftop-3.png';
+import shRooftop4 from '../assets/skyheight-rooftop/skyheight-rooftop-4.png';
+import shRooftop5 from '../assets/skyheight-rooftop/skyheight-rooftop-5.png';
+import shRooftop6 from '../assets/skyheight-rooftop/skyheight-rooftop-6.png';
+import shRooftop7 from '../assets/skyheight-rooftop/skyheight-rooftop-7.png';
+import shRooftop8 from '../assets/skyheight-rooftop/skyheight-rooftop-8.png';
+
 const amenityImageMap: Record<string, string> = {
   'Grand Entrance Lobby': amenityLobby,
   'Swimming Pool & Deck': amenitySwim,
@@ -629,6 +639,23 @@ export default function ProjectDetails() {
                     { src: rooftopPromenade, text: 'Walking Promenade' },
                     { src: rooftopSittingDeck, text: 'Senior Citizen Deck' },
                     { src: rooftopLawn, text: 'Multi-purpose Lawn' },
+                  ];
+                  if (rooftopImages[idx]) {
+                    imageSrc = rooftopImages[idx].src;
+                    displayText = rooftopImages[idx].text;
+                  }
+                }
+
+                if (activeAmenityTab === 'Rooftop Amenities' && project.slug === 'sky-heights') {
+                  const rooftopImages = [
+                    { src: shRooftop1, text: 'Yoga & Meditation Deck' },
+                    { src: shRooftop2, text: 'Giant Board Games' },
+                    { src: shRooftop3, text: 'Zen Garden & Sculptures' },
+                    { src: shRooftop4, text: 'Scenic Garden Circle' },
+                    { src: shRooftop5, text: 'Reflexology Pathway' },
+                    { src: shRooftop6, text: 'Stargazing Observatory' },
+                    { src: shRooftop7, text: 'Rooftop Jogging Track' },
+                    { src: shRooftop8, text: 'Sky Lounge & Seating' },
                   ];
                   if (rooftopImages[idx]) {
                     imageSrc = rooftopImages[idx].src;
