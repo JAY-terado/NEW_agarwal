@@ -63,6 +63,7 @@ import infinityHero from '../assets/agarwal-infinity-hero.jpg';
 import infinityHeroVideo from '../assets/agarwalInfinityHero.mp4';
 import skyriseHero from '../assets/agarwal-skyrise-hero.jpg';
 import skyHeightsHero from '../assets/agarwal-sky-heights-hero.jpg';
+import skyHeightsHeroVideo from '../assets/skyHeightHero.mp4';
 import horizonHero from '../assets/agarwal-horizon-hero.jpg';
 
 import agarwalInfinityMRQR from '../assets/agarwalInfinityMRQR.jpeg';
@@ -395,6 +396,15 @@ export default function ProjectDetails() {
             {project.slug === 'infinity' ? (
               <video
                 src={infinityHeroVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            ) : project.slug === 'sky-heights' ? (
+              <video
+                src={skyHeightsHeroVideo}
                 autoPlay
                 loop
                 muted
