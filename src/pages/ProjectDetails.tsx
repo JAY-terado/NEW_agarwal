@@ -79,6 +79,11 @@ const projectHeroMap: Record<string, string> = {
   horizon: horizonHero,
 };
 
+import skyheightOverviewImage from '../assets/skyheight elevation/elev2.png';
+const projectOverviewMap: Record<string, string> = {
+  'sky-heights': skyheightOverviewImage,
+};
+
 const layoutImages = {
   '1 BHK': layout1Bhk,
   '2 BHK': layout2Bhk,
@@ -158,10 +163,10 @@ import skyheightElev8 from '../assets/skyheight elevation/elev8.png';
 
 // Sky Heights Gallery Images
 import shGallery1 from '../assets/skyheight amenities gallery/ChatGPT Image Aug 10, 2026, 10_38_18 AM.png';
-import shGallery2 from '../assets/skyheight amenities gallery/ChatGPT Image Aug 10, 2026, 10_41_16 AM.png';
+import shGallery2 from '../assets/skyheight amenities gallery/magnific_make-close-up-shot_ksLNDPt16B - Copy.jpeg';
 import shGallery3 from '../assets/skyheight amenities gallery/ChatGPT Image Aug 10, 2026, 03_25_56 PM.png';
-import shGallery4 from '../assets/skyheight interior gallery/hall.png';
-import shGallery5 from '../assets/skyheight interior gallery/bedroom.png';
+import shGallery4 from '../assets/skyheight interior gallery/bedroom.png';
+import shGallery5 from '../assets/skyheight interior gallery/familySkyheights.jpeg';
 import shGallery6 from '../assets/skyheight interior gallery/kitvhen.png';
 
 // Skyrise Rooftop Amenities
@@ -527,7 +532,7 @@ export default function ProjectDetails() {
           {/* Right: Asymmetric Image Grid */}
           <div className="flex flex-col gap-1 md:gap-2 h-full mt-10 lg:mt-0 cursor-pointer">
             <div className="w-full h-full bg-line-light overflow-hidden relative group">
-              <img src={galleryMap[project.gallery[0]]} alt="Overview" className="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-105" />
+              <img src={projectOverviewMap[project.slug] || galleryMap[project.gallery[0]]} alt="Overview" className="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-105" />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none" />
             </div>
           </div>
