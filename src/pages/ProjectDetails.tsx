@@ -708,6 +708,7 @@ export default function ProjectDetails() {
               });
             })()}
           </div>
+          <p className="text-[10px] md:text-xs text-ink/50 mt-4 text-right md:whitespace-nowrap">*Images shown are computer-generated artist impressions for representational purposes only.</p>
         </div>
       </section>
 
