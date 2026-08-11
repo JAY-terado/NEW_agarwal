@@ -95,7 +95,7 @@ export default function ProjectNavbar() {
     backdropFilter: 'blur(14px)',
     WebkitBackdropFilter: 'blur(14px)',
     transition: 'transform 0.5s ease, background .5s, box-shadow .5s, padding .5s, top .45s cubic-bezier(.22,.61,.36,1)',
-    padding: scrolled ? '13px 0' : '20px 0',
+    padding: scrolled ? '8px 0' : '12px 0',
     boxShadow: scrolled ? '0 10px 40px -24px rgba(0,0,0,.22)' : 'none',
     borderBottom: forceScrolledStyle ? '1px solid rgba(20,20,18,.14)' : '1px solid rgba(255, 255, 255, 0.1)',
     transform: isIdle && !scrolled && location.pathname.startsWith('/projects/') ? 'translateY(-100%)' : 'translateY(0)',
@@ -122,7 +122,7 @@ export default function ProjectNavbar() {
         <div className="wrap-widescreen" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'clamp(12px, 2vw, 24px)', flexWrap: 'nowrap' }}>
           {/* Brand */}
           <Link to="/" style={{ textDecoration: 'none', color: brandColor, lineHeight: 1, flexShrink: 0 }}>
-            <img src={forceScrolledStyle ? LogoOther : LogoHero} alt="Agarwal Group" style={{ height: '60px', width: 'auto', display: 'block', borderRadius: '6px', transition: 'filter 0.3s ease' }} />
+            <img src={forceScrolledStyle ? LogoOther : LogoHero} alt="Agarwal Group" style={{ height: '40px', width: 'auto', display: 'block', borderRadius: '6px', transition: 'filter 0.3s ease' }} />
           </Link>
 
           {/* Right Side Group */}
@@ -321,7 +321,7 @@ export default function ProjectNavbar() {
         {/* Drawer Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '36px' }}>
           <Link to="/" onClick={() => setMobileMenuOpen(false)}>
-            <img src={LogoHero} alt="Agarwal Group" style={{ height: '60px', width: 'auto', display: 'block', borderRadius: '4px' }} />
+            <img src={LogoHero} alt="Agarwal Group" style={{ height: '40px', width: 'auto', display: 'block', borderRadius: '4px' }} />
           </Link>
           <button
             onClick={() => setMobileMenuOpen(false)}
