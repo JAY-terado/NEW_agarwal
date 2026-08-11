@@ -1489,7 +1489,7 @@ export default function ProjectDetails() {
             </div>
           </div>
 
-          <div className="bg-ivory border border-line-light rounded-3xl p-8 shadow-xl ">
+          <div className="bg-ivory border border-line-light rounded-3xl p-8 shadow-xl self-start">
             <AnimatePresence mode="wait">
               {!formSubmitted ? (
                 <form onSubmit={handleFormSubmit} className="flex flex-col gap-5">

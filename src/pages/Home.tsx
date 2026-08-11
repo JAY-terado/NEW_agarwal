@@ -989,16 +989,16 @@ export default function Home() {
       <section className="contact" id="contact" style={{ padding: 'clamp(80px, 13vh, 150px) 0', background: 'var(--color-paper)' }}>
         <div className="wrap-widescreen contact-grid">
           {/* Left info */}
-          <div className="reveal">
+          <div className="reveal" style={{ flex: 1.2 }}>
             <span className="eyebrow">Contact Us</span>
             <h2 className="serif" style={{ fontFamily: '"Fraunces", serif', fontSize: 'clamp(2.1rem, 4.6vw, 3.6rem)', fontWeight: 300, lineHeight: 1.08, margin: '.4em 0 0', letterSpacing: '-.01em', color: 'var(--color-ink)' }}>
               Contact <em className='text-brass'>Agarwal Group</em>
 
             </h2>
-            <p className="lead" style={{ marginTop: '1.2em', color: 'var(--color-ink-soft)', fontSize: '1.1rem', fontWeight: 300, lineHeight: 1.6 }}>
+            <p className="lead" style={{ marginTop: '1.2em', color: 'var(--color-ink-soft)', fontSize: '0.9rem', fontWeight: 300, lineHeight: 1.6 }}>
               Looking for the best residential project in Mumbai and Vasai-Virar MMR Mumbai Metropolitan Region?
             </p>
-            <p className="lead" style={{ marginTop: '1.2em', color: 'var(--color-ink-soft)', fontSize: '1.1rem', fontWeight: 300, lineHeight: 1.6 }}>
+            <p className="lead" style={{ marginTop: '1.2em', color: 'var(--color-ink-soft)', fontSize: '0.9rem', fontWeight: 300, lineHeight: 1.6 }}>
               Speak with our property experts to explore premium 1, 2, 3 and 4 BHK apartments, schedule a site visit, compare projects and receive exclusive offers.
             </p>
             <div className="cinfo">
@@ -1024,7 +1024,7 @@ export default function Home() {
           </div>
 
           {/* Right form Card - matches original 3-field callback form exactly */}
-          <div className="form reveal" style={{ background: 'var(--color-ivory)', border: '1px solid var(--color-line)', borderRadius: '8px', padding: 'clamp(26px, 4vw, 42px)', paddingBottom: '24px' }}>
+          <div className="form reveal" style={{ flex: 0.8, alignSelf: 'center', background: 'var(--color-ivory)', border: '1px solid var(--color-line)', borderRadius: '8px', padding: 'clamp(26px, 4vw, 42px)', paddingBottom: '24px' }}>
             <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '4px', lineHeight: 1.4 }}>
               Request an <span className="text-brass">Immediate Callback</span> for Exclusive Offers.
             </div>
