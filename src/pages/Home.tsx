@@ -132,14 +132,41 @@ export default function Home() {
   const [contactSubmitted, setContactSubmitted] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [showAllFaqs, setShowAllFaqs] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isInitialVisible, setIsInitialVisible] = useState(true);
+  const [isIdle, setIsIdle] = useState(false);
+  const isTopHoveredRef = useRef(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsInitialVisible(false);
-    }, 2000);
-    return () => clearTimeout(timer);
+    let timeout: ReturnType<typeof setTimeout>;
+
+    const resetTimer = () => {
+      setIsIdle(false);
+      clearTimeout(timeout);
+      if (window.scrollY < 40 && !isTopHoveredRef.current) {
+        timeout = setTimeout(() => {
+          setIsIdle(true);
+        }, 5000);
+      }
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      isTopHoveredRef.current = e.clientY < 100;
+      resetTimer();
+    };
+
+    const handleScroll = () => {
+      resetTimer();
+    };
+
+    resetTimer();
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timeout);
+    };
   }, []);
 
   const statsRef = useRef<HTMLDivElement>(null);
@@ -395,12 +422,10 @@ export default function Home() {
 
         <div
           className="relative z-10 w-full wrap-widescreen pt-24 pb-16 flex flex-col items-start text-left"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
         >
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: isInitialVisible || isHovered ? 1 : 0, y: 0 }}
+            animate={{ opacity: !isIdle ? 1 : 0, y: 0 }}
             transition={{ duration: 0.8 }}
             className="flex flex-col items-start"
           >

@@ -23,11 +23,43 @@ export default function ProjectNavbar() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const [isIdle, setIsIdle] = useState(false);
+  const isHoveredRef = useRef(false);
+
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
+    let timeout: ReturnType<typeof setTimeout>;
+
+    const resetTimer = () => {
+      setIsIdle(false);
+      clearTimeout(timeout);
+      if (window.scrollY < 40 && !isHoveredRef.current && location.pathname.startsWith('/projects/')) {
+        timeout = setTimeout(() => {
+          setIsIdle(true);
+        }, 5000);
+      }
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      isHoveredRef.current = e.clientY < 100;
+      resetTimer();
+    };
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+      resetTimer();
+    };
+
+    resetTimer();
+
+    window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timeout);
+    };
+  }, [location.pathname]);
 
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -62,10 +94,11 @@ export default function ProjectNavbar() {
     background: scrolled ? 'rgba(255,255,255,.9)' : (isFaqPage ? 'transparent' : 'rgba(0, 0, 0, 0.15)'),
     backdropFilter: 'blur(14px)',
     WebkitBackdropFilter: 'blur(14px)',
-    transition: 'background .5s, box-shadow .5s, padding .5s, top .45s cubic-bezier(.22,.61,.36,1)',
+    transition: 'transform 0.5s ease, background .5s, box-shadow .5s, padding .5s, top .45s cubic-bezier(.22,.61,.36,1)',
     padding: scrolled ? '13px 0' : '20px 0',
     boxShadow: scrolled ? '0 10px 40px -24px rgba(0,0,0,.22)' : 'none',
     borderBottom: forceScrolledStyle ? '1px solid rgba(20,20,18,.14)' : '1px solid rgba(255, 255, 255, 0.1)',
+    transform: isIdle && !scrolled && location.pathname.startsWith('/projects/') ? 'translateY(-100%)' : 'translateY(0)',
   };
 
   const brandColor = forceScrolledStyle ? 'var(--ink)' : 'var(--paper)';
