@@ -162,6 +162,26 @@ import srPodium6 from '../assets/skyrise podium/sp6.png';
 import srPodium7 from '../assets/skyrise podium/sp7.png';
 import srPodium8 from '../assets/skyrise podium/sp8.jpg';
 
+// Infinity Elevation Images
+import infElev1 from '../assets/infinity elevations/ie1.png';
+import infElev2 from '../assets/infinity elevations/ie2.png';
+import infElev3 from '../assets/infinity elevations/ie3.png';
+import infElev4 from '../assets/infinity elevations/ie4.png';
+import infElev5 from '../assets/infinity elevations/ie5.png';
+import infElev6 from '../assets/infinity elevations/ie6.png';
+import infElev7 from '../assets/infinity elevations/ie7.png';
+import infElev8 from '../assets/infinity elevations/ie8.png';
+
+// Infinity Podium Images
+import infPodium1 from '../assets/infinity podium/ip1.jpg';
+import infPodium2 from '../assets/infinity podium/ip2.jpg';
+import infPodium3 from '../assets/infinity podium/ip3.jpg';
+import infPodium4 from '../assets/infinity podium/ip4.jpg';
+import infPodium5 from '../assets/infinity podium/ip5.png';
+import infPodium6 from '../assets/infinity podium/ip6.png';
+import infPodium7 from '../assets/infinity podium/ip7.png';
+import infPodium8 from '../assets/infinity podium/ip8.png';
+
 // Sky Heights Elevation Images
 import skyheightElev1 from '../assets/skyheight elevation/elev1.png';
 import skyheightElev2 from '../assets/skyheight elevation/elev2.png';
@@ -619,6 +639,23 @@ export default function ProjectDetails() {
                 let imageSrc = `https://placehold.co/600x600/e2e0d8/8a867d?text=${project.slug}+${activeAmenityTab.split(' ')[0]}+${idx + 1}`;
                 let displayText = `${activeAmenityTab} ${idx + 1}`;
 
+                if (activeAmenityTab === 'Project Elevation' && project.slug === 'infinity') {
+                  const elevImages = [
+                    { src: infElev1, text: 'Perspective Elevation' },
+                    { src: infElev2, text: 'Podium Top View' },
+                    { src: infElev3, text: 'Front Elevation' },
+                    { src: infElev4, text: 'Podium Layout' },
+                    { src: infElev5, text: "Bird's Eye View" },
+                    { src: infElev6, text: 'Majestic Front View' },
+                    { src: infElev7, text: 'Corner Elevation' },
+                    { src: infElev8, text: 'Retail & Commercial Spaces' },
+                  ];
+                  if (elevImages[idx]) {
+                    imageSrc = elevImages[idx].src;
+                    displayText = elevImages[idx].text;
+                  }
+                }
+
                 if (activeAmenityTab === 'Project Elevation' && project.slug === 'skyrise') {
                   const elevImages = [
                     { src: skyriseElev1, text: 'Street View' },
@@ -663,6 +700,21 @@ export default function ProjectDetails() {
                     { src: shPodium6, text: 'Indoor Games Lounge' },
                     { src: shPodium7, text: 'Fully-Equipped Gymnasium' },
                     { src: shPodium8, text: 'Indoor Kids Play Zone' },
+                  ];
+                  if (podiumImages[idx]) {
+                    imageSrc = podiumImages[idx].src;
+                    displayText = podiumImages[idx].text;
+                  }
+                } else if (activeAmenityTab === 'Podium Amenities' && project.slug === 'infinity') {
+                  const podiumImages = [
+                    { src: infPodium1, text: 'Multipurpose Court' },
+                    { src: infPodium2, text: 'BBQ & Outdoor Dining' },
+                    { src: infPodium3, text: 'Central Lawn' },
+                    { src: infPodium4, text: 'Kids Play Area' },
+                    { src: infPodium5, text: 'Jogging Track' },
+                    { src: infPodium6, text: 'Pickleball Court' },
+                    { src: infPodium7, text: 'Yoga & Meditation Deck' },
+                    { src: infPodium8, text: 'The Residence Gym' },
                   ];
                   if (podiumImages[idx]) {
                     imageSrc = podiumImages[idx].src;
