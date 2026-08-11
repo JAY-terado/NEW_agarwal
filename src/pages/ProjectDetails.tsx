@@ -62,6 +62,7 @@ import skyrise3Bhk from '../assets/Skyrise 3BHK.jpg.jpeg';
 import infinityHero from '../assets/agarwal-infinity-hero.jpg';
 import infinityHeroVideo from '../assets/agarwalInfinityHero.mp4';
 import skyriseHero from '../assets/agarwal-skyrise-hero.jpg';
+import skyriseHeroVideo from '../assets/SkyriseHero.mp4';
 import skyHeightsHero from '../assets/agarwal-sky-heights-hero.jpg';
 import skyHeightsHeroVideo from '../assets/skyHeightHero.mp4';
 import horizonHero from '../assets/agarwal-horizon-hero.jpg';
@@ -189,6 +190,16 @@ import shRooftop5 from '../assets/skyheight-rooftop/skyheight-rooftop-5.png';
 import shRooftop6 from '../assets/skyheight-rooftop/skyheight-rooftop-6.png';
 import shRooftop7 from '../assets/skyheight-rooftop/skyheight-rooftop-7.png';
 import shRooftop8 from '../assets/skyheight-rooftop/skyheight-rooftop-8.png';
+
+// Sky Heights Podium Amenities
+import shPodium1 from '../assets/skyheight-podium/skyheight-podium-1.png';
+import shPodium2 from '../assets/skyheight-podium/skyheight-podium-2.png';
+import shPodium3 from '../assets/skyheight-podium/skyheight-podium-3.png';
+import shPodium4 from '../assets/skyheight-podium/skyheight-podium-4.png';
+import shPodium5 from '../assets/skyheight-podium/skyheight-podium-5.png';
+import shPodium6 from '../assets/skyheight-podium/skyheight-podium-6.jpg';
+import shPodium7 from '../assets/skyheight-podium/skyheight-podium-7.png';
+import shPodium8 from '../assets/skyheight-podium/skyheight-podium-8.jpg';
 
 const amenityImageMap: Record<string, string> = {
   'Grand Entrance Lobby': amenityLobby,
@@ -421,6 +432,15 @@ export default function ProjectDetails() {
                 playsInline
                 className="w-full h-full object-cover"
               />
+            ) : project.slug === 'skyrise' ? (
+              <video
+                src={skyriseHeroVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
             ) : (
               <img
                 src={heroImage}
@@ -624,7 +644,22 @@ export default function ProjectDetails() {
                   }
                 }
 
-                if (activeAmenityTab === 'Podium Amenities' && project.amenities[idx]) {
+                if (activeAmenityTab === 'Podium Amenities' && project.slug === 'sky-heights') {
+                  const podiumImages = [
+                    { src: shPodium1, text: 'Outdoor Kids Play Area' },
+                    { src: shPodium2, text: 'Grand Water Feature' },
+                    { src: shPodium3, text: 'Mini Golf & Putting Green' },
+                    { src: shPodium4, text: 'Multi-cuisine Restaurant' },
+                    { src: shPodium5, text: 'Covered Car Parking' },
+                    { src: shPodium6, text: 'Indoor Games Lounge' },
+                    { src: shPodium7, text: 'Fully-Equipped Gymnasium' },
+                    { src: shPodium8, text: 'Indoor Kids Play Zone' },
+                  ];
+                  if (podiumImages[idx]) {
+                    imageSrc = podiumImages[idx].src;
+                    displayText = podiumImages[idx].text;
+                  }
+                } else if (activeAmenityTab === 'Podium Amenities' && project.amenities[idx]) {
                   displayText = project.amenities[idx];
                   imageSrc = amenityImageMap[displayText] || imageSrc;
                 }
