@@ -153,6 +153,15 @@ import skyriseElev5 from '../assets/skyrise elevations/elev5.png';
 import skyriseElev6 from '../assets/skyrise elevations/elev6.png';
 import skyriseGate from '../assets/skyrise elevations/gate.png';
 
+import srPodium1 from '../assets/skyrise podium/sp1.png';
+import srPodium2 from '../assets/skyrise podium/sp2.png';
+import srPodium3 from '../assets/skyrise podium/sp3.png';
+import srPodium4 from '../assets/skyrise podium/sp4.png';
+import srPodium5 from '../assets/skyrise podium/sp5.png';
+import srPodium6 from '../assets/skyrise podium/sp6.png';
+import srPodium7 from '../assets/skyrise podium/sp7.png';
+import srPodium8 from '../assets/skyrise podium/sp8.jpg';
+
 // Sky Heights Elevation Images
 import skyheightElev1 from '../assets/skyheight elevation/elev1.png';
 import skyheightElev2 from '../assets/skyheight elevation/elev2.png';
@@ -654,6 +663,21 @@ export default function ProjectDetails() {
                     { src: shPodium6, text: 'Indoor Games Lounge' },
                     { src: shPodium7, text: 'Fully-Equipped Gymnasium' },
                     { src: shPodium8, text: 'Indoor Kids Play Zone' },
+                  ];
+                  if (podiumImages[idx]) {
+                    imageSrc = podiumImages[idx].src;
+                    displayText = podiumImages[idx].text;
+                  }
+                } else if (activeAmenityTab === 'Podium Amenities' && project.slug === 'skyrise') {
+                  const podiumImages = [
+                    { src: srPodium1, text: 'Box Cricket' },
+                    { src: srPodium2, text: 'Multipurpose Court' },
+                    { src: srPodium3, text: 'Multilevel Parking' },
+                    { src: srPodium4, text: 'Rainwater Harvesting System' },
+                    { src: srPodium5, text: 'Fully-Equipped Gymnasium' },
+                    { src: srPodium6, text: 'Table Tennis' },
+                    { src: srPodium7, text: 'Indoor Games Lounge' },
+                    { src: srPodium8, text: 'Grand Entrance Lobby' },
                   ];
                   if (podiumImages[idx]) {
                     imageSrc = podiumImages[idx].src;
