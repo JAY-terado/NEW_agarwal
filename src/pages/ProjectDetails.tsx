@@ -333,7 +333,6 @@ export default function ProjectDetails() {
   const [isBrochureDrawerOpen, setIsBrochureDrawerOpen] = useState(false);
   const [brochureFormSubmitted, setBrochureFormSubmitted] = useState(false);
   const contactRef = useRef<HTMLElement>(null);
-  const otherProjectsRef = useRef<HTMLDivElement>(null);
   const [activeAmenityTab, setActiveAmenityTab] = useState<'Project Elevation' | 'Podium Amenities' | 'Rooftop Amenities'>('Podium Amenities');
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [showAllFaqs, setShowAllFaqs] = useState(false);
@@ -352,7 +351,7 @@ export default function ProjectDetails() {
 
   useEffect(() => {
     if (!showFloater || hasClosedFloater) {
-      const delay = (!showFloater && !hasClosedFloater) ? 20000 : 30000;
+      const delay = (!showFloater && !hasClosedFloater) ? 30000 : 60000;
       const timer = setTimeout(() => {
         setShowFloater(true);
         setHasClosedFloater(false);
@@ -989,7 +988,7 @@ export default function ProjectDetails() {
         <div className="wrap-widescreen">
           <div className="section-head mb-14">
             <span className="eyebrow">Gallery</span>
-            <h2 className="serif tracking-tight" style={{ fontSize: 'min(6vw, clamp(2.1rem, 4.6vw, 3.6rem))' }}>A Closer Look at <em>{project.name}</em></h2>
+            <h2 className="serif tracking-tight" style={{ fontSize: 'min(6vw, clamp(2.1rem, 4.6vw, 3.6rem))' }}>A Closer Look at <br /><em>{project.name}</em></h2>
           </div>
 
           <div className="grid grid-cols-12 gap-1 md:gap-2">
@@ -1141,38 +1140,12 @@ export default function ProjectDetails() {
         <div className="wrap-widescreen relative">
           <div className="section-head mb-14 text-center max-w-2xl mx-auto flex flex-col items-center">
             <span className="eyebrow">Explore More</span>
-            <h2 className="serif">Other Ongoing <em>Projects</em></h2>
+            <h2 className="serif">Other  <em>Ongoing Projects</em></h2>
           </div>
 
           <div className="relative">
-            {/* Arrows */}
-            <button
-              onClick={() => {
-                if (otherProjectsRef.current) {
-                  otherProjectsRef.current.scrollBy({ left: -380, behavior: 'smooth' });
-                }
-              }}
-              className="absolute -left-4 md:-left-16 top-[40%] -translate-y-1/2 z-10 p-4 rounded-full bg-paper border border-line-light text-brass-deep hover:bg-brass-bright hover:text-paper hover:border-transparent transition-all shadow-md hidden xl:flex items-center justify-center cursor-pointer"
-            >
-              <ChevronLeft size={28} />
-            </button>
-            <button
-              onClick={() => {
-                if (otherProjectsRef.current) {
-                  otherProjectsRef.current.scrollBy({ left: 380, behavior: 'smooth' });
-                }
-              }}
-              className="absolute -right-4 md:-right-16 top-[40%] -translate-y-1/2 z-10 p-4 rounded-full bg-paper border border-line-light text-brass-deep hover:bg-brass-bright hover:text-paper hover:border-transparent transition-all shadow-md hidden xl:flex items-center justify-center cursor-pointer"
-            >
-              <ChevronRight size={28} />
-            </button>
-
-            {/* Scroll Container */}
-            <div
-              ref={otherProjectsRef}
-              className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-12 pt-4 px-4 -mx-4 hide-scrollbar lg:justify-center"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-            >
+            {/* Grid Container */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-12 pt-4">
               {projects.filter(p => p.slug !== project.slug).map(proj => {
                 const imageSrc = projectHeroMap[proj.slug];
                 const projectMeta = {
@@ -1203,7 +1176,7 @@ export default function ProjectDetails() {
                 };
 
                 return (
-                  <article key={proj.slug} className="pcard snap-center shrink-0 w-[85vw] sm:w-[350px] md:w-[380px]">
+                  <article key={proj.slug} className="pcard w-full">
                     <div className="pcard-media">
                       <img src={imageSrc} alt={proj.name} />
                     </div>

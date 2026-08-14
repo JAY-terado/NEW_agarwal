@@ -432,7 +432,7 @@ export default function Home() {
             <h1 className="serif drop-shadow-2xl" style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 300, lineHeight: 1.15, marginBottom: '1.2rem' }}>
               Trusted Real Estate Developer <br className="hidden md:block" />
               in Vasai–Virar &amp; Mumbai <br />
-              <em className="serif italic block mt-2" style={{ color: 'var(--color-brass)', fontSize: 'clamp(2rem, 4.5vw, 3.8rem)' }}>Since 1978</em>
+              <em className="serif italic block mt-2" style={{ color: 'var(--color-white)', fontSize: 'clamp(2rem, 4.5vw, 3.8rem)', opacity: 0.8 }}>Since 1978</em>
             </h1>
 
             <p className="flex flex-col md:flex-row items-start md:items-center justify-start gap-2 md:gap-4 mb-10 max-w-4xl drop-shadow-md opacity-90" style={{ fontSize: 'clamp(1rem, 1.2vw, 1.25rem)', fontWeight: 400 }}>
@@ -477,7 +477,7 @@ export default function Home() {
         <div className="wrap-widescreen stats-grid">
           <div className="sbox">
             <div className="num">{countYears}+</div>
-            <div className="lbl">Years of Excellence in Real Estate Development</div>
+            <div className="lbl">Years of Excellence <br />in Real Estate Development</div>
           </div>
           <div className="sbox">
             <div className="num">{countProjects}+</div>
@@ -485,7 +485,7 @@ export default function Home() {
           </div>
           <div className="sbox">
             <div className="num">{countFamilies.toLocaleString('en-IN')}+</div>
-            <div className="lbl">Happy Families Living in Agarwal Homes</div>
+            <div className="lbl">Happy Families Living <br />in Agarwal Homes</div>
           </div>
           <div className="sbox">
             <div className="num">1 Cr+</div>
@@ -568,7 +568,7 @@ export default function Home() {
             <img
               src={storyImage}
               alt="Agarwal Group architecture"
-              style={{ width: '80%', height: 'auto', aspectRatio: '4/5', objectFit: 'cover' }}
+              style={{ width: '80%', height: 'auto', aspectRatio: '1/1', objectFit: 'cover' }}
             />
             <div className="story-badge">
               <b>48+</b>
@@ -767,7 +767,7 @@ export default function Home() {
       <section className="section faq" id="faq" style={{ backgroundColor: 'var(--color-ivory)' }}>
         <div className="wrap-widescreen">
           <div className="section-head reveal">
-            <span className="eyebrow">FAQ</span>
+            <span className="eyebrow">FAQ<span style={{ textTransform: 'lowercase', marginLeft: '-0.55em' }}>s</span></span>
             <h2 className="serif">Questions, <em>Answered</em></h2>
             <p>Frequently Asked Questions About Agarwal Group</p>
           </div>
@@ -1018,7 +1018,7 @@ export default function Home() {
               </div>
               <div>
                 <div className="ct">Corporate Office</div>
-                <p>9, Gokul Annexe, Agarwal Gardens, Opp. Muljibhai Mehta School, Gokul Township, Virar (W),<br /> Maharashtra — 401303</p>
+                <p>9, Gokul Annexe, Agarwal Gardens, Opp. Muljibhai Mehta School, Gokul Township, Virar (W), Maharashtra - 401303, India</p>
               </div>
             </div>
           </div>

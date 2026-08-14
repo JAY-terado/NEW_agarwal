@@ -21,7 +21,7 @@ export default function Footer() {
               9, Gokul Annexe, Agarwal Gardens,<br />
               Opp. Muljibhai Mehta School,<br />
               Gokul Township, Virar (W),<br />
-              Maharashtra - 401303
+              Maharashtra - 401303, India
             </address>
             <div style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '5px', alignItems: 'flex-start' }}>
               <a href="tel:+918408008001" style={{ display: 'inline-block', fontWeight: 300, color: 'var(--ink-soft)', transition: 'all 0.3s ease', fontFamily: '"Fraunces", serif', fontSize: '1.05rem', transform: 'translateX(0)' }}
@@ -103,9 +103,9 @@ export default function Footer() {
               ].map(link => (
                 <Link key={link.to} to={link.to}
                   onClick={() => window.scrollTo(0, 0)}
-                  style={{ display: 'block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'color .25s', textDecoration: 'none' }}
-                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>
+                  style={{ display: 'inline-block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'all 0.3s ease', textDecoration: 'none', transform: 'translateX(0)' }}
+                  onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass)'; e.currentTarget.style.transform = 'translateX(5px)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.color = 'var(--ink-soft)'; e.currentTarget.style.transform = 'translateX(0)'; }}>
                   {link.label}
                 </Link>
               ))}
@@ -129,9 +129,9 @@ export default function Footer() {
               ].map((link, i) => (
                 <Link key={i} to={link.to}
                   onClick={() => window.scrollTo(0, 0)}
-                  style={{ display: 'block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'color .25s', textDecoration: 'none' }}
-                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>
+                  style={{ display: 'inline-block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'all 0.3s ease', textDecoration: 'none', transform: 'translateX(0)' }}
+                  onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass)'; e.currentTarget.style.transform = 'translateX(5px)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.color = 'var(--ink-soft)'; e.currentTarget.style.transform = 'translateX(0)'; }}>
                   {link.label}
                 </Link>
               ))}
@@ -150,9 +150,9 @@ export default function Footer() {
               ].map((link, i) => (
                 <Link key={i} to={link.to}
                   onClick={() => window.scrollTo(0, 0)}
-                  style={{ display: 'block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'color .25s', textDecoration: 'none' }}
-                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>
+                  style={{ display: 'inline-block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'all 0.3s ease', textDecoration: 'none', transform: 'translateX(0)' }}
+                  onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass)'; e.currentTarget.style.transform = 'translateX(5px)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.color = 'var(--ink-soft)'; e.currentTarget.style.transform = 'translateX(0)'; }}>
                   {link.label}
                 </Link>
               ))}
@@ -168,14 +168,13 @@ export default function Footer() {
               {[
                 { to: '/faqs', label: 'FAQs' },
                 { to: '/book-site-visit', label: 'Book Site Visit' },
-                { to: '/downloads', label: 'Downloads' },
                 { to: '/contact', label: 'Contact Us' },
               ].map((link, i) => (
                 <Link key={i} to={link.to}
                   onClick={() => window.scrollTo(0, 0)}
-                  style={{ display: 'block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'color .25s', textDecoration: 'none' }}
-                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>
+                  style={{ display: 'inline-block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'all 0.3s ease', textDecoration: 'none', transform: 'translateX(0)' }}
+                  onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass)'; e.currentTarget.style.transform = 'translateX(5px)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.color = 'var(--ink-soft)'; e.currentTarget.style.transform = 'translateX(0)'; }}>
                   {link.label}
                 </Link>
               ))}
@@ -196,9 +195,9 @@ export default function Footer() {
               ].map((link, i) => (
                 <Link key={i} to={link.to}
                   onClick={() => window.scrollTo(0, 0)}
-                  style={{ display: 'block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'color .25s', textDecoration: 'none' }}
-                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--ink)')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--ink-soft)')}>
+                  style={{ display: 'inline-block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'all 0.3s ease', textDecoration: 'none', transform: 'translateX(0)' }}
+                  onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass)'; e.currentTarget.style.transform = 'translateX(5px)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.color = 'var(--ink-soft)'; e.currentTarget.style.transform = 'translateX(0)'; }}>
                   {link.label}
                 </Link>
               ))}
