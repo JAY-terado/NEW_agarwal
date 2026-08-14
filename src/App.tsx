@@ -49,6 +49,8 @@ function AnimatedRoutes() {
           <Route path="/blogs" element={<Blog />} />
           <Route path="/blogs/:id" element={<BlogPost />} />
           <Route path="/channel-partner" element={<ChannelPartner />} />
+          <Route path="/channel-partner-registration" element={<ChannelPartner />} />
+          <Route path="/channel-partner-faqs" element={<ChannelPartner />} />
           <Route path="/customer-registration" element={<CustomerRegistration />} />
           <Route path="/terms-conditions" element={<TermsConditions />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
