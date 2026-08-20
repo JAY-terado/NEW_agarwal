@@ -193,12 +193,12 @@ import skyheightElev7 from '../assets/skyheight elevation/elev7.png';
 import skyheightElev8 from '../assets/skyheight elevation/elev8.png';
 
 // Sky Heights Gallery Images
-import shGallery1 from '../assets/skyheight amenities gallery/ChatGPT Image Aug 10, 2026, 10_38_18 AM.png';
-import shGallery2 from '../assets/skyheight amenities gallery/magnific_make-close-up-shot_ksLNDPt16B - Copy.jpeg';
-import shGallery3 from '../assets/skyheight amenities gallery/ChatGPT Image Aug 10, 2026, 03_25_56 PM.png';
-import shGallery4 from '../assets/skyheight interior gallery/bedroom.png';
-import shGallery5 from '../assets/skyheight interior gallery/familySkyheights.jpeg';
-import shGallery6 from '../assets/skyheight interior gallery/kitvhen.png';
+import shGallery1 from '../assets/skyheights/sky heights rooms/sh-room-1.png';
+import shGallery2 from '../assets/skyheights/sky heights rooms/sh-room-2.png';
+import shGallery3 from '../assets/skyheights/sky heights rooms/sh-room-3.png';
+import shGallery4 from '../assets/skyheights/sky heights rooms/sh-room-4.png';
+import shGallery5 from '../assets/skyheights/sky heights rooms/sh-room-5.png';
+import shGallery6 from '../assets/skyheights/sky heights rooms/sh-room-6.png';
 
 // Skyrise Rooftop Amenities
 import rooftopGym from '../assets/skyrise amenities/gym.png';
@@ -211,24 +211,24 @@ import rooftopLounge from '../assets/skyrise amenities/ChatGPT Image Aug 1, 2026
 import rooftopLawn from '../assets/skyrise amenities/ChatGPT Image Aug 1, 2026, 03_43_30 PM.png';
 
 // Sky Heights Rooftop Amenities
-import shRooftop1 from '../assets/skyheight-rooftop/skyheight-rooftop-1.png';
-import shRooftop2 from '../assets/skyheight-rooftop/skyheight-rooftop-2.png';
-import shRooftop3 from '../assets/skyheight-rooftop/skyheight-rooftop-3.png';
-import shRooftop4 from '../assets/skyheight-rooftop/skyheight-rooftop-4.png';
-import shRooftop5 from '../assets/skyheight-rooftop/skyheight-rooftop-5.png';
-import shRooftop6 from '../assets/skyheight-rooftop/skyheight-rooftop-6.png';
-import shRooftop7 from '../assets/skyheight-rooftop/skyheight-rooftop-7.png';
-import shRooftop8 from '../assets/skyheight-rooftop/skyheight-rooftop-8.png';
+import shRooftop1 from '../assets/skyheights/skyheights rooftop/sh-rooftop-1.png';
+import shRooftop2 from '../assets/skyheights/skyheights rooftop/sh-rooftop-2.png';
+import shRooftop3 from '../assets/skyheights/skyheights rooftop/sh-rooftop-3.png';
+import shRooftop4 from '../assets/skyheights/skyheights rooftop/sh-rooftop-4.png';
+import shRooftop5 from '../assets/skyheights/skyheights rooftop/sh-rooftop-5.png';
+import shRooftop6 from '../assets/skyheights/skyheights rooftop/sh-rooftop-6.png';
 
 // Sky Heights Podium Amenities
-import shPodium1 from '../assets/skyheight-podium/skyheight-podium-1.png';
-import shPodium2 from '../assets/skyheight-podium/skyheight-podium-2.png';
-import shPodium3 from '../assets/skyheight-podium/skyheight-podium-3.png';
-import shPodium4 from '../assets/skyheight-podium/skyheight-podium-4.png';
-import shPodium5 from '../assets/skyheight-podium/skyheight-podium-5.png';
-import shPodium6 from '../assets/skyheight-podium/skyheight-podium-6.jpg';
-import shPodium7 from '../assets/skyheight-podium/skyheight-podium-7.png';
-import shPodium8 from '../assets/skyheight-podium/skyheight-podium-8.jpg';
+import shPodium1 from '../assets/skyheights/skyheights podium amenities/sh-podium-1.png';
+import shPodium4 from '../assets/skyheights/skyheights podium amenities/sh-podium-4.png';
+
+// Sky Heights Amenities
+import shAmenity1 from '../assets/skyheights/sky heights amenities/sh-amenity-1.png';
+import shAmenity2 from '../assets/skyheights/sky heights amenities/sh-amenity-2.png';
+import shAmenity3 from '../assets/skyheights/sky heights amenities/sh-amenity-3.png';
+import shAmenity4 from '../assets/skyheights/sky heights amenities/sh-amenity-4.png';
+import shAmenity5 from '../assets/skyheights/sky heights amenities/sh-amenity-5.png';
+import shAmenity6 from '../assets/skyheights/sky heights amenities/sh-amenity-6.png';
 
 const amenityImageMap: Record<string, string> = {
   'Grand Entrance Lobby': amenityLobby,
@@ -635,8 +635,8 @@ export default function ProjectDetails() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-1">
             {(() => {
               const currentTabItems = Array.from({ length: 8 }).map((_, idx) => {
-                let imageSrc = `https://placehold.co/600x600/e2e0d8/8a867d?text=${project.slug}+${activeAmenityTab.split(' ')[0]}+${idx + 1}`;
-                let displayText = `${activeAmenityTab} ${idx + 1}`;
+                let imageSrc = project.slug === 'sky-heights' ? '' : `https://placehold.co/600x600/e2e0d8/8a867d?text=${project.slug}+${activeAmenityTab.split(' ')[0]}+${idx + 1}`;
+                let displayText = project.slug === 'sky-heights' ? '' : `${activeAmenityTab} ${idx + 1}`;
 
                 if (activeAmenityTab === 'Project Elevation' && project.slug === 'infinity') {
                   const elevImages = [
@@ -691,16 +691,16 @@ export default function ProjectDetails() {
 
                 if (activeAmenityTab === 'Podium Amenities' && project.slug === 'sky-heights') {
                   const podiumImages = [
-                    { src: shPodium1, text: 'Outdoor Kids Play Area' },
-                    { src: shPodium2, text: 'Grand Water Feature' },
-                    { src: shPodium3, text: 'Mini Golf & Putting Green' },
-                    { src: shPodium4, text: 'Multi-cuisine Restaurant' },
-                    { src: shPodium5, text: 'Covered Car Parking' },
-                    { src: shPodium6, text: 'Indoor Games Lounge' },
-                    { src: shPodium7, text: 'Fully-Equipped Gymnasium' },
-                    { src: shPodium8, text: 'Indoor Kids Play Zone' },
+                    { src: shPodium1, text: 'Podium Amenity 1' },
+                    { src: shAmenity5, text: 'Amenity 5' },
+                    { src: shAmenity6, text: 'Amenity 6' },
+                    { src: shPodium4, text: 'Podium Amenity 4' },
+                    { src: shAmenity1, text: 'Amenity 1' },
+                    { src: shAmenity2, text: 'Amenity 2' },
+                    { src: shAmenity3, text: 'Amenity 3' },
+                    { src: shAmenity4, text: 'Amenity 4' },
                   ];
-                  if (podiumImages[idx]) {
+                  if (podiumImages[idx] && podiumImages[idx].src) {
                     imageSrc = podiumImages[idx].src;
                     displayText = podiumImages[idx].text;
                   }
@@ -758,23 +758,21 @@ export default function ProjectDetails() {
 
                 if (activeAmenityTab === 'Rooftop Amenities' && project.slug === 'sky-heights') {
                   const rooftopImages = [
-                    { src: shRooftop1, text: 'Yoga & Meditation Deck' },
-                    { src: shRooftop2, text: 'Giant Board Games' },
-                    { src: shRooftop3, text: 'Zen Garden & Sculptures' },
-                    { src: shRooftop4, text: 'Scenic Garden Circle' },
-                    { src: shRooftop5, text: 'Reflexology Pathway' },
-                    { src: shRooftop6, text: 'Stargazing Observatory' },
-                    { src: shRooftop7, text: 'Rooftop Jogging Track' },
-                    { src: shRooftop8, text: 'Sky Lounge & Seating' },
+                    { src: shRooftop1, text: 'Rooftop Amenity 1' },
+                    { src: shRooftop2, text: 'Rooftop Amenity 2' },
+                    { src: shRooftop3, text: 'Rooftop Amenity 3' },
+                    { src: shRooftop4, text: 'Rooftop Amenity 4' },
+                    { src: shRooftop5, text: 'Rooftop Amenity 5' },
+                    { src: shRooftop6, text: 'Rooftop Amenity 6' },
                   ];
-                  if (rooftopImages[idx]) {
+                  if (rooftopImages[idx] && rooftopImages[idx].src) {
                     imageSrc = rooftopImages[idx].src;
                     displayText = rooftopImages[idx].text;
                   }
                 }
 
                 return { imageSrc, displayText };
-              });
+              }).filter(item => item.imageSrc !== '');
 
               const currentImagesForLightbox = currentTabItems.map(item => item.imageSrc);
 
@@ -789,8 +787,12 @@ export default function ProjectDetails() {
                 else if (patternIdx === 3) spanClass = 'col-span-1 md:col-span-1';
                 else if (patternIdx === 4) spanClass = 'col-span-1 md:col-span-1';
                 else if (patternIdx === 5) {
-                  spanClass = 'col-span-1 md:col-span-2 md:row-span-2';
-                  heightClass = 'h-[250px] md:h-[504px] lg:h-[644px]';
+                  if (currentTabItems.length >= idx + 3) {
+                    spanClass = 'col-span-1 md:col-span-2 md:row-span-2';
+                    heightClass = 'h-[250px] md:h-[504px] lg:h-[644px]';
+                  } else {
+                    spanClass = 'col-span-1 md:col-span-2';
+                  }
                 }
                 else if (patternIdx === 6) spanClass = 'col-span-1 md:col-span-1';
                 else if (patternIdx === 7) spanClass = 'col-span-1 md:col-span-1';
@@ -1114,7 +1116,7 @@ export default function ProjectDetails() {
           <div className="wrap-widescreen">
             <div className="section-head mb-16 text-center max-w-2xl mx-auto">
               <span className="eyebrow">Highlights</span>
-              <h2 className="serif mt-2">Why Choose {project.name}?</h2>
+              <h2 className="serif mt-2">Why Choose <em>{project.name}?</em></h2>
             </div>
 
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-x-8">
@@ -1440,7 +1442,7 @@ export default function ProjectDetails() {
           <div className="flex flex-col justify-between gap-12 h-full lg:py-2">
             <div className="section-head">
               <span className="eyebrow">Contact Us</span>
-              <h2 className="serif">Register Your Interest</h2>
+              <h2 className="serif">Register <em>Your Interest</em></h2>
               <p className="mt-6 text-ink-soft leading-relaxed">
                 Connect with our relationship managers today. Fill out the form, and we'll reach out to discuss booking options, schedule a site visit, and share exclusive offers available for {project.name}.
               </p>
@@ -1526,8 +1528,7 @@ export default function ProjectDetails() {
                     <span className="arr">→</span>
                   </button>
                   <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', marginTop: '10px', lineHeight: 1.4 }}>
-                    And Its Representatives To Call, SMS, Email Or Whatsapp Me About Its Products And Offers. This Consent Overrides Any Registration For DND NDNC.
-                  </div>
+                    By Clicking Above Button, I Authorize Agarwal Group And Its Representatives To Call, SMS, Email Or Whatsapp Me About Its Products And Offers. This Consent Overrides Any Registration For DND NDNC.                  </div>
                 </form>
               ) : (
                 <motion.div

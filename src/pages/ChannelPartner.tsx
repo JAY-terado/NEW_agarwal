@@ -375,7 +375,7 @@ export default function ChannelPartner() {
           <h3 className="serif text-3xl" style={{ lineHeight: 1.4, color: 'var(--ink)', marginBottom: '32px' }}>
             "Working with Agarwal Group has always been smooth. Their support team and transparent processes make doing business easy."
           </h3>
-          <p style={{ color: 'var(--ink-soft)', fontWeight: 500, letterSpacing: '1px', textTransform: 'uppercase', fontSize: '0.9rem' }}>— Vishal Salunke</p>
+          <p style={{ color: 'var(--ink-soft)', fontWeight: 500, letterSpacing: '1px', textTransform: 'uppercase', fontSize: '0.9rem' }}>— Vishal Salunkhe</p>
         </div>
       </section>
 
