@@ -1116,7 +1116,7 @@ export default function ProjectDetails() {
           <div className="wrap-widescreen">
             <div className="section-head mb-16 text-center max-w-2xl mx-auto">
               <span className="eyebrow">Highlights</span>
-              <h2 className="serif mt-2">Why Choose <em>{project.name}?</em></h2>
+              <h2 className="serif mt-2">Why Choose <br /><em>{project.name}?</em></h2>
             </div>
 
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 md:gap-x-8">
