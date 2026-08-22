@@ -12,7 +12,7 @@ export default function Footer() {
             <img
               src={Logo}
               alt="Agarwal Group"
-              style={{ height: '60px', width: 'auto', display: 'block', borderRadius: '8px', marginBottom: '2px' }}
+              style={{ height: 'clamp(28px, 6vw, 40px)', width: 'auto', display: 'block', borderRadius: '6px', marginBottom: '2px' }}
             />
             <p style={{ marginTop: '18px', fontSize: '.92rem', fontWeight: 300, fontStyle: 'italic', fontFamily: '"Fraunces", serif', maxWidth: '36ch', color: 'var(--ink-soft)' }}>
               "Agarwal Group is a trusted real estate developer in Mumbai and Vasai-Virar MMR Mumbai Metropolitan Region with over 48+ years of experience delivering RERA-registered residential and commercial projects. Explore premium 1, 2, 3 & 4 BHK apartments in Virar, Vasai and Mumbai designed for modern families."
@@ -145,11 +145,19 @@ export default function Footer() {
             </h5>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {[
-                { to: '/channel-partner-registration', label: 'Register' },
-                { to: '/channel-partner-faqs', label: 'FAQs' },
+                { to: '/channel-partner', label: 'Overview' },
+                { to: '/channel-partner#why-partner', label: 'Why Partner with us' },
+                { to: '/channel-partner#portfolio', label: 'Portfolio' },
+                { to: '/channel-partner#benefits', label: 'Benefits' },
+                { to: '/channel-partner#register', label: 'Register' },
+                { to: '/channel-partner#faqs', label: 'FAQs' },
               ].map((link, i) => (
                 <Link key={i} to={link.to}
-                  onClick={() => window.scrollTo(0, 0)}
+                  onClick={() => {
+                    if (!link.to.includes('#')) {
+                      window.scrollTo(0, 0);
+                    }
+                  }}
                   style={{ display: 'inline-block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'all 0.3s ease', textDecoration: 'none', transform: 'translateX(0)' }}
                   onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass)'; e.currentTarget.style.transform = 'translateX(5px)'; }}
                   onMouseLeave={e => { e.currentTarget.style.color = 'var(--ink-soft)'; e.currentTarget.style.transform = 'translateX(0)'; }}>

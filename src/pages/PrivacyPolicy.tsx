@@ -21,10 +21,10 @@ export default function PrivacyPolicy() {
           <div className="absolute inset-0 bg-gradient-to-t from-pine via-pine/40 to-pine/65" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 pb-12 w-full text-ivory flex flex-col items-center text-center">
-          <h1 className="font-serif text-4xl sm:text-5xl font-light tracking-tight mb-2">
+          <h1 className="font-serif text-3xl sm:text-4xl font-light tracking-tight mb-2">
             Privacy <span className="italic font-serif text-brass-bright font-normal">Policy</span>
           </h1>
-          <p className="text-xs sm:text-sm text-ivory/80 font-light leading-relaxed">
+          <p className="text-[11px] sm:text-xs text-ivory/80 font-light leading-relaxed">
             Effective Date: 25 August 2026. Your privacy is our highest priority, and we ensure absolute confidentiality.
           </p>
         </div>
@@ -37,7 +37,7 @@ export default function PrivacyPolicy() {
             <Shield className="w-4 h-4" /> Data collection &amp; Privacy protection systems
           </div>
 
-          <div className="prose max-w-none text-xs sm:text-sm text-ink-soft leading-relaxed font-light flex flex-col gap-6">
+          <div className="prose prose-sm max-w-none text-[11px] sm:text-xs text-ink-soft leading-relaxed font-light flex flex-col gap-6">
             <p>
               Agarwal Group ("Company", "we", "our", or "us") values your trust and is committed to protecting your privacy. This Privacy Policy explains how we collect, use, store, disclose and protect your personal information when you visit our website, interact with us online or offline, or use any of our services.<br />
               By accessing or using this website, you agree to the practices described in this Privacy Policy.

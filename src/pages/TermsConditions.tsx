@@ -21,10 +21,10 @@ export default function TermsConditions() {
           <div className="absolute inset-0 bg-gradient-to-t from-pine via-pine/40 to-pine/65" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 pb-12 w-full text-ivory flex flex-col items-center text-center">
-          <h1 className="font-serif text-4xl sm:text-5xl font-light tracking-tight mb-2">
+          <h1 className="font-serif text-3xl sm:text-4xl font-light tracking-tight mb-2">
             Terms &amp; <span className="italic font-serif text-brass-bright font-normal">Conditions</span>
           </h1>
-          <p className="text-xs sm:text-sm text-ivory/80 font-light leading-relaxed">
+          <p className="text-[11px] sm:text-xs text-ivory/80 font-light leading-relaxed">
             Last Updated: 25 August 2026. Please read these terms carefully before using our services.
           </p>
         </div>
@@ -37,7 +37,7 @@ export default function TermsConditions() {
             <FileText className="w-4 h-4" /> Website Terms of Use &amp; Service disclaimers
           </div>
 
-          <div className="prose max-w-none text-xs sm:text-sm text-ink-soft leading-relaxed font-light flex flex-col gap-6">
+          <div className="prose prose-sm max-w-none text-[11px] sm:text-xs text-ink-soft leading-relaxed font-light flex flex-col gap-6">
             <p>
               Welcome to the Agarwal Group website ("Website"). By accessing or using this Website, you agree to comply with and be bound by these Terms &amp; Conditions ("Terms"). If you do not agree with these Terms, please refrain from using this Website.
             </p>

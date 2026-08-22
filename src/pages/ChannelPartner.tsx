@@ -37,6 +37,9 @@ export default function ChannelPartner() {
         registerRef.current?.scrollIntoView({ behavior: 'smooth' });
       } else if (location.pathname === '/channel-partner-faqs' || location.hash === '#faqs') {
         faqRef.current?.scrollIntoView({ behavior: 'smooth' });
+      } else if (location.hash) {
+        const id = location.hash.substring(1);
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
       } else {
         window.scrollTo(0, 0);
       }
@@ -100,7 +103,7 @@ export default function ChannelPartner() {
       </header>
 
       {/* 2. Why Partner With Agarwal Group */}
-      <section className="section py-24" style={{ backgroundColor: 'var(--color-paper)', padding: '100px 0' }}>
+      <section id="why-partner" className="section py-24" style={{ backgroundColor: 'var(--color-paper)', padding: '100px 0' }}>
         <div className="wrap-widescreen">
           <div className="text-center mb-16" style={{ marginBottom: '64px' }}>
             <h2 className="serif text-4xl md:text-5xl" style={{ color: 'var(--color-pine)' }}>Why Leading Channel Partners Choose Us</h2>
@@ -121,7 +124,7 @@ export default function ChannelPartner() {
       </section>
 
       {/* 3. Current Projects */}
-      <section className="section py-24" style={{ backgroundColor: 'var(--color-ivory)', padding: '100px 0' }}>
+      <section id="portfolio" className="section py-24" style={{ backgroundColor: 'var(--color-ivory)', padding: '100px 0' }}>
         <div className="wrap-widescreen">
           <div className="mb-12" style={{ marginBottom: '48px' }}>
             <span className="eyebrow">Portfolio</span>
@@ -175,7 +178,7 @@ export default function ChannelPartner() {
       </section>
 
       {/* 4. Benefits */}
-      <section className="section py-24" style={{ padding: '100px 0', backgroundColor: 'var(--color-paper)' }}>
+      <section id="benefits" className="section py-24" style={{ padding: '100px 0', backgroundColor: 'var(--color-paper)' }}>
         <div className="wrap-widescreen">
           <div className="text-center mb-16" style={{ marginBottom: '64px' }}>
             <h2 className="serif text-4xl" style={{ color: 'var(--ink)' }}>Benefits of Becoming Our Channel Partner</h2>
