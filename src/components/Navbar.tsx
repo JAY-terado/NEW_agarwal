@@ -7,7 +7,7 @@ import LogoOther from '../assets/logo2.png';
 
 import infinityHero from '../assets/agarwal-infinity-hero.jpg';
 import skyriseHero from '../assets/agarwal-skyrise-hero.jpg';
-import skyHeightsHero from '../assets/agarwal-sky-heights-hero.jpg';
+import skyHeightsHero from '../assets/agarwalSkyheight.jpeg';
 import horizonHero from '../assets/agarwal-horizon-hero.jpg';
 
 const projectImages: Record<string, string> = {

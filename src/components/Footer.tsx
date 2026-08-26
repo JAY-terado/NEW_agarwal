@@ -122,7 +122,7 @@ export default function Footer() {
                 { to: '/', label: 'Home' },
                 { to: '/about-us', label: 'About Us' },
                 { to: '/projects', label: 'Ongoing Projects' },
-                { to: '/projects-completed', label: 'Completed Projects' },
+                { to: '/completed-projects', label: 'Completed Projects' },
                 { to: '/blogs', label: 'Blogs' },
                 { to: '/careers', label: 'Careers' },
                 { to: '/supplier-registration', label: 'Supplier/Contractor Registration' },

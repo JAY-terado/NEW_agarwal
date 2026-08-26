@@ -12,7 +12,7 @@ import { channelPartnerFaqs } from '../data/faqs';
 import { projects } from '../data/projects';
 import infinityHero from '../assets/agarwal-infinity-hero.jpg';
 import skyriseHero from '../assets/agarwal-skyrise-hero.jpg';
-import skyHeightsHero from '../assets/agarwal-sky-heights-hero.jpg';
+import skyHeightsHero from '../assets/agarwalSkyheight.jpeg';
 
 const projectHeroMap: Record<string, string> = {
   infinity: infinityHero,
@@ -346,7 +346,7 @@ export default function ChannelPartner() {
                 onClick={() => setShowAllFaqs(false)}
               >
                 <span className="custom-read-more__label">Show Less FAQ's</span>
-                <span className="custom-read-more__icon" style={{ transform: 'rotate(-90deg)' }}>
+                <span className="custom-read-more__icon">
                   <span className="custom-read-more__icon-small">
                     <svg viewBox="0 0 100 100">
                       <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50"></polygon>

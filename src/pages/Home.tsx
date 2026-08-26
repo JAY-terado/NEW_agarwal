@@ -10,10 +10,10 @@ import { contactEmailAxios } from '../_api/user';
 // Asset Imports
 import heroVideo from '../assets/hero.mp4';
 import heroPoster from '../assets/hero-poster.jpg';
-import storyImage from '../assets/blog-interiors.jpg';
+import homeAus from '../assets/homeAus.jpeg';
 import infinityHero from '../assets/agarwal-infinity-hero.jpg';
 import skyriseHero from '../assets/agarwal-skyrise-hero.jpg';
-import skyHeightsHero from '../assets/agarwal-sky-heights-hero.jpg';
+import skyHeightsHero from '../assets/agarwalSkyheight.jpeg';
 import horizonHero from '../assets/agarwal-horizon-hero.jpg';
 
 import test1 from '../assets/testimonial-1.jpg';
@@ -481,7 +481,7 @@ export default function Home() {
           </div>
           <div className="sbox">
             <div className="num">{countProjects}+</div>
-            <div className="lbl">Successfully Delivered Residential Projects</div>
+            <div className="lbl">Successfully Delivered <br />Residential Projects</div>
           </div>
           <div className="sbox">
             <div className="num">{countFamilies.toLocaleString('en-IN')}+</div>
@@ -566,7 +566,7 @@ export default function Home() {
           </div>
           <div className="story-media reveal">
             <img
-              src={storyImage}
+              src={homeAus}
               alt="Agarwal Group architecture"
               style={{ width: '80%', height: 'auto', aspectRatio: '1/1', objectFit: 'cover' }}
             />
@@ -828,7 +828,7 @@ export default function Home() {
                 onClick={() => setShowAllFaqs(false)}
               >
                 <span className="custom-read-more__label">Show Less FAQ's</span>
-                <span className="custom-read-more__icon" style={{ transform: 'rotate(-90deg)' }}>
+                <span className="custom-read-more__icon">
                   <span className="custom-read-more__icon-small">
                     <svg viewBox="0 0 100 100">
                       <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50"></polygon>

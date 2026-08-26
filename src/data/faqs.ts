@@ -5,7 +5,7 @@ export const homeFaqs = [
   },
   {
     q: "Is Agarwal Group a reliable brand for long-term investment?",
-    a: "Yes, with over 48+ years of experience and 50+ completed projects, the brand Agarwal Group offers unmatched reliability. Their history of timely delivery and premium quality ensures high capital appreciation for investors."
+    a: "Yes, with over 48+ years of experience and 30+ completed projects, the brand Agarwal Group offers unmatched reliability. Their history of timely delivery and premium quality ensures high capital appreciation for investors."
   },
   {
     q: "Where are Agarwal Group's residential projects located?",

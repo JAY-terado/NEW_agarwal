@@ -3,9 +3,11 @@ import {
   Hammer, Map, Trophy,
   CalendarCheck, BadgeCheck, Users, Trees
 } from 'lucide-react';
-import heroImage from '../assets/gallery-pool.jpg';
-import storyImage from '../assets/gallery-living.jpg';
-import visionImage from '../assets/blog-interiors.jpg';
+import ourLegacyAus from '../assets/ourLegacyAus.jpeg';
+import ourMissionAus from '../assets/ourMissionAus.jpeg';
+import ourVisionAus from '../assets/OurVisionAus.jpeg';
+import ourPresenceAus from '../assets/ourPresenceAus.jpeg';
+import aboutUsHero from '../assets/aboutUsHero.jpeg';
 
 export default function AboutUs() {
   useEffect(() => {
@@ -18,7 +20,7 @@ export default function AboutUs() {
       <section className="relative h-[55vh] flex items-end overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src={heroImage}
+            src={aboutUsHero}
             alt="About Us"
             className="w-full h-full object-cover"
           />
@@ -58,7 +60,7 @@ export default function AboutUs() {
             </div>
             <div className="story-media">
               <img
-                src={storyImage}
+                src={ourLegacyAus}
                 alt="Agarwal Group Heritage"
                 style={{ width: '80%', height: 'auto', aspectRatio: '4/5', objectFit: 'cover' }}
               />
@@ -85,7 +87,7 @@ export default function AboutUs() {
             <div className="values" style={{ marginTop: '4rem' }}>
               <div className="vcard">
                 <div className="vcard-icon-clear">
-                  <Trophy className="w-5 h-5" strokeWidth={1.8} />
+                  <Trophy className="w-9 h-9" strokeWidth={1.6} />
                 </div>
                 <div className="vcard-content">
                   <b>48+ Years of Trusted Experience</b>
@@ -94,7 +96,7 @@ export default function AboutUs() {
               </div>
               <div className="vcard">
                 <div className="vcard-icon-clear">
-                  <Map className="w-5 h-5" strokeWidth={1.8} />
+                  <Map className="w-9 h-9" strokeWidth={1.6} />
                 </div>
                 <div className="vcard-content">
                   <b>Prime Locations Across Mumbai, Vasai & Virar</b>
@@ -103,7 +105,7 @@ export default function AboutUs() {
               </div>
               <div className="vcard">
                 <div className="vcard-icon-clear">
-                  <Hammer className="w-5 h-5" strokeWidth={1.8} />
+                  <Hammer className="w-9 h-9" strokeWidth={1.6} />
                 </div>
                 <div className="vcard-content">
                   <b>Superior Construction Quality</b>
@@ -112,7 +114,7 @@ export default function AboutUs() {
               </div>
               <div className="vcard">
                 <div className="vcard-icon-clear">
-                  <CalendarCheck className="w-5 h-5" strokeWidth={1.8} />
+                  <CalendarCheck className="w-9 h-9" strokeWidth={1.6} />
                 </div>
                 <div className="vcard-content">
                   <b>Timely Project Delivery</b>
@@ -121,7 +123,7 @@ export default function AboutUs() {
               </div>
               <div className="vcard">
                 <div className="vcard-icon-clear">
-                  <BadgeCheck className="w-5 h-5" strokeWidth={1.8} />
+                  <BadgeCheck className="w-9 h-9" strokeWidth={1.6} />
                 </div>
                 <div className="vcard-content">
                   <b>RERA Registered Projects</b>
@@ -130,7 +132,7 @@ export default function AboutUs() {
               </div>
               <div className="vcard">
                 <div className="vcard-icon-clear">
-                  <Users className="w-5 h-5" strokeWidth={1.8} />
+                  <Users className="w-9 h-9" strokeWidth={1.6} />
                 </div>
                 <div className="vcard-content">
                   <b>Customer-Centric Approach</b>
@@ -139,7 +141,7 @@ export default function AboutUs() {
               </div>
               <div className="vcard">
                 <div className="vcard-icon-clear">
-                  <Trees className="w-5 h-5" strokeWidth={1.8} />
+                  <Trees className="w-9 h-9" strokeWidth={1.6} />
                 </div>
                 <div className="vcard-content">
                   <b>Modern Lifestyle Amenities</b>
@@ -165,7 +167,7 @@ export default function AboutUs() {
             </div>
             <div className="story-media" style={{ direction: 'ltr' }}>
               <img
-                src={visionImage}
+                src={ourVisionAus}
                 alt="Agarwal Group Vision"
                 style={{ width: '80%', height: 'auto', aspectRatio: '4/5', objectFit: 'cover' }}
               />
@@ -193,7 +195,7 @@ export default function AboutUs() {
             </div>
             <div className="story-media">
               <img
-                src={heroImage}
+                src={ourMissionAus}
                 alt="Agarwal Group Mission"
                 style={{ width: '80%', height: 'auto', aspectRatio: '4/5', objectFit: 'cover' }}
               />
@@ -216,7 +218,7 @@ export default function AboutUs() {
             </div>
             <div className="story-media" style={{ direction: 'ltr' }}>
               <img
-                src={visionImage}
+                src={ourPresenceAus}
                 alt="Agarwal Group Presence"
                 style={{ width: '80%', height: 'auto', aspectRatio: '4/5', objectFit: 'cover' }}
               />

@@ -45,7 +45,7 @@ export const projects: Project[] = [
     name: 'Agarwal Infinity',
     location: 'Opp. D-Mart, New Viva College Road, Virar (W), MMR Mumbai',
     status: 'Under Construction',
-    rera: 'P9900052695',
+    rera: 'PR1240002502497',
     config: '2, 3 & 4 BHK',
     startingPrice: 'Price on Request',
     carpetAreaRange: '395 – 720 sq.ft',
@@ -183,14 +183,14 @@ export const projects: Project[] = [
     slug: 'sky-heights',
     name: 'Agarwal Sky Heights',
     location: 'Yashwant Smart City, Gokhiware, Vasai (E), MMR Mumbai',
-    status: 'OC Received',
-    rera: 'P99000004474',
+    status: 'Nearing Completion',
+    rera: 'P99000054026',
     config: '1, 2 & 3 BHK',
     startingPrice: 'Price on Request',
-    carpetAreaRange: '395 – 720 sq.ft',
+    carpetAreaRange: '425 – 714 sq.ft',
     heroImage: 'agarwal-sky-heights-hero.jpg',
     overviewTitle: 'A landmark address where everyday life feels elevated.',
-    overviewText1: 'Agarwal Sky Heights brings thoughtfully designed 1, 2 & 3 BHK homes to the heart of Virar West. Every residence is planned for abundant natural light, cross-ventilation and efficient carpet areas — wrapped in a gated community with resort-grade amenities and seamless connectivity to Mumbai.',
+    overviewText1: 'Agarwal Sky Heights brings thoughtfully designed 1, 2 & 3 BHK homes to the heart of Vasai East. Every residence is planned for abundant natural light, cross-ventilation and efficient carpet areas — wrapped in a gated community with resort-grade amenities and seamless connectivity to Mumbai.',
     overviewText2: 'Backed by four decades of Agarwal Group craftsmanship, Sky Heights is built to hold its value and grow with your family for generations.',
     overviewFeatures: [
       { title: "Landscaped Gardens", desc: "Lush green spaces to unwind in", icon: "Leaf" },
@@ -215,9 +215,9 @@ export const projects: Project[] = [
       'Rooftop Sky Lounge'
     ],
     pricing: [
-      { type: '1 BHK', carpetArea: '395 sq.ft', price: '₹33.59 L*', status: 'Available' },
-      { type: '2 BHK', carpetArea: '560 sq.ft', price: '₹52.90 L*', status: 'Available' },
-      { type: '3 BHK', carpetArea: '720 sq.ft', price: '₹68.50 L*', status: 'Few Left' }
+      { type: '1 BHK', carpetArea: '425 sq.ft', price: '₹33.59 L*', status: 'Available' },
+      { type: '2 BHK', carpetArea: '561 sq.ft', price: '₹52.90 L*', status: 'Available' },
+      { type: '3 BHK', carpetArea: '714 sq.ft', price: '₹68.50 L*', status: 'Few Left' }
     ],
     specifications: [
       { key: 'Structure', value: 'Earthquake-resistant RCC framed' },
@@ -354,11 +354,11 @@ export const projects: Project[] = [
     slug: 'skyrise',
     name: 'Agarwal Skyrise',
     location: 'Y.K Nagar NX, Near Global City, Virar (W), MMR Mumbai',
-    status: 'OC Received',
-    rera: 'P99000006929',
+    status: 'Nearing Completion',
+    rera: 'P99000053167',
     config: '1, 2 & 3 BHK',
     startingPrice: 'Price on Request',
-    carpetAreaRange: '395 – 720 sq.ft',
+    carpetAreaRange: '412 – 824 sq.ft',
     heroImage: 'agarwal-skyrise-hero.jpg',
     overviewTitle: 'A landmark address where everyday life feels elevated.',
     overviewText1: 'Agarwal Skyrise brings thoughtfully designed 1, 2 & 3 BHK homes to the heart of Vasai East. Every residence is planned for abundant natural light, cross-ventilation and efficient carpet areas — wrapped in a gated community with resort-grade amenities and seamless connectivity to Mumbai.',
@@ -386,9 +386,9 @@ export const projects: Project[] = [
       'Rooftop Sky Lounge'
     ],
     pricing: [
-      { type: '1 BHK', carpetArea: '395 sq.ft', price: '₹35.45 L*', status: 'Available' },
-      { type: '2 BHK', carpetArea: '560 sq.ft', price: '₹52.90 L*', status: 'Available' },
-      { type: '3 BHK', carpetArea: '720 sq.ft', price: '₹68.50 L*', status: 'Few Left' }
+      { type: '1 BHK', carpetArea: '412 sq.ft', price: '₹35.45 L*', status: 'Available' },
+      { type: '2 BHK', carpetArea: '617 sq.ft', price: '₹52.90 L*', status: 'Available' },
+      { type: '3 BHK', carpetArea: '824 sq.ft', price: '₹68.50 L*', status: 'Few Left' }
     ],
     specifications: [
       { key: 'Structure', value: 'Earthquake-resistant RCC framed' },

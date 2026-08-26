@@ -63,7 +63,7 @@ import infinityHero from '../assets/agarwal-infinity-hero.jpg';
 import infinityHeroVideo from '../assets/agarwalInfinityHero.mp4';
 import skyriseHero from '../assets/agarwal-skyrise-hero.jpg';
 import skyriseHeroVideo from '../assets/SkyriseHero.mp4';
-import skyHeightsHero from '../assets/agarwal-sky-heights-hero.jpg';
+import skyHeightsHero from '../assets/agarwalSkyheight.jpeg';
 import skyHeightsHeroVideo from '../assets/skyHeightHero.mp4';
 import horizonHero from '../assets/agarwal-horizon-hero.jpg';
 
@@ -584,8 +584,8 @@ export default function ProjectDetails() {
                 const IconComponent = iconComponents[feat.icon] || Leaf;
                 return (
                   <div key={idx} className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-line-light flex items-center justify-center shrink-0 text-pine">
-                      <IconComponent className="w-[20px] h-[20px]" strokeWidth={2} />
+                    <div className="w-12 h-12 rounded-full bg-line-light flex items-center justify-center shrink-0 text-pine mt-0.5">
+                      <IconComponent className="w-6 h-6" strokeWidth={1.75} />
                     </div>
                     <div>
                       <h4 className="text-sm font-bold text-ink mb-1">{feat.title}</h4>
@@ -811,10 +811,7 @@ export default function ProjectDetails() {
                       alt={item.displayText}
                       className="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-700 z-10" />
-                    <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-6 text-left z-20">
-                      <span className="font-serif text-sm md:text-base text-ivory tracking-wide">{item.displayText}</span>
-                    </div>
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none" />
                   </motion.div>
                 );
               });
@@ -1023,6 +1020,7 @@ export default function ProjectDetails() {
               );
             })}
           </div>
+          <p className="text-[10px] md:text-xs text-ink/50 mt-4 text-right md:whitespace-nowrap">*Images shown are computer-generated artist impressions for representational purposes only.</p>
         </div>
       </section>
 
@@ -1030,7 +1028,7 @@ export default function ProjectDetails() {
       <section className="section bg-ivory pt-24 pb-24" id="faq">
         <div className="wrap-widescreen">
           <div className="section-head">
-            <span className="eyebrow">FAQ</span>
+            <span className="eyebrow">FAQ<span style={{ textTransform: 'lowercase', marginLeft: '-0.55em' }}>s</span></span>
             <h2 className="serif">Questions, <em>Answered</em></h2>
             <p>Everything you need to know before making <em className='text-brass font-bold'>{project.name}</em> your home.</p>
           </div>
@@ -1091,7 +1089,7 @@ export default function ProjectDetails() {
                 onClick={() => setShowAllFaqs(false)}
               >
                 <span className="custom-read-more__label">Show Less FAQ's</span>
-                <span className="custom-read-more__icon" style={{ transform: 'rotate(-90deg)' }}>
+                <span className="custom-read-more__icon">
                   <span className="custom-read-more__icon-small">
                     <svg viewBox="0 0 100 100">
                       <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50"></polygon>
@@ -1158,12 +1156,12 @@ export default function ProjectDetails() {
                   },
                   skyrise: {
                     badge: 'Ready · OC Received',
-                    location: 'Yashwant Smart City, Gokhiware, Vasai (E), MMR Mumbai',
-                    tags: ['Grand Clubhouses', 'Sky-High Rooftop Amenities', 'Multipurpose Turf', 'Excellent Connectivity']
+                    location: 'Y.K Nagar NX, Near Global City, Virar (W), MMR Mumbai',
+                    tags: ['Multipurpose Turf', 'Excellent Connectivity', 'Grand Clubhouses', 'Sky-High Rooftop Amenities',]
                   },
                   'sky-heights': {
                     badge: 'Club Membership Free',
-                    location: 'Y.K Nagar NX, Near Global City, Virar (W), MMR Mumbai',
+                    location: 'Yashwant Smart City, Gokhiware, Vasai (E), MMR Mumbai',
                     tags: ['Iconic High-Rise Living', 'Grand Clubhouse Experience', '⁠Exclusive Rooftop Amenities', '⁠Grand Podium Amenities']
                   },
                   horizon: {
@@ -1278,7 +1276,7 @@ export default function ProjectDetails() {
               className="fixed top-1/2 right-0 md:right-6 w-full max-w-[360px] bg-paper z-[101] p-6 md:p-8 shadow-2xl overflow-y-auto flex flex-col rounded-l-[24px] md:rounded-[24px]"
               style={{ maxHeight: 'calc(100vh - 4rem)' }}
             >
-              <div className="flex items-start justify-between mb-8">
+              <div className="flex items-start justify-between mb-4">
                 <div>
                   <h3 className="font-serif text-2xl text-ink mb-2">Download Brochure</h3>
                   <p className="text-xs text-taupe leading-relaxed pr-4">
@@ -1292,6 +1290,7 @@ export default function ProjectDetails() {
                   <X className="w-6 h-6 text-ink-soft" />
                 </button>
               </div>
+              <div className="w-full border-b border-line-light mb-6" />
 
               {!brochureFormSubmitted ? (
                 <form onSubmit={handleBrochureSubmit} className="flex flex-col gap-6 flex-1">
