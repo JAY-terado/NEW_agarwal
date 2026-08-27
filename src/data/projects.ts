@@ -48,22 +48,22 @@ export const projects: Project[] = [
     rera: 'PR1240002502497',
     config: '2, 3 & 4 BHK',
     startingPrice: 'Price on Request',
-    carpetAreaRange: '395 – 720 sq.ft',
+    carpetAreaRange: '975 – 1,215 sq.ft',
     heroImage: 'agarwal-infinity-hero.jpg',
-    overviewTitle: 'A landmark address where everyday life feels elevated.',
-    overviewText1: 'Agarwal Infinity brings thoughtfully designed 1, 2 & 3 BHK homes to the heart of Virar West. Every residence is planned for abundant natural light, cross-ventilation and efficient carpet areas, wrapped in a gated community with resort-grade amenities and seamless connectivity to Mumbai.',
-    overviewText2: 'Backed by four decades of Agarwal Group craftsmanship, Infinity is built to hold its value and grow with your family for generations.',
+    overviewTitle: 'Agarwal Infinity – Where Spacious Living Meets Everyday Convenience.',
+    overviewText1: 'Agarwal Infinity brings spacious 2, 3 & 4 BHK homes to Virar West, thoughtfully designed for families seeking more space, comfort and everyday convenience. With carpet areas ranging from 975 to 1,215 sq. ft., the project combines well-planned residences with a range of lifestyle amenities in a well-connected location. Every home is planned with spacious layouts, abundant natural light and smart space utilisation to make everyday living more comfortable.',
+    overviewText2: 'Located in one of Virar West\'s most well-connected neighbourhoods, Agarwal Infinity keeps everything you need just minutes away. From seamless railway connectivity and reputed schools to shopping, healthcare and everyday essentials, life here is designed to be convenient today and promising for tomorrow.',
     overviewFeatures: [
-      { title: "Landscaped Gardens", desc: "Lush green spaces to unwind in", icon: "Leaf" },
-      { title: "Fitness Zones", desc: "State-of-the-art equipment", icon: "Dumbbell" },
-      { title: "Podium Parking", desc: "Dedicated covered parking spaces", icon: "Car" },
-      { title: "Sky Deck Views", desc: "Panoramic vistas from the rooftop", icon: "Sun" }
+      { title: "Spacious 2, 3 & 4 BHK Homes", desc: "Carpet areas ranging from 975 to 1,215 sq. ft.", icon: "Home" },
+      { title: "7 Mins From Virar Station", desc: "Seamless railway & transit connectivity", icon: "Train" },
+      { title: "Lifestyle Amenities for Every Age", desc: "Thoughtfully curated facilities for all generations", icon: "Trees" },
+      { title: "Everyday Essentials Nearby", desc: "Schools, healthcare & shopping minutes away", icon: "ShoppingBag" }
     ],
     whyChoseUs: [
-      { title: "Luxury Residences with Deck", desc: "Spacious homes with private decks for panoramic views", icon: "Home" },
-      { title: "Exclusive Jodi Flats", desc: "Flexible layouts perfect for growing families", icon: "Building2" },
-      { title: "Grand Lifestyle Amenities", desc: "Premium facilities for recreation and relaxation", icon: "Coffee" },
-      { title: "Prime Location", desc: "Excellent connectivity to essential destinations", icon: "MapPin" }
+      { title: "Spacious 2, 3 & 4 BHK Homes", desc: "Thoughtfully designed for families seeking more space & comfort", icon: "Home" },
+      { title: "7 Mins From Virar Station", desc: "Convenient daily commuting across MMR Mumbai", icon: "Train" },
+      { title: "Lifestyle Amenities for Every Age", desc: "Well-planned leisure & community spaces for all ages", icon: "Trees" },
+      { title: "Everyday Essentials Nearby", desc: "Reputed schools, shopping & healthcare just minutes away", icon: "ShoppingBag" }
     ],
     amenities: [
       'Grand Entrance Lobby',
@@ -189,20 +189,20 @@ export const projects: Project[] = [
     startingPrice: 'Price on Request',
     carpetAreaRange: '425 – 714 sq.ft',
     heroImage: 'agarwal-sky-heights-hero.jpg',
-    overviewTitle: 'A landmark address where everyday life feels elevated.',
-    overviewText1: 'Agarwal Sky Heights brings thoughtfully designed 1, 2 & 3 BHK homes to the heart of Vasai East. Every residence is planned for abundant natural light, cross-ventilation and efficient carpet areas — wrapped in a gated community with resort-grade amenities and seamless connectivity to Mumbai.',
-    overviewText2: 'Backed by four decades of Agarwal Group craftsmanship, Sky Heights is built to hold its value and grow with your family for generations.',
+    overviewTitle: 'Agarwal Sky Heights – Elevated Living in Vasai East',
+    overviewText1: 'Agarwal Sky Heights is a 29-floor residential tower in Vasai East, offering thoughtfully designed 1, 2 & 3 BHK homes with modern specifications, lifestyle amenities and elevated recreational spaces.',
+    overviewText2: 'The highlight of Agarwal Sky Heights is its rooftop amenity zone, located 345 feet above ground level, offering residents elevated spaces for relaxation, fitness and recreation. From a lounge and telescope point to rooftop jogging tracks, meditation areas, open gym and children\'s activity spaces, the project brings a distinctive lifestyle experience above the city.',
     overviewFeatures: [
-      { title: "Landscaped Gardens", desc: "Lush green spaces to unwind in", icon: "Leaf" },
-      { title: "Fitness Zones", desc: "State-of-the-art equipment", icon: "Dumbbell" },
-      { title: "Podium Parking", desc: "Dedicated covered parking spaces", icon: "Car" },
-      { title: "Sky Deck Views", desc: "Panoramic vistas from the rooftop", icon: "Sun" }
+      { title: "Live 345 Ft. Above The Ground", desc: "Rooftop amenity zone offering elevated spaces & panoramic views", icon: "Sun" },
+      { title: "A 29-Storey Landmark", desc: "Iconic high-rise residential tower in Vasai East", icon: "Building2" },
+      { title: "More Than A Home", desc: "Lounge, telescope point, rooftop track, meditation & activity areas", icon: "Coffee" },
+      { title: "Designed For Everyday Comfort", desc: "Thoughtfully planned residences with modern specifications", icon: "Home" }
     ],
     whyChoseUs: [
-      { title: "Iconic High-Rise Living", desc: "Elevated lifestyle with stunning cityscapes", icon: "Building2" },
-      { title: "Grand Clubhouse Experience", desc: "A luxurious retreat for leisure and gatherings", icon: "Coffee" },
-      { title: "Exclusive Rooftop Amenities", desc: "Stargazing and recreation atop the city", icon: "Sun" },
-      { title: "Grand Podium Amenities", desc: "Thoughtfully designed spaces for every age", icon: "Trees" }
+      { title: "Live 345 Ft. Above The Ground", desc: "Rooftop amenity zone offering elevated spaces & panoramic views", icon: "Sun" },
+      { title: "A 29-Storey Landmark", desc: "Iconic high-rise residential tower in Vasai East", icon: "Building2" },
+      { title: "More Than A Home", desc: "Lounge, telescope point, rooftop track, meditation & activity areas", icon: "Coffee" },
+      { title: "Designed For Everyday Comfort", desc: "Thoughtfully planned residences with modern specifications", icon: "Home" }
     ],
     amenities: [
       'Grand Entrance Lobby',
@@ -360,20 +360,20 @@ export const projects: Project[] = [
     startingPrice: 'Price on Request',
     carpetAreaRange: '412 – 824 sq.ft',
     heroImage: 'agarwal-skyrise-hero.jpg',
-    overviewTitle: 'A landmark address where everyday life feels elevated.',
-    overviewText1: 'Agarwal Skyrise brings thoughtfully designed 1, 2 & 3 BHK homes to the heart of Vasai East. Every residence is planned for abundant natural light, cross-ventilation and efficient carpet areas — wrapped in a gated community with resort-grade amenities and seamless connectivity to Mumbai.',
-    overviewText2: 'Backed by four decades of Agarwal Group craftsmanship, Skyrise is built to hold its value and grow with your family for generations.',
+    overviewTitle: 'Agarwal Skyrise – Upscale to a High Life',
+    overviewText1: 'Agarwal Skyrise is a premium residential project in Virar West, offering thoughtfully designed 1, 2 & 3 BHK homes across two high-rise wings of 22 and 21 storeys. With contemporary specifications, modern amenities and an exclusive Sky Deck, the project brings together elevated living, recreation and everyday convenience.',
+    overviewText2: 'Located close to Reliance Smart, schools, hospitals, shopping and entertainment, with Virar Railway Station approximately 2.5 km away, Agarwal Skyrise offers a well-connected address designed for a modern lifestyle.',
     overviewFeatures: [
-      { title: "Landscaped Gardens", desc: "Lush green spaces to unwind in", icon: "Leaf" },
-      { title: "Fitness Zones", desc: "State-of-the-art equipment", icon: "Dumbbell" },
-      { title: "Podium Parking", desc: "Dedicated covered parking spaces", icon: "Car" },
-      { title: "Sky Deck Views", desc: "Panoramic vistas from the rooftop", icon: "Sun" }
+      { title: "Sky Deck Lifestyle", desc: "Exclusive Sky Deck with elevated leisure & panoramic vistas", icon: "Sun" },
+      { title: "1, 2 & 3 BHK Homes", desc: "Thoughtfully designed residences across two high-rise wings", icon: "Home" },
+      { title: "Everyday Convenience at Your Doorstep", desc: "Close to Reliance Smart, schools, hospitals & shopping", icon: "ShoppingBag" },
+      { title: "Amenities for Every Generation", desc: "Modern lifestyle facilities & recreation for all ages", icon: "Trees" }
     ],
     whyChoseUs: [
-      { title: "Grand Clubhouse", desc: "State-of-the-art facility for social and wellness activities", icon: "Coffee" },
-      { title: "Sky-High Rooftop Amenities", desc: "Experience unmatched leisure high above the ground", icon: "Sun" },
-      { title: "Multipurpose Turf", desc: "Dedicated sporting areas for active lifestyles", icon: "Trophy" },
-      { title: "Excellent Connectivity", desc: "Seamless travel with nearby transit hubs", icon: "Train" }
+      { title: "Sky Deck Lifestyle", desc: "Exclusive Sky Deck with elevated leisure & panoramic vistas", icon: "Sun" },
+      { title: "1, 2 & 3 BHK Homes", desc: "Thoughtfully designed residences across two high-rise wings", icon: "Home" },
+      { title: "Everyday Convenience at Your Doorstep", desc: "Close to Reliance Smart, schools, hospitals & shopping", icon: "ShoppingBag" },
+      { title: "Amenities for Every Generation", desc: "Modern lifestyle facilities & recreation for all ages", icon: "Trees" }
     ],
     amenities: [
       'Grand Entrance Lobby',
