@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Instagram } from 'lucide-react';
+import { Instagram, X } from 'lucide-react';
 import { projects } from '../data/projects';
 import { homeFaqs } from '../data/faqs';
 import { contactEmailAxios } from '../_api/user';
@@ -16,12 +16,15 @@ import skyriseHero from '../assets/agarwal-skyrise-hero.jpg';
 import skyHeightsHero from '../assets/agarwalSkyheight.jpeg';
 import horizonHero from '../assets/agarwal-horizon-hero.jpg';
 
-import test1 from '../assets/testimonial-1.jpg';
-import test2 from '../assets/testimonial-2.jpg';
-import test3 from '../assets/testimonial-3.jpg';
-import test4 from '../assets/testimonial-4.jpg';
-import test5 from '../assets/testimonial-5.jpg';
-import test6 from '../assets/testimonial-6.jpg';
+// Testimonial Videos
+import testVid1 from '../assets/testimonials/darshan mehta AG1.mp4';
+import testVid2 from '../assets/testimonials/Keyur raichand AG2.mp4';
+import testVid3 from '../assets/testimonials/Hitesh patil AG3.mp4';
+import testVid4 from '../assets/testimonials/Hitesh shah AG4.mp4';
+import testVid5 from '../assets/testimonials/ekta goraksha AG5.mp4';
+import testVid6 from '../assets/testimonials/Deesha shah AG6.mp4';
+import testVid7 from '../assets/testimonials/M.S.bijju AG7.mp4';
+import testVid8 from '../assets/testimonials/Ramkrushna sabat AG8.mp4';
 
 
 import blogGreen from '../assets/blog-green.jpg';
@@ -39,14 +42,24 @@ const projectHeroMap: Record<string, string> = {
   horizon: horizonHero,
 };
 
+interface Testimonial {
+  id: string;
+  name: string;
+  title: string;
+  project: string;
+  video: string;
+}
+
 // Testimonials data matching the original reels
-const testimonialsData = [
-  { title: "A Home to Cherish", project: "Agarwal Infinity", image: test1 },
-  { title: "Exactly as Promised", project: "Agarwal Skyrise", image: test2 },
-  { title: "Delivered On Time", project: "Agarwal Sky Heights", image: test3 },
-  { title: "World-Class Amenities", project: "Agarwal Horizon", image: test4 },
-  { title: "A Trusted Name", project: "Vasai–Virar & Mumbai", image: test5 },
-  { title: "Highly Recommended", project: "Agarwal Group", image: test6 },
+const testimonialsData: Testimonial[] = [
+  { id: '1', name: "Darshan Mehta", title: "A Home to Cherish", project: "Agarwal Infinity", video: testVid1 },
+  { id: '2', name: "Keyur Raichand", title: "Exactly as Promised", project: "Agarwal Skyrise", video: testVid2 },
+  { id: '3', name: "Hitesh Patil", title: "Delivered On Time", project: "Agarwal Sky Heights", video: testVid3 },
+  { id: '4', name: "Hitesh Shah", title: "World-Class Amenities", project: "Agarwal Horizon", video: testVid4 },
+  { id: '5', name: "Ekta Goraksha", title: "A Trusted Name", project: "Vasai–Virar & Mumbai", video: testVid5 },
+  { id: '6', name: "Deesha Shah", title: "Highly Recommended", project: "Agarwal Group", video: testVid6 },
+  { id: '7', name: "M.S. Bijju", title: "Exceptional Quality", project: "Agarwal Paramount", video: testVid7 },
+  { id: '8', name: "Ramkrushna Sabat", title: "Peace of Mind", project: "Agarwal Residency", video: testVid8 },
 ];
 
 // Insights blog data matching the original bposts
@@ -133,7 +146,29 @@ export default function Home() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [showAllFaqs, setShowAllFaqs] = useState(false);
   const [isIdle, setIsIdle] = useState(false);
+  const [activeVideoModal, setActiveVideoModal] = useState<Testimonial | null>(null);
   const isTopHoveredRef = useRef(false);
+
+  useEffect(() => {
+    if (activeVideoModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [activeVideoModal]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && activeVideoModal) {
+        setActiveVideoModal(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeVideoModal]);
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout>;
@@ -732,17 +767,31 @@ export default function Home() {
                 <article
                   key={index}
                   className="reel"
-                  style={{ backgroundImage: `url(${item.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+                  onClick={() => setActiveVideoModal(item)}
                 >
-                  <button className="reel-play" aria-label="Play client reel">
+                  <video
+                    src={`${item.video}#t=0.001`}
+                    preload="metadata"
+                    muted
+                    playsInline
+                    className="reel-video"
+                  />
+                  <button
+                    className="reel-play"
+                    aria-label={`Play testimonial reel from ${item.name}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveVideoModal(item);
+                    }}
+                  >
                     <svg viewBox="0 0 24 24">
                       <path d="M8 5v14l11-7z" />
                     </svg>
                   </button>
                   <div className="reel-cap">
                     <div className="reel-stars">★★★★★</div>
-                    <b>{item.title}</b>
-                    <span>{item.project}</span>
+                    <b>{item.name}</b>
+                    <span>{item.project} • {item.title}</span>
                   </div>
                 </article>
               ))}
@@ -1112,6 +1161,53 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Testimonial Video Modal */}
+      <AnimatePresence>
+        {activeVideoModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="testimonial-modal-backdrop"
+            onClick={() => setActiveVideoModal(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="testimonial-modal-card"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                className="testimonial-modal-close"
+                onClick={() => setActiveVideoModal(null)}
+                aria-label="Close video player"
+              >
+                <X size={20} />
+              </button>
+
+              <div className="testimonial-modal-video-wrap">
+                <video
+                  src={activeVideoModal.video}
+                  autoPlay
+                  controls
+                  playsInline
+                  className="testimonial-modal-video"
+                />
+              </div>
+
+              <div className="testimonial-modal-info">
+                <div className="reel-stars">★★★★★</div>
+                <h3 className="testimonial-modal-name">{activeVideoModal.name}</h3>
+                <p className="testimonial-modal-meta">
+                  <span>{activeVideoModal.project}</span> • <em>{activeVideoModal.title}</em>
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   );
