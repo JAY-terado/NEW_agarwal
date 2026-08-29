@@ -50,9 +50,6 @@
   --shadow: var(--color-shadow);
 }
 
-html {
-}
-
 body {
   font-family: 'Inter', sans-serif;
   background-color: #F6F4EE;
@@ -247,7 +244,7 @@ input[type="radio"] {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(4px);
-  WebkitBackdropFilter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   display: grid;
   place-items: center;
   border: 1px solid rgba(255, 255, 255, 0.25);
