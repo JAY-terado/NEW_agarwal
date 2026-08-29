@@ -82,9 +82,6 @@ const projectHeroMap: Record<string, string> = {
 };
 
 import skyheightOverviewImage from '../assets/skyheight elevation/elev2.png';
-const projectOverviewMap: Record<string, string> = {
-  'sky-heights': skyheightOverviewImage,
-};
 
 const layoutImages = {
   '1 BHK': layout1Bhk,
@@ -163,14 +160,14 @@ import srPodium7 from '../assets/skyrise podium/sp7.png';
 import srPodium8 from '../assets/skyrise podium/sp8.jpg';
 
 // Infinity Elevation Images
-import infElev1 from '../assets/infinity elevations/ie1.png';
-import infElev2 from '../assets/infinity elevations/ie2.png';
-import infElev3 from '../assets/infinity elevations/ie3.png';
-import infElev4 from '../assets/infinity elevations/ie4.png';
-import infElev5 from '../assets/infinity elevations/ie5.png';
-import infElev6 from '../assets/infinity elevations/ie6.png';
-import infElev7 from '../assets/infinity elevations/ie7.png';
-import infElev8 from '../assets/infinity elevations/ie8.png';
+import infElev1 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 12.10.23 PM.jpeg';
+import infElev2 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 12.52.44 PM (1).jpeg';
+import infElev3 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 12.52.44 PM.jpeg';
+import infElev4 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 12.52.45 PM (1).jpeg';
+import infElev5 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 12.52.45 PM (2).jpeg';
+import infElev6 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 12.52.45 PM.jpeg';
+import infElev7 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 1.00.47 PM.jpeg';
+import infElev8 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 1.05.17 PM.jpeg';
 
 // Infinity Podium Images
 import infPodium1 from '../assets/infinity podium/ip1.jpg';
@@ -229,6 +226,11 @@ import shAmenity3 from '../assets/skyheights/sky heights amenities/sh-amenity-3.
 import shAmenity4 from '../assets/skyheights/sky heights amenities/sh-amenity-4.png';
 import shAmenity5 from '../assets/skyheights/sky heights amenities/sh-amenity-5.png';
 import shAmenity6 from '../assets/skyheights/sky heights amenities/sh-amenity-6.png';
+
+const projectOverviewMap: Record<string, string> = {
+  'sky-heights': skyheightOverviewImage,
+  infinity: infElev2,
+};
 
 const amenityImageMap: Record<string, string> = {
   'Grand Entrance Lobby': amenityLobby,
