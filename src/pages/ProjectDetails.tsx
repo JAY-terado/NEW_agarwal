@@ -188,14 +188,14 @@ import infPodium7 from '../assets/infinity podium/ip7.png';
 import infPodium8 from '../assets/infinity podium/ip8.jpeg';
 
 // Sky Heights Elevation Images
-import skyheightElev1 from '../assets/skyheight elevation/elev1.png';
-import skyheightElev2 from '../assets/skyheight elevation/elev2.png';
-import skyheightElev3 from '../assets/skyheight elevation/elev3.png';
-import skyheightElev4 from '../assets/skyheight elevation/elev4.png';
-import skyheightElev5 from '../assets/skyheight elevation/elev5.png';
-import skyheightElev6 from '../assets/skyheight elevation/elev6.png';
-import skyheightElev7 from '../assets/skyheight elevation/elev7.png';
-import skyheightElev8 from '../assets/skyheight elevation/elev8.png';
+import skyheightElev1 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.18.57 PM (1).jpeg';
+import skyheightElev2 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.18.57 PM (2).jpeg';
+import skyheightElev3 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.18.57 PM.jpeg';
+import skyheightElev4 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.18.58 PM (1).jpeg';
+import skyheightElev5 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.18.58 PM.jpeg';
+import skyheightElev6 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.18.59 PM.jpeg';
+import skyheightElev7 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.25.00 PM.jpeg';
+import skyheightElev8 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.50.04 PM.jpeg';
 
 // Sky Heights Gallery Images
 import shGallery1 from '../assets/skyheights/sky heights rooms/sh-room-1.png';
