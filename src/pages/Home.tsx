@@ -12,7 +12,7 @@ import heroVideo from '../assets/hero.mp4';
 import heroPoster from '../assets/hero-poster.jpeg';
 import homeAus from '../assets/homeAus.jpeg';
 import infinityHero from '../assets/agarwal-infinity-hero.jpg';
-import skyriseHero from '../assets/agarwal-skyrise-hero.jpg';
+import skyriseHero from '../assets/skyrise elevations/elev6.png';
 import skyHeightsHero from '../assets/agarwalSkyheight.jpeg';
 import horizonHero from '../assets/agarwal-horizon-hero.jpg';
 

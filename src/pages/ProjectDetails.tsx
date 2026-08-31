@@ -61,7 +61,7 @@ import skyrise3Bhk from '../assets/Skyrise 3BHK.jpg.jpeg';
 // Project Hero Imports
 import infinityHero from '../assets/agarwal-infinity-hero.jpg';
 import infinityHeroVideo from '../assets/agarwalInfinityHero.mp4';
-import skyriseHero from '../assets/agarwal-skyrise-hero.jpg';
+import skyriseHero from '../assets/skyrise elevations/elev6.png';
 import skyriseHeroVideo from '../assets/SkyriseHero.mp4';
 import skyHeightsHero from '../assets/agarwalSkyheight.jpeg';
 import skyHeightsHeroVideo from '../assets/skyHeightHero.mp4';
@@ -231,7 +231,7 @@ import shPodium4 from '../assets/skyheights/skyheights podium amenities/sh-podiu
 import shAmenity1 from '../assets/skyheights/sky heights amenities/sh-amenity-1.png';
 import shAmenity2 from '../assets/skyheights/sky heights amenities/sh-amenity-2.png';
 import shAmenity3 from '../assets/skyheights/sky heights amenities/sh-amenity-3.png';
-import shAmenity4 from '../assets/skyheights/sky heights amenities/sh-amenity-4.png';
+import shAmenity4 from '../assets/skyheights/sky heights amenities/sh-amenity-4.jpeg';
 import shAmenity5 from '../assets/skyheights/sky heights amenities/sh-amenity-5.png';
 import shAmenity6 from '../assets/skyheights/sky heights amenities/sh-amenity-6.png';
 

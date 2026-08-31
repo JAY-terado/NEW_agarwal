@@ -6,7 +6,7 @@ import LogoHero from '../assets/logo1.png';
 import LogoOther from '../assets/logo2.png';
 
 import infinityHero from '../assets/agarwal-infinity-hero.jpg';
-import skyriseHero from '../assets/agarwal-skyrise-hero.jpg';
+import skyriseHero from '../assets/skyrise elevations/elev6.png';
 import skyHeightsHero from '../assets/agarwalSkyheight.jpeg';
 import horizonHero from '../assets/agarwal-horizon-hero.jpg';
 

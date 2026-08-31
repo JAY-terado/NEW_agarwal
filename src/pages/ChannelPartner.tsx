@@ -11,7 +11,7 @@ import heroImage from '../assets/agarwal-horizon-hero.jpg';
 import { channelPartnerFaqs } from '../data/faqs';
 import { projects } from '../data/projects';
 import infinityHero from '../assets/agarwal-infinity-hero.jpg';
-import skyriseHero from '../assets/agarwal-skyrise-hero.jpg';
+import skyriseHero from '../assets/skyrise elevations/elev6.png';
 import skyHeightsHero from '../assets/agarwalSkyheight.jpeg';
 
 const projectHeroMap: Record<string, string> = {
