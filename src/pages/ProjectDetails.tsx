@@ -68,6 +68,14 @@ import skyHeightsHeroVideo from '../assets/skyHeightHero.mp4';
 import horizonHero from '../assets/agarwal-horizon-hero.jpg';
 
 import agarwalInfinityMRQR from '../assets/agarwalInfinityMRQR.jpeg';
+import agarwalSkyHeightsMRQR from '../assets/AgarwalSkyHeightsMRQR.jpeg';
+import agarwalSkyRiseMRQR from '../assets/AgarwalSkyRiseMRQR.jpeg';
+
+const projectQrMap: Record<string, string> = {
+  infinity: agarwalInfinityMRQR,
+  'sky-heights': agarwalSkyHeightsMRQR,
+  skyrise: agarwalSkyRiseMRQR,
+};
 
 // import qrSample from '../assets/qrSample.svg';
 
@@ -177,7 +185,7 @@ import infPodium4 from '../assets/infinity podium/ip4.jpg';
 import infPodium5 from '../assets/infinity podium/ip5.png';
 import infPodium6 from '../assets/infinity podium/ip6.png';
 import infPodium7 from '../assets/infinity podium/ip7.png';
-import infPodium8 from '../assets/infinity podium/ip8.png';
+import infPodium8 from '../assets/infinity podium/ip8.jpeg';
 
 // Sky Heights Elevation Images
 import skyheightElev1 from '../assets/skyheight elevation/elev1.png';
@@ -547,8 +555,8 @@ export default function ProjectDetails() {
                 </div>
                 <div className="flex items-center justify-center">
                   <div className="w-20 h-20 lg:w-24 lg:h-24 bg-white border border-line-light p-1.5 flex items-center justify-center rounded-sm shadow-sm">
-                    {project.slug === 'infinity' ? (
-                      <img src={agarwalInfinityMRQR} alt={`MahaRERA QR Code for ${project.name}`} className="w-full h-full object-contain mix-blend-multiply" />
+                    {projectQrMap[project.slug] ? (
+                      <img src={projectQrMap[project.slug]} alt={`MahaRERA QR Code for ${project.name}`} className="w-full h-full object-contain mix-blend-multiply" />
                     ) : (
                       <div className="text-black/50 text-sm tracking-wider">No QR</div>
                     )}
@@ -1450,9 +1458,9 @@ export default function ProjectDetails() {
             </div>
 
             <div className="border border-line-light rounded-2xl p-6 sm:p-8 bg-ivory shadow-sm flex flex-col sm:flex-row gap-6 items-center">
-              {project.slug === 'infinity' && (
+              {projectQrMap[project.slug] && (
                 <div className="w-32 h-32 shrink-0 overflow-hidden flex items-center justify-center border border-line-light rounded bg-white p-1">
-                  <img src={agarwalInfinityMRQR} alt="MahaRERA QR Code" className="w-full h-full object-contain mix-blend-multiply" />
+                  <img src={projectQrMap[project.slug]} alt={`MahaRERA QR Code for ${project.name}`} className="w-full h-full object-contain mix-blend-multiply" />
                 </div>
               )}
               <div className="flex flex-col gap-3 flex-1">
