@@ -60,11 +60,11 @@ import skyrise3Bhk from '../assets/Skyrise 3BHK.jpg.jpeg';
 
 // Project Hero Imports
 import infinityHero from '../assets/agarwal-infinity-hero.jpg';
-import infinityHeroVideo from '../assets/agarwalInfinityHero.mp4';
+import infinityHeroVideo from '../assets/agarwalInfintyHero.mp4';
 import skyriseHero from '../assets/skyrise elevations/elev6.png';
-import skyriseHeroVideo from '../assets/SkyriseHero.mp4';
+import skyriseHeroVideo from '../assets/SkyriseHero1.mp4';
 import skyHeightsHero from '../assets/agarwalSkyheight.jpeg';
-import skyHeightsHeroVideo from '../assets/skyHeightHero.mp4';
+import skyHeightsHeroVideo from '../assets/skyHeightHero1.mp4';
 import horizonHero from '../assets/agarwal-horizon-hero.jpg';
 
 import agarwalInfinityMRQR from '../assets/agarwalInfinityMRQR.jpeg';
