@@ -24,7 +24,7 @@ import img20 from '../assets/Completed Projects/Gokul Arcade, Gokul Township, Vi
 import img21 from '../assets/Completed Projects/Gokul Empire, Gokul Township, Virar West.png';
 import img22 from '../assets/Completed Projects/Gokul Heaven, Gokul Township, Virar West.png';
 import img23 from '../assets/Completed Projects/Gokul Heights, Gokul Township, Virar West.png';
-import img24 from '../assets/Completed Projects/Gokul Sapphire, Near Muljibhai Mehta School, Gokul Township, Virar West.JPG';
+import img24 from '../assets/Completed Projects/Gokul Sapphire, Near Muljibhai Mehta School, Gokul Township, Virar West.jpg';
 import img25 from '../assets/Completed Projects/Gokul Solitaire, Agarwal Gardens Phase 2, Gokul Township, Virar West.jpg';
 import img26 from '../assets/Completed Projects/Gokul Township, Bolinj, Virar West.png';
 import img27 from '../assets/Completed Projects/Gokuldham Complex, Virar West.png';
