@@ -193,13 +193,13 @@ export const projects: Project[] = [
     overviewText1: 'Agarwal Sky Heights is a 29-floor residential tower in Vasai East, offering thoughtfully designed 1, 2 & 3 BHK homes with modern specifications, lifestyle amenities and elevated recreational spaces.',
     overviewText2: 'The highlight of Agarwal Sky Heights is its rooftop amenity zone, located 345 feet above ground level, offering residents elevated spaces for relaxation, fitness and recreation. From a lounge and telescope point to rooftop jogging tracks, meditation areas, open gym and children\'s activity spaces, the project brings a distinctive lifestyle experience above the city.',
     overviewFeatures: [
-      { title: "Live 345 Ft. Above The Ground", desc: "Rooftop amenity zone offering elevated spaces & panoramic views", icon: "Sun" },
+      { title: "Experience Hi-Life", desc: "Rooftop amenity zone offering elevated spaces & panoramic views", icon: "Sun" },
       { title: "A 29-Storey Landmark", desc: "Iconic high-rise residential tower in Vasai East", icon: "Building2" },
       { title: "More Than A Home", desc: "Lounge, telescope point, rooftop track, meditation & activity areas", icon: "Coffee" },
       { title: "Designed For Everyday Comfort", desc: "Thoughtfully planned residences with modern specifications", icon: "Home" }
     ],
     whyChoseUs: [
-      { title: "Live 345 Ft. Above The Ground", desc: "Rooftop amenity zone offering elevated spaces & panoramic views", icon: "Sun" },
+      { title: "Experience Hi-Life", desc: "Rooftop amenity zone offering elevated spaces & panoramic views", icon: "Sun" },
       { title: "A 29-Storey Landmark", desc: "Iconic high-rise residential tower in Vasai East", icon: "Building2" },
       { title: "More Than A Home", desc: "Lounge, telescope point, rooftop track, meditation & activity areas", icon: "Coffee" },
       { title: "Designed For Everyday Comfort", desc: "Thoughtfully planned residences with modern specifications", icon: "Home" }
@@ -230,10 +230,10 @@ export const projects: Project[] = [
       { key: 'Lifts', value: 'Branded automatic elevators' }
     ],
     connectivity: [
-      { key: 'Railway Station', value: '5 mins' },
+      { key: 'Railway Station', value: '12 mins' },
       { key: 'Western Express Highway', value: '12 mins' },
-      { key: 'Schools & Colleges', value: '5–10 mins' },
-      { key: 'Hospitals', value: '8 mins' },
+      { key: 'Schools & Colleges', value: '1 mins' },
+      { key: 'Hospitals', value: '3 mins' },
       { key: 'Shopping & Malls', value: '10 mins' },
       { key: 'Restaurants & Cafes', value: '2 mins' },
       { key: 'Upcoming Metro', value: 'Nearby' }
@@ -402,10 +402,10 @@ export const projects: Project[] = [
     ],
     connectivity: [
       { key: 'Railway Station', value: '5 mins' },
-      { key: 'Western Express Highway', value: '12 mins' },
-      { key: 'Schools & Colleges', value: '5–10 mins' },
-      { key: 'Hospitals', value: '8 mins' },
-      { key: 'Shopping & Malls', value: '10 mins' },
+      { key: 'Western Express Highway', value: '19 mins' },
+      { key: 'Schools & Colleges', value: '2 mins' },
+      { key: 'Hospitals', value: '2 mins' },
+      { key: 'Shopping & Malls', value: '2 mins' },
       { key: 'Restaurants & Cafes', value: '2 mins' },
       { key: 'Upcoming Metro', value: 'Nearby' }
     ],

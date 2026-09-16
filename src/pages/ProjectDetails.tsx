@@ -521,7 +521,7 @@ export default function ProjectDetails() {
               </div>
 
               <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center border-b lg:border-r border-line-light bg-[var(--color-ivory)]">
-                <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Carpet Area</div>
+                <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Carpet Area Ranging From</div>
                 <div className="font-serif font-light text-brass-deep leading-tight text-xl sm:text-2xl lg:text-3xl">{project.carpetAreaRange}</div>
               </div>
 
@@ -1325,11 +1325,10 @@ export default function ProjectDetails() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs uppercase tracking-widest text-ink-soft mb-2 font-semibold">Email Address *</label>
+                    <label className="block text-xs uppercase tracking-widest text-ink-soft mb-2 font-semibold">Email Address</label>
                     <input
                       type="email"
                       name="email"
-                      required
                       className="w-full border-b border-line-light bg-transparent py-2 outline-none focus:border-brass-deep transition-colors text-ink"
                       placeholder="Enter your email"
                     />
@@ -1395,11 +1394,11 @@ export default function ProjectDetails() {
                   </div>
                   <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
                     <div className="flex flex-col">
-                      <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Full Name</label>
+                      <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Full Name*</label>
                       <input type="text" name="name" placeholder="Full Name" className="border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors bg-white" required />
                     </div>
                     <div className="flex flex-col">
-                      <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Mobile Number</label>
+                      <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Mobile Number*</label>
                       <div className="flex">
                         <div className="bg-paper border border-line border-r-0 rounded-l-xl px-4 flex items-center justify-center font-bold text-sm text-ink">+91</div>
                         <input type="text" name="mobile_number" placeholder="00000 00000" className="border border-line rounded-r-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors flex-1 bg-white" required />
@@ -1407,7 +1406,7 @@ export default function ProjectDetails() {
                     </div>
                     <div className="flex flex-col">
                       <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Email Address</label>
-                      <input type="email" name="email" placeholder="you@email.com" className="border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors bg-white" required />
+                      <input type="email" name="email" placeholder="you@email.com" className="border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors bg-white" />
                     </div>
                     <button
                       type="submit"

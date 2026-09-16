@@ -41,11 +41,11 @@ export const homeFaqs = [
   },
   {
     q: "Can I book a site visit for an Agarwal Group project?",
-    a: "Yes. You can schedule an exclusive site visit or receive project brochures, by contacting the sales team through the website or by calling the customer support numbers + 91 84080 08001 / + 91 84080 08002 / + 91 84080 08003 for immediate assistance and personalized property consultation."
+    a: "Yes. You can schedule an exclusive site visit or receive project brochures, by contacting the sales team through the website or by calling the customer support numbers </br> +91 84080 08001 / +91 84080 08002 / +91 84080 08003 for immediate assistance and personalized property consultation."
   },
   {
     q: "How can I contact Agarwal Group?",
-    a: "You can connect with Agarwal Group through the contact form on the website, visit the corporate office in Virar for personalized assistance, or by calling the customer support numbers + 91 84080 08001 / + 91 84080 08002 / + 91 84080 08003."
+    a: "You can connect with Agarwal Group through the contact form on the website, visit the corporate office in Virar for personalized assistance, or by calling the customer support numbers +91 84080 08001 / +91 84080 08002 / +91 84080 08003."
   },
   {
     q: "What documents are required to buy a property in Agarwal Group?",

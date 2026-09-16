@@ -6,53 +6,827 @@ import heroImage from '../assets/gallery-lobby.jpg';
 const JOBS = [
   {
     "id": 1,
-    "title": "Site Engineer",
-    "department": "Construction",
-    "location": "Mumbai, Maharashtra",
+    "title": "Sales & Marketing Director / Head",
+    "department": "Sales & Marketing",
+    "location": "Mumbai / Virar",
     "employmentType": "Full Time",
-    "experience": "2-5 Years",
-    "salary": "₹4.5 - ₹7.5 LPA",
-    "vacancies": 2,
-    "description": "We are looking for a Site Engineer to oversee day-to-day construction activities, coordinate with contractors, ensure quality standards, and monitor project progress.",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Formulate and execute overall sales and marketing strategies for all real estate projects. Manage large marketing budgets, drive multi-channel sales campaigns, lead the sales management team, and establish strong relationships with key channel partners to achieve organizational revenue targets.",
     "requirements": [
-      "B.E./B.Tech in Civil Engineering",
-      "Knowledge of AutoCAD and MS Project",
-      "Strong communication and site coordination skills",
-      "Experience in residential high-rise projects preferred"
+      "MBA in Marketing / Post Graduate",
+      "Strategic Planning",
+      "Team Leadership",
+      "Budgeting",
+      "High-Value Deal Closure",
+      "Channel Partner Management"
     ]
   },
   {
     "id": 2,
-    "title": "Sales Executive",
+    "title": "Sales Manager",
     "department": "Sales & Marketing",
-    "location": "Navi Mumbai, Maharashtra",
+    "location": "Mumbai / Virar",
     "employmentType": "Full Time",
-    "experience": "1-4 Years",
-    "salary": "₹3 - ₹6 LPA + Incentives",
-    "vacancies": 4,
-    "description": "Responsible for handling customer inquiries, site visits, property presentations, bookings, and achieving monthly sales targets.",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Lead and motivate the on-site sales executive team to meet monthly and quarterly sales targets. Handle corporate clients, resolve complex customer queries, monitor daily site walk-ins, and manage broker networks/channel partners.",
     "requirements": [
-      "Graduate in any discipline",
-      "Excellent communication and negotiation skills",
-      "Experience in real estate sales preferred",
-      "Ability to work on weekends and holidays"
+      "MBA / Graduate",
+      "Sales Team Management",
+      "Customer Conversion",
+      "Real Estate Market Knowledge",
+      "Negotiation"
     ]
   },
   {
     "id": 3,
-    "title": "Quantity Surveyor",
-    "department": "Project Management",
-    "location": "Thane, Maharashtra",
+    "title": "Assistant Sales Manager",
+    "department": "Sales & Marketing",
+    "location": "Mumbai / Virar",
     "employmentType": "Full Time",
-    "experience": "3-6 Years",
-    "salary": "₹6 - ₹9 LPA",
-    "vacancies": 1,
-    "description": "Prepare BOQs, estimate project costs, verify contractor bills, and manage project budgets while ensuring cost efficiency.",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Assist the Sales Manager in managing site walk-ins, delivering project pitches, maintaining active communication with potential buyers, and executing initial documentation during booking.",
     "requirements": [
-      "B.E./B.Tech Civil or Diploma in Civil Engineering",
-      "Knowledge of BOQ preparation and quantity estimation",
-      "Experience with billing and tender documentation",
-      "Strong analytical and Excel skills"
+      "Graduate / MBA",
+      "Client Relationship",
+      "Pitching",
+      "Follow-ups",
+      "Target Oriented"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Sales Executive",
+    "department": "Sales & Marketing",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Conduct project presentations and site tours for prospective buyers. Explain layout plans, pricing models, and financing options. Follow up diligently with prospective leads to close property bookings.",
+    "requirements": [
+      "Graduate",
+      "Communication Skills",
+      "Persuasion",
+      "Presentation",
+      "Active Listening"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Presales Executive / Telecaller",
+    "department": "Sales & Marketing",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Call incoming leads generated from marketing campaigns, introduce ongoing projects, filter qualified prospects, and schedule formal site visits for the on-site sales team.",
+    "requirements": [
+      "Undergraduate / Graduate",
+      "Telephonic Etiquette",
+      "Lead Filtering",
+      "Customer Relationship",
+      "Basic Excel"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Digital Marketing Lead",
+    "department": "Digital Marketing",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Plan and supervise all digital lead generation campaigns across Google, Facebook, Instagram, and LinkedIn. Analyze campaign performance metrics, optimize cost per lead (CPL), and manage the digital marketing agency and internal creative team.",
+    "requirements": [
+      "MBA / Certification in Digital Marketing",
+      "Google Ads",
+      "Meta Ads",
+      "SEO Strategy",
+      "Web Analytics",
+      "Campaign Planning"
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Digital Marketing Executive",
+    "department": "Digital Marketing",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Execute and monitor daily paid ad campaigns, manage official social media channels, publish regular updates, and optimize website content to improve organic search rankings.",
+    "requirements": [
+      "Graduate / Digital Marketing Course",
+      "Social Media Management",
+      "PPC Campaigns",
+      "Content Distribution",
+      "SEO"
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Graphic Designer & Content Creator",
+    "department": "Digital Marketing",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Design high-quality marketing collateral including project brochures, social media posters, ad banners, and short video reels for digital promotion.",
+    "requirements": [
+      "Diploma or Degree in Graphic Design",
+      "Adobe Photoshop",
+      "Illustrator",
+      "Canva",
+      "Video Editing",
+      "Creative Thinking"
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Senior Project Manager (SPM)",
+    "department": "Civil Construction",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Oversee the end-to-end execution of high-rise or large residential/commercial projects. Ensure construction aligns with approved architectural drawings, master timelines, quality benchmarks, and budgetary limits.",
+    "requirements": [
+      "B.E. / B.Tech in Civil Engineering",
+      "Project Scheduling",
+      "Cost Control",
+      "Contractor Management",
+      "Execution Planning"
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Senior Site Engineer",
+    "department": "Civil Construction",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Supervise daily on-site construction work, cross-verify RCC layouts and finishing tasks against structural drawings, resolve technical challenges, and monitor subcontractor milestones.",
+    "requirements": [
+      "B.E. / B.Tech / Diploma in Civil Engineering",
+      "Drawing Interpretation",
+      "Material Verification",
+      "Structural Knowledge",
+      "Team Supervision"
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Site Engineer / Junior Engineer",
+    "department": "Civil Construction",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Manage on-site labor allocations, oversee daily masonry, shuttering, and reinforcement activities, maintain accurate material utilization logs, and report progress to the Senior Engineer.",
+    "requirements": [
+      "B.E. / Diploma in Civil Engineering",
+      "Labor Supervision",
+      "Site Log Maintenance",
+      "Concrete Pouring Check",
+      "Basic Autocad"
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Billing & Quantity Surveyor (QS) Engineer",
+    "department": "Civil Construction",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Prepare precise material quantity estimations, verify contractor and vendor invoices against actual site execution metrics, analyze work-rate fluctuations, and manage monthly billing reconciliations.",
+    "requirements": [
+      "B.E. / Diploma in Civil Engineering",
+      "Quantity Estimation",
+      "Bill Verification",
+      "Rate Analysis",
+      "MS Excel",
+      "AutoCAD"
+    ]
+  },
+  {
+    "id": 13,
+    "title": "CRM Manager",
+    "department": "Customer Relationship (CRM)",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Head the post-sales customer service division. Oversee allotment processes, manage bank loan documentations, coordinate registration processes, and resolve complex client queries or complaints.",
+    "requirements": [
+      "MBA / Post Graduate",
+      "Client Grievance Redressal",
+      "Post-Sales Operations",
+      "Loan Coordination",
+      "Team Management"
+    ]
+  },
+  {
+    "id": 14,
+    "title": "CRM Executive",
+    "department": "Customer Relationship (CRM)",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Generate and issue milestone-based payment demand letters to customers, process receipts, maintain accurate customer accounts in CRM software, and follow up regularly on outstanding payments.",
+    "requirements": [
+      "Graduate",
+      "Customer Service",
+      "Demand Letter Generation",
+      "Data Accuracy",
+      "Communication"
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Chief Accountant / Accounts Manager",
+    "department": "Finance & Accounts",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Manage the company's comprehensive financial accounts. Finalize annual balance sheets, optimize corporate taxation models, handle statutory GST/TDS compliance filing, and manage project fund allocations and cash flows.",
+    "requirements": [
+      "CA / ICWA / M.Com",
+      "Financial Auditing",
+      "Taxation (GST/TDS)",
+      "Balance Sheet Finalization",
+      "Cash Flow Management"
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Accountant",
+    "department": "Finance & Accounts",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Maintain accurate day-to-day accounting records using Tally Prime. Process vendor payments, reconcile monthly bank statements, verify contractor invoices, and administer employee payroll records.",
+    "requirements": [
+      "B.Com / M.Com",
+      "Tally Prime",
+      "Bank Reconciliation",
+      "Voucher Verification",
+      "Payroll Processing"
+    ]
+  },
+  {
+    "id": 17,
+    "title": "Accounts Assistant",
+    "department": "Finance & Accounts",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Assist the senior accounting team with basic financial data entry, file physical and digital invoices, process petty cash expenses, and perform general administrative accounting support tasks.",
+    "requirements": [
+      "B.Com",
+      "Data Entry",
+      "Invoice Archiving",
+      "Basic Accounting",
+      "MS Office"
+    ]
+  },
+  {
+    "id": 18,
+    "title": "Purchase Manager",
+    "department": "Procurement & Store",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Lead the procurement department for structural and finishing materials (steel, cement, tiles, plumbing fixtures). Develop a strong vendor network, negotiate volume-based supply contracts, and minimize procurement costs.",
+    "requirements": [
+      "Graduate / MBA in Supply Chain",
+      "Vendor Development",
+      "Rate Negotiation",
+      "Supply Chain Management",
+      "Material Sourcing"
+    ]
+  },
+  {
+    "id": 19,
+    "title": "Storekeeper / Store Executive",
+    "department": "Procurement & Store",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Manage the on-site materials warehouse. Maintain precise logs for inward shipments and outward material issuance, conduct regular physical stock verifications, and prevent material damage or theft.",
+    "requirements": [
+      "Graduate",
+      "Inventory Management",
+      "Inward/Outward Log",
+      "Material Preservation",
+      "Stock Verification"
+    ]
+  },
+  {
+    "id": 20,
+    "title": "Liaisoning Head / Senior Manager",
+    "department": "Liaisoning & Approvals",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Coordinate with municipal corporations, town planning boards, environment ministries, and RERA authorities to secure all necessary pre-construction approvals, commencement certificates, and final occupancy certificates.",
+    "requirements": [
+      "Graduate / Architect / Civil Engineer",
+      "Municipal Regulations",
+      "Building Bye-laws",
+      "Government Relations",
+      "RERA Compliance"
+    ]
+  },
+  {
+    "id": 21,
+    "title": "Liaisoning Executive",
+    "department": "Liaisoning & Approvals",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Prepare and organize structural/legal files for submission to various government bodies. Handle field visits to administrative offices to track file status and expedite approval processes.",
+    "requirements": [
+      "Graduate",
+      "Documentation",
+      "Government Department Follow-ups",
+      "Local Language Proficiency"
+    ]
+  },
+  {
+    "id": 22,
+    "title": "QA/QC Manager",
+    "department": "Quality & Safety (QA/QC & HSE)",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Establish on-site quality assurance frameworks. Conduct structural raw material checks (compressive strength, sand silt content, steel tensile tests) and enforce strict standard operating procedures for structural masonry and finishes.",
+    "requirements": [
+      "B.E. Civil / Quality Certification",
+      "Material Testing",
+      "Quality Audit",
+      "Concrete Cube Testing",
+      "ISO Standards"
+    ]
+  },
+  {
+    "id": 23,
+    "title": "Safety Officer / Engineer",
+    "department": "Quality & Safety (QA/QC & HSE)",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Enforce strict construction safety protocols at the project site. Ensure mandatory usage of safety gear (harnesses, helmets, nets), conduct periodic safety drills, and mitigate workplace hazards.",
+    "requirements": [
+      "Diploma in Fire & Safety / Civil Engineering",
+      "Hazard Identification",
+      "Safety Training",
+      "PPE Enforcement",
+      "Accident Prevention"
+    ]
+  },
+  {
+    "id": 24,
+    "title": "Legal Head",
+    "department": "Legal",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Oversee the organization's legal affairs. Conduct intensive title verification checks for land acquisitions, manage joint-development contract drafting, represent the company in regulatory forums, and handle dispute litigations.",
+    "requirements": [
+      "LLB / LLM",
+      "Property Law",
+      "Land Title Due Diligence",
+      "Contract Drafting",
+      "Dispute Resolution"
+    ]
+  },
+  {
+    "id": 25,
+    "title": "Legal Executive",
+    "department": "Legal",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Draft standard customer Sale Deeds, Allotment Letters, and Vendor Agreements. Compile historical title documents and maintain absolute regulatory alignment with regional property laws.",
+    "requirements": [
+      "LLB",
+      "Agreement Drafting",
+      "Document Verification",
+      "RERA Formalities",
+      "Compliance"
+    ]
+  },
+  {
+    "id": 26,
+    "title": "HR & Admin Manager",
+    "department": "Human Resources & Admin",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Manage end-to-end human resource planning and general office administration. Strategize corporate recruitment drives, manage employee performance appraisal systems, process payroll parameters, and maintain active adherence to local labor codes.",
+    "requirements": [
+      "MBA in HR",
+      "Talent Acquisition",
+      "Performance Management",
+      "Labor Law Compliance",
+      "Office Administration"
+    ]
+  },
+  {
+    "id": 27,
+    "title": "BBS (Bar Bending Schedule) Engineer",
+    "department": "Civil Construction",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Prepare and review BBS, optimize steel consumption, reconcile reinforcement steel with structural drawings, and support execution and billing activities.",
+    "requirements": [
+      "B.E./B.Tech / Diploma in Civil Engineering",
+      "Bar Bending Schedule",
+      "AutoCAD",
+      "Steel Optimization",
+      "MS Excel",
+      "Structural Drawings"
+    ]
+  },
+  {
+    "id": 28,
+    "title": "BOQ Engineer / Quantity Surveyor",
+    "department": "Civil Construction",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Prepare BOQs, quantity take-offs, cost estimates, billing verification, rate analysis, and project cost monitoring.",
+    "requirements": [
+      "B.E./B.Tech / Diploma in Civil Engineering",
+      "Quantity Surveying",
+      "Bill of Quantities (BOQ)",
+      "Cost Estimation",
+      "Rate Analysis",
+      "Material Take-off"
+    ]
+  },
+  {
+    "id": 29,
+    "title": "Jr. Planning Engineer",
+    "department": "Civil Construction",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Assist in project scheduling, tracking tracking, MIS reporting, tracking progress, and coordination for timely execution.",
+    "requirements": [
+      "B.E./B.Tech / Diploma in Civil Engineering",
+      "Project Scheduling",
+      "MS Project",
+      "Primavera P6",
+      "Progress Tracking",
+      "MIS Reporting"
+    ]
+  },
+  {
+    "id": 30,
+    "title": "Lab Technician",
+    "department": "Civil Construction",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Conduct RMC, aggregates, sand, ready mix plaster, specific gravity, steel/TMT testing, site inspection, and quality documentation.",
+    "requirements": [
+      "Diploma / ITI / Degree in Material Technology / Civil Engineering or Equivalent",
+      "Material Testing",
+      "Concrete Mix Design",
+      "Quality Control",
+      "Lab Equipment Management"
+    ]
+  },
+  {
+    "id": 31,
+    "title": "MEP Engineer",
+    "department": "Civil Construction",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Manage MEP execution including electrical, plumbing, firefighting, HVAC, coordination, testing, and commissioning activities.",
+    "requirements": [
+      "B.E./B.Tech / Diploma in Electrical / Mechanical Engineering",
+      "MEP Execution",
+      "HVAC",
+      "Electrical Systems",
+      "Plumbing & Firefighting",
+      "Coordination"
+    ]
+  },
+  {
+    "id": 32,
+    "title": "Project Manager",
+    "department": "Civil Construction",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Lead end-to-end project execution; planning, budgeting, contractor management, project delivery, and stakeholder coordination.",
+    "requirements": [
+      "B.E./B.Tech in Civil Engineering (MBA preferred)",
+      "Project Management",
+      "Budgeting",
+      "Vendor Management",
+      "Team Leadership",
+      "Risk Management"
+    ]
+  },
+  {
+    "id": 33,
+    "title": "Quality Assistant",
+    "department": "Civil Construction",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Support QA/QC activities, inspections, documentation, material testing, and quality compliance.",
+    "requirements": [
+      "B.Tech in Civil Engineering / Diploma in Civil Engineering",
+      "Quality Audits",
+      "Site Inspection",
+      "QA/QC Checklists",
+      "Documentation"
+    ]
+  },
+  {
+    "id": 34,
+    "title": "Quality Engineer",
+    "department": "Civil Construction",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Manage QA/QC systems, material approvals, audits, corrective actions, and ensure construction quality standards.",
+    "requirements": [
+      "B.E./B.Tech / Diploma in Civil Engineering",
+      "Quality Assurance",
+      "QC Standards",
+      "Root Cause Analysis",
+      "Method Statements",
+      "Compliance"
+    ]
+  },
+  {
+    "id": 35,
+    "title": "Safety Manager",
+    "department": "Civil Construction",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Lead EHS functions, implement safety procedures, conduct audits, training, incident management, and statutory compliance.",
+    "requirements": [
+      "Degree / Diploma in Safety Management / Certified ADIS (Industrial Safety preferred)",
+      "EHS Management",
+      "Hazard Identification",
+      "Safety Audits",
+      "Incident Investigation",
+      "Statutory Compliance"
+    ]
+  },
+  {
+    "id": 36,
+    "title": "Safety Steward",
+    "department": "Civil Construction",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Monitor site safety practices, conduct toolbox talks, ensure PPE compliance, and support timely completion.",
+    "requirements": [
+      "Diploma / Certification in Safety Management / Course preferred",
+      "Site Monitoring",
+      "Toolbox Talks",
+      "PPE Compliance",
+      "Safety Hazard Reports"
+    ]
+  },
+  {
+    "id": 37,
+    "title": "Sr. Engineer",
+    "department": "Civil Construction",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Supervise project execution, monitor quality and progress, coordinate contractors, and ensure timely completion.",
+    "requirements": [
+      "B.E./B.Tech / Diploma in Civil Engineering",
+      "Site Execution",
+      "Contractor Coordination",
+      "Quality Monitoring",
+      "Resource Management"
+    ]
+  },
+  {
+    "id": 38,
+    "title": "Sr. Planning Engineer",
+    "department": "Civil Construction",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Develop project schedules, monitor progress, perform delay analysis, and manage planning reports using Primavera/MS Project.",
+    "requirements": [
+      "B.E./B.Tech / Diploma in Civil Engineering (Planning Certification preferred)",
+      "Primavera P6",
+      "MS Project",
+      "Project Controls",
+      "Delay Analysis",
+      "Progress Reports"
+    ]
+  },
+  {
+    "id": 39,
+    "title": "Sr. Site Engineer",
+    "department": "Civil Construction",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Handle site execution, contractor coordination, quality monitoring, and daily progress management.",
+    "requirements": [
+      "B.E./B.Tech / Diploma in Civil Engineering",
+      "Site Management",
+      "Daily Progress Reports",
+      "Contractor Management",
+      "Quality Control"
+    ]
+  },
+  {
+    "id": 40,
+    "title": "Store Keeper",
+    "department": "Civil Construction",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Manage material receipt, inventory control, stock records, issue tracking, and store documentation.",
+    "requirements": [
+      "Graduate / Diploma in Material Management / Supply Chain Management / Construction Material Management",
+      "Inventory Management",
+      "Store Accounting",
+      "Material Receipt",
+      "Stock Verification",
+      "Excel"
+    ]
+  },
+  {
+    "id": 41,
+    "title": "Supervisor",
+    "department": "Civil Construction",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Supervise labour and construction activities, monitor productivity, and maintain site discipline.",
+    "requirements": [
+      "Graduate / ITI / Diploma / Degree in Civil Engineering",
+      "Labour Management",
+      "Site Discipline",
+      "Execution Monitoring",
+      "Progress Tracking"
+    ]
+  },
+  {
+    "id": 42,
+    "title": "Surveyor",
+    "department": "Civil Construction",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Perform layout marking, level checking, quantity verification, and coordinate survey activities.",
+    "requirements": [
+      "Diploma / Degree in ITI Surveying / Civil Engineering",
+      "Total Station",
+      "Leveling",
+      "Layout Marking",
+      "Survey Data Analysis"
+    ]
+  },
+  {
+    "id": 43,
+    "title": "Jr. Architect",
+    "department": "Architecture & Design",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Assist senior architects with architectural drawings, layouts, design development, site measurements, and coordination with consultants and site teams. Prepare and revise drawings as per project requirements.",
+    "requirements": [
+      "B.Arch / Diploma in Architecture",
+      "AutoCAD",
+      "Architectural Planning",
+      "Space Planning",
+      "Site Coordination",
+      "Basic 3D Software"
+    ]
+  },
+  {
+    "id": 44,
+    "title": "Jr. Interiar Designer",
+    "department": "Architecture & Design",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Assist in developing interior layouts, furniture plans, material selections, and presentations. Coordinate with vendors and site teams and support execution as per approved designs.",
+    "requirements": [
+      "Degree / Diploma in Interior Design",
+      "AutoCAD",
+      "SketchUp",
+      "Space Planning",
+      "Material Selection",
+      "3D Visualization"
+    ]
+  },
+  {
+    "id": 45,
+    "title": "Jr. Draftsman",
+    "department": "Architecture & Design",
+    "location": "Mumbai / Virar",
+    "employmentType": "Full Time",
+    "experience": "As per industry standards",
+    "salary": "Competitive",
+    "vacancies": "Open",
+    "description": "Prepare accurate 2D architectural and working drawings under senior supervision. Update drawings based on site requirements, maintain drawing revisions, and coordinate drawing details with project teams.",
+    "requirements": [
+      "Diploma / ITI in Drafting or Civil / Architectural Drafting",
+      "AutoCAD",
+      "2D Drafting",
+      "Working Drawings",
+      "Detailing",
+      "Drawing Coordination"
     ]
   }
 ];
@@ -181,7 +955,7 @@ export default function Careers() {
       {/* Application Modal */}
       {selectedJob !== null && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/50 backdrop-blur-sm cursor-pointer"
+          className="fixed inset-0 z-[999] flex items-center justify-center p-4 bg-ink/50 backdrop-blur-sm cursor-pointer"
           onClick={() => setSelectedJob(null)}
         >
           <div 
@@ -207,8 +981,8 @@ export default function Careers() {
               </div>
               
               <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-ink uppercase tracking-wider">Email Address <span className="text-red-500">*</span></label>
-                <input type="email" required placeholder="john@example.com" className="w-full border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep focus:ring-1 focus:ring-brass-deep transition-all" />
+                <label className="text-xs font-semibold text-ink uppercase tracking-wider">Email Address</label>
+                <input type="email" placeholder="john@example.com" className="w-full border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep focus:ring-1 focus:ring-brass-deep transition-all" />
               </div>
 
               <div className="flex flex-col gap-1.5">

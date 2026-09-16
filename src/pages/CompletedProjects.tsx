@@ -1,23 +1,23 @@
 import { useEffect } from 'react';
 
 import img0 from '../assets/Completed Projects/Agarwal & Doshi Complex, Kaul Heritage City, Vasai West.jpg';
-import img1 from '../assets/Completed Projects/Agarwal Exotica, Yashwant Smart City, Vasai East.jpg';
+import img1 from '../assets/Completed Projects/new/agarwal-exotica-yashwant-smart-city-vasai-east.webp';
 import img2 from '../assets/Completed Projects/Agarwal Gardens (Phase-I), Gokul Township, Virar West.jpg';
 import img3 from '../assets/Completed Projects/Agarwal Gardens (Phase-II), Gokul Township, Virar West.png';
 import img4 from '../assets/Completed Projects/Agarwal Heritage, Yashwant Nagar, Virar West.png';
 import img5 from '../assets/Completed Projects/Agarwal Infinity, New Viva College Road, Virar West.jpg';
-import img6 from '../assets/Completed Projects/Agarwal Lifestyle, Global City, Virar West.jpg';
-import img7 from '../assets/Completed Projects/Agarwal Meadows, Near Gokul Township, Virar West.jpg';
-import img8 from '../assets/Completed Projects/Agarwal Palazzo, Near Kora Kendra, Borivali West.jpg';
-import img9 from '../assets/Completed Projects/Agarwal Paramount, Global City, Virar West.jpg';
-import img10 from '../assets/Completed Projects/Agarwal Residency, Yashwant Viva Township, Vasai East.jpg';
+import img6 from '../assets/Completed Projects/new/agarwal-lifestyle-global-city-virar-west.webp';
+import img7 from '../assets/Completed Projects/new/agarwal-meadows-near-gokul-township-virar-west.webp';
+import img8 from '../assets/Completed Projects/new/agarwal-palazzo-near-kora-kendra-borivali-west.webp';
+import img9 from '../assets/Completed Projects/new/agarwal-paramount-global-city-virar-west.webp';
+import img10 from '../assets/Completed Projects/new/agarwal-residency-yashwant-viva-township-vasai-east.webp';
 import img11 from '../assets/Completed Projects/Agarwal Sky Heights, Yashwant Smart City, Vasai East.jpg';
-import img12 from '../assets/Completed Projects/Agarwal Skyrise, Y K Nagar NX, Virar West.jpg';
-import img13 from '../assets/Completed Projects/Agarwal Solitaire, HDIL Township, Virar West.jpg';
+import img12 from '../assets/Completed Projects/new/agarwal-skyrise-y-k-nagar-nx-virar-west.webp';
+import img13 from '../assets/Completed Projects/new/agarwal-solitaire-hdil-township-virar-west.webp';
 import img14 from '../assets/Completed Projects/Agarwal Township, Kaul Heritage City, Vasai West.jpg';
-import img15 from '../assets/Completed Projects/Agarwal XYz.png';
+
 import img16 from '../assets/Completed Projects/Balaji Banquets, Gokul Township, Virar West.jpg';
-import img17 from '../assets/Completed Projects/Glory, Viva Gokul Complex, Virar West.jpg';
+import img17 from '../assets/Completed Projects/new/glory-viva-gokul-complex-virar-west.webp';
 import img18 from '../assets/Completed Projects/Gokul Aangan, Gokul Township, Virar West.png';
 import img19 from '../assets/Completed Projects/Gokul Annexe, Gokul Township, Virar West.png';
 import img20 from '../assets/Completed Projects/Gokul Arcade, Gokul Township, Virar West.png';
@@ -25,43 +25,58 @@ import img21 from '../assets/Completed Projects/Gokul Empire, Gokul Township, Vi
 import img22 from '../assets/Completed Projects/Gokul Heaven, Gokul Township, Virar West.png';
 import img23 from '../assets/Completed Projects/Gokul Heights, Gokul Township, Virar West.png';
 import img24 from '../assets/Completed Projects/Gokul Sapphire, Near Muljibhai Mehta School, Gokul Township, Virar West.jpg';
-import img25 from '../assets/Completed Projects/Gokul Solitaire, Agarwal Gardens Phase 2, Gokul Township, Virar West.jpg';
+import img25 from '../assets/Completed Projects/new/gokul-solitaire-agarwal-gardens-phase-2-gokul-township-virar-west.webp';
 import img26 from '../assets/Completed Projects/Gokul Township, Bolinj, Virar West.png';
 import img27 from '../assets/Completed Projects/Gokuldham Complex, Virar West.png';
 import img28 from '../assets/Completed Projects/Krishna Galaxy, Viva Vrindavan Township, Virar West.png';
 import img29 from '../assets/Completed Projects/Krishna Heritage, M G Road, Kandivali West.png';
-import img30 from '../assets/Completed Projects/Madhuvan Heights, Gokhiware, Vasai East.jpg';
+import img30 from '../assets/Completed Projects/new/madhuvan-heights-gokhiware-vasai-east.webp';
 import img31 from '../assets/Completed Projects/Madhuvan Park (Phase-II), Tirupati Nagar, Virar West.png';
 import img32 from '../assets/Completed Projects/Siddhivinayak Tower, Y K Nagar, Virar West.jpg';
 import img33 from '../assets/Completed Projects/Srishti Complex, New Viva College Road, Virar West.png';
-import img34 from '../assets/Completed Projects/Surbhi Arcade SH3, Gokul Township, Virar West.jpg';
-import img35 from '../assets/Completed Projects/Vinay Heights, Mira Road East.jpg';
-import img36 from '../assets/Completed Projects/Vinay Kumkum Shopping Arcade, Goregaon West.jpeg';
-import img37 from '../assets/Completed Projects/Viva Gokul Arcade,  Viva Gokul Complex, Virar West.jpg';
+import img34 from '../assets/Completed Projects/new/surbhi-arcade-sh3-gokul-township-virar-west.webp';
+import img35 from '../assets/Completed Projects/new/vinay-heights-mira-road-east.webp';
+import img36 from '../assets/Completed Projects/new/vinay-kumkum-shopping-arcade-goregaon-west.webp';
+import img37 from '../assets/Completed Projects/new/viva-gokul-arcade-viva-gokul-complex-virar-west.webp';
 import img38 from '../assets/Completed Projects/Viva Gokul Complex, Gokul Township, Virar West.png';
 import img39 from '../assets/Completed Projects/Viva Vrindavan Township, Opp. Viva College, Virar West.png';
 import img40 from '../assets/Completed Projects/Vrindavan Gardens, Yashwant Viva Township, Vasai East.png';
 import img41 from '../assets/Completed Projects/Vrindavan Township, New Viva College Road, Virar West.jpg';
-import img42 from '../assets/Completed Projects/Yashwant Heights, Virat Nagar, Virar West.jpg';
+import img42 from '../assets/Completed Projects/new/yashwant-heights-virat-nagar-virar-west.webp';
+import img43 from '../assets/Completed Projects/Giriraj towers, Virar west.jpeg';
+import img44 from '../assets/Completed Projects/Shagun Banquets, Virar West.jpg';
 
 const completedProjects = [
-  { name: 'Agarwal & Doshi Complex', sub: 'Kaul Heritage City, Vasai West', image: img0 },
+  // Sequence from handwritten note
+  { name: 'Agarwal Palazzo', sub: 'Near Kora Kendra, Borivali West', image: img8 },
+  { name: 'Krishna Heritage', sub: 'M G Road, Kandivali West', image: img29 },
+  { name: 'Vinay Heights', sub: 'Mira Road East', image: img35 },
+  { name: 'Vinay Kumkum Shopping Arcade', sub: 'Goregaon West', image: img36 },
+  { name: 'Agarwal Paramount', sub: 'Global City, Virar West', image: img9 },
   { name: 'Agarwal Exotica', sub: 'Yashwant Smart City, Vasai East', image: img1 },
+  { name: 'Agarwal Lifestyle', sub: 'Global City, Virar West', image: img6 },
+  { name: 'Balaji Banquets', sub: 'Gokul Township, Virar West', image: img16 },
+  { name: 'Viva Gokul Arcade', sub: 'Viva Gokul Complex, Virar West', image: img37 },
+  { name: 'Viva Vrindavan Township', sub: 'Opp. Viva College, Virar West', image: img39 },
+  { name: 'Vrindavan Gardens', sub: 'Yashwant Viva Township, Vasai East', image: img40 },
+  { name: 'Vrindavan Township', sub: 'New Viva College Road, Virar West', image: img41 },
+  { name: 'Gokul Township', sub: 'Bolinj, Virar West', image: img26 },
+  { name: 'Agarwal Township', sub: 'Kaul Heritage City, Vasai West', image: img14 },
+  { name: 'Agarwal Heritage', sub: 'Yashwant Nagar, Virar West', image: img4 },
+  { name: 'Agarwal & Doshi Complex', sub: 'Kaul Heritage City, Vasai West', image: img0 },
+  { name: 'Agarwal Solitaire', sub: 'HDIL Township, Virar West', image: img13 },
+  { name: 'Viva Gokul Complex', sub: 'Gokul Township, Virar West', image: img38 },
+  { name: 'Yashwant Heights', sub: 'Virat Nagar, Virar West', image: img42 },
+
+  // Remaining
   { name: 'Agarwal Gardens (Phase-I)', sub: 'Gokul Township, Virar West', image: img2 },
   { name: 'Agarwal Gardens (Phase-II)', sub: 'Gokul Township, Virar West', image: img3 },
-  { name: 'Agarwal Heritage', sub: 'Yashwant Nagar, Virar West', image: img4 },
   { name: 'Agarwal Infinity', sub: 'New Viva College Road, Virar West', image: img5 },
-  { name: 'Agarwal Lifestyle', sub: 'Global City, Virar West', image: img6 },
   { name: 'Agarwal Meadows', sub: 'Near Gokul Township, Virar West', image: img7 },
-  { name: 'Agarwal Palazzo', sub: 'Near Kora Kendra, Borivali West', image: img8 },
-  { name: 'Agarwal Paramount', sub: 'Global City, Virar West', image: img9 },
   { name: 'Agarwal Residency', sub: 'Yashwant Viva Township, Vasai East', image: img10 },
   { name: 'Agarwal Sky Heights', sub: 'Yashwant Smart City, Vasai East', image: img11 },
   { name: 'Agarwal Skyrise', sub: 'Y K Nagar NX, Virar West', image: img12 },
-  { name: 'Agarwal Solitaire', sub: 'HDIL Township, Virar West', image: img13 },
-  { name: 'Agarwal Township', sub: 'Kaul Heritage City, Vasai West', image: img14 },
-  { name: 'Agarwal XYz', sub: '', image: img15 },
-  { name: 'Balaji Banquets', sub: 'Gokul Township, Virar West', image: img16 },
+  { name: 'Giriraj towers', sub: 'Virar west', image: img43 },
   { name: 'Glory', sub: 'Viva Gokul Complex, Virar West', image: img17 },
   { name: 'Gokul Aangan', sub: 'Gokul Township, Virar West', image: img18 },
   { name: 'Gokul Annexe', sub: 'Gokul Township, Virar West', image: img19 },
@@ -71,23 +86,14 @@ const completedProjects = [
   { name: 'Gokul Heights', sub: 'Gokul Township, Virar West', image: img23 },
   { name: 'Gokul Sapphire', sub: 'Near Muljibhai Mehta School, Gokul Township, Virar West', image: img24 },
   { name: 'Gokul Solitaire', sub: 'Agarwal Gardens Phase 2, Gokul Township, Virar West', image: img25 },
-  { name: 'Gokul Township', sub: 'Bolinj, Virar West', image: img26 },
   { name: 'Gokuldham Complex', sub: 'Virar West', image: img27 },
   { name: 'Krishna Galaxy', sub: 'Viva Vrindavan Township, Virar West', image: img28 },
-  { name: 'Krishna Heritage', sub: 'M G Road, Kandivali West', image: img29 },
   { name: 'Madhuvan Heights', sub: 'Gokhiware, Vasai East', image: img30 },
   { name: 'Madhuvan Park (Phase-II)', sub: 'Tirupati Nagar, Virar West', image: img31 },
+  { name: 'Shagun Banquets', sub: 'Virar West', image: img44 },
   { name: 'Siddhivinayak Tower', sub: 'Y K Nagar, Virar West', image: img32 },
   { name: 'Srishti Complex', sub: 'New Viva College Road, Virar West', image: img33 },
   { name: 'Surbhi Arcade SH3', sub: 'Gokul Township, Virar West', image: img34 },
-  { name: 'Vinay Heights', sub: 'Mira Road East', image: img35 },
-  { name: 'Vinay Kumkum Shopping Arcade', sub: 'Goregaon West', image: img36 },
-  { name: 'Viva Gokul Arcade', sub: 'Viva Gokul Complex, Virar West', image: img37 },
-  { name: 'Viva Gokul Complex', sub: 'Gokul Township, Virar West', image: img38 },
-  { name: 'Viva Vrindavan Township', sub: 'Opp. Viva College, Virar West', image: img39 },
-  { name: 'Vrindavan Gardens', sub: 'Yashwant Viva Township, Vasai East', image: img40 },
-  { name: 'Vrindavan Township', sub: 'New Viva College Road, Virar West', image: img41 },
-  { name: 'Yashwant Heights', sub: 'Virat Nagar, Virar West', image: img42 },
 ];
 
 export default function CompletedProjects() {

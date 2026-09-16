@@ -230,7 +230,7 @@ export default function TermsConditions() {
                   +91 84080 08002<br />
                   +91 84080 08003</p>
                 <p className="mt-2">Email:<br />sales@agarwalrealties.com</p>
-                <p className="mt-2">Website:<br />[Insert Website URL]</p>
+                <p className="mt-2">Website:<br />https://agarwalgroup.in </p>
               </div>
             </div>
           </div>
