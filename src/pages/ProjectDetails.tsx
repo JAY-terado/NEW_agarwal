@@ -238,6 +238,7 @@ import shAmenity6 from '../assets/skyheights/sky heights amenities/sh-amenity-6.
 const projectOverviewMap: Record<string, string> = {
   'sky-heights': skyheightOverviewImage,
   infinity: infElev2,
+  skyrise: skyriseElev3,
 };
 
 const amenityImageMap: Record<string, string> = {
@@ -628,7 +629,7 @@ export default function ProjectDetails() {
 
           {/* Tabs */}
           <div className="flex flex-wrap gap-3 md:gap-4 mb-10 justify-center md:justify-start">
-            {['Project Elevation', 'Podium Amenities', 'Rooftop Amenities'].map((tab) => (
+            {['Project Elevation', 'Podium Amenities', ...(project.slug === 'infinity' ? [] : ['Rooftop Amenities'])].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveAmenityTab(tab as any)}

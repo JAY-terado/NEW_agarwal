@@ -55,13 +55,13 @@ export const projects: Project[] = [
     overviewText2: 'Located in one of Virar West\'s most well-connected neighbourhoods, Agarwal Infinity keeps everything you need just minutes away. From seamless railway connectivity and reputed schools to shopping, healthcare and everyday essentials, life here is designed to be convenient today and promising for tomorrow.',
     overviewFeatures: [
       { title: "Spacious 2, 3 & 4 BHK Homes", desc: "Carpet areas ranging from 975 to 1,215 sq. ft.", icon: "Home" },
-      { title: "7 Mins From Virar Station", desc: "Seamless railway & transit connectivity", icon: "Train" },
+      { title: "5 Mins From Virar Station", desc: "Seamless railway & transit connectivity", icon: "Train" },
       { title: "Lifestyle Amenities for Every Age", desc: "Thoughtfully curated facilities for all generations", icon: "Trees" },
       { title: "Everyday Essentials Nearby", desc: "Schools, healthcare & shopping minutes away", icon: "ShoppingBag" }
     ],
     whyChoseUs: [
       { title: "Spacious 2, 3 & 4 BHK Homes", desc: "Thoughtfully designed for families seeking more space & comfort", icon: "Home" },
-      { title: "7 Mins From Virar Station", desc: "Convenient daily commuting across MMR Mumbai", icon: "Train" },
+      { title: "5 Mins From Virar Station", desc: "Convenient daily commuting across MMR Mumbai", icon: "Train" },
       { title: "Lifestyle Amenities for Every Age", desc: "Well-planned leisure & community spaces for all ages", icon: "Trees" },
       { title: "Everyday Essentials Nearby", desc: "Reputed schools, shopping & healthcare just minutes away", icon: "ShoppingBag" }
     ],
