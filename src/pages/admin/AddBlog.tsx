@@ -107,7 +107,7 @@ export default function AddBlog() {
               type="url"
               value={image}
               onChange={e => setImage(e.target.value)}
-              placeholder="https://example.com/image.jpg"
+              placeholder="https://example.com/image.webp"
               className="w-full border border-line rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-brass text-ink font-medium mb-4"
             />
             {image && (

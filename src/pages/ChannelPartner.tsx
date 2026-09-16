@@ -4,15 +4,15 @@ import {
   Building2, Award, TrendingUp, HandCoins, UserCheck, FileCheck, Star,
   Megaphone, Clock, Bell, Headphones, MapPin, Calendar, Smartphone, Banknote, Users
 } from 'lucide-react';
-import cpHero from '../assets/cpHero.png';
-import cp2Image from '../assets/cp2.png';
-import cp3Image from '../assets/cp3.png';
-import heroImage from '../assets/agarwal-horizon-hero.jpg';
+import cpHero from '../assets/cpHero.webp';
+import cp2Image from '../assets/cp2.webp';
+import cp3Image from '../assets/cp3.webp';
+import heroImage from '../assets/agarwal-horizon-hero.webp';
 import { channelPartnerFaqs } from '../data/faqs';
 import { projects } from '../data/projects';
-import infinityHero from '../assets/agarwal-infinity-hero.jpg';
-import skyriseHero from '../assets/skyrise elevations/elev6.png';
-import skyHeightsHero from '../assets/agarwalSkyheight.jpeg';
+import infinityHero from '../assets/agarwal-infinity-hero.webp';
+import skyriseHero from '../assets/skyrise elevations/elev6.webp';
+import skyHeightsHero from '../assets/agarwalSkyheight.webp';
 
 const projectHeroMap: Record<string, string> = {
   infinity: infinityHero,

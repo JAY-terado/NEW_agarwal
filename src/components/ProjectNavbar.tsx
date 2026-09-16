@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import LogoHero from '../assets/logo1.png';
-import LogoOther from '../assets/logo2.png';
+import LogoHero from '../assets/logo1.webp';
+import LogoOther from '../assets/logo2.webp';
 import { projects } from '../data/projects';
 
 export default function ProjectNavbar() {

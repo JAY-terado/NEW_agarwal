@@ -2,13 +2,13 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { projects } from '../data/projects';
-import LogoHero from '../assets/logo1.png';
-import LogoOther from '../assets/logo2.png';
+import LogoHero from '../assets/logo1.webp';
+import LogoOther from '../assets/logo2.webp';
 
-import infinityHero from '../assets/agarwal-infinity-hero.jpg';
-import skyriseHero from '../assets/skyrise elevations/elev6.png';
-import skyHeightsHero from '../assets/agarwalSkyheight.jpeg';
-import horizonHero from '../assets/agarwal-horizon-hero.jpg';
+import infinityHero from '../assets/agarwal-infinity-hero.webp';
+import skyriseHero from '../assets/skyrise elevations/elev6.webp';
+import skyHeightsHero from '../assets/agarwalSkyheight.webp';
+import horizonHero from '../assets/agarwal-horizon-hero.webp';
 
 const projectImages: Record<string, string> = {
   infinity: infinityHero,

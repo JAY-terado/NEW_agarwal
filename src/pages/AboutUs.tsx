@@ -3,11 +3,11 @@ import {
   Hammer, Map, Trophy,
   CalendarCheck, BadgeCheck, Users, Trees
 } from 'lucide-react';
-import ourLegacyAus from '../assets/ourLegacyAus.jpeg';
-import ourMissionAus from '../assets/ourMissionAus.jpeg';
-import ourVisionAus from '../assets/OurVisionAus.jpeg';
-import ourPresenceAus from '../assets/ourPresenceAus.jpeg';
-import aboutUsHero from '../assets/aboutUsHero.jpeg';
+import ourLegacyAus from '../assets/ourLegacyAus.webp';
+import ourMissionAus from '../assets/ourMissionAus.webp';
+import ourVisionAus from '../assets/OurVisionAus.webp';
+import ourPresenceAus from '../assets/ourPresenceAus.webp';
+import aboutUsHero from '../assets/aboutUsHero.webp';
 
 export default function AboutUs() {
   useEffect(() => {

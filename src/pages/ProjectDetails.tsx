@@ -43,33 +43,33 @@ import { defaultProjectFaqs } from '../data/faqs';
 import { contactEmailAxios, createLeadAxios } from '../_api/user';
 
 // Gallery Asset Imports
-import galleryExterior from '../assets/gallery-exterior.jpg';
-import galleryLobby from '../assets/gallery-lobby.jpg';
-import galleryLiving from '../assets/gallery-living.jpg';
-import galleryBedroom from '../assets/gallery-bedroom.jpg';
-import galleryPool from '../assets/gallery-pool.jpg';
-import galleryAerial from '../assets/gallery-aerial.jpg';
+import galleryExterior from '../assets/gallery-exterior.webp';
+import galleryLobby from '../assets/gallery-lobby.webp';
+import galleryLiving from '../assets/gallery-living.webp';
+import galleryBedroom from '../assets/gallery-bedroom.webp';
+import galleryPool from '../assets/gallery-pool.webp';
+import galleryAerial from '../assets/gallery-aerial.webp';
 
-import layout1Bhk from '../assets/layout-1bhk.png';
-import layout2Bhk from '../assets/layout-2bhk.png';
-import layout3Bhk from '../assets/layout-3bhk.png';
+import layout1Bhk from '../assets/layout-1bhk.webp';
+import layout2Bhk from '../assets/layout-2bhk.webp';
+import layout3Bhk from '../assets/layout-3bhk.webp';
 
-import skyrise1Bhk from '../assets/Skyrise 1BHK.jpg.jpeg';
-import skyrise2Bhk from '../assets/Skyrise 2BHK.jpg.jpeg';
-import skyrise3Bhk from '../assets/Skyrise 3BHK.jpg.jpeg';
+import skyrise1Bhk from '../assets/Skyrise 1BHK.jpg.webp';
+import skyrise2Bhk from '../assets/Skyrise 2BHK.jpg.webp';
+import skyrise3Bhk from '../assets/Skyrise 3BHK.jpg.webp';
 
 // Project Hero Imports
-import infinityHero from '../assets/agarwal-infinity-hero.jpg';
+import infinityHero from '../assets/agarwal-infinity-hero.webp';
 import infinityHeroVideo from '../assets/agarwalInfintyHero.mp4';
-import skyriseHero from '../assets/skyrise elevations/elev6.png';
+import skyriseHero from '../assets/skyrise elevations/elev6.webp';
 import skyriseHeroVideo from '../assets/SkyriseHero1.mp4';
-import skyHeightsHero from '../assets/agarwalSkyheight.jpeg';
+import skyHeightsHero from '../assets/agarwalSkyheight.webp';
 import skyHeightsHeroVideo from '../assets/skyHeightHero1.mp4';
-import horizonHero from '../assets/agarwal-horizon-hero.jpg';
+import horizonHero from '../assets/agarwal-horizon-hero.webp';
 
-import agarwalInfinityMRQR from '../assets/agarwalInfinityMRQR.jpeg';
-import agarwalSkyHeightsMRQR from '../assets/AgarwalSkyHeightsMRQR.jpeg';
-import agarwalSkyRiseMRQR from '../assets/AgarwalSkyRiseMRQR.jpeg';
+import agarwalInfinityMRQR from '../assets/agarwalInfinityMRQR.webp';
+import agarwalSkyHeightsMRQR from '../assets/AgarwalSkyHeightsMRQR.webp';
+import agarwalSkyRiseMRQR from '../assets/AgarwalSkyRiseMRQR.webp';
 
 const projectQrMap: Record<string, string> = {
   infinity: agarwalInfinityMRQR,
@@ -89,7 +89,7 @@ const projectHeroMap: Record<string, string> = {
   horizon: horizonHero,
 };
 
-import skyheightOverviewImage from '../assets/skyheight elevation/elev2.png';
+import skyheightOverviewImage from '../assets/skyheight elevation/elev2.webp';
 
 const layoutImages = {
   '1 BHK': layout1Bhk,
@@ -110,130 +110,130 @@ const getLayoutImage = (slug: string, type: string) => {
 };
 
 const galleryMap: Record<string, string> = {
-  'gallery-exterior.jpg': galleryExterior,
-  'gallery-lobby.jpg': galleryLobby,
-  'gallery-living.jpg': galleryLiving,
-  'gallery-bedroom.jpg': galleryBedroom,
-  'gallery-pool.jpg': galleryPool,
-  'gallery-aerial.jpg': galleryAerial,
+  'gallery-exterior.webp': galleryExterior,
+  'gallery-lobby.webp': galleryLobby,
+  'gallery-living.webp': galleryLiving,
+  'gallery-bedroom.webp': galleryBedroom,
+  'gallery-pool.webp': galleryPool,
+  'gallery-aerial.webp': galleryAerial,
   // Skyrise specific
-  'skyrise-elev1.png': skyriseElev1,
-  'skyrise-living.png': skyriseLiving,
-  'skyrise-bedroom.png': skyriseBedroom,
-  'skyrise-kitchen.png': skyriseKitchen,
-  'skyrise-dining.png': skyriseDining,
-  'skyrise-balcony.png': skyriseBalcony,
+  'skyrise-elev1.webp': skyriseElev1,
+  'skyrise-living.webp': skyriseLiving,
+  'skyrise-bedroom.webp': skyriseBedroom,
+  'skyrise-kitchen.webp': skyriseKitchen,
+  'skyrise-dining.webp': skyriseDining,
+  'skyrise-balcony.webp': skyriseBalcony,
   // Sky Heights specific
-  'sh-gallery-1.png': shGallery1,
-  'sh-gallery-2.png': shGallery2,
-  'sh-gallery-3.png': shGallery3,
-  'sh-gallery-4.png': shGallery4,
-  'sh-gallery-5.png': shGallery5,
-  'sh-gallery-6.png': shGallery6,
+  'sh-gallery-1.webp': shGallery1,
+  'sh-gallery-2.webp': shGallery2,
+  'sh-gallery-3.webp': shGallery3,
+  'sh-gallery-4.webp': shGallery4,
+  'sh-gallery-5.webp': shGallery5,
+  'sh-gallery-6.webp': shGallery6,
 };
 
 // Skyrise Interior Images
-import skyriseLiving from '../assets/skyrise interior/livingRoom.png';
-import skyriseBedroom from '../assets/skyrise interior/bedroom1.png';
-import skyriseKitchen from '../assets/skyrise interior/kitchen.png';
-import skyriseDining from '../assets/skyrise interior/dining.png';
-import skyriseBalcony from '../assets/skyrise interior/balcony.png';
+import skyriseLiving from '../assets/skyrise interior/livingRoom.webp';
+import skyriseBedroom from '../assets/skyrise interior/bedroom1.webp';
+import skyriseKitchen from '../assets/skyrise interior/kitchen.webp';
+import skyriseDining from '../assets/skyrise interior/dining.webp';
+import skyriseBalcony from '../assets/skyrise interior/balcony.webp';
 
 // Amenity Images
-import amenityGym from '../assets/gymA.png';
-import amenityIndoor from '../assets/indoorA.png';
-import amenityLandscape from '../assets/landscaspeA.png';
-import amenityLobby from '../assets/lobbyA.png';
-import amenityMultipurpose from '../assets/multipurposeA.png';
-import amenityPlay from '../assets/playA.png';
-import amenityRooftop from '../assets/rooftopA.png';
-import amenitySwim from '../assets/swimmingA.png';
+import amenityGym from '../assets/gymA.webp';
+import amenityIndoor from '../assets/indoorA.webp';
+import amenityLandscape from '../assets/landscaspeA.webp';
+import amenityLobby from '../assets/lobbyA.webp';
+import amenityMultipurpose from '../assets/multipurposeA.webp';
+import amenityPlay from '../assets/playA.webp';
+import amenityRooftop from '../assets/rooftopA.webp';
+import amenitySwim from '../assets/swimmingA.webp';
 
 // Skyrise Elevation Images
-import skyriseElev1 from '../assets/skyrise elevations/elev1.png';
-import skyriseElev2 from '../assets/skyrise elevations/elev2.png';
-import skyriseElev3 from '../assets/skyrise elevations/elev3.png';
-import skyriseElev4 from '../assets/skyrise elevations/elev4.png';
-import skyriseElev5 from '../assets/skyrise elevations/elev5.png';
-import skyriseElev6 from '../assets/skyrise elevations/elev6.png';
-import skyriseGate from '../assets/skyrise elevations/gate.png';
+import skyriseElev1 from '../assets/skyrise elevations/elev1.webp';
+import skyriseElev2 from '../assets/skyrise elevations/elev2.webp';
+import skyriseElev3 from '../assets/skyrise elevations/elev3.webp';
+import skyriseElev4 from '../assets/skyrise elevations/elev4.webp';
+import skyriseElev5 from '../assets/skyrise elevations/elev5.webp';
+import skyriseElev6 from '../assets/skyrise elevations/elev6.webp';
+import skyriseGate from '../assets/skyrise elevations/gate.webp';
 
-import srPodium1 from '../assets/skyrise podium/sp1.png';
-import srPodium2 from '../assets/skyrise podium/sp2.png';
-import srPodium3 from '../assets/skyrise podium/sp3.png';
-import srPodium4 from '../assets/skyrise podium/sp4.png';
-import srPodium5 from '../assets/skyrise podium/sp5.png';
-import srPodium6 from '../assets/skyrise podium/sp6.png';
-import srPodium7 from '../assets/skyrise podium/sp7.png';
-import srPodium8 from '../assets/skyrise podium/sp8.jpg';
+import srPodium1 from '../assets/skyrise podium/sp1.webp';
+import srPodium2 from '../assets/skyrise podium/sp2.webp';
+import srPodium3 from '../assets/skyrise podium/sp3.webp';
+import srPodium4 from '../assets/skyrise podium/sp4.webp';
+import srPodium5 from '../assets/skyrise podium/sp5.webp';
+import srPodium6 from '../assets/skyrise podium/sp6.webp';
+import srPodium7 from '../assets/skyrise podium/sp7.webp';
+import srPodium8 from '../assets/skyrise podium/sp8.webp';
 
 // Infinity Elevation Images
-import infElev1 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 12.10.23 PM.jpeg';
-import infElev2 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 12.52.44 PM (1).jpeg';
-import infElev3 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 12.52.44 PM.jpeg';
-import infElev4 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 12.52.45 PM (1).jpeg';
-import infElev5 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 12.52.45 PM (2).jpeg';
-import infElev6 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 12.52.45 PM.jpeg';
-import infElev7 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 1.00.47 PM.jpeg';
-import infElev8 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 1.05.17 PM.jpeg';
+import infElev1 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 12.10.23 PM.webp';
+import infElev2 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 12.52.44 PM (1).webp';
+import infElev3 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 12.52.44 PM.webp';
+import infElev4 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 12.52.45 PM (1).webp';
+import infElev5 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 12.52.45 PM (2).webp';
+import infElev6 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 12.52.45 PM.webp';
+import infElev7 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 1.00.47 PM.webp';
+import infElev8 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 1.05.17 PM.webp';
 
 // Infinity Podium Images
-import infPodium1 from '../assets/infinity podium/ip1.jpg';
-import infPodium2 from '../assets/infinity podium/ip2.jpg';
-import infPodium3 from '../assets/infinity podium/ip3.jpg';
-import infPodium4 from '../assets/infinity podium/ip4.jpg';
-import infPodium5 from '../assets/infinity podium/ip5.png';
-import infPodium6 from '../assets/infinity podium/ip6.png';
-import infPodium7 from '../assets/infinity podium/ip7.png';
-import infPodium8 from '../assets/infinity podium/ip8.jpeg';
+import infPodium1 from '../assets/infinity podium/ip1.webp';
+import infPodium2 from '../assets/infinity podium/ip2.webp';
+import infPodium3 from '../assets/infinity podium/ip3.webp';
+import infPodium4 from '../assets/infinity podium/ip4.webp';
+import infPodium5 from '../assets/infinity podium/ip5.webp';
+import infPodium6 from '../assets/infinity podium/ip6.webp';
+import infPodium7 from '../assets/infinity podium/ip7.webp';
+import infPodium8 from '../assets/infinity podium/ip8.webp';
 
 // Sky Heights Elevation Images
-import skyheightElev1 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.18.57 PM (1).jpeg';
-import skyheightElev2 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.18.57 PM (2).jpeg';
-import skyheightElev3 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.18.57 PM.jpeg';
-import skyheightElev4 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.18.58 PM (1).jpeg';
-import skyheightElev5 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.18.58 PM.jpeg';
-import skyheightElev6 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.18.59 PM.jpeg';
-import skyheightElev7 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.25.00 PM.jpeg';
-import skyheightElev8 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.50.04 PM.jpeg';
+import skyheightElev1 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.18.57 PM (1).webp';
+import skyheightElev2 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.18.57 PM (2).webp';
+import skyheightElev3 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.18.57 PM.webp';
+import skyheightElev4 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.18.58 PM (1).webp';
+import skyheightElev5 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.18.58 PM.webp';
+import skyheightElev6 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.18.59 PM.webp';
+import skyheightElev7 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.25.00 PM.webp';
+import skyheightElev8 from '../assets/skyHeightsElevations/WhatsApp Image 2026-08-31 at 3.50.04 PM.webp';
 
 // Sky Heights Gallery Images
-import shGallery1 from '../assets/skyheights/sky heights rooms/sh-room-1.png';
-import shGallery2 from '../assets/skyheights/sky heights rooms/sh-room-2.png';
-import shGallery3 from '../assets/skyheights/sky heights rooms/sh-room-3.png';
-import shGallery4 from '../assets/skyheights/sky heights rooms/sh-room-4.png';
-import shGallery5 from '../assets/skyheights/sky heights rooms/sh-room-5.png';
-import shGallery6 from '../assets/skyheights/sky heights rooms/sh-room-6.png';
+import shGallery1 from '../assets/skyheights/sky heights rooms/sh-room-1.webp';
+import shGallery2 from '../assets/skyheights/sky heights rooms/sh-room-2.webp';
+import shGallery3 from '../assets/skyheights/sky heights rooms/sh-room-3.webp';
+import shGallery4 from '../assets/skyheights/sky heights rooms/sh-room-4.webp';
+import shGallery5 from '../assets/skyheights/sky heights rooms/sh-room-5.webp';
+import shGallery6 from '../assets/skyheights/sky heights rooms/sh-room-6.webp';
 
 // Skyrise Rooftop Amenities
-import rooftopGym from '../assets/skyrise amenities/gym.png';
-import rooftopGames from '../assets/skyrise amenities/outdoorGames.png';
-import rooftopPlayArea from '../assets/skyrise amenities/playArea.png';
-import rooftopSittingDeck from '../assets/skyrise amenities/sittingDeck.png';
-import rooftopPromenade from '../assets/skyrise amenities/ChatGPT Image Aug 1, 2026, 01_01_21 PM.png';
-import rooftopYoga from '../assets/skyrise amenities/ChatGPT Image Aug 1, 2026, 01_05_01 PM.png';
-import rooftopLounge from '../assets/skyrise amenities/ChatGPT Image Aug 1, 2026, 03_28_08 PM.png';
-import rooftopLawn from '../assets/skyrise amenities/ChatGPT Image Aug 1, 2026, 03_43_30 PM.png';
+import rooftopGym from '../assets/skyrise amenities/gym.webp';
+import rooftopGames from '../assets/skyrise amenities/outdoorGames.webp';
+import rooftopPlayArea from '../assets/skyrise amenities/playArea.webp';
+import rooftopSittingDeck from '../assets/skyrise amenities/sittingDeck.webp';
+import rooftopPromenade from '../assets/skyrise amenities/ChatGPT Image Aug 1, 2026, 01_01_21 PM.webp';
+import rooftopYoga from '../assets/skyrise amenities/ChatGPT Image Aug 1, 2026, 01_05_01 PM.webp';
+import rooftopLounge from '../assets/skyrise amenities/ChatGPT Image Aug 1, 2026, 03_28_08 PM.webp';
+import rooftopLawn from '../assets/skyrise amenities/ChatGPT Image Aug 1, 2026, 03_43_30 PM.webp';
 
 // Sky Heights Rooftop Amenities
-import shRooftop1 from '../assets/skyheights/skyheights rooftop/sh-rooftop-1.png';
-import shRooftop2 from '../assets/skyheights/skyheights rooftop/sh-rooftop-2.png';
-import shRooftop3 from '../assets/skyheights/skyheights rooftop/sh-rooftop-3.png';
-import shRooftop4 from '../assets/skyheights/skyheights rooftop/sh-rooftop-4.png';
-import shRooftop5 from '../assets/skyheights/skyheights rooftop/sh-rooftop-5.png';
-import shRooftop6 from '../assets/skyheights/skyheights rooftop/sh-rooftop-6.png';
+import shRooftop1 from '../assets/skyheights/skyheights rooftop/sh-rooftop-1.webp';
+import shRooftop2 from '../assets/skyheights/skyheights rooftop/sh-rooftop-2.webp';
+import shRooftop3 from '../assets/skyheights/skyheights rooftop/sh-rooftop-3.webp';
+import shRooftop4 from '../assets/skyheights/skyheights rooftop/sh-rooftop-4.webp';
+import shRooftop5 from '../assets/skyheights/skyheights rooftop/sh-rooftop-5.webp';
+import shRooftop6 from '../assets/skyheights/skyheights rooftop/sh-rooftop-6.webp';
 
 // Sky Heights Podium Amenities
-import shPodium1 from '../assets/skyheights/skyheights podium amenities/sh-podium-1.png';
-import shPodium4 from '../assets/skyheights/skyheights podium amenities/sh-podium-4.png';
+import shPodium1 from '../assets/skyheights/skyheights podium amenities/sh-podium-1.webp';
+import shPodium4 from '../assets/skyheights/skyheights podium amenities/sh-podium-4.webp';
 
 // Sky Heights Amenities
-import shAmenity1 from '../assets/skyheights/sky heights amenities/sh-amenity-1.png';
-import shAmenity2 from '../assets/skyheights/sky heights amenities/sh-amenity-2.png';
-import shAmenity3 from '../assets/skyheights/sky heights amenities/sh-amenity-3.png';
-import shAmenity4 from '../assets/skyheights/sky heights amenities/sh-amenity-4.jpeg';
-import shAmenity5 from '../assets/skyheights/sky heights amenities/sh-amenity-5.png';
-import shAmenity6 from '../assets/skyheights/sky heights amenities/sh-amenity-6.png';
+import shAmenity1 from '../assets/skyheights/sky heights amenities/sh-amenity-1.webp';
+import shAmenity2 from '../assets/skyheights/sky heights amenities/sh-amenity-2.webp';
+import shAmenity3 from '../assets/skyheights/sky heights amenities/sh-amenity-3.webp';
+import shAmenity4 from '../assets/skyheights/sky heights amenities/sh-amenity-4.webp';
+import shAmenity5 from '../assets/skyheights/sky heights amenities/sh-amenity-5.webp';
+import shAmenity6 from '../assets/skyheights/sky heights amenities/sh-amenity-6.webp';
 
 const projectOverviewMap: Record<string, string> = {
   'sky-heights': skyheightOverviewImage,

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getAllBlogsAxios } from '../_api/admin';
 import type { BlogPost as BlogPostType } from '../data/blogs';
-import blogGreen from '../assets/blog-green.jpg';
+import blogGreen from '../assets/blog-green.webp';
 
 export default function Blog() {
   const [blogs, setBlogs] = useState<BlogPostType[]>([]);

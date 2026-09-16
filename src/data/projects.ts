@@ -49,7 +49,7 @@ export const projects: Project[] = [
     config: '2, 3 & 4 BHK',
     startingPrice: 'Price on Request',
     carpetAreaRange: '975 – 1,215 sq.ft',
-    heroImage: 'agarwal-infinity-hero.jpg',
+    heroImage: 'agarwal-infinity-hero.webp',
     overviewTitle: 'Agarwal Infinity – Where Spacious Living Meets Everyday Convenience.',
     overviewText1: 'Agarwal Infinity brings spacious 2, 3 & 4 BHK homes to Virar West, thoughtfully designed for families seeking more space, comfort and everyday convenience. With carpet areas ranging from 975 to 1,215 sq. ft., the project combines well-planned residences with a range of lifestyle amenities in a well-connected location. Every home is planned with spacious layouts, abundant natural light and smart space utilisation to make everyday living more comfortable.',
     overviewText2: 'Located in one of Virar West\'s most well-connected neighbourhoods, Agarwal Infinity keeps everything you need just minutes away. From seamless railway connectivity and reputed schools to shopping, healthcare and everyday essentials, life here is designed to be convenient today and promising for tomorrow.',
@@ -170,12 +170,12 @@ export const projects: Project[] = [
       }
     ],
     gallery: [
-      'gallery-exterior.jpg',
-      'gallery-lobby.jpg',
-      'gallery-living.jpg',
-      'gallery-bedroom.jpg',
-      'gallery-pool.jpg',
-      'gallery-aerial.jpg'
+      'gallery-exterior.webp',
+      'gallery-lobby.webp',
+      'gallery-living.webp',
+      'gallery-bedroom.webp',
+      'gallery-pool.webp',
+      'gallery-aerial.webp'
     ],
     mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.8917781719983!2d72.7994673760003!3d19.46023223979633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ab000fb32b41%3A0x7641e67f26411fa3!2sAgarwal%20Infinity!5e0!3m2!1sen!2sin!4v1784611645839!5m2!1sen!2sin'
   },
@@ -188,7 +188,7 @@ export const projects: Project[] = [
     config: '1, 2 & 3 BHK',
     startingPrice: 'Price on Request',
     carpetAreaRange: '425 – 714 sq.ft',
-    heroImage: 'agarwal-sky-heights-hero.jpg',
+    heroImage: 'agarwal-sky-heights-hero.webp',
     overviewTitle: 'Agarwal Sky Heights – Elevated Living in Vasai East',
     overviewText1: 'Agarwal Sky Heights is a 29-floor residential tower in Vasai East, offering thoughtfully designed 1, 2 & 3 BHK homes with modern specifications, lifestyle amenities and elevated recreational spaces.',
     overviewText2: 'The highlight of Agarwal Sky Heights is its rooftop amenity zone, located 345 feet above ground level, offering residents elevated spaces for relaxation, fitness and recreation. From a lounge and telescope point to rooftop jogging tracks, meditation areas, open gym and children\'s activity spaces, the project brings a distinctive lifestyle experience above the city.',
@@ -341,12 +341,12 @@ export const projects: Project[] = [
       }
     ],
     gallery: [
-      'sh-gallery-1.png',
-      'sh-gallery-2.png',
-      'sh-gallery-3.png',
-      'sh-gallery-4.png',
-      'sh-gallery-5.png',
-      'sh-gallery-6.png'
+      'sh-gallery-1.webp',
+      'sh-gallery-2.webp',
+      'sh-gallery-3.webp',
+      'sh-gallery-4.webp',
+      'sh-gallery-5.webp',
+      'sh-gallery-6.webp'
     ],
     mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.463647118351!2d72.8469149759992!3d19.392363241963135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7afe1180f68cd%3A0xcc8573a1e7dd76ab!2sAgarwal%20Sky%20Heights!5e0!3m2!1sen!2sin!4v1784611689586!5m2!1sen!2sin'
   },
@@ -359,7 +359,7 @@ export const projects: Project[] = [
     config: '1, 2 & 3 BHK',
     startingPrice: 'Price on Request',
     carpetAreaRange: '412 – 824 sq.ft',
-    heroImage: 'agarwal-skyrise-hero.jpg',
+    heroImage: 'agarwal-skyrise-hero.webp',
     overviewTitle: 'Agarwal Skyrise – Upscale to a High Life',
     overviewText1: 'Agarwal Skyrise is a premium residential project in Virar West, offering thoughtfully designed 1, 2 & 3 BHK homes across two high-rise wings of 22 and 21 storeys. With contemporary specifications, modern amenities and an exclusive Sky Deck, the project brings together elevated living, recreation and everyday convenience.',
     overviewText2: 'Located close to Reliance Smart, schools, hospitals, shopping and entertainment, with Virar Railway Station approximately 2.5 km away, Agarwal Skyrise offers a well-connected address designed for a modern lifestyle.',
@@ -516,12 +516,12 @@ export const projects: Project[] = [
       }
     ],
     gallery: [
-      'skyrise-elev1.png',
-      'skyrise-living.png',
-      'skyrise-bedroom.png',
-      'skyrise-kitchen.png',
-      'skyrise-dining.png',
-      'skyrise-balcony.png'
+      'skyrise-elev1.webp',
+      'skyrise-living.webp',
+      'skyrise-bedroom.webp',
+      'skyrise-kitchen.webp',
+      'skyrise-dining.webp',
+      'skyrise-balcony.webp'
     ],
     mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.7471885210675!2d72.8020161!3d19.4664638!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ab98fe48e75f%3A0x3677f404d52a5136!2sAgarwal%20skyrise!5e0!3m2!1sen!2sin!4v1784611565341!5m2!1sen!2sin'
   },
@@ -534,7 +534,7 @@ export const projects: Project[] = [
     config: '1, 2 & 3 BHK',
     startingPrice: 'Price on Request',
     carpetAreaRange: '395 – 720 sq.ft',
-    heroImage: 'agarwal-horizon-hero.jpg',
+    heroImage: 'agarwal-horizon-hero.webp',
     overviewTitle: 'A landmark address where everyday life feels elevated.',
     overviewText1: 'Agarwal Horizon brings thoughtfully designed 1, 2 & 3 BHK homes to the heart of Virar West. Every residence is planned for abundant natural light, cross-ventilation and efficient carpet areas — wrapped in a gated community with resort-grade amenities and seamless connectivity to Mumbai.',
     overviewText2: 'Backed by four decades of Agarwal Group craftsmanship, Horizon is built to hold its value and grow with your family for generations.',
@@ -585,11 +585,11 @@ export const projects: Project[] = [
       { key: 'Upcoming Metro', value: 'Nearby' }
     ],
     gallery: [
-      'gallery-exterior.jpg',
-      'gallery-lobby.jpg',
-      'gallery-living.jpg',
-      'gallery-bedroom.jpg',
-      'gallery-aerial.jpg'
+      'gallery-exterior.webp',
+      'gallery-lobby.webp',
+      'gallery-living.webp',
+      'gallery-bedroom.webp',
+      'gallery-aerial.webp'
     ],
     mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.176013521966!2d72.79982009999999!3d19.4479766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7aa2b7336c9df%3A0xa20ede8f1d00bbf2!2sGlory%20-%20Agarwal%20Group!5e0!3m2!1sen!2sin!4v1784611810538!5m2!1sen!2sin'
   }

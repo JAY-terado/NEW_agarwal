@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Briefcase, ArrowLeft, MapPin, IndianRupee, Clock, Users, ChevronRight, X, UploadCloud } from 'lucide-react';
-import heroImage from '../assets/gallery-lobby.jpg';
+import heroImage from '../assets/gallery-lobby.webp';
 
 const JOBS = [
   {

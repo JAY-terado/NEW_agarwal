@@ -4,7 +4,7 @@ import { CheckCircle2, User, Home, FileText, Building } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import heroImage from '../assets/gallery-exterior.jpg';
+import heroImage from '../assets/gallery-exterior.webp';
 
 const schema = z.object({
   applicantName: z.string().min(2, "Name must be at least 2 characters"),

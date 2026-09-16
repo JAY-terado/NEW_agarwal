@@ -9,12 +9,12 @@ import { contactEmailAxios } from '../_api/user';
 
 // Asset Imports
 import heroVideo from '../assets/hero.mp4';
-import heroPoster from '../assets/hero-poster.jpeg';
-import homeAus from '../assets/homeAus.jpeg';
-import infinityHero from '../assets/agarwal-infinity-hero.jpg';
-import skyriseHero from '../assets/skyrise elevations/elev6.png';
-import skyHeightsHero from '../assets/agarwalSkyheight.jpeg';
-import horizonHero from '../assets/agarwal-horizon-hero.jpg';
+import heroPoster from '../assets/hero-poster.webp';
+import homeAus from '../assets/homeAus.webp';
+import infinityHero from '../assets/agarwal-infinity-hero.webp';
+import skyriseHero from '../assets/skyrise elevations/elev6.webp';
+import skyHeightsHero from '../assets/agarwalSkyheight.webp';
+import horizonHero from '../assets/agarwal-horizon-hero.webp';
 
 // Testimonial Videos
 import testVid1 from '../assets/testimonials/darshan mehta AG1.mp4';
@@ -27,12 +27,12 @@ import testVid7 from '../assets/testimonials/M.S.bijju AG7.mp4';
 import testVid8 from '../assets/testimonials/Ramkrushna sabat AG8.mp4';
 
 
-import blogGreen from '../assets/blog-green.jpg';
-import blogClub from '../assets/blog-club.jpg';
-import blogInteriors from '../assets/blog-interiors.jpg';
-import blogInvest from '../assets/blog-invest.jpg';
-import blogCraft from '../assets/blog-craft.jpg';
-import blogFestival from '../assets/blog-festival.jpg';
+import blogGreen from '../assets/blog-green.webp';
+import blogClub from '../assets/blog-club.webp';
+import blogInteriors from '../assets/blog-interiors.webp';
+import blogInvest from '../assets/blog-invest.webp';
+import blogCraft from '../assets/blog-craft.webp';
+import blogFestival from '../assets/blog-festival.webp';
 
 // Map project slugs to imported hero images
 const projectHeroMap: Record<string, string> = {
@@ -52,14 +52,14 @@ interface Testimonial {
 
 // Testimonials data matching the original reels
 const testimonialsData: Testimonial[] = [
-  { id: '1', name: "Darshan Mehta", title: "A Home to Cherish", project: "Agarwal Infinity", video: testVid1 },
-  { id: '2', name: "Keyur Raichand", title: "Exactly as Promised", project: "Agarwal Skyrise", video: testVid2 },
-  { id: '3', name: "Hitesh Patil", title: "Delivered On Time", project: "Agarwal Sky Heights", video: testVid3 },
-  { id: '4', name: "Hitesh Shah", title: "World-Class Amenities", project: "Agarwal Horizon", video: testVid4 },
-  { id: '5', name: "Ekta Goraksha", title: "A Trusted Name", project: "Vasai–Virar & Mumbai", video: testVid5 },
-  { id: '6', name: "Deesha Shah", title: "Highly Recommended", project: "Agarwal Group", video: testVid6 },
-  { id: '7', name: "M.S. Bijju", title: "Exceptional Quality", project: "Agarwal Paramount", video: testVid7 },
-  { id: '8', name: "Ramkrushna Sabat", title: "Peace of Mind", project: "Agarwal Residency", video: testVid8 },
+  { id: '1', name: "Ramkrishna Sabat", title: "Trust & Peace of Mind", project: "Proud Home Buyer", video: testVid8 },
+  { id: '2', name: "Keyur Raichand", title: "Exactly as Promised", project: "Proud Home Buyer", video: testVid2 },
+  { id: '3', name: "Meletheil Biju", title: "Exceptional quality", project: "Proud Home Buyer", video: testVid7 },
+  { id: '4', name: "Darshan Mehta", title: "Home to Cherish", project: "Proud Channel Partner", video: testVid1 },
+  { id: '5', name: "Hitesh Patil", title: "Delivered on Time", project: "Proud Channel Partner", video: testVid3 },
+  { id: '6', name: "Ekta Goraksha", title: "A Trusted Name", project: "Proud Home Buyer", video: testVid5 },
+  { id: '7', name: "Disha Shah", title: "Highly Recommended", project: "Proud Home Buyer", video: testVid6 },
+  { id: '8', name: "Hitesh Shah", title: "World class Amenities", project: "Proud Channel Partner", video: testVid4 },
 ];
 
 // Insights blog data matching the original bposts
