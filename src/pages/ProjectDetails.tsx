@@ -858,7 +858,7 @@ export default function ProjectDetails() {
                   <img
                     src={getLayoutImage(project.slug, p.type)}
                     alt={`${p.type} Floor Plan`}
-                    className="w-full h-auto object-contain group-hover:scale-[1.03] transition-transform duration-700 block"
+                    className="w-full h-auto object-contain group-hover:scale-[1.03] transition-transform duration-700 block blur-md"
                   />
                 </div>
 
