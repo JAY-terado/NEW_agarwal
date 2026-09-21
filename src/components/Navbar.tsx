@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { contactEmailAxios } from '../_api/user';
@@ -41,7 +41,6 @@ export default function Navbar() {
   const [megaOpen, setMegaOpen] = useState(false);
   const [ddOpen, setDdOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
   const megaTimer = useRef<number | null>(null);
   const ddTimer = useRef<number | null>(null);
 
