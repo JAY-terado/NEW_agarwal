@@ -12,7 +12,7 @@ import heroVideo from '../assets/hero.mp4';
 import heroPoster from '../assets/hero-poster.webp';
 import homeAus from '../assets/homeAus.webp';
 import infinityHero from '../assets/agarwal-infinity-hero.webp';
-import skyriseHero from '../assets/skyrise elevations/elev6.webp';
+import skyriseHero from '../assets/skriseElevationsNew/skye6.webp';
 import skyHeightsHero from '../assets/agarwalSkyheight.webp';
 import horizonHero from '../assets/agarwal-horizon-hero.webp';
 

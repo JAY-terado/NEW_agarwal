@@ -8,7 +8,7 @@ import LogoHero from '../assets/logo1.webp';
 import LogoOther from '../assets/logo2.webp';
 
 import infinityHero from '../assets/agarwal-infinity-hero.webp';
-import skyriseHero from '../assets/skyrise elevations/elev6.webp';
+import skyriseHero from '../assets/skriseElevationsNew/skye6.webp';
 import skyHeightsHero from '../assets/agarwalSkyheight.webp';
 import horizonHero from '../assets/agarwal-horizon-hero.webp';
 

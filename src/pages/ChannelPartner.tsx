@@ -11,7 +11,7 @@ import heroImage from '../assets/agarwal-horizon-hero.webp';
 import { channelPartnerFaqs } from '../data/faqs';
 import { projects } from '../data/projects';
 import infinityHero from '../assets/agarwal-infinity-hero.webp';
-import skyriseHero from '../assets/skyrise elevations/elev6.webp';
+import skyriseHero from '../assets/skriseElevationsNew/skye6.webp';
 import skyHeightsHero from '../assets/agarwalSkyheight.webp';
 
 const projectHeroMap: Record<string, string> = {

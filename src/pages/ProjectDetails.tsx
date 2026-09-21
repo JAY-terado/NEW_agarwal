@@ -69,7 +69,7 @@ import skyrise3Bhk from '../assets/Skyrise 3BHK.jpg.webp';
 // Project Hero Imports
 import infinityHero from '../assets/agarwal-infinity-hero.webp';
 import infinityHeroVideo from '../assets/agarwalInfintyHero.mp4';
-import skyriseHero from '../assets/skyrise elevations/elev6.webp';
+import skyriseHero from '../assets/skriseElevationsNew/skye6.webp';
 import skyriseHeroVideo from '../assets/SkyriseHero1.mp4';
 import skyHeightsHero from '../assets/agarwalSkyheight.webp';
 import skyHeightsHeroVideo from '../assets/skyHeightHero1.mp4';
@@ -165,13 +165,14 @@ import amenityRooftop from '../assets/rooftopA.webp';
 import amenitySwim from '../assets/swimmingA.webp';
 
 // Skyrise Elevation Images
-import skyriseElev1 from '../assets/skyrise elevations/elev1.webp';
-import skyriseElev2 from '../assets/skyrise elevations/elev2.webp';
-import skyriseElev3 from '../assets/skyrise elevations/elev3.webp';
-import skyriseElev4 from '../assets/skyrise elevations/elev4.webp';
-import skyriseElev5 from '../assets/skyrise elevations/elev5.webp';
-import skyriseElev6 from '../assets/skyrise elevations/elev6.webp';
-import skyriseGate from '../assets/skyrise elevations/gate.webp';
+import skyriseElev1 from '../assets/skriseElevationsNew/skye1.webp';
+import skyriseElev2 from '../assets/skriseElevationsNew/skye2.webp';
+import skyriseElev3 from '../assets/skriseElevationsNew/skye3.webp';
+import skyriseElev4 from '../assets/skriseElevationsNew/skye4.webp';
+import skyriseElev5 from '../assets/skriseElevationsNew/skye5.webp';
+import skyriseElev6 from '../assets/skriseElevationsNew/skye6.webp';
+import skyriseElev7 from '../assets/skriseElevationsNew/skye7.webp';
+import skyriseElev8 from '../assets/skriseElevationsNew/skye8.webp';
 
 import srPodium1 from '../assets/skyrise podium/sp1.webp';
 import srPodium2 from '../assets/skyrise podium/sp2.webp';
@@ -253,7 +254,7 @@ import shAmenity6 from '../assets/skyheights/sky heights amenities/sh-amenity-6.
 const projectOverviewMap: Record<string, string> = {
   'sky-heights': skyheightOverviewImage,
   infinity: infElev2,
-  skyrise: skyriseElev3,
+  skyrise: skyriseElev6,
 };
 
 const amenityImageMap: Record<string, string> = {
@@ -689,8 +690,8 @@ export default function ProjectDetails() {
                     { src: skyriseElev4, text: 'Podium Layout View' },
                     { src: skyriseElev5, text: 'Terrace Seating Area' },
                     { src: skyriseElev6, text: 'Bird\'s Eye View' },
-                    { src: skyriseGate, text: 'Grand Entrance Gate' },
-                    { src: skyriseElev1, text: 'Perspective View' }, // Fallback for 8th grid item
+                    { src: skyriseElev7, text: 'Grand Entrance Gate' },
+                    { src: skyriseElev8, text: 'Perspective View' },
                   ];
                   if (elevImages[idx]) {
                     imageSrc = elevImages[idx].src;
