@@ -50,6 +50,14 @@ import galleryBedroom from '../assets/gallery-bedroom.webp';
 import galleryPool from '../assets/gallery-pool.webp';
 import galleryAerial from '../assets/gallery-aerial.webp';
 
+// Infinity Gallery Imports
+import ig1 from '../assets/infinityGallery/ig1.jpeg';
+import ig2 from '../assets/infinityGallery/ig2.jpeg';
+import ig3 from '../assets/infinityGallery/ig3.jpeg';
+import ig4 from '../assets/infinityGallery/ig4.jpeg';
+import ig5 from '../assets/infinityGallery/ig5.jpeg';
+import ig6 from '../assets/infinityGallery/ig6.jpeg';
+
 import layout1Bhk from '../assets/layout-1bhk.webp';
 import layout2Bhk from '../assets/layout-2bhk.webp';
 import layout3Bhk from '../assets/layout-3bhk.webp';
@@ -116,6 +124,13 @@ const galleryMap: Record<string, string> = {
   'gallery-bedroom.webp': galleryBedroom,
   'gallery-pool.webp': galleryPool,
   'gallery-aerial.webp': galleryAerial,
+  // Infinity specific
+  'ig1.jpeg': ig1,
+  'ig2.jpeg': ig2,
+  'ig3.jpeg': ig3,
+  'ig4.jpeg': ig4,
+  'ig5.jpeg': ig5,
+  'ig6.jpeg': ig6,
   // Skyrise specific
   'skyrise-elev1.webp': skyriseElev1,
   'skyrise-living.webp': skyriseLiving,
