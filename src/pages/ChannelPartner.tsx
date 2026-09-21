@@ -343,7 +343,14 @@ export default function ChannelPartner() {
               <button
                 className="custom-read-more"
                 style={{ border: 'none', background: 'transparent', cursor: 'pointer', padding: 0, font: 'inherit' }}
-                onClick={() => setShowAllFaqs(false)}
+                onClick={() => {
+                  setShowAllFaqs(false);
+                  const el = document.getElementById('faqs');
+                  if (el) {
+                    const y = el.getBoundingClientRect().top + window.scrollY - 100;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                  }
+                }}
               >
                 <span className="custom-read-more__label">Show Less FAQ's</span>
                 <span className="custom-read-more__icon">

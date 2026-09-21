@@ -1112,7 +1112,14 @@ export default function ProjectDetails() {
             {showAllFaqs && (
               <button
                 className="custom-read-more border-none bg-transparent cursor-pointer p-0 font-inherit"
-                onClick={() => setShowAllFaqs(false)}
+                onClick={() => {
+                  setShowAllFaqs(false);
+                  const el = document.getElementById('faq');
+                  if (el) {
+                    const y = el.getBoundingClientRect().top + window.scrollY - 100;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                  }
+                }}
               >
                 <span className="custom-read-more__label">Show Less FAQ's</span>
                 <span className="custom-read-more__icon">

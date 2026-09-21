@@ -147,10 +147,11 @@ export default function Home() {
   const [showAllFaqs, setShowAllFaqs] = useState(false);
   const [isIdle, setIsIdle] = useState(false);
   const [activeVideoModal, setActiveVideoModal] = useState<Testimonial | null>(null);
+  const [isEnquireModalOpen, setIsEnquireModalOpen] = useState(false);
   const isTopHoveredRef = useRef(false);
 
   useEffect(() => {
-    if (activeVideoModal) {
+    if (activeVideoModal || isEnquireModalOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -158,12 +159,13 @@ export default function Home() {
     return () => {
       document.body.style.overflow = '';
     };
-  }, [activeVideoModal]);
+  }, [activeVideoModal, isEnquireModalOpen]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && activeVideoModal) {
-        setActiveVideoModal(null);
+      if (e.key === 'Escape') {
+        if (activeVideoModal) setActiveVideoModal(null);
+        if (isEnquireModalOpen) setIsEnquireModalOpen(false);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -682,7 +684,7 @@ export default function Home() {
                         to="/contact"
                         onClick={(e) => {
                           e.preventDefault();
-                          document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                          setIsEnquireModalOpen(true);
                         }}
                       >
                         <span>Enquire Now</span>
@@ -874,7 +876,14 @@ export default function Home() {
             {showAllFaqs && (
               <button
                 className="custom-read-more border-none bg-transparent cursor-pointer p-0 font-inherit"
-                onClick={() => setShowAllFaqs(false)}
+                onClick={() => {
+                  setShowAllFaqs(false);
+                  const el = document.getElementById('faq');
+                  if (el) {
+                    const y = el.getBoundingClientRect().top + window.scrollY - 100;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                  }
+                }}
               >
                 <span className="custom-read-more__label">Show Less FAQ's</span>
                 <span className="custom-read-more__icon">
@@ -1203,6 +1212,123 @@ export default function Home() {
                   <span>{activeVideoModal.project}</span> • <em>{activeVideoModal.title}</em>
                 </p>
               </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Enquire Now Modal */}
+      <AnimatePresence>
+        {isEnquireModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="testimonial-modal-backdrop"
+            onClick={() => setIsEnquireModalOpen(false)}
+            style={{ zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.7)', padding: '20px' }}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="form"
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                background: 'var(--color-ivory)', border: '1px solid var(--color-line)', borderRadius: '8px', padding: 'clamp(26px, 4vw, 42px)', paddingBottom: '24px', width: '100%', maxWidth: '500px', margin: 'auto', position: 'relative', top: 0, overflowY: 'auto', maxHeight: '90vh'
+              }}
+            >
+              <button
+                onClick={() => setIsEnquireModalOpen(false)}
+                aria-label="Close modal"
+                style={{ position: 'absolute', top: '16px', right: '16px', background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--color-ink)', padding: '4px' }}
+              >
+                <X size={24} />
+              </button>
+              
+              <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '4px', lineHeight: 1.4 }}>
+                Request an <span className="text-brass">Immediate Callback</span> for Exclusive Offers.
+              </div>
+              <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingBottom: '20px', marginBottom: '20px', fontWeight: 300, borderBottom: '1px solid var(--color-line)' }}>
+                Share your details and our relationship manager will contact you with special offer.
+              </div>
+              <AnimatePresence mode="wait">
+                {!contactSubmitted ? (
+                  <form onSubmit={handleContactSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                      <label style={{ display: 'block', fontSize: '.7rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-taupe)', fontWeight: 600 }}>Full Name*</label>
+                      <input
+                        type="text"
+                        name="name"
+                        required
+                        placeholder="Full Name"
+                        style={{ width: '100%', border: '1px solid var(--color-line)', borderRadius: '4px', padding: '13px 15px', fontSize: '.95rem', fontFamily: 'inherit', color: 'var(--color-ink)', outline: 'none', background: '#ffffff' }}
+                      />
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                      <label style={{ display: 'block', fontSize: '.7rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-taupe)', fontWeight: 600 }}>Mobile Number*</label>
+                      <div style={{ display: 'flex', border: '1px solid var(--color-line)', borderRadius: '4px', overflow: 'hidden', background: '#ffffff' }}>
+                        <span style={{ display: 'flex', alignItems: 'center', background: 'var(--color-ivory)', borderRight: '1px solid var(--color-line)', fontSize: '.95rem', fontWeight: 500, color: 'var(--color-ink)', padding: '0 13px', userSelect: 'none' }}>+91</span>
+                        <input
+                          type="tel"
+                          name="mobile_number"
+                          required
+                          maxLength={10}
+                          pattern="[0-9]{10}"
+                          title="Please enter a valid 10-digit mobile number"
+                          onInput={(e) => {
+                            e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '').slice(0, 10);
+                          }}
+                          placeholder="00000 00000"
+                          style={{ width: '100%', flex: 1, border: 'none', padding: '13px 15px', fontSize: '.95rem', fontFamily: 'inherit', color: 'var(--color-ink)', outline: 'none', background: 'transparent' }}
+                        />
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                      <label style={{ display: 'block', fontSize: '.7rem', letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-taupe)', fontWeight: 600 }}>Email Address</label>
+                      <input
+                        type="email"
+                        name="email"
+                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                        title="Please enter a valid email address (e.g. name@example.com)"
+                        placeholder="you@email.com"
+                        style={{ width: '100%', border: '1px solid var(--color-line)', borderRadius: '4px', padding: '13px 15px', fontSize: '.95rem', fontFamily: 'inherit', color: 'var(--color-ink)', outline: 'none', background: '#ffffff' }}
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="pcta-btn btn-enquire"
+                      style={{ width: '100%' }}
+                    >
+                      <span>Get Best Offers</span>
+                      <span className="arr">→</span>
+                    </button>
+                    <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', lineHeight: 1.4, }}>
+                      By Clicking Above Button, I Authorize Agarwal Group And Its Representatives To Call, SMS, Email Or Whatsapp Me About Its Products And Offers. This Consent Overrides Any Registration For DND NDNC.
+                    </div>
+                  </form>
+                ) : (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '40px 0', gap: '16px' }}
+                  >
+                    <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: 'rgba(16, 185, 129, 0.2)', color: 'rgb(16, 185, 129)', display: 'grid', placeItems: 'center', margin: '0 auto' }}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    </div>
+                    <h3 className="serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.5rem', fontWeight: 500, color: 'var(--color-ink)' }}>Callback Requested!</h3>
+                    <p style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', lineHeight: 1.6 }}>
+                      Thank you! Your details have been submitted. Our relationship manager will reach out shortly.
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           </motion.div>
         )}
