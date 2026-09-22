@@ -11,7 +11,7 @@ import heroImage from '../assets/agarwal-horizon-hero.webp';
 import { channelPartnerFaqs } from '../data/faqs';
 import { projects } from '../data/projects';
 import infinityHero from '../assets/agarwal-infinity-hero.webp';
-import skyriseHero from '../assets/skyrise elevations/elev6.webp';
+import skyriseHero from '../assets/skriseElevationsNew/skye6.webp';
 import skyHeightsHero from '../assets/agarwalSkyheight.webp';
 
 const projectHeroMap: Record<string, string> = {
@@ -343,7 +343,14 @@ export default function ChannelPartner() {
               <button
                 className="custom-read-more"
                 style={{ border: 'none', background: 'transparent', cursor: 'pointer', padding: 0, font: 'inherit' }}
-                onClick={() => setShowAllFaqs(false)}
+                onClick={() => {
+                  setShowAllFaqs(false);
+                  const el = document.getElementById('faqs');
+                  if (el) {
+                    const y = el.getBoundingClientRect().top + window.scrollY - 100;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                  }
+                }}
               >
                 <span className="custom-read-more__label">Show Less FAQ's</span>
                 <span className="custom-read-more__icon">
