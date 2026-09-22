@@ -145,9 +145,31 @@ export default function Home() {
   const [contactSubmitted, setContactSubmitted] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [showAllFaqs, setShowAllFaqs] = useState(false);
-  const [isIdle, setIsIdle] = useState(false);
   const [activeVideoModal, setActiveVideoModal] = useState<Testimonial | null>(null);
-  const isTopHoveredRef = useRef(false);
+
+  const [isHeroTextVisible, setIsHeroTextVisible] = useState(false);
+  const heroTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleHeroInteraction = () => {
+    setIsHeroTextVisible(true);
+    if (heroTimerRef.current) clearTimeout(heroTimerRef.current);
+    heroTimerRef.current = setTimeout(() => {
+      setIsHeroTextVisible(false);
+    }, 3000);
+  };
+
+  const handleHeroLeave = () => {
+    if (heroTimerRef.current) clearTimeout(heroTimerRef.current);
+    heroTimerRef.current = setTimeout(() => {
+      setIsHeroTextVisible(false);
+    }, 3000);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (heroTimerRef.current) clearTimeout(heroTimerRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     if (activeVideoModal) {
@@ -170,39 +192,6 @@ export default function Home() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [activeVideoModal]);
 
-  useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
-
-    const resetTimer = () => {
-      setIsIdle(false);
-      clearTimeout(timeout);
-      if (window.scrollY < 40 && !isTopHoveredRef.current) {
-        timeout = setTimeout(() => {
-          setIsIdle(true);
-        }, 5000);
-      }
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      isTopHoveredRef.current = e.clientY < 100;
-      resetTimer();
-    };
-
-    const handleScroll = () => {
-      resetTimer();
-    };
-
-    resetTimer();
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('scroll', handleScroll);
-      clearTimeout(timeout);
-    };
-  }, []);
 
   const statsRef = useRef<HTMLDivElement>(null);
 
@@ -440,7 +429,14 @@ export default function Home() {
   return (
     <div className="relative">
       {/* 1. HERO SECTION - matches original: video bg, absolute bottom search only */}
-      <header className="relative min-h-[100svh] overflow-hidden text-white" style={{ display: 'flex', alignItems: 'center', minHeight: '100svh' }}>
+      <header
+        className="relative min-h-[100svh] overflow-hidden text-white"
+        style={{ display: 'flex', alignItems: 'center', minHeight: '100svh' }}
+        onMouseMove={handleHeroInteraction}
+        onMouseEnter={handleHeroInteraction}
+        onMouseLeave={handleHeroLeave}
+        onClick={handleHeroInteraction}
+      >
         <div className="absolute inset-0 z-0">
           <video
             className="w-full h-full object-cover block"
@@ -456,11 +452,11 @@ export default function Home() {
         </div>
 
         <div
-          className="relative z-10 w-full wrap-widescreen pt-24 pb-16 flex flex-col items-start text-left"
+          className="relative z-10 w-full wrap-widescreen pt-24 pb-16 hidden lg:flex flex-col items-start text-left"
         >
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: !isIdle ? 1 : 0, y: 0 }}
+            animate={{ opacity: isHeroTextVisible ? 1 : 0, y: isHeroTextVisible ? 0 : 30 }}
             transition={{ duration: 0.8 }}
             className="flex flex-col items-start"
           >
@@ -535,76 +531,73 @@ export default function Home() {
         <div className="wrap-widescreen story-grid">
           <div className="reveal">
             <span className="eyebrow">About Us</span>
-            <h2 className="serif">About Agarwal Group – Leading Builder in <em>Vasai–Virar Since 1978</em></h2>
-            <p>For over 48 years, Agarwal Group has been one of the most trusted real estate developers in Mumbai and Vasai-Virar MMR Mumbai Metropolitan Region. Since 1978, we have successfully delivered thoughtfully planned residential projects that combine quality construction, prime locations, modern amenities and long-term value.</p>
-            <p>From affordable 1 BHK homes to spacious 2, 3 and 4 BHK apartments, every Agarwal development is designed around the needs of modern families. Our projects are RERA registered, strategically located near railway stations, schools, hospitals and major highways, making everyday life more convenient.</p>
+
+            {/* SEO Heading */}
+            <h2 className="sr-only">
+              Vasai-Virar Real Estate Developers and Builders
+            </h2>
+
+            <h2 className="serif">
+              About Agarwal Group – Leading Builder and Developer
+              <em> Since 1978</em>
+            </h2>
+
+            <p>
+              For over 48 years, Agarwal Group has been one of the most trusted real
+              estate developers in Mumbai and Vasai-Virar MMR Mumbai Metropolitan
+              Region. Since 1978, we have successfully delivered thoughtfully planned
+              residential projects that combine quality construction, prime
+              locations, modern amenities and long-term value.
+            </p>
+
+            <p>
+              From affordable 1 BHK homes to spacious 2, 3 and 4 BHK apartments,
+              every Agarwal development is designed around the needs of modern
+              families. Our projects are RERA registered, strategically located near
+              railway stations, schools, hospitals and major highways, making
+              everyday life more convenient.
+            </p>
 
             <Link className="custom-read-more" to="/about-us">
               <span className="custom-read-more__label">Read More</span>
+
               <span className="custom-read-more__icon">
                 <span className="custom-read-more__icon-small">
                   <svg viewBox="0 0 100 100">
                     <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50"></polygon>
                   </svg>
                 </span>
+
                 <span className="custom-read-more__icon-circle">
                   <svg viewBox="0 0 100 100">
-                    <path className="bottomcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
-                    <path pathLength="100" className="topcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                    <path
+                      className="bottomcircle"
+                      d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"
+                    ></path>
+
+                    <path
+                      pathLength="100"
+                      className="topcircle"
+                      d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"
+                    ></path>
                   </svg>
                 </span>
               </span>
             </Link>
-            {/* 
-            <div className="values">
-              <div className="vcard">
-                <div className="vcard-icon-clear">
-                  <Gem className="w-7 h-7" strokeWidth={1.25} />
-                </div>
-                <div className="vcard-content">
-                  <b>Quality Living</b>
-                  <span>Every detail crafted with precision.</span>
-                </div>
-              </div>
-              <div className="vcard">
-                <div className="vcard-icon-clear">
-                  <Timer className="w-7 h-7" strokeWidth={1.25} />
-                </div>
-                <div className="vcard-content">
-                  <b>On-Time Delivery</b>
-                  <span>A commitment upheld for decades.</span>
-                </div>
-              </div>
-              <div className="vcard">
-                <div className="vcard-icon-clear">
-                  <BadgeCheck className="w-7 h-7" strokeWidth={1.25} />
-                </div>
-                <div className="vcard-content">
-                  <b>RERA Compliant</b>
-                  <span>Transparent, accountable practices.</span>
-                </div>
-              </div>
-              <div className="vcard">
-                <div className="vcard-icon-clear">
-                  <HeartHandshake className="w-7 h-7" strokeWidth={1.25} />
-                </div>
-                <div className="vcard-content">
-                  <b>Community First</b>
-                  <span>Neighbourhoods that thrive together.</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="quote">
-              <p className="serif">"We don't just build structures — we build the places where life's greatest chapters unfold."</p>
-            </div> */}
           </div>
+
           <div className="story-media reveal">
             <img
               src={homeAus}
               alt="Agarwal Group architecture"
-              style={{ width: '80%', height: 'auto', aspectRatio: '1/1', objectFit: 'cover' }}
+              style={{
+                width: '80%',
+                height: 'auto',
+                aspectRatio: '1/1',
+                objectFit: 'cover',
+              }}
             />
+
             <div className="story-badge">
               <b>48+</b>
               <small>Years of Trust</small>
@@ -789,9 +782,12 @@ export default function Home() {
                     </svg>
                   </button>
                   <div className="reel-cap">
-                    <div className="reel-stars">★★★★★</div>
                     <b>{item.name}</b>
-                    <span>{item.project} • {item.title}</span>
+                    <span>{item.project}</span>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '6px' }}>
+                      <span className="reel-stars" style={{ marginBottom: 0 }}>★★★★★</span>
+                      <span style={{ opacity: 0.5 }}>|</span> {item.title}
+                    </span>
                   </div>
                 </article>
               ))}
@@ -1197,11 +1193,14 @@ export default function Home() {
               </div>
 
               <div className="testimonial-modal-info">
-                <div className="reel-stars">★★★★★</div>
-                <h3 className="testimonial-modal-name">{activeVideoModal.name}</h3>
-                <p className="testimonial-modal-meta">
-                  <span>{activeVideoModal.project}</span> • <em>{activeVideoModal.title}</em>
+                <h3 className="testimonial-modal-name" style={{ marginTop: 0 }}>{activeVideoModal.name}</h3>
+                <p className="testimonial-modal-meta" style={{ marginBottom: '8px' }}>
+                  <span>{activeVideoModal.project}</span>
                 </p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span className="reel-stars" style={{ marginBottom: 0 }}>★★★★★</span>
+                  <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem' }}><span style={{ opacity: 0.5 }}>|</span> {activeVideoModal.title}</span>
+                </div>
               </div>
             </motion.div>
           </motion.div>

@@ -1,7 +1,11 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../assets/logo2.webp';
+import SupplierRegistrationModal from './SupplierRegistrationModal';
 
 export default function Footer() {
+  const [isSupplierModalOpen, setIsSupplierModalOpen] = useState(false);
+
   return (
     <footer style={{ background: 'var(--ivory)', color: 'var(--ink-soft)', borderTop: '1px solid var(--line)', padding: 'clamp(64px, 9vh, 100px) 0 30px' }}>
       <div className="wrap-widescreen">
@@ -127,13 +131,22 @@ export default function Footer() {
                 { to: '/careers', label: 'Careers' },
                 { to: '/supplier-registration', label: 'Supplier/Contractor Registration' },
               ].map((link, i) => (
-                <Link key={i} to={link.to}
-                  onClick={() => window.scrollTo(0, 0)}
-                  style={{ display: 'inline-block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'all 0.3s ease', textDecoration: 'none', transform: 'translateX(0)' }}
-                  onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass)'; e.currentTarget.style.transform = 'translateX(5px)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.color = 'var(--ink-soft)'; e.currentTarget.style.transform = 'translateX(0)'; }}>
-                  {link.label}
-                </Link>
+                link.to === '/supplier-registration' ? (
+                  <button key={i} onClick={() => setIsSupplierModalOpen(true)}
+                    style={{ background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left', display: 'inline-block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'all 0.3s ease', textDecoration: 'none', transform: 'translateX(0)' }}
+                    onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass)'; e.currentTarget.style.transform = 'translateX(5px)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.color = 'var(--ink-soft)'; e.currentTarget.style.transform = 'translateX(0)'; }}>
+                    {link.label}
+                  </button>
+                ) : (
+                  <Link key={i} to={link.to}
+                    onClick={() => window.scrollTo(0, 0)}
+                    style={{ display: 'inline-block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'all 0.3s ease', textDecoration: 'none', transform: 'translateX(0)' }}
+                    onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass)'; e.currentTarget.style.transform = 'translateX(5px)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.color = 'var(--ink-soft)'; e.currentTarget.style.transform = 'translateX(0)'; }}>
+                    {link.label}
+                  </Link>
+                )
               ))}
             </div>
           </div>
@@ -232,6 +245,8 @@ export default function Footer() {
           }
         }
       `}</style>
+      
+      <SupplierRegistrationModal isOpen={isSupplierModalOpen} onClose={() => setIsSupplierModalOpen(false)} />
     </footer>
   );
 }

@@ -43,41 +43,15 @@ export default function Navbar() {
   const megaTimer = useRef<number | null>(null);
   const ddTimer = useRef<number | null>(null);
 
-  const [isIdle, setIsIdle] = useState(false);
-  const isHoveredRef = useRef(false);
-
   useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
-
-    const resetTimer = () => {
-      setIsIdle(false);
-      clearTimeout(timeout);
-      if (window.scrollY < 40 && !isHoveredRef.current && location.pathname === '/') {
-        timeout = setTimeout(() => {
-          setIsIdle(true);
-        }, 5000);
-      }
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      isHoveredRef.current = e.clientY < 100;
-      resetTimer();
-    };
-
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
-      resetTimer();
     };
 
-    resetTimer();
-
-    window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('scroll', handleScroll);
-      clearTimeout(timeout);
     };
   }, [location.pathname]);
 
@@ -160,7 +134,7 @@ export default function Navbar() {
     padding: scrolled ? '8px 0' : '12px 0',
     boxShadow: scrolled ? '0 10px 40px -24px rgba(0,0,0,.22)' : 'none',
     borderBottom: forceScrolledStyle ? '1px solid rgba(20,20,18,.14)' : '1px solid rgba(255, 255, 255, 0.1)',
-    transform: isIdle && !scrolled && location.pathname === '/' ? 'translateY(-100%)' : 'translateY(0)',
+    transform: 'translateY(0)',
   };
 
   const brandColor = forceScrolledStyle ? 'var(--ink)' : 'var(--paper)';

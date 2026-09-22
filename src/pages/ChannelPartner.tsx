@@ -53,7 +53,7 @@ export default function ChannelPartner() {
 
   const whyPartnerFeatures = [
     { icon: <Award />, title: "48+ Years of Legacy", desc: "Building trust since 1978." },
-    { icon: <Building2 />, title: "50+ Successful Projects", desc: "A proven track record across MMR." },
+    { icon: <Building2 />, title: "30+ Successful Projects", desc: "A proven track record across MMR." },
     { icon: <TrendingUp />, title: "High Conversion Projects", desc: "Well-planned developments in growing locations." },
     { icon: <Banknote />, title: "Attractive Commission Structure", desc: "Competitive and timely payouts." },
     { icon: <UserCheck />, title: "Dedicated Relationship Manager", desc: "One point of contact for all your requirements." },
@@ -70,7 +70,7 @@ export default function ChannelPartner() {
     { icon: <Calendar />, title: "Inventory Availability", desc: "Real-time unit availability." },
     { icon: <Smartphone />, title: "Digital Sales Kit", desc: "E-Brochures, Floor Plans, Price Lists, Payment Plans, Location Maps & Videos." },
     { icon: <HandCoins />, title: "Faster Commission Processing", desc: "Transparent and timely payment process." },
-    { icon: <Users />, title: "Exclusive Events", desc: "Project launches, broker meets and appreciation events." }
+    { icon: <Users />, title: "Exclusive Events", desc: "Project launches, channel partner meets and appreciation events." }
   ];
 
   return (

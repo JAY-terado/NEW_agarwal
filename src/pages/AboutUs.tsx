@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Hammer, Map, Trophy,
   CalendarCheck, BadgeCheck, Users, Trees
@@ -8,6 +9,18 @@ import ourMissionAus from '../assets/ourMissionAus.webp';
 import ourVisionAus from '../assets/OurVisionAus.webp';
 import ourPresenceAus from '../assets/ourPresenceAus.webp';
 import aboutUsHero from '../assets/aboutUsHero.webp';
+import { projects } from '../data/projects';
+import infinityHero from '../assets/agarwal-infinity-hero.webp';
+import skyriseHero from '../assets/skyrise elevations/elev6.webp';
+import skyHeightsHero from '../assets/agarwalSkyheight.webp';
+import heroImage from '../assets/agarwal-horizon-hero.webp';
+
+const projectHeroMap: Record<string, string> = {
+  infinity: infinityHero,
+  skyrise: skyriseHero,
+  'sky-heights': skyHeightsHero,
+  horizon: heroImage
+};
 
 export default function AboutUs() {
   useEffect(() => {
@@ -46,7 +59,7 @@ export default function AboutUs() {
               <span className="eyebrow">Our Legacy</span>
               <h2 className="serif">A Legacy Built on <em>Trust, Quality &amp; Excellence</em></h2>
               <p>
-                Established in <strong>1978</strong>, Agarwal Group has become one of the most respected real estate developers in <strong>Vasai–Virar and Mumbai</strong>, with a legacy of delivering thoughtfully planned residential communities.
+                Established in <strong>1978</strong>, Agarwal Group has become one of the most respected real estate developers in <strong>Vasai–Virar, Mumbai and MMR Region</strong>, with a legacy of delivering thoughtfully planned residential communities.
               </p>
               <p>
                 From affordable homes to premium apartments, every project reflects our commitment to exceptional construction quality, intelligent space planning, modern lifestyle amenities, and timely delivery.
@@ -210,7 +223,7 @@ export default function AboutUs() {
               <span className="eyebrow">Our Presence</span>
               <h2 className="serif">Building Across <em>The MMR</em></h2>
               <p>
-                For more than Four decades, Agarwal Group has developed commercial and residential communities across Mumbai and Vasai-Virar MMR Mumbai Metropolitan Region.
+                For nearly Five decades, Agarwal Group has developed commercial and residential communities across Mumbai and Vasai-Virar MMR Mumbai Metropolitan Region.
               </p>
               <p>
                 Our portfolio includes premium apartments, integrated townships, and lifestyle-focused residential developments designed for modern families.
@@ -222,6 +235,60 @@ export default function AboutUs() {
                 alt="Agarwal Group Presence"
                 style={{ width: '80%', height: 'auto', aspectRatio: '4/5', objectFit: 'cover' }}
               />
+            </div>
+          </div>
+        </section>
+
+        {/* Section 6: Current Projects (Portfolio) */}
+        <section id="portfolio" className="section py-24" style={{ backgroundColor: 'var(--color-ivory)', padding: '100px 0' }}>
+          <div className="wrap-widescreen">
+            <div className="mb-12" style={{ marginBottom: '48px' }}>
+              <span className="eyebrow">Our Portfolio</span>
+              <h2 className="serif text-4xl" style={{ color: 'var(--ink)' }}>Current Projects</h2>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '32px' }}>
+              {projects.map((proj) => {
+                const imageSrc = projectHeroMap[proj.slug] || infinityHero;
+
+                // Extract a short location snippet if possible (e.g., "Virar (W)")
+                const locationParts = proj.location.split(',');
+                const shortLocation = locationParts.length > 2
+                  ? locationParts[locationParts.length - 2].trim()
+                  : locationParts[0].trim();
+
+                return (
+                  <Link key={proj.slug} to={`/projects/${proj.slug}`} style={{ display: 'block', textDecoration: 'none', borderRadius: '12px', overflow: 'hidden', background: '#fff', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', transition: 'transform 0.3s ease' }} onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-5px)'} onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}>
+                    <div style={{ height: '240px', overflow: 'hidden' }}>
+                      <img src={imageSrc} alt={proj.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    </div>
+                    <div style={{ padding: '24px', textAlign: 'center' }}>
+                      <h3 className="serif" style={{ fontSize: '1.5rem', color: 'var(--ink)', marginBottom: '8px' }}>{proj.name}</h3>
+                      <p style={{ color: 'var(--ink-soft)', marginBottom: '16px', fontSize: '0.95rem' }}>
+                        {shortLocation} | {proj.config}
+                      </p>
+                      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <div className="custom-read-more">
+                          <span className="custom-read-more__label">Know More</span>
+                          <span className="custom-read-more__icon">
+                            <span className="custom-read-more__icon-small">
+                              <svg viewBox="0 0 100 100">
+                                <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50"></polygon>
+                              </svg>
+                            </span>
+                            <span className="custom-read-more__icon-circle">
+                              <svg viewBox="0 0 100 100">
+                                <path className="bottomcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                                <path pathLength="100" className="topcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                              </svg>
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>

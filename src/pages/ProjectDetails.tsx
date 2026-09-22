@@ -91,10 +91,11 @@ const projectHeroMap: Record<string, string> = {
 
 import skyheightOverviewImage from '../assets/skyheight elevation/elev2.webp';
 
-const layoutImages = {
+const layoutImages: Record<string, string> = {
   '1 BHK': layout1Bhk,
   '2 BHK': layout2Bhk,
   '3 BHK': layout3Bhk,
+  '4 BHK': layout3Bhk, // Fallback until a specific 4BHK image is available
 };
 
 const projectLayoutImages: Record<string, Record<string, string>> = {
@@ -106,7 +107,7 @@ const projectLayoutImages: Record<string, Record<string, string>> = {
 };
 
 const getLayoutImage = (slug: string, type: string) => {
-  return (projectLayoutImages[slug] && projectLayoutImages[slug][type]) || layoutImages[type as '1 BHK' | '2 BHK' | '3 BHK'];
+  return (projectLayoutImages[slug] && projectLayoutImages[slug][type]) || layoutImages[type] || layout3Bhk;
 };
 
 const galleryMap: Record<string, string> = {
@@ -493,14 +494,7 @@ export default function ProjectDetails() {
           {/* <ReraDetailsWidget project={project} /> */}
 
           {/* Hero Title & Breadcrumb */}
-          <div className="wrap-widescreen relative z-10 w-full text-ivory pb-12">
-            {/* <div className="text-xs uppercase tracking-widest text-ivory/80 mb-3">
-            <Link to="/" className="hover:text-brass-bright transition-colors">Home</Link> &nbsp;/&nbsp;
-            <span className="text-brass-bright">{project.name}</span>
-          </div>
-          <span className="bg-brass-bright text-pine text-[10px] tracking-wider uppercase font-bold py-1 px-3.5 rounded-full inline-block mb-3.5">
-            {project.status}
-          </span> */}
+          <div className="wrap-widescreen relative z-10 w-full text-ivory pb-12 hidden lg:block">
             <h1 className="font-serif text-5xl sm:text-6xl font-light tracking-tight mb-3">
               {project.name}
             </h1>
@@ -515,6 +509,17 @@ export default function ProjectDetails() {
         <section className="stats relative z-20">
           <div className="wrap-widescreen">
             <div className="grid grid-cols-1 lg:grid-cols-3">
+
+              {/* Mobile Project Title & Location */}
+              <div className="py-8 px-4 flex flex-col justify-center items-center text-center border-b border-line-light bg-[var(--color-ivory)] lg:hidden">
+                <h1 className="font-serif text-4xl sm:text-5xl font-light tracking-tight mb-3 text-brass-deep">
+                  {project.name}
+                </h1>
+                <div className="text-[11px] sm:text-sm text-ink-soft font-medium max-w-[280px] sm:max-w-sm mx-auto text-center leading-relaxed">
+                  <MapPin className="w-3.5 h-3.5 text-brass-deep inline-block align-text-top mr-1" style={{ marginTop: '2px' }} />
+                  {project.location}
+                </div>
+              </div>
 
               <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center border-b lg:border-r border-line-light bg-[var(--color-ivory)]">
                 <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Configuration</div>
@@ -1204,10 +1209,19 @@ export default function ProjectDetails() {
                         ))}
                       </div>
                       <div className="pcta mt-auto">
-                        <Link className="btn-enquire" to="/contact">
+                        <button
+                          className="pcta-btn btn-enquire"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setShowFloater(true);
+                            setHasClosedFloater(false);
+                            setIsManualFloater(true);
+                          }}
+                        >
                           <span>Enquire Now</span>
                           <span className="arr">→</span>
-                        </Link>
+                        </button>
                         <Link className="btn-explore" to={`/projects/${proj.slug}`}>
                           <span>Explore</span>
                           <span className="arr">→</span>

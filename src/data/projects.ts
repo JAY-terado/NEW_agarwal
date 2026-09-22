@@ -48,7 +48,7 @@ export const projects: Project[] = [
     rera: 'PR1240002502497',
     config: '2, 3 & 4 BHK',
     startingPrice: 'Price on Request',
-    carpetAreaRange: '975 – 1,215 sq.ft',
+    carpetAreaRange: '749 – 1,214 sq.ft',
     heroImage: 'agarwal-infinity-hero.webp',
     overviewTitle: 'Agarwal Infinity – Where Spacious Living Meets Everyday Convenience.',
     overviewText1: 'Agarwal Infinity brings spacious 2, 3 & 4 BHK homes to Virar West, thoughtfully designed for families seeking more space, comfort and everyday convenience. With carpet areas ranging from 975 to 1,215 sq. ft., the project combines well-planned residences with a range of lifestyle amenities in a well-connected location. Every home is planned with spacious layouts, abundant natural light and smart space utilisation to make everyday living more comfortable.',
@@ -76,9 +76,9 @@ export const projects: Project[] = [
       'Rooftop Sky Lounge'
     ],
     pricing: [
-      { type: '1 BHK', carpetArea: '395 sq.ft', price: '₹35.99 L*', status: 'Available' },
-      { type: '2 BHK', carpetArea: '560 sq.ft', price: '₹52.90 L*', status: 'Available' },
-      { type: '3 BHK', carpetArea: '720 sq.ft', price: '₹68.50 L*', status: 'Few Left' }
+      { type: '2 BHK', carpetArea: '749 sq.ft', price: '₹58.49 L*', status: 'Available' },
+      { type: '3 BHK', carpetArea: '974 sq.ft', price: '₹74.49 L*', status: 'Available' },
+      { type: '4 BHK', carpetArea: '1214 sq.ft', price: '₹93.49 L*', status: 'Available' }
     ],
     specifications: [
       { key: 'Structure', value: 'Earthquake-resistant RCC framed' },

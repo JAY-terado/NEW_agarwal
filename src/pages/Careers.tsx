@@ -793,7 +793,7 @@ const JOBS = [
   },
   {
     "id": 44,
-    "title": "Jr. Interiar Designer",
+    "title": "Jr. Interior Designer",
     "department": "Architecture & Design",
     "location": "Mumbai / Virar",
     "employmentType": "Full Time",
@@ -833,7 +833,7 @@ const JOBS = [
 
 export default function Careers() {
   const [selectedJob, setSelectedJob] = useState<number | null>(null);
-  
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
@@ -873,7 +873,7 @@ export default function Careers() {
       {/* Main Content */}
       <section className="py-16 max-w-5xl mx-auto px-6">
         <div className="flex flex-col gap-8">
-          
+
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brass-deep pb-3 border-b border-line/40">
             <Briefcase className="w-4 h-4" /> Current Openings
           </div>
@@ -886,7 +886,7 @@ export default function Careers() {
                     <h3 className="font-serif text-2xl text-ink mb-1">{job.title}</h3>
                     <div className="text-brass-deep text-xs uppercase tracking-wider font-semibold">{job.department}</div>
                   </div>
-                  <button 
+                  <button
                     onClick={() => setSelectedJob(job.id)}
                     className="bg-pine text-ivory px-6 py-2.5 rounded-full text-xs uppercase tracking-widest font-semibold hover:bg-pine-deep transition-colors self-start sm:self-auto"
                   >
@@ -954,11 +954,11 @@ export default function Careers() {
 
       {/* Application Modal */}
       {selectedJob !== null && (
-        <div 
+        <div
           className="fixed inset-0 z-[999] flex items-center justify-center p-4 bg-ink/50 backdrop-blur-sm cursor-pointer"
           onClick={() => setSelectedJob(null)}
         >
-          <div 
+          <div
             className="bg-white rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden flex flex-col cursor-auto"
             onClick={(e) => e.stopPropagation()}
           >
@@ -968,18 +968,18 @@ export default function Careers() {
                 <X className="w-5 h-5" />
               </button>
             </div>
-            
+
             <form className="p-6 flex flex-col gap-5" onSubmit={e => e.preventDefault()}>
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-semibold text-ink uppercase tracking-wider">Full Name <span className="text-red-500">*</span></label>
                 <input type="text" required placeholder="John Doe" className="w-full border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep focus:ring-1 focus:ring-brass-deep transition-all" />
               </div>
-              
+
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-semibold text-ink uppercase tracking-wider">Phone Number <span className="text-red-500">*</span></label>
                 <input type="tel" required placeholder="+91 98765 43210" className="w-full border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep focus:ring-1 focus:ring-brass-deep transition-all" />
               </div>
-              
+
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-semibold text-ink uppercase tracking-wider">Email Address</label>
                 <input type="email" placeholder="john@example.com" className="w-full border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep focus:ring-1 focus:ring-brass-deep transition-all" />
@@ -996,7 +996,7 @@ export default function Careers() {
                   <input type="file" className="hidden" accept=".pdf,.doc,.docx" required />
                 </label>
               </div>
-              
+
               <div className="mt-4 flex items-center gap-3">
                 <button type="button" onClick={() => setSelectedJob(null)} className="flex-1 py-3 rounded-full text-sm font-semibold text-ink border border-line hover:bg-ivory transition-colors">
                   Cancel
