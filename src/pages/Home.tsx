@@ -146,7 +146,31 @@ export default function Home() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [showAllFaqs, setShowAllFaqs] = useState(false);
   const [activeVideoModal, setActiveVideoModal] = useState<Testimonial | null>(null);
-  const isTopHoveredRef = useRef(false);
+  
+  const [isEnquireModalOpen, setIsEnquireModalOpen] = useState(false);
+  const [isHeroTextVisible, setIsHeroTextVisible] = useState(false);
+  const heroTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleHeroInteraction = () => {
+    setIsHeroTextVisible(true);
+    if (heroTimerRef.current) clearTimeout(heroTimerRef.current);
+    heroTimerRef.current = setTimeout(() => {
+      setIsHeroTextVisible(false);
+    }, 3000);
+  };
+
+  const handleHeroLeave = () => {
+    if (heroTimerRef.current) clearTimeout(heroTimerRef.current);
+    heroTimerRef.current = setTimeout(() => {
+      setIsHeroTextVisible(false);
+    }, 3000);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (heroTimerRef.current) clearTimeout(heroTimerRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     if (activeVideoModal || isEnquireModalOpen) {

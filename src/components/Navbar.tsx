@@ -44,8 +44,33 @@ export default function Navbar() {
   const megaTimer = useRef<number | null>(null);
   const ddTimer = useRef<number | null>(null);
 
-  const [isIdle, setIsIdle] = useState(false);
-  const isHoveredRef = useRef(false);
+
+
+  const [isEnquireModalOpen, setIsEnquireModalOpen] = useState(false);
+  const [contactSubmitted, setContactSubmitted] = useState(false);
+
+  const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      mobile_number: formData.get('mobile_number'),
+      email: formData.get('email'),
+      project: 'Global Navbar Enquiry'
+    };
+
+    try {
+      await contactEmailAxios(data as any);
+      setContactSubmitted(true);
+      setTimeout(() => {
+        setIsEnquireModalOpen(false);
+        setContactSubmitted(false);
+      }, 3000);
+    } catch (error) {
+      console.error('Error submitting form', error);
+      alert('Failed to submit form. Please try again.');
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {

@@ -11,7 +11,7 @@ import ourPresenceAus from '../assets/ourPresenceAus.webp';
 import aboutUsHero from '../assets/aboutUsHero.webp';
 import { projects } from '../data/projects';
 import infinityHero from '../assets/agarwal-infinity-hero.webp';
-import skyriseHero from '../assets/skyrise elevations/elev6.webp';
+import skyriseHero from "../assets/skriseElevationsNew/skye6.webp";
 import skyHeightsHero from '../assets/agarwalSkyheight.webp';
 import heroImage from '../assets/agarwal-horizon-hero.webp';
 
