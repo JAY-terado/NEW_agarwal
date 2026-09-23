@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  X, Briefcase, Package, Check, ChevronLeft, ChevronRight, UploadCloud, FileText, Plus, Trash2, Edit2
+  X, Briefcase, Package, Check, ChevronRight, UploadCloud, FileText, Plus, Trash2, Edit2
 } from 'lucide-react';
 
 interface ProjectExperience {
