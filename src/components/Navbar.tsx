@@ -8,9 +8,9 @@ import LogoHero from '../assets/logo1.webp';
 import LogoOther from '../assets/logo2.webp';
 
 import infinityHero from '../assets/agarwal-infinity-hero.webp';
-import skyriseHero from '../assets/skriseElevationsNew/skye6.webp';
+import skyriseHero from '../assets/skyRise1.webp';
 import skyHeightsHero from '../assets/agarwalSkyheight.webp';
-import horizonHero from '../assets/agarwal-horizon-hero.webp';
+import horizonHero from '../assets/horizon.webp';
 
 const projectImages: Record<string, string> = {
   infinity: infinityHero,
@@ -21,17 +21,18 @@ const projectImages: Record<string, string> = {
 
 // Completed projects list from original site
 const completedProjects = [
+  { name: 'Agarwal Palazzo', sub: 'Borivali West', href: '/completed-projects' },
+  { name: 'Krishna Heritage', sub: 'Kandivali West', href: '/completed-projects' },
+  { name: 'Vinay Heights', sub: 'Mira Road East', href: '/completed-projects' },
+  { name: 'Vinay Kumkum', sub: 'Goregaon West', href: '/completed-projects' },
   { name: 'Agarwal Paramount', sub: 'Virar West', href: '/completed-projects' },
   { name: 'Agarwal Exotica', sub: 'Vasai East', href: '/completed-projects' },
   { name: 'Agarwal Lifestyle', sub: 'Virar West', href: '/completed-projects' },
-  { name: 'Agarwal Yashwant Hts.', sub: 'Virar', href: '/completed-projects' },
-  { name: 'Agarwal Meadows', sub: 'Virar West', href: '/completed-projects' },
-  { name: 'Agarwal Nagri', sub: 'Vasai East', href: '/completed-projects' },
-  { name: 'Viva Vrindavan', sub: 'Virar Township', href: '/completed-projects' },
-  { name: 'Gokul Solitaire', sub: 'Virar', href: '/completed-projects' },
-  { name: 'Gokul Sapphire', sub: 'Virar', href: '/completed-projects' },
-  { name: 'Vrindavan Gardens', sub: 'Vasai', href: '/completed-projects' },
-  { name: 'Agarwal Residency', sub: 'Vasai', href: '/completed-projects' },
+  { name: 'Balaji Banquets', sub: 'Virar West', href: '/completed-projects' },
+  { name: 'Viva Gokul Arcade', sub: 'Virar West', href: '/completed-projects' },
+  { name: 'Viva Vrindavan', sub: 'Virar West', href: '/completed-projects' },
+  { name: 'Vrindavan Gardens', sub: 'Vasai East', href: '/completed-projects' },
+  { name: 'Vrindavan Township', sub: 'Virar West', href: '/completed-projects' },
 ];
 
 export default function Navbar() {
@@ -142,7 +143,7 @@ export default function Navbar() {
     left: 0,
     right: 0,
     zIndex: 100,
-    background: scrolled ? 'rgba(255,255,255,.9)' : (location.pathname.endsWith('/faqs') ? 'transparent' : 'rgba(0, 0, 0, 0.15)'),
+    background: forceScrolledStyle ? 'rgba(255,255,255,.9)' : (location.pathname.endsWith('/faqs') ? 'transparent' : 'rgba(0, 0, 0, 0.15)'),
     backdropFilter: 'blur(14px)',
     WebkitBackdropFilter: 'blur(14px)',
     transition: 'transform 0.5s ease, background .5s, box-shadow .5s, padding .5s, top .45s cubic-bezier(.22,.61,.36,1)',
@@ -383,37 +384,54 @@ export default function Navbar() {
               </Link>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '22px' }}>
-              {projects.map(proj => (
-                <Link key={proj.slug} to={`/projects/${proj.slug}`} style={{ display: 'block', textDecoration: 'none' }}
-                  onMouseEnter={e => {
-                    const h4 = e.currentTarget.querySelector('h4') as HTMLElement;
-                    if (h4) h4.style.color = 'var(--brass-deep)';
-                    const img = e.currentTarget.querySelector('img') as HTMLElement;
-                    if (img) img.style.transform = 'scale(1.07)';
-                  }}
-                  onMouseLeave={e => {
-                    const h4 = e.currentTarget.querySelector('h4') as HTMLElement;
-                    if (h4) h4.style.color = 'var(--ink)';
-                    const img = e.currentTarget.querySelector('img') as HTMLElement;
-                    if (img) img.style.transform = 'scale(1)';
-                  }}>
-                  {/* mc-img */}
-                  <div style={{ aspectRatio: '16/10', overflow: 'hidden', borderRadius: '6px', marginBottom: '12px', position: 'relative', background: '#e7e1d4' }}>
-                    <img
-                      src={projectImages[proj.slug]}
-                      alt={proj.name}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform .9s', display: 'block' }}
-                      onError={e => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
-                    />
-                  </div>
-                  <h4 style={{ fontFamily: '"Fraunces", serif', fontWeight: 500, fontSize: '1.04rem', color: 'var(--ink)', lineHeight: 1.16, transition: 'color .3s' }}>{proj.name}</h4>
-                  <div style={{ fontSize: '.74rem', color: 'var(--taupe)', marginTop: '2px' }}>{proj.location}</div>
-                  <div style={{ fontSize: '.78rem', color: 'var(--ink-soft)', marginTop: '7px', display: 'flex', gap: '12px', alignItems: 'baseline' }}>
-                    <span style={{ color: 'var(--brass-deep)', fontWeight: 600, fontFamily: '"Fraunces", serif', fontSize: '.92rem' }}>{proj.config}</span>
-                    <span>{proj.startingPrice}</span>
-                  </div>
-                </Link>
-              ))}
+              {projects.map(proj => {
+                const isHorizon = proj.slug === 'horizon';
+                const Wrapper = isHorizon ? 'div' : Link;
+                const wrapperProps = isHorizon ? {} : { to: `/projects/${proj.slug}` };
+
+                return (
+                  <Wrapper key={proj.slug} {...(wrapperProps as any)} style={{ display: 'block', textDecoration: 'none', cursor: isHorizon ? 'default' : 'pointer' }}
+                    onMouseEnter={e => {
+                      if (isHorizon) return;
+                      const h4 = e.currentTarget.querySelector('h4') as HTMLElement;
+                      if (h4) h4.style.color = 'var(--brass-deep)';
+                      const img = e.currentTarget.querySelector('img') as HTMLElement;
+                      if (img) img.style.transform = 'scale(1.07)';
+                    }}
+                    onMouseLeave={e => {
+                      if (isHorizon) return;
+                      const h4 = e.currentTarget.querySelector('h4') as HTMLElement;
+                      if (h4) h4.style.color = 'var(--ink)';
+                      const img = e.currentTarget.querySelector('img') as HTMLElement;
+                      if (img) img.style.transform = 'scale(1)';
+                    }}>
+                    {/* mc-img */}
+                    <div style={{ aspectRatio: '16/10', overflow: 'hidden', borderRadius: '6px', marginBottom: '12px', position: 'relative', background: '#e7e1d4' }}>
+                      <img
+                        src={projectImages[proj.slug]}
+                        alt={proj.name}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform .9s', display: 'block' }}
+                        onError={e => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                      />
+                      {isHorizon && (
+                        <div style={{ position: 'absolute', top: '10px', right: '10px', background: 'var(--ivory)', border: '1px solid var(--brass-deep)', color: 'var(--brass-deep)', padding: '4px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+                          Coming Soon
+                        </div>
+                      )}
+                    </div>
+                    <h4 style={{ fontFamily: '"Fraunces", serif', fontWeight: 500, fontSize: '1.04rem', color: 'var(--ink)', lineHeight: 1.16, transition: 'color .3s' }}>{proj.name}</h4>
+                    <div style={{ fontSize: '.74rem', color: 'var(--taupe)', marginTop: '2px' }}>{proj.location}</div>
+                    <div style={{ fontSize: '.78rem', color: 'var(--ink-soft)', marginTop: '7px', display: 'flex', gap: '12px', alignItems: 'baseline' }}>
+                      {!isHorizon && (
+                        <>
+                          <span style={{ color: 'var(--brass-deep)', fontWeight: 600, fontFamily: '"Fraunces", serif', fontSize: '.92rem' }}>{proj.config}</span>
+                          <span>{proj.startingPrice}</span>
+                        </>
+                      )}
+                    </div>
+                  </Wrapper>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -539,24 +557,46 @@ export default function Navbar() {
                         style={{ overflow: 'hidden' }}
                       >
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', borderLeft: '1px solid rgba(220, 188, 124, 0.2)', paddingLeft: '14px', marginLeft: '4px', marginTop: '16px', marginBottom: '8px' }}>
-                          {item.items?.map(p => (
-                            <Link
-                              key={p.slug}
-                              to={`/projects/${p.slug}`}
-                              onClick={() => setMobileMenuOpen(false)}
-                              style={{
-                                fontSize: '0.92rem',
-                                color: 'rgba(244, 240, 231, 0.7)',
-                                textDecoration: 'none',
-                                transition: 'color 0.3s, transform 0.3s',
-                                display: 'block'
-                              }}
-                              onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass-bright)'; e.currentTarget.style.transform = 'translateX(4px)'; }}
-                              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(244, 240, 231, 0.7)'; e.currentTarget.style.transform = 'none'; }}
-                            >
-                              {p.name}
-                            </Link>
-                          ))}
+                          {item.items?.map(p => {
+                            const isHorizon = p.slug === 'horizon';
+                            const Wrapper = isHorizon ? 'div' : Link;
+                            const wrapperProps = isHorizon ? {} : { to: `/projects/${p.slug}`, onClick: () => setMobileMenuOpen(false) };
+                            
+                            return (
+                              <Wrapper
+                                key={p.slug}
+                                {...(wrapperProps as any)}
+                                style={{
+                                  fontSize: '0.92rem',
+                                  color: 'rgba(244, 240, 231, 0.7)',
+                                  textDecoration: 'none',
+                                  transition: 'color 0.3s, transform 0.3s',
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  alignItems: 'center',
+                                  gap: '12px',
+                                  cursor: isHorizon ? 'default' : 'pointer'
+                                }}
+                                onMouseEnter={e => {
+                                  if (isHorizon) return;
+                                  e.currentTarget.style.color = 'var(--brass-bright)';
+                                  e.currentTarget.style.transform = 'translateX(4px)';
+                                }}
+                                onMouseLeave={e => {
+                                  if (isHorizon) return;
+                                  e.currentTarget.style.color = 'rgba(244, 240, 231, 0.7)';
+                                  e.currentTarget.style.transform = 'none';
+                                }}
+                              >
+                                <span style={{ whiteSpace: 'nowrap' }}>{p.name}</span>
+                                {isHorizon && (
+                                  <span style={{ fontSize: '0.65rem', padding: '2px 8px', background: 'transparent', border: '1px solid currentColor', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>
+                                    Coming Soon
+                                  </span>
+                                )}
+                              </Wrapper>
+                            );
+                          })}
                         </div>
                       </motion.div>
                     )}

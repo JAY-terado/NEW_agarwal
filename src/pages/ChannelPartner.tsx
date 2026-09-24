@@ -7,11 +7,11 @@ import {
 import cpHero from '../assets/cpHero.webp';
 import cp2Image from '../assets/cp2.webp';
 import cp3Image from '../assets/cp3.webp';
-import heroImage from '../assets/agarwal-horizon-hero.webp';
+import heroImage from '../assets/horizon.webp';
 import { channelPartnerFaqs } from '../data/faqs';
 import { projects } from '../data/projects';
 import infinityHero from '../assets/agarwal-infinity-hero.webp';
-import skyriseHero from '../assets/skriseElevationsNew/skye6.webp';
+import skyriseHero from '../assets/skyRise1.webp';
 import skyHeightsHero from '../assets/agarwalSkyheight.webp';
 
 const projectHeroMap: Record<string, string> = {
@@ -141,36 +141,53 @@ export default function ChannelPartner() {
                 ? locationParts[locationParts.length - 2].trim()
                 : locationParts[0].trim();
 
+              const isHorizon = proj.slug === 'horizon';
+              const CardWrapper = isHorizon ? 'div' : Link;
+              const wrapperProps = isHorizon ? {} : { to: `/projects/${proj.slug}` };
+
               return (
-                <Link key={proj.slug} to={`/projects/${proj.slug}`} style={{ display: 'block', textDecoration: 'none', borderRadius: '12px', overflow: 'hidden', background: '#fff', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', transition: 'transform 0.3s ease' }} onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-5px)'} onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}>
+                <CardWrapper key={proj.slug} {...(wrapperProps as any)} style={{ display: 'block', textDecoration: 'none', borderRadius: '12px', overflow: 'hidden', background: '#fff', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', transition: 'transform 0.3s ease', cursor: isHorizon ? 'default' : 'pointer' }} onMouseEnter={e => e.currentTarget.style.transform = isHorizon ? 'none' : 'translateY(-5px)'} onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}>
                   <div style={{ height: '240px', overflow: 'hidden' }}>
                     <img src={imageSrc} alt={proj.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
                   <div style={{ padding: '24px', textAlign: 'center' }}>
                     <h3 className="serif" style={{ fontSize: '1.5rem', color: 'var(--ink)', marginBottom: '8px' }}>{proj.name}</h3>
                     <p style={{ color: 'var(--ink-soft)', marginBottom: '16px', fontSize: '0.95rem' }}>
-                      {shortLocation} | {proj.config}
+                      {shortLocation}{!isHorizon && ` | ${proj.config}`}
                     </p>
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                      <div className="custom-read-more">
-                        <span className="custom-read-more__label">Know More</span>
-                        <span className="custom-read-more__icon">
-                          <span className="custom-read-more__icon-small">
-                            <svg viewBox="0 0 100 100">
-                              <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50"></polygon>
-                            </svg>
+                      {isHorizon ? (
+                        <div className="inline-flex items-center justify-center px-8 rounded-full" style={{ height: '54px', border: '1px solid #8B5A2B', backgroundColor: 'transparent', marginTop: '14px', marginBottom: '24px' }}>
+                            <span style={{ color: '#8B5A2B', fontSize: '13px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+                                Coming Soon
+                            </span>
+                            <span className="flex space-x-1 ml-3">
+                                <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s' }}></span>
+                                <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s', animationDelay: '0.5s' }}></span>
+                                <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s', animationDelay: '1s' }}></span>
+                            </span>
+                        </div>
+                      ) : (
+                        <div className="custom-read-more">
+                          <span className="custom-read-more__label">Know More</span>
+                          <span className="custom-read-more__icon">
+                            <span className="custom-read-more__icon-small">
+                              <svg viewBox="0 0 100 100">
+                                <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50"></polygon>
+                              </svg>
+                            </span>
+                            <span className="custom-read-more__icon-circle">
+                              <svg viewBox="0 0 100 100">
+                                <path className="bottomcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                                <path pathLength="100" className="topcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                              </svg>
+                            </span>
                           </span>
-                          <span className="custom-read-more__icon-circle">
-                            <svg viewBox="0 0 100 100">
-                              <path className="bottomcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
-                              <path pathLength="100" className="topcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
-                            </svg>
-                          </span>
-                        </span>
-                      </div>
+                        </div>
+                      )}
                     </div>
                   </div>
-                </Link>
+                </CardWrapper>
               );
             })}
           </div>

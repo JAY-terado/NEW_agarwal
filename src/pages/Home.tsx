@@ -12,9 +12,9 @@ import heroVideo from '../assets/hero.mp4';
 import heroPoster from '../assets/hero-poster.webp';
 import homeAus from '../assets/homeAus.webp';
 import infinityHero from '../assets/agarwal-infinity-hero.webp';
-import skyriseHero from '../assets/skriseElevationsNew/skye6.webp';
+import skyriseHero from '../assets/skyRise1.webp';
 import skyHeightsHero from '../assets/agarwalSkyheight.webp';
-import horizonHero from '../assets/agarwal-horizon-hero.webp';
+import horizonHero from '../assets/horizon.webp';
 
 // Testimonial Videos
 import testVid1 from '../assets/testimonials/darshan mehta AG1.mp4';
@@ -662,32 +662,50 @@ export default function Home() {
                   <div className="pbody">
                     <h3>{proj.name}</h3>
                     <span className="loc">{projectMeta.location}</span>
-                    <div className="pmeta">
-                      <span className="price">{proj.startingPrice}</span>
-                      <span className="cfg">{proj.config}</span>
-                    </div>
-                    <div className="ptags">
-                      {projectMeta.tags.map((t, idx) => (
-                        <span key={idx} className="ptag">{t}</span>
-                      ))}
-                    </div>
-                    <div className="pcta">
-                      <Link
-                        className="btn-enquire"
-                        to="/contact"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setIsEnquireModalOpen(true);
-                        }}
-                      >
-                        <span>Enquire Now</span>
-                        <span className="arr">→</span>
-                      </Link>
-                      <Link className="btn-explore" to={`/projects/${proj.slug}`}>
-                        <span>Explore</span>
-                        <span className="arr">→</span>
-                      </Link>
-                    </div>
+                    {proj.slug !== 'horizon' && (
+                      <>
+                        <div className="pmeta">
+                          <span className="price">{proj.startingPrice}</span>
+                          <span className="cfg">{proj.config}</span>
+                        </div>
+                        <div className="ptags">
+                          {projectMeta.tags.map((t, idx) => (
+                            <span key={idx} className="ptag">{t}</span>
+                          ))}
+                        </div>
+                        <div className="pcta">
+                          <Link
+                            className="btn-enquire"
+                            to="/contact"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setIsEnquireModalOpen(true);
+                            }}
+                          >
+                            <span>Enquire Now</span>
+                            <span className="arr">→</span>
+                          </Link>
+                          <Link className="btn-explore" to={`/projects/${proj.slug}`}>
+                            <span>Explore</span>
+                            <span className="arr">→</span>
+                          </Link>
+                        </div>
+                      </>
+                    )}
+                    {proj.slug === 'horizon' && (
+                      <div className="pcta" style={{ marginTop: 'auto' }}>
+                        <div className="inline-flex items-center justify-center w-full rounded-full" style={{ height: '54px', border: '1px solid #8B5A2B', backgroundColor: 'transparent' }}>
+                            <span style={{ color: '#8B5A2B', fontSize: '13px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+                                Coming Soon
+                            </span>
+                            <span className="flex space-x-1 ml-3">
+                                <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s' }}></span>
+                                <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s', animationDelay: '0.5s' }}></span>
+                                <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s', animationDelay: '1s' }}></span>
+                            </span>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </article>
               );

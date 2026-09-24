@@ -69,11 +69,11 @@ import skyrise3Bhk from '../assets/Skyrise 3BHK.jpg.webp';
 // Project Hero Imports
 import infinityHero from '../assets/agarwal-infinity-hero.webp';
 import infinityHeroVideo from '../assets/agarwalInfintyHero.mp4';
-import skyriseHero from '../assets/skriseElevationsNew/skye6.webp';
+import skyriseHero from '../assets/skyRise1.webp';
 import skyriseHeroVideo from '../assets/SkyriseHero1.mp4';
 import skyHeightsHero from '../assets/agarwalSkyheight.webp';
 import skyHeightsHeroVideo from '../assets/skyHeightHero1.mp4';
-import horizonHero from '../assets/agarwal-horizon-hero.webp';
+import horizonHero from '../assets/horizon.webp';
 
 import agarwalInfinityMRQR from '../assets/agarwalInfinityMRQR.webp';
 import agarwalSkyHeightsMRQR from '../assets/AgarwalSkyHeightsMRQR.webp';
@@ -167,13 +167,13 @@ import amenitySwim from '../assets/swimmingA.webp';
 
 // Skyrise Elevation Images
 import skyriseElev1 from '../assets/skriseElevationsNew/skye1.webp';
-import skyriseElev2 from '../assets/skriseElevationsNew/skye2.webp';
+import skyriseElev2 from '../assets/skriseElevationsNew/skye8.webp';
 import skyriseElev3 from '../assets/skriseElevationsNew/skye3.webp';
 import skyriseElev4 from '../assets/skriseElevationsNew/skye4.webp';
 import skyriseElev5 from '../assets/skriseElevationsNew/skye5.webp';
 import skyriseElev6 from '../assets/skriseElevationsNew/skye6.webp';
 import skyriseElev7 from '../assets/skriseElevationsNew/skye7.webp';
-import skyriseElev8 from '../assets/skriseElevationsNew/skye8.webp';
+import skyriseElev8 from '../assets/skriseElevationsNew/skye9.webp';
 
 import srPodium1 from '../assets/skyrise podium/sp1.webp';
 import srPodium2 from '../assets/skyrise podium/sp2.webp';
@@ -223,14 +223,13 @@ import shGallery5 from '../assets/skyheights/sky heights rooms/sh-room-5.webp';
 import shGallery6 from '../assets/skyheights/sky heights rooms/sh-room-6.webp';
 
 // Skyrise Rooftop Amenities
-import rooftopGym from '../assets/skyrise amenities/gym.webp';
-import rooftopGames from '../assets/skyrise amenities/outdoorGames.webp';
-import rooftopPlayArea from '../assets/skyrise amenities/playArea.webp';
-import rooftopSittingDeck from '../assets/skyrise amenities/sittingDeck.webp';
-import rooftopPromenade from '../assets/skyrise amenities/ChatGPT Image Aug 1, 2026, 01_01_21 PM.webp';
-import rooftopYoga from '../assets/skyrise amenities/ChatGPT Image Aug 1, 2026, 01_05_01 PM.webp';
-import rooftopLounge from '../assets/skyrise amenities/ChatGPT Image Aug 1, 2026, 03_28_08 PM.webp';
-import rooftopLawn from '../assets/skyrise amenities/ChatGPT Image Aug 1, 2026, 03_43_30 PM.webp';
+import skyr1 from '../assets/skyriseRooftop/skyr1.webp';
+import skyr2 from '../assets/skyriseRooftop/skyr2.webp';
+import skyr3 from '../assets/skyriseRooftop/skyr3.webp';
+import skyr4 from '../assets/skyriseRooftop/skyr4.webp';
+import skyr5 from '../assets/skyriseRooftop/skyr5.webp';
+import skyr6 from '../assets/skyriseRooftop/skyr6.webp';
+import skyr7 from '../assets/skyriseRooftop/skyr7.webp';
 
 // Sky Heights Rooftop Amenities
 import shRooftop1 from '../assets/skyheights/skyheights rooftop/sh-rooftop-1.webp';
@@ -773,18 +772,20 @@ export default function ProjectDetails() {
 
                 if (activeAmenityTab === 'Rooftop Amenities' && project.slug === 'skyrise') {
                   const rooftopImages = [
-                    { src: rooftopYoga, text: 'Yoga & Meditation Zone' },
-                    { src: rooftopGym, text: 'Open Air Gym' },
-                    { src: rooftopPlayArea, text: 'Kids Play Area' },
-                    { src: rooftopGames, text: 'Giant Board Games' },
-                    { src: rooftopLounge, text: 'Family Seating & Lounge' },
-                    { src: rooftopPromenade, text: 'Walking Promenade' },
-                    { src: rooftopSittingDeck, text: 'Senior Citizen Deck' },
-                    { src: rooftopLawn, text: 'Multi-purpose Lawn' },
+                    { src: skyr1, text: 'Rooftop Amenity 1' },
+                    { src: skyr2, text: 'Rooftop Amenity 2' },
+                    { src: skyr3, text: 'Rooftop Amenity 3' },
+                    { src: skyr4, text: 'Rooftop Amenity 4' },
+                    { src: skyr5, text: 'Rooftop Amenity 5' },
+                    { src: skyr6, text: 'Rooftop Amenity 6' },
+                    { src: skyr7, text: 'Rooftop Amenity 7' },
                   ];
                   if (rooftopImages[idx]) {
                     imageSrc = rooftopImages[idx].src;
                     displayText = rooftopImages[idx].text;
+                  } else {
+                    imageSrc = '';
+                    displayText = '';
                   }
                 }
 
@@ -812,22 +813,29 @@ export default function ProjectDetails() {
                 let spanClass = 'col-span-1';
                 let heightClass = 'h-[250px] lg:h-[320px]';
 
-                const patternIdx = idx % 8;
-                if (patternIdx === 0) spanClass = 'col-span-1 md:col-span-2';
-                else if (patternIdx === 1) spanClass = 'col-span-1 md:col-span-1';
-                else if (patternIdx === 2) spanClass = 'col-span-1 md:col-span-1';
-                else if (patternIdx === 3) spanClass = 'col-span-1 md:col-span-1';
-                else if (patternIdx === 4) spanClass = 'col-span-1 md:col-span-1';
-                else if (patternIdx === 5) {
-                  if (currentTabItems.length >= idx + 3) {
-                    spanClass = 'col-span-1 md:col-span-2 md:row-span-2';
-                    heightClass = 'h-[250px] md:h-[504px] lg:h-[644px]';
-                  } else {
-                    spanClass = 'col-span-1 md:col-span-2';
+                if (currentTabItems.length === 7) {
+                  if (idx === 0) spanClass = 'col-span-1 md:col-span-2';
+                  else if (idx === 1) spanClass = 'col-span-1 md:col-span-1';
+                  else if (idx === 2) spanClass = 'col-span-1 md:col-span-1';
+                  else spanClass = 'col-span-1 md:col-span-2';
+                } else {
+                  const patternIdx = idx % 8;
+                  if (patternIdx === 0) spanClass = 'col-span-1 md:col-span-2';
+                  else if (patternIdx === 1) spanClass = 'col-span-1 md:col-span-1';
+                  else if (patternIdx === 2) spanClass = 'col-span-1 md:col-span-1';
+                  else if (patternIdx === 3) spanClass = 'col-span-1 md:col-span-1';
+                  else if (patternIdx === 4) spanClass = 'col-span-1 md:col-span-1';
+                  else if (patternIdx === 5) {
+                    if (currentTabItems.length >= idx + 3) {
+                      spanClass = 'col-span-1 md:col-span-2 md:row-span-2';
+                      heightClass = 'h-[250px] md:h-[504px] lg:h-[644px]';
+                    } else {
+                      spanClass = 'col-span-1 md:col-span-2';
+                    }
                   }
+                  else if (patternIdx === 6) spanClass = 'col-span-1 md:col-span-1';
+                  else if (patternIdx === 7) spanClass = 'col-span-1 md:col-span-1';
                 }
-                else if (patternIdx === 6) spanClass = 'col-span-1 md:col-span-1';
-                else if (patternIdx === 7) spanClass = 'col-span-1 md:col-span-1';
 
                 return (
                   <motion.div
@@ -1222,34 +1230,52 @@ export default function ProjectDetails() {
                     <div className="pbody">
                       <h3>{proj.name}</h3>
                       <span className="loc">{projectMeta.location}</span>
-                      <div className="pmeta">
-                        <span className="price">{proj.startingPrice}</span>
-                        <span className="cfg">{proj.config}</span>
-                      </div>
-                      <div className="ptags">
-                        {projectMeta.tags.slice(0, 2).map((t, idx) => (
-                          <span key={idx} className="ptag">{t}</span>
-                        ))}
-                      </div>
-                      <div className="pcta mt-auto">
-                        <button
-                          className="pcta-btn btn-enquire"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            setShowFloater(true);
-                            setHasClosedFloater(false);
-                            setIsManualFloater(true);
-                          }}
-                        >
-                          <span>Enquire Now</span>
-                          <span className="arr">→</span>
-                        </button>
-                        <Link className="btn-explore" to={`/projects/${proj.slug}`}>
-                          <span>Explore</span>
-                          <span className="arr">→</span>
-                        </Link>
-                      </div>
+                      {proj.slug !== 'horizon' && (
+                        <>
+                          <div className="pmeta">
+                            <span className="price">{proj.startingPrice}</span>
+                            <span className="cfg">{proj.config}</span>
+                          </div>
+                          <div className="ptags">
+                            {projectMeta.tags.slice(0, 2).map((t, idx) => (
+                              <span key={idx} className="ptag">{t}</span>
+                            ))}
+                          </div>
+                          <div className="pcta mt-auto">
+                            <button
+                              className="pcta-btn btn-enquire"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                setShowFloater(true);
+                                setHasClosedFloater(false);
+                                setIsManualFloater(true);
+                              }}
+                            >
+                              <span>Enquire Now</span>
+                              <span className="arr">→</span>
+                            </button>
+                            <Link className="btn-explore" to={`/projects/${proj.slug}`}>
+                              <span>Explore</span>
+                              <span className="arr">→</span>
+                            </Link>
+                          </div>
+                        </>
+                      )}
+                      {proj.slug === 'horizon' && (
+                        <div className="pcta mt-auto">
+                          <div className="inline-flex items-center justify-center w-full rounded-full" style={{ height: '54px', border: '1px solid #8B5A2B', backgroundColor: 'transparent' }}>
+                            <span style={{ color: '#8B5A2B', fontSize: '13px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+                              Coming Soon
+                            </span>
+                            <span className="flex space-x-1 ml-3">
+                              <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s' }}></span>
+                              <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s', animationDelay: '0.5s' }}></span>
+                              <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s', animationDelay: '1s' }}></span>
+                            </span>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </article>
                 );

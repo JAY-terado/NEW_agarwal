@@ -183,38 +183,57 @@ export default function ProjectNavbar() {
                       display: 'flex',
                       flexDirection: 'column',
                       gap: '4px',
-                      minWidth: '220px',
+                      minWidth: '260px',
                       boxShadow: scrolled ? '0 20px 40px -10px rgba(0,0,0,0.1)' : '0 20px 40px -10px rgba(0,0,0,0.3)',
                       zIndex: 101,
                     }}
                   >
-                    {projects.filter(p => !location.pathname.includes(p.slug)).map(p => (
-                      <Link
-                        key={p.slug}
-                        to={`/projects/${p.slug}`}
-                        style={{
-                          padding: '12px 16px',
-                          color: scrolled ? 'var(--color-brass-deep, #94762f)' : 'var(--color-brass-bright, #d4bc7c)',
-                          textDecoration: 'none',
-                          fontSize: '0.85rem',
-                          fontWeight: 600,
-                          borderRadius: '8px',
-                          transition: 'background 0.2s, color 0.2s',
-                          display: 'block',
-                        }}
-                        onMouseEnter={e => {
-                          e.currentTarget.style.background = scrolled ? 'var(--color-brass, #d4af37)' : 'rgba(220, 188, 124, 0.15)';
-                          e.currentTarget.style.color = scrolled ? 'var(--color-pine, #26302b)' : '#fff';
-                        }}
-                        onMouseLeave={e => {
-                          e.currentTarget.style.background = 'transparent';
-                          e.currentTarget.style.color = scrolled ? 'var(--color-brass-deep, #94762f)' : 'var(--color-brass-bright, #d4bc7c)';
-                        }}
-                        onClick={() => setDropdownOpen(false)}
-                      >
-                        {p.name}
-                      </Link>
-                    ))}
+                    {projects.filter(p => !location.pathname.includes(p.slug)).map(p => {
+                      const isHorizon = p.slug === 'horizon';
+                      const CardWrapper = isHorizon ? 'div' : Link;
+                      const wrapperProps = isHorizon ? {} : { to: `/projects/${p.slug}` };
+
+                      return (
+                        <CardWrapper
+                          key={p.slug}
+                          {...(wrapperProps as any)}
+                          style={{
+                            padding: '12px 16px',
+                            color: scrolled ? 'var(--color-brass-deep, #94762f)' : 'var(--color-brass-bright, #d4bc7c)',
+                            textDecoration: 'none',
+                            fontSize: '0.85rem',
+                            fontWeight: 600,
+                            borderRadius: '8px',
+                            transition: 'background 0.2s, color 0.2s',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            gap: '12px',
+                            cursor: isHorizon ? 'default' : 'pointer'
+                          }}
+                          onMouseEnter={e => {
+                            if (isHorizon) return;
+                            e.currentTarget.style.background = scrolled ? 'var(--color-brass, #d4af37)' : 'rgba(220, 188, 124, 0.15)';
+                            e.currentTarget.style.color = scrolled ? 'var(--color-pine, #26302b)' : '#fff';
+                          }}
+                          onMouseLeave={e => {
+                            if (isHorizon) return;
+                            e.currentTarget.style.background = 'transparent';
+                            e.currentTarget.style.color = scrolled ? 'var(--color-brass-deep, #94762f)' : 'var(--color-brass-bright, #d4bc7c)';
+                          }}
+                          onClick={() => {
+                            if (!isHorizon) setDropdownOpen(false);
+                          }}
+                        >
+                          <span style={{ whiteSpace: 'nowrap' }}>{p.name}</span>
+                          {isHorizon && (
+                            <span style={{ fontSize: '0.65rem', padding: '2px 8px', background: 'transparent', border: '1px solid currentColor', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>
+                              Coming Soon
+                            </span>
+                          )}
+                        </CardWrapper>
+                      );
+                    })}
                   </motion.div>
                 )}
               </AnimatePresence>
