@@ -253,7 +253,7 @@ import shAmenity6 from '../assets/skyheights/sky heights amenities/sh-amenity-6.
 
 const projectOverviewMap: Record<string, string> = {
   'sky-heights': skyheightOverviewImage,
-  infinity: infElev2,
+  infinity: infElev4,
   skyrise: skyriseElev6,
 };
 

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import img0 from '../assets/Completed Projects/new2/Agarwal Doshi.webp';
 import img1 from '../assets/Completed Projects/new/agarwal-exotica-yashwant-smart-city-vasai-east.webp';
-import img2 from '../assets/Completed Projects/Agarwal Gardens (Phase-I), Gokul Township, Virar West.webp';
+import img2 from '../assets/Completed Projects/new2/AgarwalGarden(Phase1).jpeg';
 import img3 from '../assets/Completed Projects/Agarwal Gardens (Phase-II), Gokul Township, Virar West.webp';
 import img4 from '../assets/Completed Projects/Agarwal Heritage, Yashwant Nagar, Virar West.webp';
 import img6 from '../assets/Completed Projects/new/agarwal-lifestyle-global-city-virar-west.webp';
@@ -13,7 +13,7 @@ import img10 from '../assets/Completed Projects/new/agarwal-residency-yashwant-v
 import img13 from '../assets/Completed Projects/new/agarwal-solitaire-hdil-township-virar-west.webp';
 import img14 from '../assets/Completed Projects/Agarwal Township, Kaul Heritage City, Vasai West.webp';
 
-import img16 from '../assets/Completed Projects/Balaji Banquets, Gokul Township, Virar West.webp';
+import img16 from '../assets/Completed Projects/new2/BalajiBanquets.jpeg';
 import img17 from '../assets/Completed Projects/new/glory-viva-gokul-complex-virar-west.webp';
 import img18 from '../assets/Completed Projects/Gokul Aangan, Gokul Township, Virar West.webp';
 import img19 from '../assets/Completed Projects/Gokul Annexe, Gokul Township, Virar West.webp';
@@ -52,7 +52,7 @@ const completedProjects = [
   { name: 'Agarwal Paramount', sub: 'Global City, Virar West', image: img9 },
   { name: 'Agarwal Exotica', sub: 'Yashwant Smart City, Vasai East', image: img1 },
   { name: 'Agarwal Lifestyle', sub: 'Global City, Virar West', image: img6 },
-  { name: 'Balaji Banquets', sub: 'Gokul Township, Virar West', image: img16 },
+  { name: 'Balaji Banquets', sub: 'Virar West', image: img16 },
   { name: 'Viva Gokul Arcade', sub: 'Viva Gokul Complex, Virar West', image: img37 },
   { name: 'Viva Vrindavan Township', sub: 'Opp. Viva College, Virar West', image: img39 },
   { name: 'Vrindavan Gardens', sub: 'Yashwant Viva Township, Vasai East', image: img40 },

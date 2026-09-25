@@ -888,9 +888,10 @@ export default function Careers() {
                   </div>
                   <button
                     onClick={() => setSelectedJob(job.id)}
-                    className="bg-pine text-ivory px-6 py-2.5 rounded-full text-xs uppercase tracking-widest font-semibold hover:bg-pine-deep transition-colors self-start sm:self-auto"
+                    className="btn-enquire self-start sm:self-auto"
                   >
-                    Apply Now
+                    <span>Apply Now</span>
+                    <span className="arr">→</span>
                   </button>
                 </div>
 
