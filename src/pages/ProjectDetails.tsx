@@ -360,7 +360,7 @@ export default function ProjectDetails() {
   const [isBrochureDrawerOpen, setIsBrochureDrawerOpen] = useState(false);
   const [brochureFormSubmitted, setBrochureFormSubmitted] = useState(false);
   const contactRef = useRef<HTMLElement>(null);
-  const [activeAmenityTab, setActiveAmenityTab] = useState<'Project Elevation' | 'Podium Amenities' | 'Rooftop Amenities'>('Podium Amenities');
+  const [activeAmenityTab, setActiveAmenityTab] = useState<'Project Elevation' | 'Podium Amenities' | 'Rooftop Amenities' | 'Clubhouse Amenities'>(slug === 'skyrise' ? 'Clubhouse Amenities' : 'Podium Amenities');
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [showAllFaqs, setShowAllFaqs] = useState(false);
 
@@ -373,6 +373,7 @@ export default function ProjectDetails() {
     setIsManualFloater(false);
     setIsBrochureDrawerOpen(false);
     setBrochureFormSubmitted(false);
+    setActiveAmenityTab(slug === 'skyrise' ? 'Clubhouse Amenities' : 'Podium Amenities');
     window.scrollTo(0, 0);
   }, [slug]);
 
@@ -649,7 +650,7 @@ export default function ProjectDetails() {
 
           {/* Tabs */}
           <div className="flex flex-wrap gap-3 md:gap-4 mb-10 justify-center md:justify-start">
-            {['Project Elevation', 'Podium Amenities', ...(project.slug === 'infinity' ? [] : ['Rooftop Amenities'])].map((tab) => (
+            {['Project Elevation', project.slug === 'skyrise' ? 'Clubhouse Amenities' : 'Podium Amenities', ...(project.slug === 'infinity' ? [] : ['Rooftop Amenities'])].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveAmenityTab(tab as any)}
@@ -750,7 +751,7 @@ export default function ProjectDetails() {
                     imageSrc = podiumImages[idx].src;
                     displayText = podiumImages[idx].text;
                   }
-                } else if (activeAmenityTab === 'Podium Amenities' && project.slug === 'skyrise') {
+                } else if (activeAmenityTab === 'Clubhouse Amenities' && project.slug === 'skyrise') {
                   const podiumImages = [
                     { src: srPodium1, text: 'Box Cricket' },
                     { src: srPodium2, text: 'Multipurpose Court' },

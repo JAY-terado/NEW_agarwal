@@ -89,12 +89,12 @@ export default function ChannelPartner() {
           <p className="text-white" style={{ maxWidth: '600px', fontSize: '1.1rem', opacity: 0.9, marginBottom: '40px' }}>
             Join our growing network of Channel Partners and unlock rewarding opportunities with premium residential projects, transparent dealings, and dedicated relationship support.
           </p>
-          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-            <button onClick={() => registerRef.current?.scrollIntoView({ behavior: 'smooth' })} className="pcta-btn btn-enquire" style={{ background: 'var(--brass)', color: '#fff', border: 'none' }}>
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <button onClick={() => registerRef.current?.scrollIntoView({ behavior: 'smooth' })} className="pcta-btn btn-enquire w-full sm:w-auto justify-center" style={{ background: 'var(--brass)', color: '#fff', border: 'none' }}>
               <span>Register as a Channel Partner</span>
               <span className="arr">→</span>
             </button>
-            <button onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })} className="pcta-btn btn-enquire" style={{ background: 'var(--brass)', color: '#fff', border: 'none' }}>
+            <button onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })} className="pcta-btn btn-enquire w-full sm:w-auto justify-center" style={{ background: 'var(--brass)', color: '#fff', border: 'none' }}>
               <span>Contact CP Team</span>
               <span className="arr">→</span>
             </button>

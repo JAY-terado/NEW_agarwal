@@ -50,6 +50,12 @@ export default function Navbar() {
   const [isEnquireModalOpen, setIsEnquireModalOpen] = useState(false);
   const [contactSubmitted, setContactSubmitted] = useState(false);
 
+  useEffect(() => {
+    const handleOpenModal = () => setIsEnquireModalOpen(true);
+    window.addEventListener('openEnquireModal', handleOpenModal);
+    return () => window.removeEventListener('openEnquireModal', handleOpenModal);
+  }, []);
+
   const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -342,11 +348,11 @@ export default function Navbar() {
                   transition: 'background 0.3s, border-color 0.3s'
                 }}
                 className="burger-btn"
-                aria-label="Open menu"
+                aria-label="Toggle mobile menu"
               >
-                <span style={{ width: '18px', height: '1.6px', background: burgerColor, display: 'block', transition: '.3s' }} />
-                <span style={{ width: '18px', height: '1.6px', background: burgerColor, display: 'block', transition: '.3s' }} />
-                <span style={{ width: '18px', height: '1.6px', background: burgerColor, display: 'block', transition: '.3s' }} />
+                <span style={{ width: '18px', height: '1.6px', background: burgerColor, display: 'block', transition: '.3s', transform: mobileMenuOpen ? 'rotate(45deg) translate(3.5px, 3.5px)' : 'none' }} />
+                <span style={{ width: '18px', height: '1.6px', background: burgerColor, display: 'block', transition: '.3s', opacity: mobileMenuOpen ? 0 : 1 }} />
+                <span style={{ width: '18px', height: '1.6px', background: burgerColor, display: 'block', transition: '.3s', transform: mobileMenuOpen ? 'rotate(-45deg) translate(3.5px, -3.5px)' : 'none' }} />
               </button>
             </div>
           </div>
@@ -435,88 +441,43 @@ export default function Navbar() {
             </div>
           </div>
         </div>
-      </nav>
-
-      {/* Mobile Drawer Backdrop Overlay */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setMobileMenuOpen(false)}
-            style={{
-              position: 'fixed',
-              inset: 0,
-              background: 'rgba(0, 0, 0, 0.5)',
-              backdropFilter: 'blur(5px)',
-              WebkitBackdropFilter: 'blur(5px)',
-              zIndex: 999,
-            }}
-          />
-        )}
-      </AnimatePresence>
-
-      {/* Mobile Drawer Panel */}
-      <div
-        style={{
-          position: 'fixed',
-          top: 0,
-          bottom: 0,
-          right: 0,
-          width: 'min(420px, 100vw)',
-          zIndex: 1000,
-          background: 'rgba(30, 31, 26, 0.96)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-          borderLeft: '1px solid rgba(220, 188, 124, 0.15)',
-          boxShadow: '-10px 0 40px rgba(0, 0, 0, 0.5)',
-          display: 'flex',
-          flexDirection: 'column',
-          padding: '32px 32px 40px',
-          transform: mobileMenuOpen ? 'translateX(0)' : 'translateX(100%)',
-          transition: 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
-        }}
-        className="mobile-drawer"
-      >
-        {/* Drawer Header */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '36px' }}>
-          <Link to="/" onClick={() => setMobileMenuOpen(false)}>
-            <img src={LogoHero} alt="Agarwal Group" style={{ height: 'clamp(28px, 6vw, 40px)', width: 'auto', display: 'block', borderRadius: '4px' }} />
-          </Link>
-          <button
-            onClick={() => setMobileMenuOpen(false)}
-            style={{
-              background: 'rgba(255, 255, 255, 0.05)',
-              border: '1px solid rgba(220, 188, 124, 0.2)',
-              color: '#fff',
-              width: '36px',
-              height: '36px',
-              borderRadius: '50%',
-              display: 'grid',
-              placeItems: 'center',
-              cursor: 'pointer',
-              fontSize: '1.4rem',
-              lineHeight: 1,
-              outline: 'none',
-              transition: 'background 0.3s, transform 0.3s'
-            }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(220, 188, 124, 0.2)'; e.currentTarget.style.transform = 'rotate(90deg)'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)'; e.currentTarget.style.transform = 'rotate(0deg)'; }}
-          >
-            ×
-          </button>
-        </div>
+        {/* Mobile Dropdown Panel */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              style={{
+                position: 'absolute',
+                top: '100%',
+                left: 0,
+                right: 0,
+                background: forceScrolledStyle ? 'rgba(253, 252, 250, 0.98)' : 'rgba(30, 31, 26, 0.6)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                borderTop: forceScrolledStyle ? '1px solid rgba(0,0,0,0.1)' : '1px solid rgba(220, 188, 124, 0.15)',
+                borderBottom: forceScrolledStyle ? '1px solid rgba(0,0,0,0.1)' : '1px solid rgba(220, 188, 124, 0.15)',
+                boxShadow: '0 20px 40px rgba(0, 0, 0, 0.5)',
+                display: 'flex',
+                flexDirection: 'column',
+                padding: '24px 32px 32px',
+                maxHeight: 'calc(100vh - 70px)',
+                zIndex: 99,
+              }}
+              className="mobile-dropdown"
+            >
 
         {/* Drawer Scrollable Links */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', flex: 1, overflowY: 'auto', paddingRight: '8px' }}>
           {[
-            { label: 'About Us', to: '/about-us', pathId: 'story', index: '01' },
-            { label: 'Ongoing Projects', isAccordion: true, items: projects, index: '02' },
-            { label: 'Completed Projects', to: '/completed-projects', index: '03' },
-            { label: 'Blogs', to: '/blogs', index: '04' },
-            { label: 'Channel Partner', to: '/channel-partner', index: '05' },
-            { label: 'Contact Us', to: '/contact', pathId: 'contact', index: '06' },
+            { label: 'About Us', to: '/about-us', pathId: 'story' },
+            { label: 'Ongoing Projects', isAccordion: true, items: projects },
+            { label: 'Completed Projects', to: '/completed-projects' },
+            { label: 'Blogs', to: '/blogs' },
+            { label: 'Channel Partner', to: '/channel-partner' },
+            { label: 'Contact Us', to: '/contact', pathId: 'contact' },
           ].map(item => {
             if (item.isAccordion) {
               return (
@@ -530,7 +491,7 @@ export default function Navbar() {
                       fontFamily: '"Fraunces", serif',
                       fontSize: '1.5rem',
                       fontWeight: 300,
-                      color: 'rgba(244, 240, 231, 0.9)',
+                      color: forceScrolledStyle ? 'var(--ink)' : 'rgba(244, 240, 231, 0.9)',
                       background: 'none',
                       border: 'none',
                       cursor: 'pointer',
@@ -540,7 +501,6 @@ export default function Navbar() {
                       outline: 'none'
                     }}
                   >
-                    <span style={{ fontSize: '0.75rem', fontFamily: '"Inter", sans-serif', color: 'var(--brass)', fontWeight: 600, letterSpacing: '0.1em' }}>{item.index}</span>
                     <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                       {item.label}
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" style={{ transition: 'transform .3s', transform: mobileOngoingOpen ? 'rotate(180deg)' : 'none', opacity: 0.7 }}>
@@ -568,7 +528,7 @@ export default function Navbar() {
                                 {...(wrapperProps as any)}
                                 style={{
                                   fontSize: '0.92rem',
-                                  color: 'rgba(244, 240, 231, 0.7)',
+                                  color: forceScrolledStyle ? 'rgba(20, 20, 18, 0.7)' : 'rgba(244, 240, 231, 0.7)',
                                   textDecoration: 'none',
                                   transition: 'color 0.3s, transform 0.3s',
                                   display: 'flex',
@@ -584,7 +544,7 @@ export default function Navbar() {
                                 }}
                                 onMouseLeave={e => {
                                   if (isHorizon) return;
-                                  e.currentTarget.style.color = 'rgba(244, 240, 231, 0.7)';
+                                  e.currentTarget.style.color = forceScrolledStyle ? 'rgba(20, 20, 18, 0.7)' : 'rgba(244, 240, 231, 0.7)';
                                   e.currentTarget.style.transform = 'none';
                                 }}
                               >
@@ -617,14 +577,13 @@ export default function Navbar() {
                   fontFamily: '"Fraunces", serif',
                   fontSize: '1.5rem',
                   fontWeight: 300,
-                  color: 'rgba(244, 240, 231, 0.9)',
+                  color: forceScrolledStyle ? 'var(--ink)' : 'rgba(244, 240, 231, 0.9)',
                   textDecoration: 'none',
                   transition: 'color .3s, transform 0.3s',
                 }}
                 onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass-bright)'; e.currentTarget.style.transform = 'translateX(6px)'; }}
-                onMouseLeave={e => { e.currentTarget.style.color = 'rgba(244, 240, 231, 0.9)'; e.currentTarget.style.transform = 'none'; }}
+                onMouseLeave={e => { e.currentTarget.style.color = forceScrolledStyle ? 'var(--ink)' : 'rgba(244, 240, 231, 0.9)'; e.currentTarget.style.transform = 'none'; }}
               >
-                <span style={{ fontSize: '0.75rem', fontFamily: '"Inter", sans-serif', color: 'var(--brass)', fontWeight: 600, letterSpacing: '0.1em' }}>{item.index}</span>
                 {item.label}
               </Link>
             );
@@ -632,7 +591,7 @@ export default function Navbar() {
         </div>
 
         {/* Drawer Footer / CTA */}
-        <div style={{ marginTop: 'auto', paddingTop: '24px', borderTop: '1px solid rgba(220, 188, 124, 0.15)', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <div style={{ marginTop: 'auto', paddingTop: '24px', borderTop: forceScrolledStyle ? '1px solid rgba(0,0,0,0.1)' : '1px solid rgba(220, 188, 124, 0.15)', display: 'flex', flexDirection: 'column', gap: '20px' }}>
           <button
             onClick={() => { setMobileMenuOpen(false); handleEnquireClick(); }}
             style={{
@@ -656,12 +615,15 @@ export default function Navbar() {
             Enquire Now
           </button>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '0.74rem', color: 'rgba(244, 240, 231, 0.5)' }}>
-            <span>Sales: <a href="tel:+918408008001" style={{ color: 'var(--brass-bright)', textDecoration: 'none' }}>+91 840 800 8001</a></span>
-            <span>Email: <a href="mailto:sales@agarwalrealties.com" style={{ color: 'var(--brass-bright)', textDecoration: 'none' }}>sales@agarwalrealties.com</a></span>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '0.74rem', color: forceScrolledStyle ? 'rgba(20, 20, 18, 0.5)' : 'rgba(244, 240, 231, 0.5)' }}>
+            <span>Sales: <a href="tel:+918408008001" style={{ color: forceScrolledStyle ? 'var(--brass-deep)' : 'var(--brass-bright)', textDecoration: 'none' }}>+91 840 800 8001</a></span>
+            <span>Email: <a href="mailto:sales@agarwalrealties.com" style={{ color: forceScrolledStyle ? 'var(--brass-deep)' : 'var(--brass-bright)', textDecoration: 'none' }}>sales@agarwalrealties.com</a></span>
           </div>
         </div>
-      </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
 
       {/* Responsive CSS for nav links and burger */}
       <style>{`

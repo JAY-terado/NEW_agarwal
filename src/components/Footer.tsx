@@ -188,11 +188,18 @@ export default function Footer() {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {[
                 { to: '/faqs', label: 'FAQs' },
-                { to: '/book-site-visit', label: 'Book Site Visit' },
-                { to: '/contact', label: 'Contact Us' },
+                { to: '#enquire', label: 'Book Site Visit' },
+                { to: '#enquire', label: 'Contact Us' },
               ].map((link, i) => (
                 <Link key={i} to={link.to}
-                  onClick={() => window.scrollTo(0, 0)}
+                  onClick={(e) => {
+                    if (link.to === '#enquire') {
+                      e.preventDefault();
+                      window.dispatchEvent(new CustomEvent('openEnquireModal'));
+                    } else {
+                      window.scrollTo(0, 0);
+                    }
+                  }}
                   style={{ display: 'inline-block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'all 0.3s ease', textDecoration: 'none', transform: 'translateX(0)' }}
                   onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass)'; e.currentTarget.style.transform = 'translateX(5px)'; }}
                   onMouseLeave={e => { e.currentTarget.style.color = 'var(--ink-soft)'; e.currentTarget.style.transform = 'translateX(0)'; }}>
@@ -210,7 +217,7 @@ export default function Footer() {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {[
                 { to: '/privacy-policy', label: 'Privacy Policy' },
-                { to: '/terms-conditions', label: 'Terms & Condition' },
+                { to: '/terms-conditions', label: 'Terms & Conditions' },
                 { to: '/disclaimer', label: 'Disclaimer' },
                 { to: '/sitemap', label: 'Sitemap' },
               ].map((link, i) => (
@@ -245,7 +252,7 @@ export default function Footer() {
           }
         }
       `}</style>
-      
+
       <SupplierRegistrationModal isOpen={isSupplierModalOpen} onClose={() => setIsSupplierModalOpen(false)} />
     </footer>
   );
