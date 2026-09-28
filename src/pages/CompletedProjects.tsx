@@ -1,44 +1,45 @@
 import { useEffect } from 'react';
 
 import img0 from '../assets/Completed Projects/new2/Agarwal Doshi.webp';
-import img1 from '../assets/Completed Projects/new/agarwal-exotica-yashwant-smart-city-vasai-east.webp';
+import img1 from '../assets/Completed Projects/NEW3/Agarwal_Exotica.webp';
 import img2 from '../assets/Completed Projects/new2/AgarwalGarden(Phase1).jpeg';
-import img3 from '../assets/Completed Projects/Agarwal Gardens (Phase-II), Gokul Township, Virar West.webp';
+import img3 from '../assets/Completed Projects/NEW3/Agarwal_Gardens_Phase-II_Gokul_Township_Virar_West_1x1_optimized.webp';
 import img4 from '../assets/Completed Projects/Agarwal Heritage, Yashwant Nagar, Virar West.webp';
-import img6 from '../assets/Completed Projects/new/agarwal-lifestyle-global-city-virar-west.webp';
-import img7 from '../assets/Completed Projects/new/agarwal-meadows-near-gokul-township-virar-west.webp';
+import img6 from '../assets/Completed Projects/NEW3/Agarwal_Lifestyle.webp';
+import img7 from '../assets/Completed Projects/NEW3/Agarwal_Meadows.webp';
 import img8 from '../assets/Completed Projects/new2/Agarwal Palazzo.webp';
-import img9 from '../assets/Completed Projects/new/agarwal-paramount-global-city-virar-west.webp';
-import img10 from '../assets/Completed Projects/new/agarwal-residency-yashwant-viva-township-vasai-east.webp';
+import img9 from '../assets/Completed Projects/NEW3/Agarwal_Paramount_Global_City_1x1_optimized.webp';
+import img10 from '../assets/Completed Projects/NEW3/Agarwal_Residency.webp';
 import img13 from '../assets/Completed Projects/new/agarwal-solitaire-hdil-township-virar-west.webp';
 import img14 from '../assets/Completed Projects/Agarwal Township, Kaul Heritage City, Vasai West.webp';
 
 import img16 from '../assets/Completed Projects/new2/BalajiBanquets.jpeg';
-import img17 from '../assets/Completed Projects/new/glory-viva-gokul-complex-virar-west.webp';
-import img18 from '../assets/Completed Projects/Gokul Aangan, Gokul Township, Virar West.webp';
-import img19 from '../assets/Completed Projects/Gokul Annexe, Gokul Township, Virar West.webp';
-import img20 from '../assets/Completed Projects/Gokul Arcade, Gokul Township, Virar West.webp';
-import img21 from '../assets/Completed Projects/Gokul Empire, Gokul Township, Virar West.webp';
-import img22 from '../assets/Completed Projects/Gokul Heaven, Gokul Township, Virar West.webp';
-import img23 from '../assets/Completed Projects/Gokul Heights, Gokul Township, Virar West.webp';
-import img24 from '../assets/Completed Projects/Gokul Sapphire, Near Muljibhai Mehta School, Gokul Township, Virar West.webp';
-import img25 from '../assets/Completed Projects/new/gokul-solitaire-agarwal-gardens-phase-2-gokul-township-virar-west.webp';
-import img26 from '../assets/Completed Projects/Gokul Township, Bolinj, Virar West.webp';
-import img27 from '../assets/Completed Projects/Gokuldham Complex, Virar West.webp';
-import img28 from '../assets/Completed Projects/Krishna Galaxy, Viva Vrindavan Township, Virar West.webp';
+import img17 from '../assets/Completed Projects/NEW3/Glory.webp';
+import img18 from '../assets/Completed Projects/NEW3/Gokul_Aangan.webp';
+import img19 from '../assets/Completed Projects/NEW3/Gokul_Annexe.webp';
+import img20 from '../assets/Completed Projects/NEW3/Gokul_Arcade_optimized.webp';
+import img21 from '../assets/Completed Projects/NEW3/Gokul_Empire_1x1_optimized.webp';
+import img22 from '../assets/Completed Projects/NEW3/Gokul_Heaven_1x1_optimized.webp';
+import img23 from '../assets/Completed Projects/NEW3/Gokul Heights, Gokul Township, Virar West.webp';
+import img24 from '../assets/Completed Projects/NEW3/Gokul Sapphire, Near Muljibhai Mehta School, Gokul Township, Virar West.webp';
+import img25 from '../assets/Completed Projects/NEW3/Gokul_Solitaire_optimized.webp';
+import img26 from '../assets/Completed Projects/NEW3/Gokul Township, Bolinj, Virar West.webp';
+import img27 from '../assets/Completed Projects/NEW3/Gokuldham Complex, Virar West.webp';
+import img28 from '../assets/Completed Projects/NEW3/Krishna Galaxy, Viva Vrindavan Township, Virar West.webp';
 import img29 from '../assets/Completed Projects/new2/Krishna Heritage.webp';
+import imgAakash from '../assets/Completed Projects/NEW3/AakashSrishtiheights.webp';
 import img30 from '../assets/Completed Projects/new2/Madhuvan heights.webp';
-import img31 from '../assets/Completed Projects/Madhuvan Park (Phase-II), Tirupati Nagar, Virar West.webp';
-import img32 from '../assets/Completed Projects/Siddhivinayak Tower, Y K Nagar, Virar West.webp';
-import img33 from '../assets/Completed Projects/Srishti Complex, New Viva College Road, Virar West.webp';
-import img34 from '../assets/Completed Projects/new/surbhi-arcade-sh3-gokul-township-virar-west.webp';
-import img35 from '../assets/Completed Projects/new/vinay-heights-mira-road-east.webp';
+import img31 from '../assets/Completed Projects/NEW3/Madhuvan Park (Phase-II), Tirupati Nagar, Virar West.webp';
+import img32 from '../assets/Completed Projects/NEW3/Siddhivinayak Tower, Y K Nagar, Virar West.webp';
+import img33 from '../assets/Completed Projects/NEW3/Srishti Complex, New Viva College Road, Virar West.webp';
+import img34 from '../assets/Completed Projects/NEW3/Surbhi_Arcade_SH3.webp';
+import img35 from '../assets/Completed Projects/NEW3/Vinay_Heights.webp';
 import img36 from '../assets/Completed Projects/new2/Vinay Kumkum.webp';
 import img37 from '../assets/Completed Projects/new2/Viva Gokul Arcade.webp';
-import img38 from '../assets/Completed Projects/Viva Gokul Complex, Gokul Township, Virar West.webp';
-import img39 from '../assets/Completed Projects/Viva Vrindavan Township, Opp. Viva College, Virar West.webp';
-import img40 from '../assets/Completed Projects/Vrindavan Gardens, Yashwant Viva Township, Vasai East.webp';
-import img41 from '../assets/Completed Projects/Vrindavan Township, New Viva College Road, Virar West.webp';
+import img38 from '../assets/Completed Projects/NEW3/Viva Gokul Complex, Gokul Township, Virar West.webp';
+import img39 from '../assets/Completed Projects/NEW3/Viva Vrindavan Township, Opp. Viva College, Virar West.webp';
+import img40 from '../assets/Completed Projects/NEW3/Vrindavan_Gardens.webp';
+// import img41 from '../assets/Completed Projects/Vrindavan Township, New Viva College Road, Virar West.webp';
 import img42 from '../assets/Completed Projects/new/yashwant-heights-virat-nagar-virar-west.webp';
 import img43 from '../assets/Completed Projects/new2/Girija tower.webp';
 import img44 from '../assets/Completed Projects/new2/Shagun Banquets.webp';
@@ -47,6 +48,7 @@ const completedProjects = [
   // Sequence from handwritten note
   { name: 'Agarwal Palazzo', sub: 'Near Kora Kendra, Borivali West', image: img8 },
   { name: 'Krishna Heritage', sub: 'M G Road, Kandivali West', image: img29 },
+  { name: 'Aakash Srishti Heights', sub: 'Andheri East', image: imgAakash },
   { name: 'Vinay Heights', sub: 'Mira Road East', image: img35 },
   { name: 'Vinay Kumkum Shopping Arcade', sub: 'Goregaon West', image: img36 },
   { name: 'Agarwal Paramount', sub: 'Global City, Virar West', image: img9 },
@@ -58,7 +60,7 @@ const completedProjects = [
   { name: 'Viva Gokul Arcade', sub: 'Viva Gokul Complex, Virar West', image: img37 },
   { name: 'Viva Vrindavan Township', sub: 'Opp. Viva College, Virar West', image: img39 },
   { name: 'Vrindavan Gardens', sub: 'Yashwant Viva Township, Vasai East', image: img40 },
-  { name: 'Vrindavan Township', sub: 'New Viva College Road, Virar West', image: img41 },
+  // { name: 'Vrindavan Township', sub: 'New Viva College Road, Virar West', image: img41 },
   { name: 'Gokul Township', sub: 'Bolinj, Virar West', image: img26 },
   { name: 'Agarwal Township', sub: 'Kaul Heritage City, Vasai West', image: img4 },
   { name: 'Agarwal Heritage', sub: 'Yashwant Nagar, Virar West', image: img14 },
@@ -110,11 +112,11 @@ export default function CompletedProjects() {
           {completedProjects.map((project, idx) => (
             <div key={idx} className="flex flex-col group cursor-pointer">
               {/* Image Side */}
-              <div className="aspect-square bg-line relative rounded-2xl overflow-hidden shadow-sm border border-line-light mb-4">
+              <div className="aspect-square bg-line relative rounded-2xl overflow-hidden shadow-sm border border-line-light group-hover:border-brass-deep transition-colors duration-300 mb-4">
                 <img
                   src={project.image}
                   alt={project.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/10 transition-colors duration-300 pointer-events-none" />
               </div>
@@ -131,6 +133,7 @@ export default function CompletedProjects() {
             </div>
           ))}
         </div>
+        <p className="text-[10px] md:text-xs text-ink/50 mt-10 text-right md:whitespace-nowrap">*Images shown are computer-generated artist impressions for representational purposes only.</p>
       </div>
     </div>
   );

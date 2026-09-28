@@ -58,13 +58,11 @@ import ig4 from '../assets/infinityGallery/ig4.jpeg';
 import ig5 from '../assets/infinityGallery/ig5.jpeg';
 import ig6 from '../assets/infinityGallery/ig6.jpeg';
 
-import layout1Bhk from '../assets/layout-1bhk.webp';
-import layout2Bhk from '../assets/layout-2bhk.webp';
-import layout3Bhk from '../assets/layout-3bhk.webp';
+import layout1Bhk from '../assets/plans/1BHK.png';
+import layout2Bhk from '../assets/plans/2BHK.png';
+import layout3Bhk from '../assets/plans/3BHK.png';
+import layout4Bhk from '../assets/plans/4BHK.png';
 
-import skyrise1Bhk from '../assets/Skyrise 1BHK.jpg.webp';
-import skyrise2Bhk from '../assets/Skyrise 2BHK.jpg.webp';
-import skyrise3Bhk from '../assets/Skyrise 3BHK.jpg.webp';
 
 // Project Hero Imports
 import infinityHero from '../assets/agarwal-infinity-hero.webp';
@@ -103,16 +101,10 @@ const layoutImages: Record<string, string> = {
   '1 BHK': layout1Bhk,
   '2 BHK': layout2Bhk,
   '3 BHK': layout3Bhk,
-  '4 BHK': layout3Bhk, // Fallback until a specific 4BHK image is available
+  '4 BHK': layout4Bhk,
 };
 
-const projectLayoutImages: Record<string, Record<string, string>> = {
-  skyrise: {
-    '1 BHK': skyrise1Bhk,
-    '2 BHK': skyrise2Bhk,
-    '3 BHK': skyrise3Bhk,
-  }
-};
+const projectLayoutImages: Record<string, Record<string, string>> = {};
 
 const getLayoutImage = (slug: string, type: string) => {
   return (projectLayoutImages[slug] && projectLayoutImages[slug][type]) || layoutImages[type] || layout3Bhk;
@@ -889,7 +881,7 @@ export default function ProjectDetails() {
                   <img
                     src={getLayoutImage(project.slug, p.type)}
                     alt={`${p.type} Floor Plan`}
-                    className="w-full h-auto object-contain group-hover:scale-[1.03] transition-transform duration-700 block blur-md"
+                    className="w-full h-auto object-contain group-hover:scale-[1.03] transition-transform duration-700 block"
                   />
                 </div>
 
