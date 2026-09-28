@@ -110,7 +110,7 @@ export default function CompletedProjects() {
           {completedProjects.map((project, idx) => (
             <div key={idx} className="flex flex-col group cursor-pointer">
               {/* Image Side */}
-              <div className="aspect-[4/3] bg-line relative rounded-2xl overflow-hidden shadow-sm border border-line-light mb-4">
+              <div className="aspect-square bg-line relative rounded-2xl overflow-hidden shadow-sm border border-line-light mb-4">
                 <img
                   src={project.image}
                   alt={project.name}
