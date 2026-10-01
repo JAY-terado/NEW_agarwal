@@ -58,6 +58,14 @@ import ig4 from '../assets/infinityGallery/ig4.jpeg';
 import ig5 from '../assets/infinityGallery/ig5.jpeg';
 import ig6 from '../assets/infinityGallery/ig6.jpeg';
 
+// Skyrise Gallery Imports
+import srG1 from '../assets/skyriseGallery/srG1.webp';
+import srG2 from '../assets/skyriseGallery/srG2.webp';
+import srG3 from '../assets/skyriseGallery/srG3.webp';
+import srG4 from '../assets/skyriseGallery/srG4.webp';
+import srG5 from '../assets/skyriseGallery/srG5.webp';
+import srG6 from '../assets/skyriseGallery/srG6.webp';
+
 import layout1Bhk from '../assets/plans/1BHK.png';
 import layout2Bhk from '../assets/plans/2BHK.png';
 import layout3Bhk from '../assets/plans/3BHK.png';
@@ -125,12 +133,12 @@ const galleryMap: Record<string, string> = {
   'ig5.jpeg': ig5,
   'ig6.jpeg': ig6,
   // Skyrise specific
-  'skyrise-elev1.webp': skyriseElev1,
-  'skyrise-living.webp': skyriseLiving,
-  'skyrise-bedroom.webp': skyriseBedroom,
-  'skyrise-kitchen.webp': skyriseKitchen,
-  'skyrise-dining.webp': skyriseDining,
-  'skyrise-balcony.webp': skyriseBalcony,
+  'srG1.webp': srG1,
+  'srG2.webp': srG2,
+  'srG3.webp': srG3,
+  'srG4.webp': srG4,
+  'srG5.webp': srG5,
+  'srG6.webp': srG6,
   // Sky Heights specific
   'sh-gallery-1.webp': shGallery1,
   'sh-gallery-2.webp': shGallery2,
@@ -140,12 +148,7 @@ const galleryMap: Record<string, string> = {
   'sh-gallery-6.webp': shGallery6,
 };
 
-// Skyrise Interior Images
-import skyriseLiving from '../assets/skyrise interior/livingRoom.webp';
-import skyriseBedroom from '../assets/skyrise interior/bedroom1.webp';
-import skyriseKitchen from '../assets/skyrise interior/kitchen.webp';
-import skyriseDining from '../assets/skyrise interior/dining.webp';
-import skyriseBalcony from '../assets/skyrise interior/balcony.webp';
+
 
 // Amenity Images
 import amenityGym from '../assets/gymA.webp';
