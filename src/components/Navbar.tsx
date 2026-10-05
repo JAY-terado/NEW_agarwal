@@ -682,7 +682,7 @@ export default function Navbar() {
               </button>
 
               <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '4px', lineHeight: 1.4 }}>
-                Request an <span className="text-brass">Immediate Callback</span> {modalType === 'siteVisit' ? 'pre reserving your site visit.' : 'for Exclusive Offers.'}
+                Request an <span className="text-brass">Immediate Callback</span> {modalType === 'siteVisit' ? 'Pre Reserving Your Site Visit.' : 'for Exclusive Offers.'}
               </div>
               <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingBottom: '20px', marginBottom: '20px', fontWeight: 300, borderBottom: '1px solid var(--color-line)' }}>
                 Share your details and our relationship manager will contact you {modalType === 'siteVisit' ? 'soon' : 'with special offer'}.
