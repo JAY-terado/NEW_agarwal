@@ -103,16 +103,36 @@ export default function Footer() {
                 { to: '/projects/infinity', label: 'Agarwal Infinity' },
                 { to: '/projects/sky-heights', label: 'Agarwal Sky Heights' },
                 { to: '/projects/skyrise', label: 'Agarwal Skyrise' },
-                { to: '/projects/horizon', label: 'Agarwal Horizon' },
-              ].map(link => (
-                <Link key={link.to} to={link.to}
-                  onClick={() => window.scrollTo(0, 0)}
-                  style={{ display: 'inline-block', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'all 0.3s ease', textDecoration: 'none', transform: 'translateX(0)' }}
-                  onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass)'; e.currentTarget.style.transform = 'translateX(5px)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.color = 'var(--ink-soft)'; e.currentTarget.style.transform = 'translateX(0)'; }}>
-                  {link.label}
-                </Link>
-              ))}
+                { to: '/projects/horizon', label: 'Agarwal Horizon', isHorizon: true },
+              ].map(link => {
+                const isHorizon = link.isHorizon;
+                const Wrapper = isHorizon ? 'div' : Link;
+                const wrapperProps = isHorizon ? {} : { to: link.to, onClick: () => window.scrollTo(0, 0) };
+
+                return (
+                  <Wrapper key={link.to} {...(wrapperProps as any)}
+                    style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '.9rem', fontWeight: 300, padding: '6px 0', color: 'var(--ink-soft)', transition: 'all 0.3s ease', textDecoration: 'none', transform: 'translateX(0)', cursor: isHorizon ? 'default' : 'pointer', width: 'fit-content' }}
+                    onMouseEnter={e => { 
+                      if (!isHorizon) {
+                        e.currentTarget.style.color = 'var(--brass)'; 
+                        e.currentTarget.style.transform = 'translateX(5px)'; 
+                      }
+                    }}
+                    onMouseLeave={e => { 
+                      if (!isHorizon) {
+                        e.currentTarget.style.color = 'var(--ink-soft)'; 
+                        e.currentTarget.style.transform = 'translateX(0)'; 
+                      }
+                    }}>
+                    <span>{link.label}</span>
+                    {isHorizon && (
+                      <span style={{ background: 'var(--ivory)', border: '1px solid var(--brass-deep)', color: 'var(--brass-deep)', padding: '2px 6px', borderRadius: '4px', fontSize: '9px', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                        Coming Soon
+                      </span>
+                    )}
+                  </Wrapper>
+                );
+              })}
             </div>
           </div>
 
