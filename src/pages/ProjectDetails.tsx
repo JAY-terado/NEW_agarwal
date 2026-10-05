@@ -174,12 +174,9 @@ import skyriseElev7 from '../assets/skriseElevationsNew/skye7.webp';
 import skyriseElev8 from '../assets/skriseElevationsNew/skye9.webp';
 
 import srPodium1 from '../assets/skyrise podium/sp1.webp';
-import srPodium2 from '../assets/skyrise podium/sp2.webp';
 import srPodium3 from '../assets/skyrise podium/sp3.webp';
-import srPodium4 from '../assets/skyrise podium/sp4.webp';
 import srPodium5 from '../assets/skyrise podium/sp5.webp';
 import srPodium6 from '../assets/skyrise podium/sp6.webp';
-import srPodium7 from '../assets/skyrise podium/sp7.webp';
 import srPodium8 from '../assets/skyrise podium/sp8.webp';
 
 // Infinity Elevation Images
@@ -782,17 +779,17 @@ export default function ProjectDetails() {
                 } else if (activeAmenityTab === 'Clubhouse Amenities' && project.slug === 'skyrise') {
                   const podiumImages = [
                     { src: srPodium1, text: 'Box Cricket' },
-                    { src: srPodium2, text: 'Multipurpose Court' },
                     { src: srPodium3, text: 'Multilevel Parking' },
-                    { src: srPodium4, text: 'Rainwater Harvesting System' },
                     { src: srPodium5, text: 'Fully-Equipped Gymnasium' },
                     { src: srPodium6, text: 'Table Tennis' },
-                    { src: srPodium7, text: 'Indoor Games Lounge' },
                     { src: srPodium8, text: 'Grand Entrance Lobby' },
                   ];
                   if (podiumImages[idx]) {
                     imageSrc = podiumImages[idx].src;
                     displayText = podiumImages[idx].text;
+                  } else {
+                    imageSrc = '';
+                    displayText = '';
                   }
                 } else if (activeAmenityTab === 'Podium Amenities' && project.amenities[idx]) {
                   displayText = project.amenities[idx];
@@ -846,6 +843,12 @@ export default function ProjectDetails() {
                   if (idx === 0) spanClass = 'col-span-1 md:col-span-2';
                   else if (idx === 1) spanClass = 'col-span-1 md:col-span-1';
                   else if (idx === 2) spanClass = 'col-span-1 md:col-span-1';
+                  else spanClass = 'col-span-1 md:col-span-2';
+                } else if (currentTabItems.length === 5) {
+                  if (idx === 0) spanClass = 'col-span-1 md:col-span-2';
+                  else if (idx === 1) spanClass = 'col-span-1 md:col-span-1';
+                  else if (idx === 2) spanClass = 'col-span-1 md:col-span-1';
+                  else if (idx === 3) spanClass = 'col-span-1 md:col-span-2';
                   else spanClass = 'col-span-1 md:col-span-2';
                 } else {
                   const patternIdx = idx % 8;

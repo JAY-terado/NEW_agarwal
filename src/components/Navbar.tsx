@@ -48,12 +48,24 @@ export default function Navbar() {
 
 
   const [isEnquireModalOpen, setIsEnquireModalOpen] = useState(false);
+  const [modalType, setModalType] = useState<'enquire' | 'siteVisit'>('enquire');
   const [contactSubmitted, setContactSubmitted] = useState(false);
 
   useEffect(() => {
-    const handleOpenModal = () => setIsEnquireModalOpen(true);
-    window.addEventListener('openEnquireModal', handleOpenModal);
-    return () => window.removeEventListener('openEnquireModal', handleOpenModal);
+    const handleOpenEnquire = () => {
+      setModalType('enquire');
+      setIsEnquireModalOpen(true);
+    };
+    const handleOpenSiteVisit = () => {
+      setModalType('siteVisit');
+      setIsEnquireModalOpen(true);
+    };
+    window.addEventListener('openEnquireModal', handleOpenEnquire);
+    window.addEventListener('openSiteVisitModal', handleOpenSiteVisit);
+    return () => {
+      window.removeEventListener('openEnquireModal', handleOpenEnquire);
+      window.removeEventListener('openSiteVisitModal', handleOpenSiteVisit);
+    };
   }, []);
 
   const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -670,10 +682,10 @@ export default function Navbar() {
               </button>
 
               <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '4px', lineHeight: 1.4 }}>
-                Request an <span className="text-brass">Immediate Callback</span> for Exclusive Offers.
+                Request an <span className="text-brass">Immediate Callback</span> {modalType === 'siteVisit' ? 'Pre reserving your site visit.' : 'for Exclusive Offers.'}
               </div>
               <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingBottom: '20px', marginBottom: '20px', fontWeight: 300, borderBottom: '1px solid var(--color-line)' }}>
-                Share your details and our relationship manager will contact you with special offer.
+                Share your details and our relationship manager will contact you {modalType === 'siteVisit' ? 'soon' : 'with special offer'}.
               </div>
               <AnimatePresence mode="wait">
                 {!contactSubmitted ? (

@@ -188,7 +188,7 @@ export default function Footer() {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {[
                 { to: '/faqs', label: 'FAQs' },
-                { to: '#enquire', label: 'Book Site Visit' },
+                { to: '#site-visit', label: 'Book Site Visit' },
                 { to: '#enquire', label: 'Contact Us' },
               ].map((link, i) => (
                 <Link key={i} to={link.to}
@@ -196,6 +196,9 @@ export default function Footer() {
                     if (link.to === '#enquire') {
                       e.preventDefault();
                       window.dispatchEvent(new CustomEvent('openEnquireModal'));
+                    } else if (link.to === '#site-visit') {
+                      e.preventDefault();
+                      window.dispatchEvent(new CustomEvent('openSiteVisitModal'));
                     } else {
                       window.scrollTo(0, 0);
                     }
