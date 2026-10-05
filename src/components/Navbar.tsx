@@ -481,157 +481,157 @@ export default function Navbar() {
               className="mobile-dropdown"
             >
 
-        {/* Drawer Scrollable Links */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', flex: 1, overflowY: 'auto', paddingRight: '8px' }}>
-          {[
-            { label: 'About Us', to: '/about-us', pathId: 'story' },
-            { label: 'Ongoing Projects', isAccordion: true, items: projects },
-            { label: 'Completed Projects', to: '/completed-projects' },
-            { label: 'Blogs', to: '/blogs' },
-            { label: 'Channel Partner', to: '/channel-partner' },
-            { label: 'Contact Us', to: '/contact', pathId: 'contact' },
-          ].map(item => {
-            if (item.isAccordion) {
-              return (
-                <div key={item.label} style={{ display: 'flex', flexDirection: 'column' }}>
-                  <button
-                    onClick={() => setMobileOngoingOpen(!mobileOngoingOpen)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'baseline',
-                      gap: '12px',
-                      fontFamily: '"Fraunces", serif',
-                      fontSize: '1.5rem',
-                      fontWeight: 300,
-                      color: forceScrolledStyle ? 'var(--ink)' : 'rgba(244, 240, 231, 0.9)',
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
-                      padding: 0,
-                      textAlign: 'left',
-                      transition: 'color .3s, transform 0.3s',
-                      outline: 'none'
-                    }}
-                  >
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              {/* Drawer Scrollable Links */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', flex: 1, overflowY: 'auto', paddingRight: '8px' }}>
+                {[
+                  { label: 'About Us', to: '/about-us', pathId: 'story' },
+                  { label: 'Ongoing Projects', isAccordion: true, items: projects },
+                  { label: 'Completed Projects', to: '/completed-projects' },
+                  { label: 'Blogs', to: '/blogs' },
+                  { label: 'Channel Partner', to: '/channel-partner' },
+                  { label: 'Contact Us', to: '/contact', pathId: 'contact' },
+                ].map(item => {
+                  if (item.isAccordion) {
+                    return (
+                      <div key={item.label} style={{ display: 'flex', flexDirection: 'column' }}>
+                        <button
+                          onClick={() => setMobileOngoingOpen(!mobileOngoingOpen)}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'baseline',
+                            gap: '12px',
+                            fontFamily: '"Fraunces", serif',
+                            fontSize: '1.5rem',
+                            fontWeight: 300,
+                            color: forceScrolledStyle ? 'var(--ink)' : 'rgba(244, 240, 231, 0.9)',
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            padding: 0,
+                            textAlign: 'left',
+                            transition: 'color .3s, transform 0.3s',
+                            outline: 'none'
+                          }}
+                        >
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            {item.label}
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" style={{ transition: 'transform .3s', transform: mobileOngoingOpen ? 'rotate(180deg)' : 'none', opacity: 0.7 }}>
+                              <path d="m6 9 6 6 6-6" />
+                            </svg>
+                          </span>
+                        </button>
+                        <AnimatePresence>
+                          {mobileOngoingOpen && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              style={{ overflow: 'hidden' }}
+                            >
+                              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', borderLeft: '1px solid rgba(220, 188, 124, 0.2)', paddingLeft: '14px', marginLeft: '4px', marginTop: '16px', marginBottom: '8px' }}>
+                                {item.items?.map(p => {
+                                  const isHorizon = p.slug === 'horizon';
+                                  const Wrapper = isHorizon ? 'div' : Link;
+                                  const wrapperProps = isHorizon ? {} : { to: `/projects/${p.slug}`, onClick: () => setMobileMenuOpen(false) };
+
+                                  return (
+                                    <Wrapper
+                                      key={p.slug}
+                                      {...(wrapperProps as any)}
+                                      style={{
+                                        fontSize: '0.92rem',
+                                        color: forceScrolledStyle ? 'rgba(20, 20, 18, 0.7)' : 'rgba(244, 240, 231, 0.7)',
+                                        textDecoration: 'none',
+                                        transition: 'color 0.3s, transform 0.3s',
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        alignItems: 'center',
+                                        gap: '12px',
+                                        cursor: isHorizon ? 'default' : 'pointer'
+                                      }}
+                                      onMouseEnter={e => {
+                                        if (isHorizon) return;
+                                        e.currentTarget.style.color = 'var(--brass-bright)';
+                                        e.currentTarget.style.transform = 'translateX(4px)';
+                                      }}
+                                      onMouseLeave={e => {
+                                        if (isHorizon) return;
+                                        e.currentTarget.style.color = forceScrolledStyle ? 'rgba(20, 20, 18, 0.7)' : 'rgba(244, 240, 231, 0.7)';
+                                        e.currentTarget.style.transform = 'none';
+                                      }}
+                                    >
+                                      <span style={{ whiteSpace: 'nowrap' }}>{p.name}</span>
+                                      {isHorizon && (
+                                        <span style={{ fontSize: '0.65rem', padding: '2px 8px', background: 'transparent', border: '1px solid currentColor', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>
+                                          Coming Soon
+                                        </span>
+                                      )}
+                                    </Wrapper>
+                                  );
+                                })}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <Link
+                      key={item.label}
+                      to={item.to as string}
+                      onClick={() => { setMobileMenuOpen(false); if (item.pathId) handleNavClick(item.pathId); }}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'baseline',
+                        gap: '12px',
+                        fontFamily: '"Fraunces", serif',
+                        fontSize: '1.5rem',
+                        fontWeight: 300,
+                        color: forceScrolledStyle ? 'var(--ink)' : 'rgba(244, 240, 231, 0.9)',
+                        textDecoration: 'none',
+                        transition: 'color .3s, transform 0.3s',
+                      }}
+                      onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass-bright)'; e.currentTarget.style.transform = 'translateX(6px)'; }}
+                      onMouseLeave={e => { e.currentTarget.style.color = forceScrolledStyle ? 'var(--ink)' : 'rgba(244, 240, 231, 0.9)'; e.currentTarget.style.transform = 'none'; }}
+                    >
                       {item.label}
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" style={{ transition: 'transform .3s', transform: mobileOngoingOpen ? 'rotate(180deg)' : 'none', opacity: 0.7 }}>
-                        <path d="m6 9 6 6 6-6" />
-                      </svg>
-                    </span>
-                  </button>
-                  <AnimatePresence>
-                    {mobileOngoingOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        style={{ overflow: 'hidden' }}
-                      >
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', borderLeft: '1px solid rgba(220, 188, 124, 0.2)', paddingLeft: '14px', marginLeft: '4px', marginTop: '16px', marginBottom: '8px' }}>
-                          {item.items?.map(p => {
-                            const isHorizon = p.slug === 'horizon';
-                            const Wrapper = isHorizon ? 'div' : Link;
-                            const wrapperProps = isHorizon ? {} : { to: `/projects/${p.slug}`, onClick: () => setMobileMenuOpen(false) };
-                            
-                            return (
-                              <Wrapper
-                                key={p.slug}
-                                {...(wrapperProps as any)}
-                                style={{
-                                  fontSize: '0.92rem',
-                                  color: forceScrolledStyle ? 'rgba(20, 20, 18, 0.7)' : 'rgba(244, 240, 231, 0.7)',
-                                  textDecoration: 'none',
-                                  transition: 'color 0.3s, transform 0.3s',
-                                  display: 'flex',
-                                  justifyContent: 'space-between',
-                                  alignItems: 'center',
-                                  gap: '12px',
-                                  cursor: isHorizon ? 'default' : 'pointer'
-                                }}
-                                onMouseEnter={e => {
-                                  if (isHorizon) return;
-                                  e.currentTarget.style.color = 'var(--brass-bright)';
-                                  e.currentTarget.style.transform = 'translateX(4px)';
-                                }}
-                                onMouseLeave={e => {
-                                  if (isHorizon) return;
-                                  e.currentTarget.style.color = forceScrolledStyle ? 'rgba(20, 20, 18, 0.7)' : 'rgba(244, 240, 231, 0.7)';
-                                  e.currentTarget.style.transform = 'none';
-                                }}
-                              >
-                                <span style={{ whiteSpace: 'nowrap' }}>{p.name}</span>
-                                {isHorizon && (
-                                  <span style={{ fontSize: '0.65rem', padding: '2px 8px', background: 'transparent', border: '1px solid currentColor', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>
-                                    Coming Soon
-                                  </span>
-                                )}
-                              </Wrapper>
-                            );
-                          })}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              {/* Drawer Footer / CTA */}
+              <div style={{ marginTop: 'auto', paddingTop: '24px', borderTop: forceScrolledStyle ? '1px solid rgba(0,0,0,0.1)' : '1px solid rgba(220, 188, 124, 0.15)', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                <button
+                  onClick={() => { setMobileMenuOpen(false); handleEnquireClick(); }}
+                  style={{
+                    width: '100%',
+                    background: 'linear-gradient(135deg, var(--color-brass-bright), var(--color-brass))',
+                    color: 'var(--color-pine)',
+                    border: 'none',
+                    padding: '14px 28px',
+                    borderRadius: '50px',
+                    fontSize: '.78rem',
+                    letterSpacing: '.12em',
+                    textTransform: 'uppercase',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    boxShadow: '0 8px 20px -8px rgba(182, 142, 63, 0.4)',
+                    transition: 'transform 0.3s, box-shadow 0.3s'
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 24px -6px rgba(182, 142, 63, 0.6)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 8px 20px -8px rgba(182, 142, 63, 0.4)'; }}
+                >
+                  Enquire Now
+                </button>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '0.74rem', color: forceScrolledStyle ? 'rgba(20, 20, 18, 0.5)' : 'rgba(244, 240, 231, 0.5)' }}>
+                  <span>Sales: <a href="tel:+918408008001" style={{ color: forceScrolledStyle ? 'var(--brass-deep)' : 'var(--brass-bright)', textDecoration: 'none' }}>+91 840 800 8001</a></span>
+                  <span>Email: <a href="mailto:sales@agarwalrealties.com" style={{ color: forceScrolledStyle ? 'var(--brass-deep)' : 'var(--brass-bright)', textDecoration: 'none' }}>sales@agarwalrealties.com</a></span>
                 </div>
-              );
-            }
-
-            return (
-              <Link
-                key={item.label}
-                to={item.to as string}
-                onClick={() => { setMobileMenuOpen(false); if (item.pathId) handleNavClick(item.pathId); }}
-                style={{
-                  display: 'flex',
-                  alignItems: 'baseline',
-                  gap: '12px',
-                  fontFamily: '"Fraunces", serif',
-                  fontSize: '1.5rem',
-                  fontWeight: 300,
-                  color: forceScrolledStyle ? 'var(--ink)' : 'rgba(244, 240, 231, 0.9)',
-                  textDecoration: 'none',
-                  transition: 'color .3s, transform 0.3s',
-                }}
-                onMouseEnter={e => { e.currentTarget.style.color = 'var(--brass-bright)'; e.currentTarget.style.transform = 'translateX(6px)'; }}
-                onMouseLeave={e => { e.currentTarget.style.color = forceScrolledStyle ? 'var(--ink)' : 'rgba(244, 240, 231, 0.9)'; e.currentTarget.style.transform = 'none'; }}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-        </div>
-
-        {/* Drawer Footer / CTA */}
-        <div style={{ marginTop: 'auto', paddingTop: '24px', borderTop: forceScrolledStyle ? '1px solid rgba(0,0,0,0.1)' : '1px solid rgba(220, 188, 124, 0.15)', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          <button
-            onClick={() => { setMobileMenuOpen(false); handleEnquireClick(); }}
-            style={{
-              width: '100%',
-              background: 'linear-gradient(135deg, var(--color-brass-bright), var(--color-brass))',
-              color: 'var(--color-pine)',
-              border: 'none',
-              padding: '14px 28px',
-              borderRadius: '50px',
-              fontSize: '.78rem',
-              letterSpacing: '.12em',
-              textTransform: 'uppercase',
-              fontWeight: 700,
-              cursor: 'pointer',
-              boxShadow: '0 8px 20px -8px rgba(182, 142, 63, 0.4)',
-              transition: 'transform 0.3s, box-shadow 0.3s'
-            }}
-            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 24px -6px rgba(182, 142, 63, 0.6)'; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 8px 20px -8px rgba(182, 142, 63, 0.4)'; }}
-          >
-            Enquire Now
-          </button>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', fontSize: '0.74rem', color: forceScrolledStyle ? 'rgba(20, 20, 18, 0.5)' : 'rgba(244, 240, 231, 0.5)' }}>
-            <span>Sales: <a href="tel:+918408008001" style={{ color: forceScrolledStyle ? 'var(--brass-deep)' : 'var(--brass-bright)', textDecoration: 'none' }}>+91 840 800 8001</a></span>
-            <span>Email: <a href="mailto:sales@agarwalrealties.com" style={{ color: forceScrolledStyle ? 'var(--brass-deep)' : 'var(--brass-bright)', textDecoration: 'none' }}>sales@agarwalrealties.com</a></span>
-          </div>
-        </div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -682,7 +682,7 @@ export default function Navbar() {
               </button>
 
               <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '4px', lineHeight: 1.4 }}>
-                Request an <span className="text-brass">Immediate Callback</span> {modalType === 'siteVisit' ? 'Pre reserving your site visit.' : 'for Exclusive Offers.'}
+                Request an <span className="text-brass">Immediate Callback</span> {modalType === 'siteVisit' ? 'pre reserving your site visit.' : 'for Exclusive Offers.'}
               </div>
               <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingBottom: '20px', marginBottom: '20px', fontWeight: 300, borderBottom: '1px solid var(--color-line)' }}>
                 Share your details and our relationship manager will contact you {modalType === 'siteVisit' ? 'soon' : 'with special offer'}.
