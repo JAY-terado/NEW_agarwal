@@ -9,6 +9,7 @@ import { contactEmailAxios } from '../_api/user';
 
 // Asset Imports
 import heroVideo from '../assets/hero.mp4';
+import heroMobileVideo from '../assets/heroVideosMobile/heroMobile.mp4';
 import heroPoster from '../assets/hero-poster.webp';
 import homeAus from '../assets/homeAus.webp';
 import infinityHero from '../assets/agarwal-infinity-hero.webp';
@@ -441,8 +442,18 @@ export default function Home() {
       >
         <div className="absolute inset-0 z-0">
           <video
-            className="w-full h-full object-cover block"
+            className="w-full h-full object-cover hidden md:block"
             src={heroVideo}
+            poster={heroPoster}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+          />
+          <video
+            className="w-full h-full object-cover block md:hidden"
+            src={heroMobileVideo}
             poster={heroPoster}
             autoPlay
             muted

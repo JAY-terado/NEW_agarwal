@@ -75,10 +75,13 @@ import layout4Bhk from '../assets/plans/4BHK.png';
 // Project Hero Imports
 import infinityHero from '../assets/agarwal-infinity-hero.webp';
 import infinityHeroVideo from '../assets/agarwalInfintyHero.mp4';
+import infinityHeroVideoMobile from '../assets/heroVideosMobile/infinityMobileHero.mp4';
 import skyriseHero from '../assets/skyRise1.webp';
 import skyriseHeroVideo from '../assets/SkyriseHero1.mp4';
+import skyriseHeroVideoMobile from '../assets/heroVideosMobile/skyriseMobileHero.mp4';
 import skyHeightsHero from '../assets/agarwalSkyheight.webp';
 import skyHeightsHeroVideo from '../assets/skyHeightHero1.mp4';
+import skyHeightsHeroVideoMobile from '../assets/heroVideosMobile/skyheigtMobileHero.mp4';
 import horizonHero from '../assets/horizon.webp';
 
 import agarwalInfinityMRQR from '../assets/agarwalInfinityMRQR.webp';
@@ -466,32 +469,62 @@ export default function ProjectDetails() {
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             {project.slug === 'infinity' ? (
-              <video
-                src={infinityHeroVideo}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover"
-              />
+              <>
+                <video
+                  src={infinityHeroVideo}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover hidden md:block"
+                />
+                <video
+                  src={infinityHeroVideoMobile}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover block md:hidden"
+                />
+              </>
             ) : project.slug === 'sky-heights' ? (
-              <video
-                src={skyHeightsHeroVideo}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover"
-              />
+              <>
+                <video
+                  src={skyHeightsHeroVideo}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover hidden md:block"
+                />
+                <video
+                  src={skyHeightsHeroVideoMobile}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover block md:hidden"
+                />
+              </>
             ) : project.slug === 'skyrise' ? (
-              <video
-                src={skyriseHeroVideo}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover"
-              />
+              <>
+                <video
+                  src={skyriseHeroVideo}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover hidden md:block"
+                />
+                <video
+                  src={skyriseHeroVideoMobile}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover block md:hidden"
+                />
+              </>
             ) : (
               <img
                 src={heroImage}
