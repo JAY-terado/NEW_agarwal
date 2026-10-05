@@ -50,7 +50,7 @@ export default function AboutUs() {
       </section>
 
       {/* Main Content */}
-      <div className="pt-24 pb-0">
+      <div className="pt-0 pb-0">
 
         {/* Section 1: Intro (Story style) */}
         <section className="section story">
@@ -274,14 +274,14 @@ export default function AboutUs() {
                       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         {isHorizon ? (
                           <div className="inline-flex items-center justify-center px-8 rounded-full" style={{ height: '54px', border: '1px solid #8B5A2B', backgroundColor: 'transparent', marginTop: '14px', marginBottom: '24px' }}>
-                              <span style={{ color: '#8B5A2B', fontSize: '13px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-                                  Coming Soon
-                              </span>
-                              <span className="flex space-x-1 ml-3">
-                                  <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s' }}></span>
-                                  <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s', animationDelay: '0.5s' }}></span>
-                                  <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s', animationDelay: '1s' }}></span>
-                              </span>
+                            <span style={{ color: '#8B5A2B', fontSize: '13px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+                              Coming Soon
+                            </span>
+                            <span className="flex space-x-1 ml-3">
+                              <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s' }}></span>
+                              <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s', animationDelay: '0.5s' }}></span>
+                              <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s', animationDelay: '1s' }}></span>
+                            </span>
                           </div>
                         ) : (
                           <div className="custom-read-more">
