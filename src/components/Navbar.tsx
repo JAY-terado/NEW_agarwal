@@ -48,23 +48,15 @@ export default function Navbar() {
 
 
   const [isEnquireModalOpen, setIsEnquireModalOpen] = useState(false);
-  const [modalType, setModalType] = useState<'enquire' | 'siteVisit'>('enquire');
   const [contactSubmitted, setContactSubmitted] = useState(false);
 
   useEffect(() => {
     const handleOpenEnquire = () => {
-      setModalType('enquire');
-      setIsEnquireModalOpen(true);
-    };
-    const handleOpenSiteVisit = () => {
-      setModalType('siteVisit');
       setIsEnquireModalOpen(true);
     };
     window.addEventListener('openEnquireModal', handleOpenEnquire);
-    window.addEventListener('openSiteVisitModal', handleOpenSiteVisit);
     return () => {
       window.removeEventListener('openEnquireModal', handleOpenEnquire);
-      window.removeEventListener('openSiteVisitModal', handleOpenSiteVisit);
     };
   }, []);
 
@@ -151,7 +143,7 @@ export default function Navbar() {
   };
 
   // Check if current page needs light navbar by default
-  const isLightHero = location.pathname === '/completed-projects' || (location.pathname.startsWith('/blogs/') && location.pathname !== '/blogs') || location.pathname.endsWith('/faqs');
+  const isLightHero = location.pathname === '/sitemap' || location.pathname === '/completed-projects' || (location.pathname.startsWith('/blogs/') && location.pathname !== '/blogs') || location.pathname.endsWith('/faqs');
   const forceScrolledStyle = scrolled || isLightHero;
 
   // Nav base: transparent/blur; scrolled: white glass
@@ -682,10 +674,10 @@ export default function Navbar() {
               </button>
 
               <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '4px', lineHeight: 1.4 }}>
-                Request an <span className="text-brass">Immediate Callback</span> {modalType === 'siteVisit' ? 'Pre Reserving Your Site Visit.' : 'for Exclusive Offers.'}
+                Request an <span className="text-brass">Immediate Callback</span> for Exclusive Offers.
               </div>
               <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingBottom: '20px', marginBottom: '20px', fontWeight: 300, borderBottom: '1px solid var(--color-line)' }}>
-                Share your details and our relationship manager will contact you {modalType === 'siteVisit' ? 'soon' : 'with special offer'}.
+                Share your details and our relationship manager will contact you with special offer.
               </div>
               <AnimatePresence mode="wait">
                 {!contactSubmitted ? (

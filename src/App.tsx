@@ -19,6 +19,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import Disclaimer from './pages/Disclaimer';
 import Careers from './pages/Careers';
 import AboutUs from './pages/AboutUs';
+import Sitemap from './pages/Sitemap';
 import CompletedProjects from './pages/CompletedProjects';
 import FaqPage from './pages/FaqPage';
 
@@ -59,6 +60,7 @@ function AnimatedRoutes() {
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/completed-projects" element={<CompletedProjects />} />
           <Route path="/faqs" element={<FaqPage />} />
+          <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/projects/:slug/faqs" element={<FaqPage />} />
           
           {/* Admin Routes */}
