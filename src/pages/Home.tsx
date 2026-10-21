@@ -147,7 +147,7 @@ export default function Home() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [showAllFaqs, setShowAllFaqs] = useState(false);
   const [activeVideoModal, setActiveVideoModal] = useState<Testimonial | null>(null);
-  
+
   const [isEnquireModalOpen, setIsEnquireModalOpen] = useState(false);
   const [isHeroTextVisible, setIsHeroTextVisible] = useState(false);
   const heroTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -655,7 +655,7 @@ export default function Home() {
                 },
                 horizon: {
                   badge: 'Township Living',
-                  location: 'Opp. Balaji Hanuman Temple, Virar-Nsp Link Road, Nilemore, Virar (W), MMR Mumbai',
+                  location: 'To be announced soon',
                   tags: ['Grand Clubhouses', 'Sky-High Rooftop Amenities', 'Multipurpose Turf', 'Excellent Connectivity']
                 }
               }[proj.slug as 'infinity' | 'skyrise' | 'sky-heights' | 'horizon'] || {
@@ -664,14 +664,16 @@ export default function Home() {
                 tags: []
               };
 
+              const projectName = proj.slug === 'horizon' ? 'Upcoming Mega Project in Virar West' : proj.name;
+
               return (
                 <article key={proj.slug} className="pcard">
                   <div className="pcard-media">
                     {/* <span className="pbadge">{projectMeta.badge}</span> */}
-                    <img src={imageSrc} alt={proj.name} />
+                    <img src={imageSrc} alt={projectName} />
                   </div>
                   <div className="pbody">
-                    <h3>{proj.name}</h3>
+                    <h3>{projectName}</h3>
                     <span className="loc">{projectMeta.location}</span>
                     {proj.slug !== 'horizon' && (
                       <>
@@ -706,14 +708,14 @@ export default function Home() {
                     {proj.slug === 'horizon' && (
                       <div className="pcta" style={{ marginTop: 'auto' }}>
                         <div className="inline-flex items-center justify-center w-full rounded-full" style={{ height: '54px', border: '1px solid #8B5A2B', backgroundColor: 'transparent' }}>
-                            <span style={{ color: '#8B5A2B', fontSize: '13px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-                                Coming Soon
-                            </span>
-                            <span className="flex space-x-1 ml-3">
-                                <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s' }}></span>
-                                <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s', animationDelay: '0.5s' }}></span>
-                                <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s', animationDelay: '1s' }}></span>
-                            </span>
+                          <span style={{ color: '#8B5A2B', fontSize: '13px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+                            Coming Soon
+                          </span>
+                          <span className="flex space-x-1 ml-3">
+                            <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s' }}></span>
+                            <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s', animationDelay: '0.5s' }}></span>
+                            <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s', animationDelay: '1s' }}></span>
+                          </span>
                         </div>
                       </div>
                     )}
@@ -1050,7 +1052,7 @@ export default function Home() {
 
           <div className="flex justify-center mt-16 reveal">
             <a className="custom-read-more" href="https://www.instagram.com/agarwalrealties" target="_blank" rel="noopener noreferrer">
-              <span className="custom-read-more__label">View More</span>
+              <span className="custom-read-more__label">View More On Instagram</span>
               <span className="custom-read-more__icon">
                 <span className="custom-read-more__icon-small">
                   <svg viewBox="0 0 100 100">

@@ -48,7 +48,7 @@ export default function Blog() {
             Insights &amp; <span className="italic font-serif text-brass-bright font-normal">Updates</span>
           </h1>
           <p className="text-xs sm:text-sm text-ivory/80 font-light leading-relaxed max-w-none mx-auto mb-8 sm:whitespace-nowrap">
-            Stories on design, community and the evolving Vasai–Virar landscape — straight from the team building it.
+            Explore curated articles, design insights, and expert perspectives on real estate and modern living.
           </p>
           {/* <div className="flex items-center justify-center gap-2 text-[10px] font-bold uppercase tracking-widest text-ivory/60">
             <Link to="/" className="hover:text-brass-bright transition-colors">Home</Link>

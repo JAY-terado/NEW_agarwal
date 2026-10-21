@@ -12,7 +12,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Formulate and execute overall sales and marketing strategies for all real estate projects. Manage large marketing budgets, drive multi-channel sales campaigns, lead the sales management team, and establish strong relationships with key channel partners to achieve organizational revenue targets.",
     "requirements": [
       "MBA in Marketing / Post Graduate",
@@ -31,7 +31,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Lead and motivate the on-site sales executive team to meet monthly and quarterly sales targets. Handle corporate clients, resolve complex customer queries, monitor daily site walk-ins, and manage broker networks/channel partners.",
     "requirements": [
       "MBA / Graduate",
@@ -49,7 +49,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Assist the Sales Manager in managing site walk-ins, delivering project pitches, maintaining active communication with potential buyers, and executing initial documentation during booking.",
     "requirements": [
       "Graduate / MBA",
@@ -67,7 +67,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Conduct project presentations and site tours for prospective buyers. Explain layout plans, pricing models, and financing options. Follow up diligently with prospective leads to close property bookings.",
     "requirements": [
       "Graduate",
@@ -85,7 +85,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Call incoming leads generated from marketing campaigns, introduce ongoing projects, filter qualified prospects, and schedule formal site visits for the on-site sales team.",
     "requirements": [
       "Undergraduate / Graduate",
@@ -103,7 +103,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Plan and supervise all digital lead generation campaigns across Google, Facebook, Instagram, and LinkedIn. Analyze campaign performance metrics, optimize cost per lead (CPL), and manage the digital marketing agency and internal creative team.",
     "requirements": [
       "MBA / Certification in Digital Marketing",
@@ -122,7 +122,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Execute and monitor daily paid ad campaigns, manage official social media channels, publish regular updates, and optimize website content to improve organic search rankings.",
     "requirements": [
       "Graduate / Digital Marketing Course",
@@ -140,7 +140,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Design high-quality marketing collateral including project brochures, social media posters, ad banners, and short video reels for digital promotion.",
     "requirements": [
       "Diploma or Degree in Graphic Design",
@@ -159,7 +159,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Oversee the end-to-end execution of high-rise or large residential/commercial projects. Ensure construction aligns with approved architectural drawings, master timelines, quality benchmarks, and budgetary limits.",
     "requirements": [
       "B.E. / B.Tech in Civil Engineering",
@@ -177,7 +177,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Supervise daily on-site construction work, cross-verify RCC layouts and finishing tasks against structural drawings, resolve technical challenges, and monitor subcontractor milestones.",
     "requirements": [
       "B.E. / B.Tech / Diploma in Civil Engineering",
@@ -195,7 +195,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Manage on-site labor allocations, oversee daily masonry, shuttering, and reinforcement activities, maintain accurate material utilization logs, and report progress to the Senior Engineer.",
     "requirements": [
       "B.E. / Diploma in Civil Engineering",
@@ -213,7 +213,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Prepare precise material quantity estimations, verify contractor and vendor invoices against actual site execution metrics, analyze work-rate fluctuations, and manage monthly billing reconciliations.",
     "requirements": [
       "B.E. / Diploma in Civil Engineering",
@@ -232,7 +232,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Head the post-sales customer service division. Oversee allotment processes, manage bank loan documentations, coordinate registration processes, and resolve complex client queries or complaints.",
     "requirements": [
       "MBA / Post Graduate",
@@ -250,7 +250,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Generate and issue milestone-based payment demand letters to customers, process receipts, maintain accurate customer accounts in CRM software, and follow up regularly on outstanding payments.",
     "requirements": [
       "Graduate",
@@ -268,7 +268,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Manage the company's comprehensive financial accounts. Finalize annual balance sheets, optimize corporate taxation models, handle statutory GST/TDS compliance filing, and manage project fund allocations and cash flows.",
     "requirements": [
       "CA / ICWA / M.Com",
@@ -286,7 +286,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Maintain accurate day-to-day accounting records using Tally Prime. Process vendor payments, reconcile monthly bank statements, verify contractor invoices, and administer employee payroll records.",
     "requirements": [
       "B.Com / M.Com",
@@ -304,7 +304,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Assist the senior accounting team with basic financial data entry, file physical and digital invoices, process petty cash expenses, and perform general administrative accounting support tasks.",
     "requirements": [
       "B.Com",
@@ -322,7 +322,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Lead the procurement department for structural and finishing materials (steel, cement, tiles, plumbing fixtures). Develop a strong vendor network, negotiate volume-based supply contracts, and minimize procurement costs.",
     "requirements": [
       "Graduate / MBA in Supply Chain",
@@ -340,7 +340,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Manage the on-site materials warehouse. Maintain precise logs for inward shipments and outward material issuance, conduct regular physical stock verifications, and prevent material damage or theft.",
     "requirements": [
       "Graduate",
@@ -358,7 +358,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Coordinate with municipal corporations, town planning boards, environment ministries, and RERA authorities to secure all necessary pre-construction approvals, commencement certificates, and final occupancy certificates.",
     "requirements": [
       "Graduate / Architect / Civil Engineer",
@@ -376,7 +376,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Prepare and organize structural/legal files for submission to various government bodies. Handle field visits to administrative offices to track file status and expedite approval processes.",
     "requirements": [
       "Graduate",
@@ -393,7 +393,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Establish on-site quality assurance frameworks. Conduct structural raw material checks (compressive strength, sand silt content, steel tensile tests) and enforce strict standard operating procedures for structural masonry and finishes.",
     "requirements": [
       "B.E. Civil / Quality Certification",
@@ -411,7 +411,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Enforce strict construction safety protocols at the project site. Ensure mandatory usage of safety gear (harnesses, helmets, nets), conduct periodic safety drills, and mitigate workplace hazards.",
     "requirements": [
       "Diploma in Fire & Safety / Civil Engineering",
@@ -429,7 +429,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Oversee the organization's legal affairs. Conduct intensive title verification checks for land acquisitions, manage joint-development contract drafting, represent the company in regulatory forums, and handle dispute litigations.",
     "requirements": [
       "LLB / LLM",
@@ -447,7 +447,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Draft standard customer Sale Deeds, Allotment Letters, and Vendor Agreements. Compile historical title documents and maintain absolute regulatory alignment with regional property laws.",
     "requirements": [
       "LLB",
@@ -465,7 +465,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Manage end-to-end human resource planning and general office administration. Strategize corporate recruitment drives, manage employee performance appraisal systems, process payroll parameters, and maintain active adherence to local labor codes.",
     "requirements": [
       "MBA in HR",
@@ -483,7 +483,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Prepare and review BBS, optimize steel consumption, reconcile reinforcement steel with structural drawings, and support execution and billing activities.",
     "requirements": [
       "B.E./B.Tech / Diploma in Civil Engineering",
@@ -502,7 +502,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Prepare BOQs, quantity take-offs, cost estimates, billing verification, rate analysis, and project cost monitoring.",
     "requirements": [
       "B.E./B.Tech / Diploma in Civil Engineering",
@@ -521,7 +521,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Assist in project scheduling, tracking tracking, MIS reporting, tracking progress, and coordination for timely execution.",
     "requirements": [
       "B.E./B.Tech / Diploma in Civil Engineering",
@@ -540,7 +540,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Conduct RMC, aggregates, sand, ready mix plaster, specific gravity, steel/TMT testing, site inspection, and quality documentation.",
     "requirements": [
       "Diploma / ITI / Degree in Material Technology / Civil Engineering or Equivalent",
@@ -558,7 +558,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Manage MEP execution including electrical, plumbing, firefighting, HVAC, coordination, testing, and commissioning activities.",
     "requirements": [
       "B.E./B.Tech / Diploma in Electrical / Mechanical Engineering",
@@ -577,7 +577,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Lead end-to-end project execution; planning, budgeting, contractor management, project delivery, and stakeholder coordination.",
     "requirements": [
       "B.E./B.Tech in Civil Engineering (MBA preferred)",
@@ -596,7 +596,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Support QA/QC activities, inspections, documentation, material testing, and quality compliance.",
     "requirements": [
       "B.Tech in Civil Engineering / Diploma in Civil Engineering",
@@ -614,7 +614,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Manage QA/QC systems, material approvals, audits, corrective actions, and ensure construction quality standards.",
     "requirements": [
       "B.E./B.Tech / Diploma in Civil Engineering",
@@ -633,7 +633,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Lead EHS functions, implement safety procedures, conduct audits, training, incident management, and statutory compliance.",
     "requirements": [
       "Degree / Diploma in Safety Management / Certified ADIS (Industrial Safety preferred)",
@@ -652,7 +652,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Monitor site safety practices, conduct toolbox talks, ensure PPE compliance, and support timely completion.",
     "requirements": [
       "Diploma / Certification in Safety Management / Course preferred",
@@ -670,7 +670,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Supervise project execution, monitor quality and progress, coordinate contractors, and ensure timely completion.",
     "requirements": [
       "B.E./B.Tech / Diploma in Civil Engineering",
@@ -688,7 +688,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Develop project schedules, monitor progress, perform delay analysis, and manage planning reports using Primavera/MS Project.",
     "requirements": [
       "B.E./B.Tech / Diploma in Civil Engineering (Planning Certification preferred)",
@@ -707,7 +707,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Handle site execution, contractor coordination, quality monitoring, and daily progress management.",
     "requirements": [
       "B.E./B.Tech / Diploma in Civil Engineering",
@@ -725,7 +725,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Manage material receipt, inventory control, stock records, issue tracking, and store documentation.",
     "requirements": [
       "Graduate / Diploma in Material Management / Supply Chain Management / Construction Material Management",
@@ -744,7 +744,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Supervise labour and construction activities, monitor productivity, and maintain site discipline.",
     "requirements": [
       "Graduate / ITI / Diploma / Degree in Civil Engineering",
@@ -762,7 +762,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Perform layout marking, level checking, quantity verification, and coordinate survey activities.",
     "requirements": [
       "Diploma / Degree in ITI Surveying / Civil Engineering",
@@ -780,7 +780,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Assist senior architects with architectural drawings, layouts, design development, site measurements, and coordination with consultants and site teams. Prepare and revise drawings as per project requirements.",
     "requirements": [
       "B.Arch / Diploma in Architecture",
@@ -799,7 +799,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Assist in developing interior layouts, furniture plans, material selections, and presentations. Coordinate with vendors and site teams and support execution as per approved designs.",
     "requirements": [
       "Degree / Diploma in Interior Design",
@@ -818,7 +818,7 @@ const JOBS = [
     "employmentType": "Full Time",
     "experience": "As per industry standards",
     "salary": "Competitive",
-    "vacancies": "Open",
+    "vacancies": "Available Openings",
     "description": "Prepare accurate 2D architectural and working drawings under senior supervision. Update drawings based on site requirements, maintain drawing revisions, and coordinate drawing details with project teams.",
     "requirements": [
       "Diploma / ITI in Drafting or Civil / Architectural Drafting",
@@ -888,7 +888,8 @@ export default function Careers() {
                   </div>
                   <button
                     onClick={() => setSelectedJob(job.id)}
-                    className="btn-enquire self-start sm:self-auto"
+                    className="pcta-btn btn-enquire self-start sm:self-auto"
+                    style={{ flex: 'none', padding: '12px 28px' }}
                   >
                     <span>Apply Now</span>
                     <span className="arr">→</span>
@@ -918,7 +919,7 @@ export default function Careers() {
                     <div className="flex items-center gap-1.5 text-[10px] uppercase text-taupe font-semibold tracking-wider">
                       <Users className="w-3 h-3" /> Vacancies
                     </div>
-                    <span className="text-sm text-ink-soft font-medium">{job.vacancies} Openings</span>
+                    <span className="text-sm text-ink-soft font-medium">{job.vacancies || "Available Openings"}</span>
                   </div>
                 </div>
 
@@ -1002,8 +1003,10 @@ export default function Careers() {
                 <button type="button" onClick={() => setSelectedJob(null)} className="flex-1 py-3 rounded-full text-sm font-semibold text-ink border border-line hover:bg-ivory transition-colors">
                   Cancel
                 </button>
-                <button type="submit" className="flex-1 py-3 rounded-full text-sm font-semibold bg-pine text-ivory hover:bg-pine-deep transition-colors shadow-lg">
-                  Submit Application
+                <button type="submit" className="pcta-btn btn-enquire flex-1"
+                  style={{ padding: '14px 24px' }}>
+                  <span>Submit Application</span>
+                  <span className="arr">→</span>
                 </button>
               </div>
             </form>

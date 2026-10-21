@@ -65,7 +65,7 @@ export default function AboutUs() {
                 From affordable homes to premium apartments, every project reflects our commitment to exceptional construction quality, intelligent space planning, modern lifestyle amenities, and timely delivery.
               </p>
               <p>
-                With <strong>30+</strong> completed residential projects, <strong>5,000+</strong> happy families and <strong>1Cr+</strong> square feet developed, we continue to create homes that offer comfort today and appreciation for the future.
+                With <strong>50+</strong> completed residential projects, <strong>5,000+</strong> happy families and <strong>1Cr+</strong> square feet developed, we continue to create homes that offer comfort today and appreciation for the future.
               </p>
               <div className="quote">
                 <p className="serif">"Every Agarwal development is designed to build not just homes, but thriving communities where families grow, memories are created, and investments gain lasting value."</p>
@@ -264,12 +264,14 @@ export default function AboutUs() {
                 return (
                   <CardWrapper key={proj.slug} {...(wrapperProps as any)} style={{ display: 'block', textDecoration: 'none', borderRadius: '12px', overflow: 'hidden', background: '#fff', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', transition: 'transform 0.3s ease', cursor: isHorizon ? 'default' : 'pointer' }} onMouseEnter={e => e.currentTarget.style.transform = isHorizon ? 'none' : 'translateY(-5px)'} onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}>
                     <div style={{ height: '240px', overflow: 'hidden' }}>
-                      <img src={imageSrc} alt={proj.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <img src={imageSrc} alt={isHorizon ? 'Upcoming Project' : proj.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                     <div style={{ padding: '24px', textAlign: 'center' }}>
-                      <h3 className="serif" style={{ fontSize: '1.5rem', color: 'var(--ink)', marginBottom: '8px' }}>{proj.name}</h3>
+                      <h3 className="serif" style={{ fontSize: '1.5rem', color: 'var(--ink)', marginBottom: '8px' }}>
+                        {isHorizon ? 'Upcoming Project' : proj.name}
+                      </h3>
                       <p style={{ color: 'var(--ink-soft)', marginBottom: '16px', fontSize: '0.95rem' }}>
-                        {shortLocation}{!isHorizon && ` | ${proj.config}`}
+                        {isHorizon ? 'To be Announced Soon' : `${shortLocation} | ${proj.config}`}
                       </p>
                       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         {isHorizon ? (

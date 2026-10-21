@@ -14,6 +14,7 @@ import EditBlog from './pages/admin/EditBlog';
 import { BlogProvider } from './context/BlogContext';
 import ChannelPartner from './pages/ChannelPartner';
 import CustomerRegistration from './pages/CustomerRegistration';
+import SupplierRegistration from './pages/SupplierRegistration';
 import TermsConditions from './pages/TermsConditions';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Disclaimer from './pages/Disclaimer';
@@ -53,6 +54,7 @@ function AnimatedRoutes() {
           <Route path="/channel-partner-registration" element={<ChannelPartner />} />
           <Route path="/channel-partner-faqs" element={<ChannelPartner />} />
           <Route path="/customer-registration" element={<CustomerRegistration />} />
+          <Route path="/supplier-registration" element={<SupplierRegistration />} />
           <Route path="/terms-conditions" element={<TermsConditions />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/disclaimer" element={<Disclaimer />} />

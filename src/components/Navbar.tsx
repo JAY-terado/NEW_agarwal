@@ -419,7 +419,7 @@ export default function Navbar() {
                     <div style={{ aspectRatio: '16/10', overflow: 'hidden', borderRadius: '6px', marginBottom: '12px', position: 'relative', background: '#e7e1d4' }}>
                       <img
                         src={projectImages[proj.slug]}
-                        alt={proj.name}
+                        alt={isHorizon ? 'Upcoming Mega Project in Virar West' : proj.name}
                         style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform .9s', display: 'block' }}
                         onError={e => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
                       />
@@ -429,8 +429,8 @@ export default function Navbar() {
                         </div>
                       )}
                     </div>
-                    <h4 style={{ fontFamily: '"Fraunces", serif', fontWeight: 500, fontSize: '1.04rem', color: 'var(--ink)', lineHeight: 1.16, transition: 'color .3s' }}>{proj.name}</h4>
-                    <div style={{ fontSize: '.74rem', color: 'var(--taupe)', marginTop: '2px' }}>{proj.location}</div>
+                    <h4 style={{ fontFamily: '"Fraunces", serif', fontWeight: 500, fontSize: '1.04rem', color: 'var(--ink)', lineHeight: 1.16, transition: 'color .3s' }}>{isHorizon ? 'Upcoming Mega Project in Virar West' : proj.name}</h4>
+                    <div style={{ fontSize: '.74rem', color: 'var(--taupe)', marginTop: '2px' }}>{isHorizon ? 'To be announced soon' : proj.location}</div>
                     <div style={{ fontSize: '.78rem', color: 'var(--ink-soft)', marginTop: '7px', display: 'flex', gap: '12px', alignItems: 'baseline' }}>
                       {!isHorizon && (
                         <>
@@ -552,7 +552,7 @@ export default function Navbar() {
                                         e.currentTarget.style.transform = 'none';
                                       }}
                                     >
-                                      <span style={{ whiteSpace: 'nowrap' }}>{p.name}</span>
+                                      <span style={{ whiteSpace: 'nowrap' }}>{isHorizon ? 'Upcoming Mega Project in Virar West' : p.name}</span>
                                       {isHorizon && (
                                         <span style={{ fontSize: '0.65rem', padding: '2px 8px', background: 'transparent', border: '1px solid currentColor', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>
                                           Coming Soon

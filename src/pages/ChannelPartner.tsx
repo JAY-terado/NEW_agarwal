@@ -53,7 +53,7 @@ export default function ChannelPartner() {
 
   const whyPartnerFeatures = [
     { icon: <Award />, title: "48+ Years of Legacy", desc: "Building trust since 1978." },
-    { icon: <Building2 />, title: "30+ Successful Projects", desc: "A proven track record across MMR." },
+    { icon: <Building2 />, title: "50+ Successful Projects", desc: "A proven track record across MMR." },
     { icon: <TrendingUp />, title: "High Conversion Projects", desc: "Well-planned developments in growing locations." },
     { icon: <Banknote />, title: "Attractive Commission Structure", desc: "Competitive and timely payouts." },
     { icon: <UserCheck />, title: "Dedicated Relationship Manager", desc: "One point of contact for all your requirements." },
@@ -148,24 +148,26 @@ export default function ChannelPartner() {
               return (
                 <CardWrapper key={proj.slug} {...(wrapperProps as any)} style={{ display: 'block', textDecoration: 'none', borderRadius: '12px', overflow: 'hidden', background: '#fff', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', transition: 'transform 0.3s ease', cursor: isHorizon ? 'default' : 'pointer' }} onMouseEnter={e => e.currentTarget.style.transform = isHorizon ? 'none' : 'translateY(-5px)'} onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}>
                   <div style={{ height: '240px', overflow: 'hidden' }}>
-                    <img src={imageSrc} alt={proj.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <img src={imageSrc} alt={isHorizon ? 'Upcoming Project' : proj.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
                   <div style={{ padding: '24px', textAlign: 'center' }}>
-                    <h3 className="serif" style={{ fontSize: '1.5rem', color: 'var(--ink)', marginBottom: '8px' }}>{proj.name}</h3>
+                    <h3 className="serif" style={{ fontSize: '1.5rem', color: 'var(--ink)', marginBottom: '8px' }}>
+                      {isHorizon ? 'Upcoming Project' : proj.name}
+                    </h3>
                     <p style={{ color: 'var(--ink-soft)', marginBottom: '16px', fontSize: '0.95rem' }}>
-                      {shortLocation}{!isHorizon && ` | ${proj.config}`}
+                      {isHorizon ? 'To be Announced Soon' : `${shortLocation} | ${proj.config}`}
                     </p>
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                       {isHorizon ? (
                         <div className="inline-flex items-center justify-center px-8 rounded-full" style={{ height: '54px', border: '1px solid #8B5A2B', backgroundColor: 'transparent', marginTop: '14px', marginBottom: '24px' }}>
-                            <span style={{ color: '#8B5A2B', fontSize: '13px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-                                Coming Soon
-                            </span>
-                            <span className="flex space-x-1 ml-3">
-                                <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s' }}></span>
-                                <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s', animationDelay: '0.5s' }}></span>
-                                <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s', animationDelay: '1s' }}></span>
-                            </span>
+                          <span style={{ color: '#8B5A2B', fontSize: '13px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.2em' }}>
+                            Coming Soon
+                          </span>
+                          <span className="flex space-x-1 ml-3">
+                            <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s' }}></span>
+                            <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s', animationDelay: '0.5s' }}></span>
+                            <span className="w-1 h-1 rounded-full animate-ping" style={{ backgroundColor: '#8B5A2B', animationDuration: '1.5s', animationDelay: '1s' }}></span>
+                          </span>
                         </div>
                       ) : (
                         <div className="custom-read-more">

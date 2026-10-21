@@ -39,6 +39,7 @@ export default function Sitemap() {
         { label: 'Channel Partner Registration', to: '/channel-partner-registration' },
         { label: 'Channel Partner FAQs', to: '/channel-partner-faqs' },
         { label: 'Customer Registration', to: '/customer-registration' },
+        { label: 'Supplier & Contractor Registration', to: '/supplier-registration' },
       ],
     },
     {

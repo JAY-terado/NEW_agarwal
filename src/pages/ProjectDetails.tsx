@@ -581,7 +581,7 @@ export default function ProjectDetails() {
               <div className="py-8 lg:py-14 px-2 lg:px-4 flex flex-col justify-center items-center text-center border-b lg:border-b-0 lg:border-r border-line-light bg-[var(--color-ivory)]">
                 <div className="text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-ink-soft mt-2 lg:mt-4">Amenities</div>
                 <div className="font-serif text-brass-deep flex items-baseline justify-center gap-1.5 mt-1">
-                  <span className="text-4xl sm:text-5xl lg:text-5xl font-normal leading-none">30+</span>
+                  <span className="text-4xl sm:text-5xl lg:text-5xl font-normal leading-none">50+</span>
                   <span className="text-lg sm:text-xl lg:text-2xl font-light">Premium Amenities</span>
                 </div>
               </div>
@@ -1245,7 +1245,7 @@ export default function ProjectDetails() {
                   },
                   horizon: {
                     badge: 'Township Living',
-                    location: 'Opp. Balaji Hanuman Temple, Virar-Nsp Link Road, Nilemore, Virar (W), MMR Mumbai',
+                    location: 'To be announced soon',
                     tags: ['Grand Clubhouses', 'Sky-High Rooftop Amenities', 'Multipurpose Turf', 'Excellent Connectivity']
                   }
                 }[proj.slug as 'infinity' | 'skyrise' | 'sky-heights' | 'horizon'] || {
@@ -1254,13 +1254,15 @@ export default function ProjectDetails() {
                   tags: []
                 };
 
+                const projectName = proj.slug === 'horizon' ? 'Upcoming Mega Project in Virar West' : proj.name;
+
                 return (
                   <article key={proj.slug} className="pcard w-full">
                     <div className="pcard-media">
-                      <img src={imageSrc} alt={proj.name} />
+                      <img src={imageSrc} alt={projectName} />
                     </div>
                     <div className="pbody">
-                      <h3>{proj.name}</h3>
+                      <h3>{projectName}</h3>
                       <span className="loc">{projectMeta.location}</span>
                       {proj.slug !== 'horizon' && (
                         <>

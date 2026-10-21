@@ -225,7 +225,7 @@ export default function ProjectNavbar() {
                             if (!isHorizon) setDropdownOpen(false);
                           }}
                         >
-                          <span style={{ whiteSpace: 'nowrap' }}>{p.name}</span>
+                          <span style={{ whiteSpace: 'nowrap' }}>{isHorizon ? 'Upcoming Project' : p.name}</span>
                           {isHorizon && (
                             <span style={{ fontSize: '0.65rem', padding: '2px 8px', background: 'transparent', border: '1px solid currentColor', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>
                               Coming Soon
