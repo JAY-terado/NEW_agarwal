@@ -28,7 +28,7 @@ export default function Sitemap() {
         { label: 'Agarwal Infinity', to: '/projects/infinity' },
         { label: 'Agarwal Sky Heights', to: '/projects/sky-heights' },
         { label: 'Agarwal Skyrise', to: '/projects/skyrise' },
-        { label: 'Agarwal Horizon', to: '/projects/horizon', disabled: true },
+        { label: 'Upcoming Project', to: '/projects/horizon', disabled: true },
       ],
     },
     {
