@@ -4,6 +4,7 @@ import { PlusCircle, Trash2, ExternalLink, Edit, AlertTriangle, X } from 'lucide
 import { motion, AnimatePresence } from 'framer-motion';
 import { useBlogContext } from '../../context/BlogContext';
 import { type BlogPost } from '../../data/blogs';
+import toast from 'react-hot-toast';
 
 export default function BlogList() {
   const { blogs, deleteBlog, isLoading } = useBlogContext();
