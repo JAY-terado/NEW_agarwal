@@ -49,11 +49,12 @@ export default function AddBlog() {
 
     try {
       await createBlogAxios({
-        titlename: title,
-        category,
-        summary: excerpt,
-        article: content,
-        imageurl: [image]
+        title,
+        blogCategory: category,
+        blogSummary: excerpt,
+        blogDescription: content,
+        blogImageFileName: image.split('/').pop()?.split('?')[0] || 'blog-image.webp',
+        blogImageURL: image,
       });
       Swal.fire({
         icon: 'success',

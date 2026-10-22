@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, User, Home, FileText, Building } from 'lucide-react';
+import { CheckCircle2, User, Home, FileText, Building, AlertCircle, Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import heroImage from '../assets/gallery-exterior.webp';
+import toast from 'react-hot-toast';
+import { customerRegistrationAxios, extractErrorMessage } from '../_api/user';
+import heroImage from '../assets/gallery-exterior-residential-towers-virar.webp';
 
 const schema = z.object({
   applicantName: z.string().min(2, "Name must be at least 2 characters"),
@@ -68,6 +70,8 @@ const ErrorMessage = ({ message }: { message?: string }) => {
 
 export default function CustomerRegistration() {
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
 
   const [otpSent, setOtpSent] = useState(false);
   const [cpOtpSent, setCpOtpSent] = useState(false);
@@ -89,10 +93,51 @@ export default function CustomerRegistration() {
 
   const visitSource = watch('visitSource');
 
-  const onSubmit = (data: FormData) => {
-    console.log("Form Submitted:", data);
-    setFormSubmitted(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const onSubmit = async (data: FormData) => {
+    try {
+      setIsSubmitting(true);
+      setServerError(null);
+
+      const referredBy =
+        data.visitSource === 'Channel Partner'
+          ? [data.cpName, data.cpAgencyName ? `(${data.cpAgencyName})` : '', data.cpMobileNumber ? `- ${data.cpMobileNumber}` : '', data.cpLocation ? `(${data.cpLocation})` : '']
+              .filter(Boolean)
+              .join(' ')
+              .trim()
+          : (data.source || 'Direct');
+
+      const payload = {
+        fullName: data.applicantName.trim(),
+        email: (data.email || '').trim(),
+        mobileNumber: data.mobileNumber.trim(),
+        occupationCategory: (data.occupation || '').trim(),
+        designation: (data.designation || '').trim(),
+        organization: (data.companyName || '').trim(),
+        preferredConfiguration: (data.config || '').trim(),
+        estimatedBudget: (data.budget || '').trim(),
+        sourceOfVisit: (data.visitSource || '').trim(),
+        referredBy: referredBy || 'Direct',
+        houseNo: (data.houseNo || '').trim(),
+        buildingOrSocietyName: data.buildingName.trim(),
+        locality: (data.streetName || '').trim(),
+        city: data.city.trim(),
+        pincode: data.pincode.trim(),
+        state: data.state.trim(),
+        country: data.country.trim(),
+      };
+
+      const res = await customerRegistrationAxios(payload);
+      toast.success(res?.message || 'Customer registration submitted successfully!');
+      setFormSubmitted(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err: any) {
+      console.error('Customer registration error:', err);
+      const msg = extractErrorMessage(err, 'Failed to complete registration. Please check your information and try again.');
+      setServerError(msg);
+      toast.error(msg);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const getInputStyle = (error?: any) => {
@@ -149,6 +194,16 @@ export default function CustomerRegistration() {
               </div>
 
               <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8">
+                {serverError && (
+                  <div className="flex items-start gap-3 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs shadow-sm">
+                    <AlertCircle className="w-5 h-5 shrink-0 text-rose-600 mt-0.5" />
+                    <div className="flex-1 font-medium leading-relaxed">
+                      <strong className="block text-rose-900 font-semibold mb-0.5">Registration Error</strong>
+                      {serverError}
+                    </div>
+                  </div>
+                )}
+
                 {/* 1. Applicant Section */}
                 <div className="flex flex-col gap-4">
                   <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brass-deep pb-2 border-b border-line/40">
@@ -589,11 +644,26 @@ export default function CustomerRegistration() {
 
                   <button
                     type="submit"
+                    disabled={isSubmitting}
                     className="pcta-btn btn-enquire"
-                    style={{ width: '100%', marginTop: '8px' }}
+                    style={{
+                      width: '100%',
+                      marginTop: '8px',
+                      opacity: isSubmitting ? 0.7 : 1,
+                      cursor: isSubmitting ? 'not-allowed' : 'pointer'
+                    }}
                   >
-                    <span>Submit Registration Details</span>
-                    <span className="arr">→</span>
+                    {isSubmitting ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Submitting Registration Details...
+                      </span>
+                    ) : (
+                      <>
+                        <span>Submit Registration Details</span>
+                        <span className="arr">→</span>
+                      </>
+                    )}
                   </button>
                 </div>
               </form>

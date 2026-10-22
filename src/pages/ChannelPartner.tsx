@@ -2,17 +2,19 @@ import { useState, useEffect, useRef } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import {
   Building2, Award, TrendingUp, HandCoins, UserCheck, FileCheck, Star,
-  Megaphone, Clock, Bell, Headphones, MapPin, Calendar, Smartphone, Banknote, Users
+  Megaphone, Clock, Bell, Headphones, MapPin, Calendar, Smartphone, Banknote, Users, AlertCircle
 } from 'lucide-react';
-import cpHero from '../assets/cpHero.webp';
-import cp2Image from '../assets/cp2.webp';
-import cp3Image from '../assets/cp3.webp';
-import heroImage from '../assets/horizon.webp';
+import toast from 'react-hot-toast';
+import { channelPartnerRegisterAxios, extractErrorMessage } from '../_api/registration';
+import cpHero from '../assets/cpHero-completed-projects-virar.webp';
+import cp2Image from '../assets/cp2-completed-projects-vasai-virar.webp';
+import cp3Image from '../assets/cp3-completed-projects-vasai-virar.webp';
+import heroImage from '../assets/horizon-residential-projects-virar.webp';
 import { channelPartnerFaqs } from '../data/faqs';
 import { projects } from '../data/projects';
-import infinityHero from '../assets/agarwal-infinity-hero.webp';
-import skyriseHero from '../assets/skyRise1.webp';
-import skyHeightsHero from '../assets/agarwalSkyheight.webp';
+import infinityHero from '../assets/agarwal-infinity-hero-flats-in-virar-west.webp';
+import skyriseHero from '../assets/skyRise1-flats-in-virar-west.webp';
+import skyHeightsHero from '../assets/agarwalSkyheight-luxury-flats-in-virar-west.webp';
 
 const projectHeroMap: Record<string, string> = {
   infinity: infinityHero,
@@ -24,6 +26,16 @@ const projectHeroMap: Record<string, string> = {
 export default function ChannelPartner() {
   const location = useLocation();
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    fullName: '',
+    firmOrCompanyName: '',
+    reraRegNo: '',
+    mobileNumber: '',
+    email: '',
+    cityOfOperation: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [showAllFaqs, setShowAllFaqs] = useState(false);
 
@@ -46,9 +58,76 @@ export default function ChannelPartner() {
     }, 100);
   }, [location]);
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    if (errorMsg) setErrorMsg(null);
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setFormSubmitted(true);
+    setErrorMsg(null);
+
+    if (!formData.fullName.trim()) {
+      const err = 'Please enter your full name';
+      setErrorMsg(err);
+      toast.error(err);
+      return;
+    }
+    if (!formData.firmOrCompanyName.trim()) {
+      const err = 'Please enter your firm or company name';
+      setErrorMsg(err);
+      toast.error(err);
+      return;
+    }
+    if (!formData.reraRegNo.trim()) {
+      const err = 'Please enter your RERA registration number';
+      setErrorMsg(err);
+      toast.error(err);
+      return;
+    }
+    if (!formData.mobileNumber.trim() || formData.mobileNumber.length !== 10) {
+      const err = 'Please enter a valid 10-digit mobile number';
+      setErrorMsg(err);
+      toast.error(err);
+      return;
+    }
+    if (!formData.email.trim()) {
+      const err = 'Please enter your email address';
+      setErrorMsg(err);
+      toast.error(err);
+      return;
+    }
+    if (!formData.cityOfOperation.trim()) {
+      const err = 'Please enter your city of operation';
+      setErrorMsg(err);
+      toast.error(err);
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const response = await channelPartnerRegisterAxios({
+        fullName: formData.fullName.trim(),
+        firmOrCompanyName: formData.firmOrCompanyName.trim(),
+        reraRegNo: formData.reraRegNo.trim(),
+        mobileNumber: formData.mobileNumber.trim(),
+        email: formData.email.trim(),
+        cityOfOperation: formData.cityOfOperation.trim()
+      });
+
+      if (response && response.success === false) {
+        throw new Error(response.message || 'Registration failed');
+      }
+
+      toast.success(response?.message || 'Registration submitted successfully!');
+      setFormSubmitted(true);
+    } catch (err: any) {
+      const msg = extractErrorMessage(err, 'Failed to submit registration. Please try again.');
+      setErrorMsg(msg);
+      toast.error(msg);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const whyPartnerFeatures = [
@@ -239,29 +318,62 @@ export default function ChannelPartner() {
                 <div className="ft serif">Registration Form</div>
                 <div className="fsub">Fill in your details below.</div>
 
+                {errorMsg && (
+                  <div className="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-start gap-2.5">
+                    <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-rose-600" />
+                    <span className="leading-relaxed font-medium">{errorMsg}</span>
+                  </div>
+                )}
+
                 <div className="frow">
                   <div className="field">
                     <label htmlFor="fullName">Full Name</label>
-                    <input type="text" id="fullName" required placeholder="Your name" />
+                    <input
+                      type="text"
+                      id="fullName"
+                      required
+                      placeholder="Your name"
+                      value={formData.fullName}
+                      onChange={(e) => handleInputChange('fullName', e.target.value)}
+                    />
                   </div>
                   <div className="field">
                     <label htmlFor="firmCompany">Firm / Company</label>
-                    <input type="text" id="firmCompany" required placeholder="Company name" />
+                    <input
+                      type="text"
+                      id="firmCompany"
+                      required
+                      placeholder="Company name"
+                      value={formData.firmOrCompanyName}
+                      onChange={(e) => handleInputChange('firmOrCompanyName', e.target.value)}
+                    />
                   </div>
                 </div>
 
                 <div className="frow">
                   <div className="field">
                     <label htmlFor="reraNo">RERA Reg. No.</label>
-                    <input type="text" id="reraNo" required placeholder="Agent RERA no." />
+                    <input
+                      type="text"
+                      id="reraNo"
+                      required
+                      placeholder="Agent RERA no."
+                      value={formData.reraRegNo}
+                      onChange={(e) => handleInputChange('reraRegNo', e.target.value)}
+                    />
                   </div>
                   <div className="field">
                     <label htmlFor="mobile">Mobile</label>
                     <div style={{ display: 'flex', border: '1px solid var(--color-line)', borderRadius: '4px', overflow: 'hidden', background: '#ffffff' }}>
                       <span style={{ display: 'flex', alignItems: 'center', background: 'var(--color-ivory)', borderRight: '1px solid var(--color-line)', fontSize: '.95rem', fontWeight: 500, color: 'var(--color-ink)', padding: '0 13px', userSelect: 'none' }}>+91</span>
                       <input
-                        type="tel" id="mobile" required maxLength={10} pattern="[0-9]{10}"
-                        onInput={(e) => { e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '').slice(0, 10); }}
+                        type="tel"
+                        id="mobile"
+                        required
+                        maxLength={10}
+                        pattern="[0-9]{10}"
+                        value={formData.mobileNumber}
+                        onChange={(e) => handleInputChange('mobileNumber', e.target.value.replace(/[^0-9]/g, '').slice(0, 10))}
                         placeholder="00000 00000"
                         style={{ width: '100%', flex: 1, border: 'none', padding: '13px 15px', fontSize: '.95rem', outline: 'none', background: 'transparent' }}
                       />
@@ -271,16 +383,35 @@ export default function ChannelPartner() {
 
                 <div className="field">
                   <label htmlFor="email">Email Address</label>
-                  <input type="email" id="email" required placeholder="you@email.com" />
+                  <input
+                    type="email"
+                    id="email"
+                    required
+                    placeholder="you@email.com"
+                    value={formData.email}
+                    onChange={(e) => handleInputChange('email', e.target.value)}
+                  />
                 </div>
 
                 <div className="field">
                   <label htmlFor="city">City of Operation</label>
-                  <input type="text" id="city" required placeholder="e.g. Mumbai, Thane, Palghar" />
+                  <input
+                    type="text"
+                    id="city"
+                    required
+                    placeholder="e.g. Mumbai, Thane, Palghar"
+                    value={formData.cityOfOperation}
+                    onChange={(e) => handleInputChange('cityOfOperation', e.target.value)}
+                  />
                 </div>
 
-                <button type="submit" className="pcta-btn btn-enquire" style={{ width: '100%', background: 'var(--brass)', color: '#fff', border: 'none' }}>
-                  <span>Become a Channel Partner</span>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="pcta-btn btn-enquire"
+                  style={{ width: '100%', background: 'var(--brass)', color: '#fff', border: 'none', opacity: isSubmitting ? 0.75 : 1, cursor: isSubmitting ? 'not-allowed' : 'pointer' }}
+                >
+                  <span>{isSubmitting ? 'Submitting Registration...' : 'Become a Channel Partner'}</span>
                   <span className="arr">→</span>
                 </button>
               </form>

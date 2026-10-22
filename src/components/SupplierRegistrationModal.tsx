@@ -4,6 +4,8 @@ import {
   X, Briefcase, Package, Check, ChevronRight, UploadCloud, FileText, 
   Trash2, Edit2, Users, Sparkles, RefreshCw, AlertCircle, Building2, MapPin, Phone, Mail, User, ShieldCheck
 } from 'lucide-react';
+import toast from 'react-hot-toast';
+import { supplierRegisterAxios, extractErrorMessage, type SupplierRegisterPayload } from '../_api/registration';
 
 export type RegistrationTypeKey = 
   | 'Supplier / Manufacturer / Dealer'
@@ -315,7 +317,7 @@ export default function SupplierRegistrationModal({ isOpen, onClose }: { isOpen:
     scrollToTop();
   };
 
-  const handleFinalSubmit = (e: React.FormEvent) => {
+  const handleFinalSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setValidationError(null);
 
@@ -331,11 +333,59 @@ export default function SupplierRegistrationModal({ isOpen, onClose }: { isOpen:
     }
 
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const cats = [...formData.categories];
+      if (formData.categoryOther.trim()) {
+        cats.push(formData.categoryOther.trim());
+      }
+      if (cats.length === 0 && formData.registrationType) {
+        cats.push(formData.registrationType);
+      }
+
+      const getDocString = (doc: DocumentEntry) => {
+        if (doc.status === 'attached' && doc.file) {
+          return doc.file.name;
+        }
+        if (doc.status === 'later') {
+          return 'To be submitted later';
+        }
+        return 'Not Applicable';
+      };
+
+      const payload: SupplierRegisterPayload = {
+        supplierName: formData.contactPerson.trim(),
+        companyName: formData.companyName.trim(),
+        mobileNumber: formData.mobile.replace(/[^0-9]/g, '').slice(0, 10),
+        email: formData.email.trim(),
+        address: formData.address.trim(),
+        website: formData.website.trim(),
+        serviceCategories: cats.length > 0 ? cats : ['General Supplier'],
+        yearsOfExperience: formData.experienceYears || '1',
+        areaOfOperation: formData.areasOfOperation.length > 0 ? formData.areasOfOperation.join(', ') : 'MMR',
+        majorClientServed: formData.majorProjects.trim() || formData.additionalInfo.trim() || 'N/A',
+        companyProfileAttachment: getDocString(formData.documents.companyProfile),
+        productCatalogueAttachment: getDocString(formData.documents.catalogue),
+        rateListAttachment: getDocString(formData.documents.rateList),
+        projectPortfolioAttachment: getDocString(formData.documents.portfolio),
+        relevantLicencesAttachment: getDocString(formData.documents.licences),
+        otherSupportingAttachment: getDocString(formData.documents.otherDocs),
+      };
+
+      const response = await supplierRegisterAxios(payload);
+
+      if (response && response.success === false) {
+        throw new Error(response.message || 'Supplier registration failed');
+      }
+
+      toast.success(response?.message || 'Supplier registration submitted successfully!');
       setIsSuccess(true);
-    }, 1500);
+    } catch (err: any) {
+      const msg = extractErrorMessage(err, 'Failed to submit registration. Please verify details.');
+      setValidationError(msg);
+      toast.error(msg);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Change Handlers

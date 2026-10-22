@@ -72,6 +72,17 @@ body {
   overflow-x: hidden;
 }
 
+/* Prevent image saving, dragging, and selection */
+img, picture, video {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 /* Custom scroll margin for section targets */
 section[id] {
   scroll-margin-top: calc(92px + var(--ticker-h));
@@ -522,21 +533,21 @@ input[type="radio"] {
   display: block;
   aspect-ratio: 16/10;
   position: relative;
-  background-size: cover;
-  background-position: center;
+  overflow: hidden;
+  background-color: var(--color-paper);
 }
 
-.bpost:nth-child(3n+1) .bpost-media {
-  background: linear-gradient(150deg, #3a4a3f, #26302b);
+.bpost-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
 }
 
-.bpost:nth-child(3n+2) .bpost-media {
-  background: linear-gradient(150deg, #4a3826, #33261d);
+.bpost:hover .bpost-media img {
+  transform: scale(1.05);
 }
 
-.bpost:nth-child(3n) .bpost-media {
-  background: linear-gradient(150deg, #454636, #2f3026);
-}
 
 .bpost-tag {
   position: absolute;
@@ -800,7 +811,41 @@ input[type="radio"] {
   color: #fff;
   z-index: 2;
   font-size: 1rem;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s var(--ease);
 }
+
+.ig-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(14, 42, 32, 0.65);
+  backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+  z-index: 3;
+  color: #fff;
+  text-align: center;
+  padding: 16px;
+}
+
+.ig-post:hover .ig-overlay {
+  opacity: 1;
+}
+
+.ig-post:hover .ig-badge {
+  opacity: 0;
+}
+
 
 /* CONTACT PAGE / STRIP OVERRIDES */
 .cinfo {

@@ -31,9 +31,9 @@ export const verifyOtpAxios = async (
 // =========================
 // Refresh Token
 // =========================
-export const refreshTokenAxios = async (token: string) => {
+export const refreshTokenAxios = async (refreshToken: string) => {
     const response = await axiosInstance.post("/v1/auth/refresh", {
-        token,
+        refreshToken,
     });
 
     return response.data;
@@ -42,9 +42,9 @@ export const refreshTokenAxios = async (token: string) => {
 // =========================
 // Logout
 // =========================
-export const logoutAxios = async (token: string) => {
+export const logoutAxios = async (refreshToken: string) => {
     const response = await axiosInstance.post("/v1/auth/logout", {
-        token,
+        refreshToken,
     });
 
     return response.data;
@@ -53,14 +53,20 @@ export const logoutAxios = async (token: string) => {
 // =========================
 // Create Blog
 // =========================
-export const createBlogAxios = async (payload: {
-    titlename: string;
-    category: string;
-    summary: string;
-    article: string;
-    imageurl: string[];
-}) => {
-    const response = await axiosInstance.post("/v1/blogs/create", payload);
+export interface CreateBlogPayload {
+    title: string;
+    blogCategory: string;
+    blogSummary: string;
+    blogDescription: string;
+    blogImageFileName: string;
+    blogImageURL: string;
+}
+
+export const createBlogAxios = async (payload: CreateBlogPayload) => {
+    const response = await axiosInstance.post(
+        "/v1/blogs/create",
+        payload
+    );
 
     return response.data;
 };
@@ -68,21 +74,49 @@ export const createBlogAxios = async (payload: {
 // =========================
 // Get All Blogs
 // =========================
-export const getAllBlogsAxios = async (payload?: any) => {
-    const response = await axiosInstance.post(
-        "/v1/blogs/get-all",
-        payload ?? {}
-    );
+export interface GetAllBlogsPayload {
+    page?: number;
+    limit?: number;
+    category?: string;
+    search?: string;
+}
 
-    return response.data;
+let inFlightBlogsPromise: Promise<any> | null = null;
+
+export const getAllBlogsAxios = async (
+    payload: GetAllBlogsPayload = {}
+) => {
+    const isDefault = !payload || Object.keys(payload).length === 0;
+    if (isDefault && inFlightBlogsPromise) {
+        return inFlightBlogsPromise;
+    }
+
+    const fetchPromise = axiosInstance.post(
+        "/v1/blogs/list",
+        payload
+    ).then((res) => res.data);
+
+    if (isDefault) {
+        inFlightBlogsPromise = fetchPromise;
+        fetchPromise.finally(() => {
+            inFlightBlogsPromise = null;
+        });
+    }
+
+    return fetchPromise;
 };
 
 // =========================
 // Get Blog By ID
 // =========================
+export interface GetBlogByIdPayload {
+    id: number;
+}
+
 export const getBlogByIdAxios = async (id: number) => {
     const response = await axiosInstance.post(
-        `/v1/blogs/get-by-id/${id}`
+        "/v1/blogs/details",
+        { id }
     );
 
     return response.data;
@@ -91,14 +125,17 @@ export const getBlogByIdAxios = async (id: number) => {
 // =========================
 // Update Blog
 // =========================
-export const updateBlogAxios = async (payload: {
+export interface UpdateBlogPayload {
     id: number;
-    titlename?: string;
-    category?: string;
-    summary?: string;
-    article?: string;
-    imageurl?: string[];
-}) => {
+    title?: string;
+    blogCategory?: string;
+    blogSummary?: string;
+    blogDescription?: string;
+    blogImageFileName?: string;
+    blogImageURL?: string;
+}
+
+export const updateBlogAxios = async (payload: UpdateBlogPayload) => {
     const response = await axiosInstance.post(
         "/v1/blogs/update",
         payload
@@ -110,9 +147,14 @@ export const updateBlogAxios = async (payload: {
 // =========================
 // Delete Blog
 // =========================
+export interface DeleteBlogPayload {
+    id: number;
+}
+
 export const deleteBlogAxios = async (id: number) => {
     const response = await axiosInstance.post(
-        `/v1/blogs/delete/${id}`
+        "/v1/blogs/delete",
+        { id }
     );
 
     return response.data;

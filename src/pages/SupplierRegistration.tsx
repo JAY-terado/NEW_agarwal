@@ -3,10 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   CheckCircle2, Briefcase, Package, Users, Sparkles, Building2, MapPin, 
   Phone, Mail, User, ShieldCheck, UploadCloud, FileText, Trash2, Check, 
-  RefreshCw, Globe
+  RefreshCw, Globe, AlertCircle
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import heroImage from '../assets/gallery-exterior.webp';
+import toast from 'react-hot-toast';
+import { supplierRegisterAxios, extractErrorMessage, type SupplierRegisterPayload } from '../_api/registration';
+import heroImage from '../assets/gallery-exterior-residential-towers-virar.webp';
 
 export type RegistrationTypeKey = 
   | 'Supplier / Manufacturer / Dealer'
@@ -196,6 +198,7 @@ export default function SupplierRegistration() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [serverError, setServerError] = useState<string | null>(null);
 
   // CAPTCHA State
   const [captchaQ, setCaptchaQ] = useState({ a: 7, b: 6 });
@@ -374,8 +377,10 @@ export default function SupplierRegistration() {
     return Object.keys(errs).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setServerError(null);
+
     if (!validate()) {
       const firstErrorEl = document.querySelector('.text-rose-500');
       if (firstErrorEl) {
@@ -385,11 +390,61 @@ export default function SupplierRegistration() {
     }
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const cats = [...formValues.categories];
+      if (formValues.categoryOther.trim()) {
+        cats.push(formValues.categoryOther.trim());
+      }
+      if (cats.length === 0 && formValues.registrationType) {
+        cats.push(formValues.registrationType);
+      }
+
+      const getDocString = (doc: DocumentEntry) => {
+        if (doc.status === 'attached' && doc.file) {
+          return doc.file.name;
+        }
+        if (doc.status === 'later') {
+          return 'To be submitted later';
+        }
+        return 'Not Applicable';
+      };
+
+      const payload: SupplierRegisterPayload = {
+        supplierName: formValues.contactPerson.trim(),
+        companyName: formValues.companyName.trim(),
+        mobileNumber: formValues.mobile.replace(/[^0-9]/g, '').slice(0, 10),
+        email: formValues.email.trim(),
+        address: formValues.address.trim(),
+        website: formValues.website.trim(),
+        serviceCategories: cats.length > 0 ? cats : ['General Supplier'],
+        yearsOfExperience: formValues.experienceYears || '1',
+        areaOfOperation: formValues.areasOfOperation.length > 0 ? formValues.areasOfOperation.join(', ') : 'MMR',
+        majorClientServed: formValues.majorProjects.trim() || formValues.additionalInfo.trim() || 'N/A',
+        companyProfileAttachment: getDocString(formValues.documents.companyProfile),
+        productCatalogueAttachment: getDocString(formValues.documents.catalogue),
+        rateListAttachment: getDocString(formValues.documents.rateList),
+        projectPortfolioAttachment: getDocString(formValues.documents.portfolio),
+        relevantLicencesAttachment: getDocString(formValues.documents.licences),
+        otherSupportingAttachment: getDocString(formValues.documents.otherDocs),
+      };
+
+      const response = await supplierRegisterAxios(payload);
+
+      if (response && response.success === false) {
+        throw new Error(response.message || 'Supplier registration failed');
+      }
+
+      toast.success(response?.message || 'Supplier registration submitted successfully!');
       setFormSubmitted(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 1200);
+    } catch (err: any) {
+      const msg = extractErrorMessage(err, 'Failed to submit supplier registration. Please check your details.');
+      setServerError(msg);
+      toast.error(msg);
+      window.scrollTo({ top: 350, behavior: 'smooth' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const getInputStyle = (error?: boolean) => {
@@ -451,6 +506,15 @@ export default function SupplierRegistration() {
               </div>
 
               <form onSubmit={handleSubmit} className="flex flex-col gap-10">
+                {serverError && (
+                  <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-start gap-3 shadow-sm">
+                    <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5 text-rose-600" />
+                    <div className="flex-1">
+                      <div className="font-bold mb-0.5">Registration Error</div>
+                      <div className="leading-relaxed">{serverError}</div>
+                    </div>
+                  </div>
+                )}
                 
                 {/* 1. REGISTRATION TYPE */}
                 <div className="flex flex-col gap-4">

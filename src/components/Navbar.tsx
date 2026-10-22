@@ -2,15 +2,16 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
-import { contactEmailAxios } from '../_api/user';
+import { requestCallbackAxios, extractErrorMessage } from '../_api/user';
+import toast from 'react-hot-toast';
 import { projects } from '../data/projects';
 import LogoHero from '../assets/logo1.webp';
 import LogoOther from '../assets/logo2.webp';
 
-import infinityHero from '../assets/agarwal-infinity-hero.webp';
-import skyriseHero from '../assets/skyRise1.webp';
-import skyHeightsHero from '../assets/agarwalSkyheight.webp';
-import horizonHero from '../assets/horizon.webp';
+import infinityHero from '../assets/agarwal-infinity-hero-flats-in-virar-west.webp';
+import skyriseHero from '../assets/skyRise1-flats-in-virar-west.webp';
+import skyHeightsHero from '../assets/agarwalSkyheight-luxury-flats-in-virar-west.webp';
+import horizonHero from '../assets/horizon-residential-projects-virar.webp';
 
 const projectImages: Record<string, string> = {
   infinity: infinityHero,
@@ -49,6 +50,7 @@ export default function Navbar() {
 
   const [isEnquireModalOpen, setIsEnquireModalOpen] = useState(false);
   const [contactSubmitted, setContactSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const handleOpenEnquire = () => {
@@ -62,24 +64,32 @@ export default function Navbar() {
 
   const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get('name'),
-      mobile_number: formData.get('mobile_number'),
-      email: formData.get('email'),
-      project: 'Global Navbar Enquiry'
-    };
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const fullName = (formData.get('name') as string)?.trim() || '';
+    const mobileNumber = (formData.get('mobile_number') as string)?.trim() || '';
+    const email = (formData.get('email') as string)?.trim() || '';
 
     try {
-      await contactEmailAxios(data as any);
+      setIsSubmitting(true);
+      const res = await requestCallbackAxios({
+        fullName,
+        email,
+        mobileNumber,
+      });
+      toast.success(res?.message || 'Callback requested successfully!');
       setContactSubmitted(true);
+      form.reset();
       setTimeout(() => {
         setIsEnquireModalOpen(false);
         setContactSubmitted(false);
       }, 3000);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error submitting form', error);
-      alert('Failed to submit form. Please try again.');
+      const msg = extractErrorMessage(error, 'Failed to submit callback request. Please try again.');
+      toast.error(msg);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -727,10 +737,11 @@ export default function Navbar() {
 
                     <button
                       type="submit"
-                      className="pcta-btn btn-enquire"
+                      disabled={isSubmitting}
+                      className="pcta-btn btn-enquire disabled:opacity-60 disabled:cursor-not-allowed"
                       style={{ width: '100%' }}
                     >
-                      <span>Get Best Offers</span>
+                      <span>{isSubmitting ? 'Sending Request...' : 'Get Best Offers'}</span>
                       <span className="arr">→</span>
                     </button>
                     <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', lineHeight: 1.4, }}>

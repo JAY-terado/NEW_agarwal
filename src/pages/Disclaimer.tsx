@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ShieldAlert, ArrowLeft } from 'lucide-react';
-import heroImage from '../assets/gallery-lobby.webp';
+import heroImage from '../assets/gallery-lobby-grand-entrance-virar.webp';
 
 export default function Disclaimer() {
   useEffect(() => {

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { Home, Settings, LogOut } from 'lucide-react';
 import { logoutAxios } from '../../_api/admin';
@@ -7,16 +8,24 @@ export default function AdminLayout() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
+  useEffect(() => {
     const token = Cookies.get("token");
-    if (token) {
+    if (!token) {
+      navigate('/admin/login', { replace: true });
+    }
+  }, [navigate]);
+
+  const handleLogout = async () => {
+    const refreshToken = Cookies.get("refreshToken") || Cookies.get("token");
+    if (refreshToken) {
       try {
-        await logoutAxios(token);
+        await logoutAxios(refreshToken);
       } catch (e) {
         console.error("Logout failed", e);
       }
     }
     Cookies.remove("token");
+    Cookies.remove("refreshToken");
     Cookies.remove("userToken");
     navigate('/admin/login');
   };

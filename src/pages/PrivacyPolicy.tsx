@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Shield, ArrowLeft } from 'lucide-react';
-import heroImage from '../assets/gallery-pool.webp';
+import heroImage from '../assets/gallery-pool-swimming-pool-amenities-virar.webp';
 
 export default function PrivacyPolicy() {
   useEffect(() => {

@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Briefcase, ArrowLeft, MapPin, IndianRupee, Clock, Users, ChevronRight, X, UploadCloud } from 'lucide-react';
-import heroImage from '../assets/gallery-lobby.webp';
+import { Briefcase, ArrowLeft, MapPin, IndianRupee, Clock, Users, ChevronRight, X, UploadCloud, AlertCircle, CheckCircle2, FileCheck } from 'lucide-react';
+import toast from 'react-hot-toast';
+import { careerApplyAxios, extractErrorMessage } from '../_api/registration';
+import heroImage from '../assets/gallery-lobby-grand-entrance-virar.webp';
 
 const JOBS = [
   {
@@ -833,20 +835,121 @@ const JOBS = [
 
 export default function Careers() {
   const [selectedJob, setSelectedJob] = useState<number | null>(null);
+  const [applicantName, setApplicantName] = useState('');
+  const [mobileNumber, setMobileNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [resumeLink, setResumeLink] = useState('');
+  const [selectedFileName, setSelectedFileName] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
+  const resetForm = () => {
+    setApplicantName('');
+    setMobileNumber('');
+    setEmail('');
+    setResumeLink('');
+    setSelectedFileName('');
+    setErrorMsg(null);
+    setIsSuccess(false);
+  };
+
+  const handleOpenJob = (jobId: number) => {
+    resetForm();
+    setSelectedJob(jobId);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedJob(null);
+    resetForm();
+  };
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        setSelectedJob(null);
+        handleCloseModal();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error('File size exceeds 5MB limit');
+        return;
+      }
+      setSelectedFileName(file.name);
+      if (!resumeLink) {
+        setResumeLink(file.name);
+      }
+      if (errorMsg) setErrorMsg(null);
+    }
+  };
+
+  const handleCareerSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMsg(null);
+
+    const currentJob = JOBS.find(j => j.id === selectedJob);
+    const positionTitle = currentJob ? currentJob.title : 'General Application';
+
+    if (!applicantName.trim()) {
+      const err = 'Please enter your full name';
+      setErrorMsg(err);
+      toast.error(err);
+      return;
+    }
+    if (!mobileNumber.trim() || mobileNumber.replace(/[^0-9]/g, '').length !== 10) {
+      const err = 'Please enter a valid 10-digit mobile number';
+      setErrorMsg(err);
+      toast.error(err);
+      return;
+    }
+    if (!email.trim()) {
+      const err = 'Please enter your email address';
+      setErrorMsg(err);
+      toast.error(err);
+      return;
+    }
+    const finalResume = resumeLink.trim() || selectedFileName.trim();
+    if (!finalResume) {
+      const err = 'Please upload a resume file or enter a resume link';
+      setErrorMsg(err);
+      toast.error(err);
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const response = await careerApplyAxios({
+        appliedForPosition: positionTitle,
+        fullName: applicantName.trim(),
+        email: email.trim(),
+        mobileNumber: mobileNumber.replace(/[^0-9]/g, '').slice(0, 10),
+        resumeUploadLink: finalResume
+      });
+
+      if (response && response.success === false) {
+        throw new Error(response.message || 'Application submission failed');
+      }
+
+      toast.success(response?.message || 'Application submitted successfully!');
+      setIsSuccess(true);
+    } catch (err: any) {
+      const msg = extractErrorMessage(err, 'Failed to submit application. Please try again.');
+      setErrorMsg(msg);
+      toast.error(msg);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="bg-ivory text-ink min-h-screen">
@@ -887,7 +990,7 @@ export default function Careers() {
                     <div className="text-brass-deep text-xs uppercase tracking-wider font-semibold">{job.department}</div>
                   </div>
                   <button
-                    onClick={() => setSelectedJob(job.id)}
+                    onClick={() => handleOpenJob(job.id)}
                     className="pcta-btn btn-enquire self-start sm:self-auto"
                     style={{ flex: 'none', padding: '12px 28px' }}
                   >
@@ -958,58 +1061,150 @@ export default function Careers() {
       {selectedJob !== null && (
         <div
           className="fixed inset-0 z-[999] flex items-center justify-center p-4 bg-ink/50 backdrop-blur-sm cursor-pointer"
-          onClick={() => setSelectedJob(null)}
+          onClick={handleCloseModal}
         >
           <div
-            className="bg-white rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden flex flex-col cursor-auto"
+            className="bg-white rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden flex flex-col cursor-auto max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between px-6 py-4 border-b border-line/40 bg-ivory">
-              <h3 className="font-serif text-xl text-ink">Apply for Position</h3>
-              <button onClick={() => setSelectedJob(null)} className="text-ink-soft hover:text-ink transition-colors p-1">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-brass-deep block">Application</span>
+                <h3 className="font-serif text-lg sm:text-xl text-ink">
+                  {JOBS.find(j => j.id === selectedJob)?.title || 'Apply for Position'}
+                </h3>
+              </div>
+              <button onClick={handleCloseModal} className="text-ink-soft hover:text-ink transition-colors p-1">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <form className="p-6 flex flex-col gap-5" onSubmit={e => e.preventDefault()}>
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-ink uppercase tracking-wider">Full Name <span className="text-red-500">*</span></label>
-                <input type="text" required placeholder="John Doe" className="w-full border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep focus:ring-1 focus:ring-brass-deep transition-all" />
+            {isSuccess ? (
+              <div className="p-8 text-center flex flex-col items-center">
+                <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4">
+                  <CheckCircle2 className="w-8 h-8" />
+                </div>
+                <h4 className="font-serif text-2xl text-ink mb-2">Application Submitted!</h4>
+                <p className="text-sm text-taupe mb-6 max-w-sm">
+                  Thank you for applying for <span className="font-semibold text-ink">{JOBS.find(j => j.id === selectedJob)?.title}</span>. Our HR team has received your application and will contact you if your profile matches our requirements.
+                </p>
+                <button
+                  type="button"
+                  onClick={handleCloseModal}
+                  className="px-8 py-3 bg-pine text-white text-xs font-semibold uppercase tracking-wider rounded-full hover:bg-brass transition-colors shadow-md"
+                >
+                  Done
+                </button>
               </div>
-
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-ink uppercase tracking-wider">Phone Number <span className="text-red-500">*</span></label>
-                <input type="tel" required placeholder="+91 98765 43210" className="w-full border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep focus:ring-1 focus:ring-brass-deep transition-all" />
-              </div>
-
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-ink uppercase tracking-wider">Email Address</label>
-                <input type="email" placeholder="john@example.com" className="w-full border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep focus:ring-1 focus:ring-brass-deep transition-all" />
-              </div>
-
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-semibold text-ink uppercase tracking-wider">Resume / CV <span className="text-red-500">*</span></label>
-                <label className="w-full border-2 border-dashed border-line rounded-xl p-8 flex flex-col items-center justify-center text-center hover:bg-ivory/80 transition-colors cursor-pointer group">
-                  <div className="w-12 h-12 bg-ivory rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-sm">
-                    <UploadCloud className="w-6 h-6 text-brass-deep" />
+            ) : (
+              <form className="p-6 flex flex-col gap-4" onSubmit={handleCareerSubmit}>
+                {errorMsg && (
+                  <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-start gap-2.5">
+                    <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-rose-600" />
+                    <span className="leading-relaxed font-medium">{errorMsg}</span>
                   </div>
-                  <span className="text-sm font-semibold text-ink mb-1">Click to upload or drag and drop</span>
-                  <span className="text-xs text-taupe max-w-xs">Maximum file size: 5MB. Supported formats: PDF, DOC, DOCX</span>
-                  <input type="file" className="hidden" accept=".pdf,.doc,.docx" required />
-                </label>
-              </div>
+                )}
 
-              <div className="mt-4 flex items-center gap-3">
-                <button type="button" onClick={() => setSelectedJob(null)} className="flex-1 py-3 rounded-full text-sm font-semibold text-ink border border-line hover:bg-ivory transition-colors">
-                  Cancel
-                </button>
-                <button type="submit" className="pcta-btn btn-enquire flex-1"
-                  style={{ padding: '14px 24px' }}>
-                  <span>Submit Application</span>
-                  <span className="arr">→</span>
-                </button>
-              </div>
-            </form>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-semibold text-ink uppercase tracking-wider">
+                    Full Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Rahul Sharma"
+                    value={applicantName}
+                    onChange={(e) => { setApplicantName(e.target.value); if (errorMsg) setErrorMsg(null); }}
+                    className="w-full border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep focus:ring-1 focus:ring-brass-deep transition-all"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-semibold text-ink uppercase tracking-wider">
+                    Phone Number <span className="text-red-500">*</span>
+                  </label>
+                  <div className="flex border border-line rounded-xl overflow-hidden bg-white focus-within:border-brass-deep focus-within:ring-1 focus-within:ring-brass-deep transition-all">
+                    <span className="flex items-center bg-ivory px-3 text-xs font-semibold text-ink border-r border-line">+91</span>
+                    <input
+                      type="tel"
+                      required
+                      maxLength={10}
+                      pattern="[0-9]{10}"
+                      placeholder="9876543210"
+                      value={mobileNumber}
+                      onChange={(e) => { setMobileNumber(e.target.value.replace(/[^0-9]/g, '').slice(0, 10)); if (errorMsg) setErrorMsg(null); }}
+                      className="w-full px-4 py-2.5 text-sm outline-none bg-transparent"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-semibold text-ink uppercase tracking-wider">
+                    Email Address <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="rahul@example.com"
+                    value={email}
+                    onChange={(e) => { setEmail(e.target.value); if (errorMsg) setErrorMsg(null); }}
+                    className="w-full border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep focus:ring-1 focus:ring-brass-deep transition-all"
+                  />
+                </div>
+
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-semibold text-ink uppercase tracking-wider">
+                    Resume / CV <span className="text-red-500">*</span>
+                  </label>
+                  <label className="w-full border-2 border-dashed border-line rounded-xl p-5 flex flex-col items-center justify-center text-center hover:bg-ivory/80 transition-colors cursor-pointer group">
+                    <div className="w-10 h-10 bg-ivory rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform shadow-sm">
+                      {selectedFileName ? <FileCheck className="w-5 h-5 text-emerald-600" /> : <UploadCloud className="w-5 h-5 text-brass-deep" />}
+                    </div>
+                    {selectedFileName ? (
+                      <span className="text-xs font-semibold text-emerald-700 break-all mb-1">
+                        Attached: {selectedFileName}
+                      </span>
+                    ) : (
+                      <span className="text-xs font-semibold text-ink mb-1">Click to select resume file</span>
+                    )}
+                    <span className="text-[10px] text-taupe max-w-xs">PDF, DOC, DOCX (Max 5MB)</span>
+                    <input type="file" className="hidden" accept=".pdf,.doc,.docx" onChange={handleFileChange} />
+                  </label>
+                </div>
+
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-semibold text-ink uppercase tracking-wider">
+                    Or Resume URL / Drive Link
+                  </label>
+                  <input
+                    type="url"
+                    placeholder="https://drive.google.com/... or LinkedIn"
+                    value={resumeLink}
+                    onChange={(e) => { setResumeLink(e.target.value); if (errorMsg) setErrorMsg(null); }}
+                    className="w-full border border-line rounded-xl px-4 py-2 text-xs outline-none focus:border-brass-deep focus:ring-1 focus:ring-brass-deep transition-all"
+                  />
+                </div>
+
+                <div className="mt-3 flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={handleCloseModal}
+                    className="flex-1 py-2.5 rounded-full text-xs font-semibold text-ink border border-line hover:bg-ivory transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="pcta-btn btn-enquire flex-1"
+                    style={{ padding: '12px 24px', opacity: isSubmitting ? 0.75 : 1, cursor: isSubmitting ? 'not-allowed' : 'pointer' }}
+                  >
+                    <span>{isSubmitting ? 'Submitting...' : 'Submit Application'}</span>
+                    <span className="arr">→</span>
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
         </div>
       )}

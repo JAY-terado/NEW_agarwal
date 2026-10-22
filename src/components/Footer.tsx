@@ -2,33 +2,43 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
-import { contactEmailAxios } from '../_api/user';
+import { requestCallbackAxios, extractErrorMessage } from '../_api/user';
+import toast from 'react-hot-toast';
 import Logo from '../assets/logo2.webp';
 
 export default function Footer() {
   const [isSiteVisitModalOpen, setIsSiteVisitModalOpen] = useState(false);
   const [siteVisitSubmitted, setSiteVisitSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSiteVisitSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get('name'),
-      mobile_number: formData.get('mobile_number'),
-      email: formData.get('email'),
-      project: 'Global Footer Site Visit'
-    };
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const fullName = (formData.get('name') as string)?.trim() || '';
+    const mobileNumber = (formData.get('mobile_number') as string)?.trim() || '';
+    const email = (formData.get('email') as string)?.trim() || '';
 
     try {
-      await contactEmailAxios(data as any);
+      setIsSubmitting(true);
+      const res = await requestCallbackAxios({
+        fullName,
+        email,
+        mobileNumber,
+      });
+      toast.success(res?.message || 'Callback requested successfully!');
       setSiteVisitSubmitted(true);
+      form.reset();
       setTimeout(() => {
         setIsSiteVisitModalOpen(false);
         setSiteVisitSubmitted(false);
       }, 3000);
-    } catch (error) {
-      console.error('Error submitting form', error);
-      alert('Failed to submit form. Please try again.');
+    } catch (error: any) {
+      console.error('Error submitting site visit request', error);
+      const msg = extractErrorMessage(error, 'Failed to submit callback request. Please try again.');
+      toast.error(msg);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -362,10 +372,11 @@ export default function Footer() {
 
                     <button
                       type="submit"
-                      className="pcta-btn btn-enquire"
+                      disabled={isSubmitting}
+                      className="pcta-btn btn-enquire disabled:opacity-60 disabled:cursor-not-allowed"
                       style={{ width: '100%' }}
                     >
-                      <span>Book Site Visit</span>
+                      <span>{isSubmitting ? 'Booking Visit...' : 'Book Site Visit'}</span>
                       <span className="arr">→</span>
                     </button>
                     <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', lineHeight: 1.4, }}>

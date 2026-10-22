@@ -16,15 +16,15 @@ export default function BlogPost() {
     
     setIsLoading(true);
     getBlogByIdAxios(Number(id)).then(response => {
-      const data = response.data || response;
-      if (data && data.titlename) { // Check if valid blog exists
+      const data = response?.data?.blog || response?.data || response?.blog || response;
+      if (data && (data.title || data.titlename)) { // Check if valid blog exists
         setPost({
           id: data.id.toString(),
-          title: data.titlename,
-          category: data.category,
-          excerpt: data.summary,
-          content: data.article,
-          image: data.imageurl && data.imageurl.length > 0 ? data.imageurl[0] : '',
+          title: data.title || data.titlename,
+          category: data.blogCategory || data.category || '',
+          excerpt: data.blogSummary || data.summary || '',
+          content: data.blogDescription || data.article || '',
+          image: data.blogImageURL || (data.imageurl && data.imageurl.length > 0 ? data.imageurl[0] : ''),
           date: new Date(data.createdAt || Date.now()).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
         });
       } else {

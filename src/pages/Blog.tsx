@@ -1,29 +1,9 @@
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { getAllBlogsAxios } from '../_api/admin';
-import type { BlogPost as BlogPostType } from '../data/blogs';
-import blogGreen from '../assets/blog-green.webp';
+import { useBlogContext } from '../context/BlogContext';
+import blogGreen from '../assets/blog-green-sustainable-homes-virar.webp';
 
 export default function Blog() {
-  const [blogs, setBlogs] = useState<BlogPostType[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    getAllBlogsAxios().then(response => {
-      const apiData = Array.isArray(response.data) ? response.data : Array.isArray(response) ? response : [];
-      const mappedBlogs: BlogPostType[] = apiData.map((b: any) => ({
-        id: b.id.toString(),
-        title: b.titlename,
-        category: b.category,
-        excerpt: b.summary,
-        content: b.article,
-        image: b.imageurl && b.imageurl.length > 0 ? b.imageurl[0] : '',
-        date: new Date(b.createdAt || Date.now()).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
-      }));
-      setBlogs(mappedBlogs);
-    }).catch(e => console.error(e))
-      .finally(() => setIsLoading(false));
-  }, []);
+  const { blogs, isLoading } = useBlogContext();
 
   return (
     <div style={{ background: 'var(--color-ivory)', minHeight: '100vh' }}>

@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useEffect } from 'react';
+import { Toaster } from 'react-hot-toast';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import ProjectDetails from './pages/ProjectDetails';
@@ -80,8 +81,50 @@ function AnimatedRoutes() {
 }
 
 export default function App() {
+  useEffect(() => {
+    // Disable right-click context menu on images and media
+    const handleContextMenu = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+
+      const isMedia =
+        target.tagName === 'IMG' ||
+        target.tagName === 'VIDEO' ||
+        target.tagName === 'PICTURE' ||
+        Boolean(target.closest('img, picture, video'));
+
+      if (isMedia) {
+        e.preventDefault();
+      }
+    };
+
+    // Disable dragging images to save or open in new tab
+    const handleDragStart = (e: DragEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+
+      if (
+        target.tagName === 'IMG' ||
+        target.tagName === 'VIDEO' ||
+        target.tagName === 'PICTURE' ||
+        Boolean(target.closest('img, picture, video'))
+      ) {
+        e.preventDefault();
+      }
+    };
+
+    document.addEventListener('contextmenu', handleContextMenu);
+    document.addEventListener('dragstart', handleDragStart);
+
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+      document.removeEventListener('dragstart', handleDragStart);
+    };
+  }, []);
+
   return (
     <BlogProvider>
+      <Toaster position="top-right" toastOptions={{ duration: 4000 }} />
       <Router>
         <Layout>
           <AnimatedRoutes />

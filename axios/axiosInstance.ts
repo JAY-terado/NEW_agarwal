@@ -14,12 +14,13 @@ const axiosClient = axios.create({
 const redirectToLogin = () => {
   if (typeof window !== "undefined") {
     Cookies.remove("token");
+    Cookies.remove("refreshToken");
     Cookies.remove("userToken");
     // Cookies.remove("userRole");
     // Cookies.remove("full_name");
     // Cookies.remove("is_profile_completed");
     // secureStorage.removeItem("type");
-    window.location.replace("/login");
+    window.location.replace("/admin/login");
   }
 };
 
@@ -51,7 +52,7 @@ axiosClient.interceptors.response.use(
         ))
     ) {
       const isAuthRequest = response.config?.url?.includes("/auth/");
-      const isLoginPage = typeof window !== "undefined" && (window.location.pathname === "/login" || window.location.pathname === "/register");
+      const isLoginPage = typeof window !== "undefined" && (window.location.pathname === "/login" || window.location.pathname === "/admin/login" || window.location.pathname === "/register");
 
       if (!isAuthRequest && !isLoginPage) {
         toast.error("Session timeout, redirecting to login page", {
@@ -69,22 +70,26 @@ axiosClient.interceptors.response.use(
     const originalRequest = error.config;
     const status = error?.response?.status;
     const isAuthRequest = originalRequest?.url?.includes("/auth/");
-    const isLoginPage = typeof window !== "undefined" && (window.location.pathname === "/login" || window.location.pathname === "/register");
+    const isLoginPage = typeof window !== "undefined" && (window.location.pathname === "/login" || window.location.pathname === "/admin/login" || window.location.pathname === "/register");
 
     if (status === 401 && !originalRequest._retry && !isAuthRequest) {
       originalRequest._retry = true;
       try {
-        const refreshToken = Cookies.get("refreshToken") || Cookies.get("token");
+        const refreshToken = Cookies.get("refreshToken");
         if (refreshToken) {
           const data = await refreshTokenAxios(refreshToken);
-          const newToken = data?.accessToken || data?.token || data?.data?.token;
+          const newToken = data?.accessToken || data?.token || data?.data?.token || data?.data?.accessToken;
+          const newRefreshToken = data?.refreshToken || data?.data?.refreshToken;
           if (newToken) {
             Cookies.set("token", newToken, { expires: 1 });
+            if (newRefreshToken) {
+              Cookies.set("refreshToken", newRefreshToken, { expires: 7 });
+            }
             originalRequest.headers.Authorization = newToken;
             return axiosClient(originalRequest);
           }
         }
-      } catch (e) {
+      } catch {
         // Refresh failed, fall through to redirect
       }
     }

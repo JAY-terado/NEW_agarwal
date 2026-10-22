@@ -4,16 +4,16 @@ import {
   Hammer, Map, Trophy,
   CalendarCheck, BadgeCheck, Users, Trees
 } from 'lucide-react';
-import ourLegacyAus from '../assets/ourLegacyAus.webp';
-import ourMissionAus from '../assets/ourMissionAus.webp';
-import ourVisionAus from '../assets/OurVisionAus.webp';
-import ourPresenceAus from '../assets/ourPresenceAus.webp';
-import aboutUsHero from '../assets/aboutUsHero.webp';
+import ourLegacyAus from '../assets/ourLegacyAus-trusted-builders-since-1978.webp';
+import ourMissionAus from '../assets/ourMissionAus-affordable-luxury-homes-virar.webp';
+import ourVisionAus from '../assets/OurVisionAus-real-estate-developer-vasai-virar.webp';
+import ourPresenceAus from '../assets/ourPresenceAus-residential-townships-virar.webp';
+import aboutUsHero from '../assets/aboutUsHero-builders-in-virar-mumbai.webp';
 import { projects } from '../data/projects';
-import infinityHero from '../assets/agarwal-infinity-hero.webp';
-import skyriseHero from '../assets/skyRise1.webp';
-import skyHeightsHero from '../assets/agarwalSkyheight.webp';
-import heroImage from '../assets/horizon.webp';
+import infinityHero from '../assets/agarwal-infinity-hero-flats-in-virar-west.webp';
+import skyriseHero from '../assets/skyRise1-flats-in-virar-west.webp';
+import skyHeightsHero from '../assets/agarwalSkyheight-luxury-flats-in-virar-west.webp';
+import heroImage from '../assets/horizon-residential-projects-virar.webp';
 
 const projectHeroMap: Record<string, string> = {
   infinity: infinityHero,

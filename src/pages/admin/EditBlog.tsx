@@ -37,15 +37,16 @@ export default function EditBlog() {
   useEffect(() => {
     if (id) {
       getBlogByIdAxios(Number(id)).then((response) => {
-        const data = response.data || response;
+        const data = response?.data?.blog || response?.data || response?.blog || response;
         if (data) {
-          setTitle(data.titlename || '');
-          setCategory(data.category || '');
-          setExcerpt(data.summary || '');
-          setContent(data.article || '');
-          setImage(data.imageurl?.[0] || '');
-          if (quillRef.current && data.article) {
-            quillRef.current.root.innerHTML = data.article;
+          setTitle(data.title || data.titlename || '');
+          setCategory(data.blogCategory || data.category || '');
+          setExcerpt(data.blogSummary || data.summary || '');
+          const articleContent = data.blogDescription || data.article || '';
+          setContent(articleContent);
+          setImage(data.blogImageURL || data.imageurl?.[0] || '');
+          if (quillRef.current && articleContent) {
+            quillRef.current.root.innerHTML = articleContent;
           }
         }
       }).catch((e) => {
@@ -77,11 +78,12 @@ export default function EditBlog() {
     try {
       await updateBlogAxios({
         id: Number(id),
-        titlename: title,
-        category,
-        summary: excerpt,
-        article: content,
-        imageurl: [image]
+        title,
+        blogCategory: category,
+        blogSummary: excerpt,
+        blogDescription: content,
+        blogImageFileName: image.split('/').pop()?.split('?')[0] || 'blog-image.webp',
+        blogImageURL: image,
       });
       Swal.fire({
         icon: 'success',

@@ -40,49 +40,50 @@ const iconComponents: Record<string, React.ElementType> = {
 
 import { projects } from '../data/projects';
 import { defaultProjectFaqs } from '../data/faqs';
-import { contactEmailAxios, createLeadAxios } from '../_api/user';
+import { requestCallbackAxios, downloadBrochureAxios, extractErrorMessage } from '../_api/user';
+import toast from 'react-hot-toast';
 
 // Gallery Asset Imports
-import galleryExterior from '../assets/gallery-exterior.webp';
-import galleryLobby from '../assets/gallery-lobby.webp';
-import galleryLiving from '../assets/gallery-living.webp';
-import galleryBedroom from '../assets/gallery-bedroom.webp';
-import galleryPool from '../assets/gallery-pool.webp';
-import galleryAerial from '../assets/gallery-aerial.webp';
+import galleryExterior from '../assets/gallery-exterior-residential-towers-virar.webp';
+import galleryLobby from '../assets/gallery-lobby-grand-entrance-virar.webp';
+import galleryLiving from '../assets/gallery-living-room-spacious-flats-virar.webp';
+import galleryBedroom from '../assets/gallery-bedroom-interior-flats-virar.webp';
+import galleryPool from '../assets/gallery-pool-swimming-pool-amenities-virar.webp';
+import galleryAerial from '../assets/gallery-aerial-view-township-virar-west.webp';
 
 // Infinity Gallery Imports
-import ig1 from '../assets/infinityGallery/ig1.jpeg';
-import ig2 from '../assets/infinityGallery/ig2.jpeg';
-import ig3 from '../assets/infinityGallery/ig3.jpeg';
-import ig4 from '../assets/infinityGallery/ig4.jpeg';
-import ig5 from '../assets/infinityGallery/ig5.jpeg';
-import ig6 from '../assets/infinityGallery/ig6.jpeg';
+import ig1 from '../assets/infinityGallery/ig1-infinity-flats-virar-west.jpeg';
+import ig2 from '../assets/infinityGallery/ig2-infinity-flats-virar-west.jpeg';
+import ig3 from '../assets/infinityGallery/ig3-infinity-flats-virar-west.jpeg';
+import ig4 from '../assets/infinityGallery/ig4-infinity-flats-virar-west.jpeg';
+import ig5 from '../assets/infinityGallery/ig5-infinity-flats-virar-west.jpeg';
+import ig6 from '../assets/infinityGallery/ig6-infinity-flats-virar-west.jpeg';
 
 // Skyrise Gallery Imports
-import srG1 from '../assets/skyriseGallery/srG1.webp';
-import srG2 from '../assets/skyriseGallery/srG2.webp';
-import srG3 from '../assets/skyriseGallery/srG3.webp';
-import srG4 from '../assets/skyriseGallery/srG4.webp';
-import srG5 from '../assets/skyriseGallery/srG5.webp';
-import srG6 from '../assets/skyriseGallery/srG6.webp';
+import srG1 from '../assets/skyriseGallery/srG1-skyrise-luxury-homes-virar.webp';
+import srG2 from '../assets/skyriseGallery/srG2-skyrise-luxury-homes-virar.webp';
+import srG3 from '../assets/skyriseGallery/srG3-skyrise-luxury-homes-virar.webp';
+import srG4 from '../assets/skyriseGallery/srG4-skyrise-luxury-homes-virar.webp';
+import srG5 from '../assets/skyriseGallery/srG5-skyrise-luxury-homes-virar.webp';
+import srG6 from '../assets/skyriseGallery/srG6-skyrise-luxury-homes-virar.webp';
 
-import layout1Bhk from '../assets/plans/1BHK.png';
-import layout2Bhk from '../assets/plans/2BHK.png';
-import layout3Bhk from '../assets/plans/3BHK.png';
-import layout4Bhk from '../assets/plans/4BHK.png';
+import layout1Bhk from '../assets/plans/1BHK-floor-plan-flats-in-virar.png';
+import layout2Bhk from '../assets/plans/2BHK-floor-plan-flats-in-virar.png';
+import layout3Bhk from '../assets/plans/3BHK-floor-plan-flats-in-virar.png';
+import layout4Bhk from '../assets/plans/4BHK-floor-plan-flats-in-virar.png';
 
 
 // Project Hero Imports
-import infinityHero from '../assets/agarwal-infinity-hero.webp';
+import infinityHero from '../assets/agarwal-infinity-hero-flats-in-virar-west.webp';
 import infinityHeroVideo from '../assets/agarwalInfintyHero.mp4';
 import infinityHeroVideoMobile from '../assets/heroVideosMobile/infinityMobileHero.mp4';
-import skyriseHero from '../assets/skyRise1.webp';
+import skyriseHero from '../assets/skyRise1-flats-in-virar-west.webp';
 import skyriseHeroVideo from '../assets/SkyriseHero1.mp4';
 import skyriseHeroVideoMobile from '../assets/heroVideosMobile/skyriseMobileHero.mp4';
-import skyHeightsHero from '../assets/agarwalSkyheight.webp';
+import skyHeightsHero from '../assets/agarwalSkyheight-luxury-flats-in-virar-west.webp';
 import skyHeightsHeroVideo from '../assets/skyHeightHero1.mp4';
 import skyHeightsHeroVideoMobile from '../assets/heroVideosMobile/skyheigtMobileHero.mp4';
-import horizonHero from '../assets/horizon.webp';
+import horizonHero from '../assets/horizon-residential-projects-virar.webp';
 
 import agarwalInfinityMRQR from '../assets/agarwalInfinityMRQR.webp';
 import agarwalSkyHeightsMRQR from '../assets/AgarwalSkyHeightsMRQR.webp';
@@ -122,26 +123,26 @@ const getLayoutImage = (slug: string, type: string) => {
 };
 
 const galleryMap: Record<string, string> = {
-  'gallery-exterior.webp': galleryExterior,
-  'gallery-lobby.webp': galleryLobby,
-  'gallery-living.webp': galleryLiving,
-  'gallery-bedroom.webp': galleryBedroom,
-  'gallery-pool.webp': galleryPool,
-  'gallery-aerial.webp': galleryAerial,
+  'gallery-exterior-residential-towers-virar.webp': galleryExterior,
+  'gallery-lobby-grand-entrance-virar.webp': galleryLobby,
+  'gallery-living-room-spacious-flats-virar.webp': galleryLiving,
+  'gallery-bedroom-interior-flats-virar.webp': galleryBedroom,
+  'gallery-pool-swimming-pool-amenities-virar.webp': galleryPool,
+  'gallery-aerial-view-township-virar-west.webp': galleryAerial,
   // Infinity specific
-  'ig1.jpeg': ig1,
-  'ig2.jpeg': ig2,
-  'ig3.jpeg': ig3,
-  'ig4.jpeg': ig4,
-  'ig5.jpeg': ig5,
-  'ig6.jpeg': ig6,
+  'ig1-infinity-flats-virar-west.jpeg': ig1,
+  'ig2-infinity-flats-virar-west.jpeg': ig2,
+  'ig3-infinity-flats-virar-west.jpeg': ig3,
+  'ig4-infinity-flats-virar-west.jpeg': ig4,
+  'ig5-infinity-flats-virar-west.jpeg': ig5,
+  'ig6-infinity-flats-virar-west.jpeg': ig6,
   // Skyrise specific
-  'srG1.webp': srG1,
-  'srG2.webp': srG2,
-  'srG3.webp': srG3,
-  'srG4.webp': srG4,
-  'srG5.webp': srG5,
-  'srG6.webp': srG6,
+  'srG1-skyrise-luxury-homes-virar.webp': srG1,
+  'srG2-skyrise-luxury-homes-virar.webp': srG2,
+  'srG3-skyrise-luxury-homes-virar.webp': srG3,
+  'srG4-skyrise-luxury-homes-virar.webp': srG4,
+  'srG5-skyrise-luxury-homes-virar.webp': srG5,
+  'srG6-skyrise-luxury-homes-virar.webp': srG6,
   // Sky Heights specific
   'sh-gallery-1.webp': shGallery1,
   'sh-gallery-2.webp': shGallery2,
@@ -154,30 +155,30 @@ const galleryMap: Record<string, string> = {
 
 
 // Amenity Images
-import amenityGym from '../assets/gymA.webp';
-import amenityIndoor from '../assets/indoorA.webp';
-import amenityLandscape from '../assets/landscaspeA.webp';
-import amenityLobby from '../assets/lobbyA.webp';
-import amenityMultipurpose from '../assets/multipurposeA.webp';
-import amenityPlay from '../assets/playA.webp';
-import amenityRooftop from '../assets/rooftopA.webp';
-import amenitySwim from '../assets/swimmingA.webp';
+import amenityGym from '../assets/gymA-fitness-center-amenities-virar.webp';
+import amenityIndoor from '../assets/indoorA-games-clubhouse-virar.webp';
+import amenityLandscape from '../assets/landscaspeA-garden-open-spaces-virar.webp';
+import amenityLobby from '../assets/lobbyA-luxury-entrance-lobby-virar.webp';
+import amenityMultipurpose from '../assets/multipurposeA-hall-amenities-virar.webp';
+import amenityPlay from '../assets/playA-kids-play-area-virar.webp';
+import amenityRooftop from '../assets/rooftopA-sky-high-amenities-virar.webp';
+import amenitySwim from '../assets/swimmingA-swimming-pool-virar.webp';
 
 // Skyrise Elevation Images
-import skyriseElev1 from '../assets/skriseElevationsNew/skye1.webp';
-import skyriseElev2 from '../assets/skriseElevationsNew/skye8.webp';
-import skyriseElev3 from '../assets/skriseElevationsNew/skye3.webp';
-import skyriseElev4 from '../assets/skriseElevationsNew/skye4.webp';
-import skyriseElev5 from '../assets/skriseElevationsNew/skye5.webp';
-import skyriseElev6 from '../assets/skriseElevationsNew/skye6.webp';
-import skyriseElev7 from '../assets/skriseElevationsNew/skye7.webp';
-import skyriseElev8 from '../assets/skriseElevationsNew/skye9.webp';
+import skyriseElev1 from '../assets/skriseElevationsNew/skye1-elevation-virar-west.webp';
+import skyriseElev2 from '../assets/skriseElevationsNew/skye8-elevation-virar-west.webp';
+import skyriseElev3 from '../assets/skriseElevationsNew/skye3-elevation-virar-west.webp';
+import skyriseElev4 from '../assets/skriseElevationsNew/skye4-elevation-virar-west.webp';
+import skyriseElev5 from '../assets/skriseElevationsNew/skye5-elevation-virar-west.webp';
+import skyriseElev6 from '../assets/skriseElevationsNew/skye6-elevation-virar-west.webp';
+import skyriseElev7 from '../assets/skriseElevationsNew/skye7-elevation-virar-west.webp';
+import skyriseElev8 from '../assets/skriseElevationsNew/skye9-elevation-virar-west.webp';
 
-import srPodium1 from '../assets/skyrise podium/sp1.webp';
-import srPodium3 from '../assets/skyrise podium/sp3.webp';
-import srPodium5 from '../assets/skyrise podium/sp5.webp';
-import srPodium6 from '../assets/skyrise podium/sp6.webp';
-import srPodium8 from '../assets/skyrise podium/sp8.webp';
+import srPodium1 from '../assets/skyrise podium/sp1-podium-amenities-virar.webp';
+import srPodium3 from '../assets/skyrise podium/sp3-podium-amenities-virar.webp';
+import srPodium5 from '../assets/skyrise podium/sp5-podium-amenities-virar.webp';
+import srPodium6 from '../assets/skyrise podium/sp6-podium-amenities-virar.webp';
+import srPodium8 from '../assets/skyrise podium/sp8-podium-amenities-virar.webp';
 
 // Infinity Elevation Images
 import infElev1 from '../assets/infinity elevations 2/WhatsApp Image 2026-08-29 at 12.10.23 PM.webp';
@@ -218,13 +219,13 @@ import shGallery5 from '../assets/skyheights/sky heights rooms/sh-room-5.webp';
 import shGallery6 from '../assets/skyheights/sky heights rooms/sh-room-6.webp';
 
 // Skyrise Rooftop Amenities
-import skyr1 from '../assets/skyriseRooftop/skyr1.webp';
-import skyr2 from '../assets/skyriseRooftop/skyr2.webp';
-import skyr3 from '../assets/skyriseRooftop/skyr3.webp';
-import skyr4 from '../assets/skyriseRooftop/skyr4.webp';
-import skyr5 from '../assets/skyriseRooftop/skyr5.webp';
-import skyr6 from '../assets/skyriseRooftop/skyr6.webp';
-import skyr7 from '../assets/skyriseRooftop/skyr7.webp';
+import skyr1 from '../assets/skyriseRooftop/skyr1-rooftop-amenities-virar.webp';
+import skyr2 from '../assets/skyriseRooftop/skyr2-rooftop-amenities-virar.webp';
+import skyr3 from '../assets/skyriseRooftop/skyr3-rooftop-amenities-virar.webp';
+import skyr4 from '../assets/skyriseRooftop/skyr4-rooftop-amenities-virar.webp';
+import skyr5 from '../assets/skyriseRooftop/skyr5-rooftop-amenities-virar.webp';
+import skyr6 from '../assets/skyriseRooftop/skyr6-rooftop-amenities-virar.webp';
+import skyr7 from '../assets/skyriseRooftop/skyr7-rooftop-amenities-virar.webp';
 
 // Sky Heights Rooftop Amenities
 import shRooftop1 from '../assets/skyheights/skyheights rooftop/sh-rooftop-1.webp';
@@ -354,6 +355,8 @@ export default function ProjectDetails() {
   const [isContactVisible, setIsContactVisible] = useState(false);
   const [isBrochureDrawerOpen, setIsBrochureDrawerOpen] = useState(false);
   const [brochureFormSubmitted, setBrochureFormSubmitted] = useState(false);
+  const [isFormSubmitting, setIsFormSubmitting] = useState(false);
+  const [isBrochureSubmitting, setIsBrochureSubmitting] = useState(false);
   const contactRef = useRef<HTMLElement>(null);
   const [activeAmenityTab, setActiveAmenityTab] = useState<'Project Elevation' | 'Podium Amenities' | 'Rooftop Amenities' | 'Clubhouse Amenities'>(slug === 'skyrise' ? 'Clubhouse Amenities' : 'Podium Amenities');
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
@@ -426,35 +429,55 @@ export default function ProjectDetails() {
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const fullName = (formData.get('name') as string)?.trim() || '';
+    const mobileNumber = (formData.get('mobile_number') as string)?.trim() || '';
+    const email = (formData.get('email') as string)?.trim() || '';
+
     try {
-      await contactEmailAxios({
-        name: formData.get('name') as string,
-        mobile_number: formData.get('mobile_number') as string,
-        email: formData.get('email') as string,
+      setIsFormSubmitting(true);
+      const res = await requestCallbackAxios({
+        fullName,
+        email,
+        mobileNumber,
       });
+      toast.success(res?.message || 'Callback requested successfully!');
       setFormSubmitted(true);
-    } catch (err) {
-      console.error(err);
-      alert('Failed to submit. Please try again.');
+      form.reset();
+    } catch (err: any) {
+      console.error('Callback request error:', err);
+      const msg = extractErrorMessage(err, 'Failed to submit callback request. Please try again.');
+      toast.error(msg);
+    } finally {
+      setIsFormSubmitting(false);
     }
   };
 
   const handleBrochureSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const fullName = (formData.get('name') as string)?.trim() || '';
+    const mobileNumber = (formData.get('mobile_number') as string)?.trim() || '';
+    const email = (formData.get('email') as string)?.trim() || '';
+
     try {
-      await createLeadAxios({
-        name: formData.get('name') as string,
-        mobile_number: formData.get('mobile_number') as string,
-        email: formData.get('email') as string,
-        requirement: 'Brochure Download',
-        company: project?.name?.replace(/agarwal /i, '')?.replace(/\s+/g, '')?.toLowerCase() || 'unknown'
+      setIsBrochureSubmitting(true);
+      const res = await downloadBrochureAxios({
+        fullName,
+        email,
+        mobileNumber,
       });
+      toast.success(res?.message || 'Brochure request submitted successfully!');
       setBrochureFormSubmitted(true);
-    } catch (err) {
-      console.error(err);
-      alert('Failed to submit. Please try again.');
+      form.reset();
+    } catch (err: any) {
+      console.error('Brochure request error:', err);
+      const msg = extractErrorMessage(err, 'Failed to submit brochure request. Please try again.');
+      toast.error(msg);
+    } finally {
+      setIsBrochureSubmitting(false);
     }
   };
 
@@ -1434,9 +1457,10 @@ export default function ProjectDetails() {
 
                   <button
                     type="submit"
-                    className="mt-auto bg-brass-deep text-white font-bold tracking-widest uppercase text-sm py-4 rounded-full hover:bg-[#b59254] transition-colors shadow-lg hover:shadow-xl"
+                    disabled={isBrochureSubmitting}
+                    className="mt-auto bg-brass-deep text-white font-bold tracking-widest uppercase text-sm py-4 rounded-full hover:bg-[#b59254] transition-colors shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Submit &amp; Download
+                    {isBrochureSubmitting ? 'Submitting...' : 'Submit & Download'}
                   </button>
                 </form>
               ) : (
@@ -1508,10 +1532,11 @@ export default function ProjectDetails() {
                     </div>
                     <button
                       type="submit"
-                      className="pcta-btn btn-enquire"
+                      disabled={isFormSubmitting}
+                      className="pcta-btn btn-enquire disabled:opacity-60 disabled:cursor-not-allowed"
                       style={{ width: '100%', marginTop: '8px' }}
                     >
-                      <span>Get Best Offers</span>
+                      <span>{isFormSubmitting ? 'Sending Request...' : 'Get Best Offers'}</span>
                       <span className="arr">→</span>
                     </button>
                   </form>
@@ -1628,9 +1653,10 @@ export default function ProjectDetails() {
 
                   <button
                     type="submit"
-                    className="pcta-btn btn-enquire w-full mt-4"
+                    disabled={isFormSubmitting}
+                    className="pcta-btn btn-enquire w-full mt-4 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    <span>Get Best Offers</span>
+                    <span>{isFormSubmitting ? 'Sending Request...' : 'Get Best Offers'}</span>
                     <span className="arr">→</span>
                   </button>
                   <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', marginTop: '10px', lineHeight: 1.4 }}>

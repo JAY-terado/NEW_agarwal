@@ -52,7 +52,7 @@ export default function ProjectNavbar() {
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'center' });
     } else {
-      navigate('/customer-registration');
+      window.dispatchEvent(new CustomEvent('openEnquireModal'));
     }
   };
 
