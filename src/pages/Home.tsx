@@ -8,6 +8,7 @@ import { homeFaqs } from '../data/faqs';
 import { requestCallbackAxios, extractErrorMessage } from '../_api/user';
 import toast from 'react-hot-toast';
 import { useBlogContext } from '../context/BlogContext';
+import { resolveFileUrl } from '../_api/fileUpload';
 
 // Asset Imports
 import heroVideo from '../assets/hero.mp4';
@@ -966,9 +967,15 @@ export default function Home() {
                       aria-label={post.title}
                     >
                       <img
-                        src={post.image || blogGreen}
+                        src={resolveFileUrl(post.image) || blogGreen}
                         alt={post.title}
                         loading="lazy"
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          if (target.src !== blogGreen) {
+                            target.src = blogGreen;
+                          }
+                        }}
                       />
                       {post.category && <span className="bpost-tag">{post.category}</span>}
                     </Link>

@@ -4,6 +4,8 @@ import { PlusCircle, Trash2, ExternalLink, Edit, AlertTriangle, X } from 'lucide
 import { motion, AnimatePresence } from 'framer-motion';
 import { useBlogContext } from '../../context/BlogContext';
 import { type BlogPost } from '../../data/blogs';
+import { resolveFileUrl } from '../../_api/fileUpload';
+import blogGreen from '../../assets/blog-green-sustainable-homes-virar.webp';
 import toast from 'react-hot-toast';
 
 export default function BlogList() {
@@ -77,13 +79,23 @@ export default function BlogList() {
               </tr>
             ) : (
               blogs.map(post => {
-                const imgSrc = post.image || 'https://via.placeholder.com/600x400?text=No+Image';
+                const imgSrc = resolveFileUrl(post.image) || blogGreen;
 
                 return (
                   <tr key={post.id} className="hover:bg-ivory/30 transition-colors">
                     <td className="px-6 py-4">
                       <div className="w-16 h-12 rounded overflow-hidden bg-ivory">
-                        <img src={imgSrc} alt={post.title} className="w-full h-full object-cover" />
+                        <img
+                          src={imgSrc}
+                          alt={post.title}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            const target = e.currentTarget;
+                            if (target.src !== blogGreen) {
+                              target.src = blogGreen;
+                            }
+                          }}
+                        />
                       </div>
                     </td>
                     <td className="px-6 py-4">
@@ -182,9 +194,15 @@ export default function BlogList() {
               <div className="flex items-center gap-3 p-3 bg-ivory/60 rounded-xl border border-line mb-4">
                 <div className="w-16 h-12 rounded-lg overflow-hidden bg-ivory shrink-0">
                   <img
-                    src={blogToDelete.image || 'https://via.placeholder.com/600x400?text=No+Image'}
+                    src={resolveFileUrl(blogToDelete.image) || blogGreen}
                     alt={blogToDelete.title}
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      if (target.src !== blogGreen) {
+                        target.src = blogGreen;
+                      }
+                    }}
                   />
                 </div>
                 <div className="min-w-0 flex-1">

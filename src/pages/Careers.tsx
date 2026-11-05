@@ -1,8 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Briefcase, ArrowLeft, MapPin, IndianRupee, Clock, Users, ChevronRight, X, UploadCloud, AlertCircle, CheckCircle2, FileCheck } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Briefcase, ArrowLeft, MapPin, IndianRupee, Clock, Users, ChevronRight, X, 
+  UploadCloud, AlertCircle, CheckCircle2, FileCheck, Eye, ExternalLink, Download, 
+  Trash2, FileText 
+} from 'lucide-react';
 import toast from 'react-hot-toast';
 import { careerApplyAxios, extractErrorMessage } from '../_api/registration';
+import { uploadFileAxios } from '../_api/fileUpload';
 import heroImage from '../assets/gallery-lobby-grand-entrance-virar.webp';
 
 const JOBS = [
@@ -843,6 +849,43 @@ export default function Careers() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [uploadedResumeUrl, setUploadedResumeUrl] = useState('');
+  const [isUploadingResume, setIsUploadingResume] = useState(false);
+
+  // Resume Preview State
+  const [previewDoc, setPreviewDoc] = useState<{
+    fileName: string;
+    file?: File | null;
+    url?: string;
+  } | null>(null);
+  const [previewBlobUrl, setPreviewBlobUrl] = useState('');
+
+  useEffect(() => {
+    if (!previewDoc) {
+      setPreviewBlobUrl('');
+      return;
+    }
+    if (previewDoc.file) {
+      const url = URL.createObjectURL(previewDoc.file);
+      setPreviewBlobUrl(url);
+      return () => {
+        URL.revokeObjectURL(url);
+      };
+    } else if (previewDoc.url) {
+      setPreviewBlobUrl(previewDoc.url);
+    }
+  }, [previewDoc]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && previewDoc) {
+        setPreviewDoc(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [previewDoc]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -854,6 +897,10 @@ export default function Careers() {
     setEmail('');
     setResumeLink('');
     setSelectedFileName('');
+    setSelectedFile(null);
+    setUploadedResumeUrl('');
+    setIsUploadingResume(false);
+    setPreviewDoc(null);
     setErrorMsg(null);
     setIsSuccess(false);
   };
@@ -878,16 +925,25 @@ export default function Careers() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      if (file.size > 5 * 1024 * 1024) {
-        toast.error('File size exceeds 5MB limit');
+      if (file.size > 10 * 1024 * 1024) {
+        toast.error('File size exceeds 10MB limit');
         return;
       }
+      setSelectedFile(file);
       setSelectedFileName(file.name);
-      if (!resumeLink) {
-        setResumeLink(file.name);
+      setIsUploadingResume(true);
+      try {
+        const res = await uploadFileAxios(file, 'resumes');
+        setUploadedResumeUrl(res.data.fileURL);
+        toast.success('Resume uploaded successfully');
+      } catch (err: any) {
+        console.error('Resume upload error:', err);
+        toast.error(err.message || 'Failed to upload resume to server');
+      } finally {
+        setIsUploadingResume(false);
       }
       if (errorMsg) setErrorMsg(null);
     }
@@ -918,7 +974,28 @@ export default function Careers() {
       toast.error(err);
       return;
     }
-    const finalResume = resumeLink.trim() || selectedFileName.trim();
+
+    if (isUploadingResume) {
+      toast.error('Please wait for the resume to finish uploading.');
+      return;
+    }
+
+    let finalResume = uploadedResumeUrl.trim() || resumeLink.trim();
+    if (!finalResume && selectedFile) {
+      setIsSubmitting(true);
+      try {
+        const res = await uploadFileAxios(selectedFile, 'resumes');
+        finalResume = res.data.fileURL;
+        setUploadedResumeUrl(finalResume);
+      } catch (uploadErr: any) {
+        setIsSubmitting(false);
+        const err = uploadErr.message || 'Failed to upload resume to server';
+        setErrorMsg(err);
+        toast.error(err);
+        return;
+      }
+    }
+
     if (!finalResume) {
       const err = 'Please upload a resume file or enter a resume link';
       setErrorMsg(err);
@@ -1156,26 +1233,105 @@ export default function Careers() {
                   <label className="text-xs font-semibold text-ink uppercase tracking-wider">
                     Resume / CV <span className="text-red-500">*</span>
                   </label>
-                  <label className="w-full border-2 border-dashed border-line rounded-xl p-5 flex flex-col items-center justify-center text-center hover:bg-ivory/80 transition-colors cursor-pointer group">
-                    <div className="w-10 h-10 bg-ivory rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform shadow-sm">
-                      {selectedFileName ? <FileCheck className="w-5 h-5 text-emerald-600" /> : <UploadCloud className="w-5 h-5 text-brass-deep" />}
+                  <input
+                    id="career-resume-file"
+                    type="file"
+                    className="hidden"
+                    accept=".pdf,.doc,.docx"
+                    onChange={handleFileChange}
+                  />
+
+                  {selectedFile || selectedFileName ? (
+                    <div className="flex items-center justify-between p-3.5 rounded-xl bg-ivory/80 border border-brass/30 shadow-sm">
+                      <div className="flex items-center gap-2.5 overflow-hidden">
+                        <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                          {isUploadingResume ? (
+                            <span className="w-4 h-4 border-2 border-brass-deep border-t-transparent rounded-full animate-spin" />
+                          ) : (
+                            <FileCheck className="w-4 h-4 text-emerald-600" />
+                          )}
+                        </div>
+                        <div className="overflow-hidden">
+                          <p className="text-xs font-semibold text-ink truncate max-w-[160px] sm:max-w-xs">
+                            {selectedFileName || selectedFile?.name}
+                          </p>
+                          <p className="text-[10px] text-ink-soft">
+                            {isUploadingResume
+                              ? 'Uploading to server...'
+                              : selectedFile
+                              ? `${(selectedFile.size / 1024 / 1024).toFixed(2)} MB • Ready`
+                              : 'Uploaded resume'}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 shrink-0">
+                        <button
+                          type="button"
+                          onClick={() => setPreviewDoc({
+                            fileName: selectedFileName || selectedFile?.name || 'Resume',
+                            file: selectedFile,
+                            url: uploadedResumeUrl
+                          })}
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold text-brass-deep bg-brass/10 hover:bg-brass/20 transition-colors cursor-pointer"
+                          title="Preview attachment"
+                        >
+                          <Eye className="w-3.5 h-3.5" />
+                          <span>Preview</span>
+                        </button>
+                        <label
+                          htmlFor="career-resume-file"
+                          className="text-xs text-brass-deep hover:underline cursor-pointer font-semibold px-1.5 py-1"
+                        >
+                          Replace
+                        </label>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setSelectedFile(null);
+                            setSelectedFileName('');
+                            setUploadedResumeUrl('');
+                          }}
+                          className="p-1 rounded-lg text-red-500 hover:bg-red-50 transition-colors cursor-pointer"
+                          aria-label="Remove resume"
+                          title="Remove resume"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
                     </div>
-                    {selectedFileName ? (
-                      <span className="text-xs font-semibold text-emerald-700 break-all mb-1">
-                        Attached: {selectedFileName}
-                      </span>
-                    ) : (
+                  ) : (
+                    <label
+                      htmlFor="career-resume-file"
+                      className="w-full border-2 border-dashed border-line rounded-xl p-5 flex flex-col items-center justify-center text-center hover:bg-ivory/80 transition-colors cursor-pointer group"
+                    >
+                      <div className="w-10 h-10 bg-ivory rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform shadow-sm">
+                        <UploadCloud className="w-5 h-5 text-brass-deep" />
+                      </div>
                       <span className="text-xs font-semibold text-ink mb-1">Click to select resume file</span>
-                    )}
-                    <span className="text-[10px] text-taupe max-w-xs">PDF, DOC, DOCX (Max 5MB)</span>
-                    <input type="file" className="hidden" accept=".pdf,.doc,.docx" onChange={handleFileChange} />
-                  </label>
+                      <span className="text-[10px] text-taupe max-w-xs">PDF, DOC, DOCX (Max 10MB)</span>
+                    </label>
+                  )}
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-xs font-semibold text-ink uppercase tracking-wider">
-                    Or Resume URL / Drive Link
-                  </label>
+                  <div className="flex items-center justify-between">
+                    <label className="text-xs font-semibold text-ink uppercase tracking-wider">
+                      Or Resume URL / Drive Link
+                    </label>
+                    {resumeLink && (
+                      <button
+                        type="button"
+                        onClick={() => setPreviewDoc({
+                          fileName: resumeLink.split('/').pop()?.split('?')[0] || 'Resume Link',
+                          url: resumeLink
+                        })}
+                        className="text-[11px] font-semibold text-brass-deep hover:underline inline-flex items-center gap-1 cursor-pointer"
+                      >
+                        <Eye className="w-3 h-3" /> Preview Link
+                      </button>
+                    )}
+                  </div>
                   <input
                     type="url"
                     placeholder="https://drive.google.com/... or LinkedIn"
@@ -1208,6 +1364,112 @@ export default function Careers() {
           </div>
         </div>
       )}
+
+      {/* Resume Preview Modal */}
+      <AnimatePresence>
+        {previewDoc && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-6 bg-black/75 backdrop-blur-sm"
+            onClick={() => setPreviewDoc(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-2xl shadow-2xl border border-line max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between px-5 py-4 border-b border-line bg-ivory/60">
+                <div className="flex items-center gap-3 overflow-hidden">
+                  <div className="w-10 h-10 rounded-xl bg-brass/10 text-brass-deep flex items-center justify-center shrink-0">
+                    <FileText className="w-5 h-5" />
+                  </div>
+                  <div className="overflow-hidden">
+                    <h3 className="text-sm sm:text-base font-serif font-bold text-ink truncate">
+                      Resume / Curriculum Vitae
+                    </h3>
+                    <p className="text-xs text-ink-soft truncate">
+                      {previewDoc.fileName}
+                      {previewDoc.file ? ` • ${(previewDoc.file.size / 1024 / 1024).toFixed(2)} MB` : ''}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 shrink-0">
+                  {(previewBlobUrl || previewDoc.url) && (
+                    <a
+                      href={previewBlobUrl || previewDoc.url}
+                      download={previewDoc.fileName}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="p-2 rounded-xl text-ink-soft hover:text-ink hover:bg-ivory border border-line/60 transition-all flex items-center gap-1.5 text-xs font-semibold"
+                      title="Download or open in new tab"
+                    >
+                      <ExternalLink className="w-4 h-4 text-brass-deep" />
+                      <span className="hidden sm:inline">Open in Tab</span>
+                    </a>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setPreviewDoc(null)}
+                    className="p-2 rounded-xl text-ink-soft hover:text-ink hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
+                    title="Close preview"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Body Content */}
+              <div className="flex-1 overflow-auto p-4 sm:p-6 bg-ivory/30 flex items-center justify-center min-h-[300px]">
+                {previewDoc.file && (previewDoc.file.type.startsWith('image/') || /\.(jpe?g|png|webp|gif|svg)$/i.test(previewDoc.file.name)) ? (
+                  <div className="w-full flex items-center justify-center">
+                    <img
+                      src={previewBlobUrl}
+                      alt={previewDoc.fileName}
+                      className="max-h-[65vh] w-auto max-w-full object-contain rounded-xl shadow-md border border-line"
+                    />
+                  </div>
+                ) : (previewDoc.file && (previewDoc.file.type === 'application/pdf' || /\.pdf$/i.test(previewDoc.file.name))) || (previewDoc.url && /\.pdf(\?.*)?$/i.test(previewDoc.url)) ? (
+                  <iframe
+                    src={previewBlobUrl || previewDoc.url}
+                    title={previewDoc.fileName}
+                    className="w-full h-[65vh] rounded-xl border border-line bg-white shadow-inner"
+                  />
+                ) : (
+                  <div className="flex flex-col items-center justify-center text-center p-8 bg-white rounded-2xl border border-line max-w-md shadow-sm">
+                    <div className="w-16 h-16 rounded-2xl bg-brass/10 text-brass-deep flex items-center justify-center mb-4">
+                      <FileText className="w-8 h-8" />
+                    </div>
+                    <h4 className="font-serif font-bold text-ink text-base mb-1 truncate max-w-full px-2">
+                      {previewDoc.fileName}
+                    </h4>
+                    <p className="text-xs text-ink-soft mb-5">
+                      {previewDoc.file
+                        ? 'Direct in-browser preview is not available for Word files (.doc, .docx). You can open or download the document directly.'
+                        : 'External link document preview. You can open the link in a new browser tab.'}
+                    </p>
+                    <a
+                      href={previewBlobUrl || previewDoc.url}
+                      download={previewDoc.fileName}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brass-deep hover:bg-brass text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-sm"
+                    >
+                      <Download className="w-4 h-4" /> Download / Open File
+                    </a>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

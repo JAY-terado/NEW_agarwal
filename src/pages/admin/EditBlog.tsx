@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Save, X, Eye } from 'lucide-react';
+import { Save, X, Eye, UploadCloud, Image as ImageIcon, Link2, Loader2 } from 'lucide-react';
 import { useBlogContext } from '../../context/BlogContext';
 import Quill from 'quill';
 import 'quill/dist/quill.snow.css';
 import { updateBlogAxios, getBlogByIdAxios } from '../../_api/admin';
+import { uploadFileAxios, resolveFileUrl } from '../../_api/fileUpload';
 import Swal from 'sweetalert2';
 
 export default function EditBlog() {
@@ -17,9 +18,15 @@ export default function EditBlog() {
   const [excerpt, setExcerpt] = useState('');
   const [content, setContent] = useState('');
   const [image, setImage] = useState('');
+  const [imageFileName, setImageFileName] = useState('');
+  const [previewUrl, setPreviewUrl] = useState('');
+  const [uploadMode, setUploadMode] = useState<'file' | 'url'>('file');
+  const [isDragging, setIsDragging] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const editorRef = useRef<HTMLDivElement>(null);
   const quillRef = useRef<Quill | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (editorRef.current && !quillRef.current) {
@@ -44,7 +51,14 @@ export default function EditBlog() {
           setExcerpt(data.blogSummary || data.summary || '');
           const articleContent = data.blogDescription || data.article || '';
           setContent(articleContent);
-          setImage(data.blogImageURL || data.imageurl?.[0] || '');
+          const rawImg = data.blogImageURL || data.imageurl?.[0] || '';
+          const loadedImg = resolveFileUrl(rawImg);
+          setImage(loadedImg);
+          setPreviewUrl(loadedImg);
+          setImageFileName(
+            data.blogImageFileName ||
+            (loadedImg.startsWith('http') ? loadedImg.split('/').pop()?.split('?')[0] || '' : 'cover-image.webp')
+          );
           if (quillRef.current && articleContent) {
             quillRef.current.root.innerHTML = articleContent;
           }
@@ -61,15 +75,107 @@ export default function EditBlog() {
     }
   }, [id]);
 
+  const handleFile = async (file: File) => {
+    if (!file.type.startsWith('image/')) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid File Format',
+        text: 'Please select a valid image file (PNG, JPG, WEBP, etc.).',
+        confirmButtonColor: '#2b5a50',
+      });
+      return;
+    }
 
+    if (file.size > 10 * 1024 * 1024) {
+      Swal.fire({
+        icon: 'error',
+        title: 'File Too Large',
+        text: 'Please upload an image smaller than 10MB.',
+        confirmButtonColor: '#2b5a50',
+      });
+      return;
+    }
+
+    // Instant local preview
+    const localBlob = URL.createObjectURL(file);
+    setPreviewUrl(localBlob);
+    setImageFileName(file.name);
+
+    setIsUploading(true);
+    try {
+      const res = await uploadFileAxios(file, 'blogs');
+      setImage(res.data.fileURL);
+      if (res.data.fileName) {
+        setImageFileName(res.data.fileName);
+      }
+    } catch (err: any) {
+      console.error('File upload error:', err);
+      Swal.fire({
+        icon: 'error',
+        title: 'Upload Failed',
+        text: err?.message || 'Failed to upload image to server.',
+        confirmButtonColor: '#2b5a50',
+      });
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      handleFile(file);
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file) {
+      handleFile(file);
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setImage('');
+    setImageFileName('');
+    setPreviewUrl('');
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isUploading) {
+      Swal.fire({
+        icon: 'info',
+        title: 'Please Wait',
+        text: 'Image is still uploading. Please wait a moment.',
+        confirmButtonColor: '#2b5a50',
+      });
+      return;
+    }
+
     if (!title || !category || !excerpt || !content || !image || !id) {
       Swal.fire({
         icon: 'error',
         title: 'Missing Information',
-        text: 'Please fill out all fields and provide an image URL.',
+        text: 'Please fill out all fields and provide a cover image.',
         confirmButtonColor: '#2b5a50',
       });
       return;
@@ -82,7 +188,7 @@ export default function EditBlog() {
         blogCategory: category,
         blogSummary: excerpt,
         blogDescription: content,
-        blogImageFileName: image.split('/').pop()?.split('?')[0] || 'blog-image.webp',
+        blogImageFileName: imageFileName || image.split('/').pop()?.split('?')[0] || 'blog-image.webp',
         blogImageURL: image,
       });
       Swal.fire({
@@ -130,26 +236,137 @@ export default function EditBlog() {
       <div className={`grid gap-8 ${showPreview ? 'grid-cols-1 xl:grid-cols-2' : 'grid-cols-1 max-w-3xl'}`}>
         {/* Editor Form */}
         <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-line p-6 sm:p-8 space-y-6">
-          {/* Image Link */}
+          {/* Cover Image Upload / URL */}
           <div>
-            <label className="block text-xs uppercase tracking-widest font-bold text-taupe mb-2">Cover Image URL</label>
-            <input
-              type="url"
-              value={image}
-              onChange={e => setImage(e.target.value)}
-              placeholder="https://example.com/image.webp"
-              className="w-full border border-line rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-brass text-ink font-medium mb-4"
-            />
-            {image && (
-              <div className="relative w-full h-48 rounded-lg overflow-hidden border border-line">
-                <img src={image} alt="Preview" className="w-full h-full object-cover" />
+            <div className="flex items-center justify-between mb-2">
+              <label className="block text-xs uppercase tracking-widest font-bold text-taupe">Cover Image</label>
+              <div className="flex items-center gap-1 bg-ivory p-0.5 rounded-lg border border-line text-xs font-semibold">
                 <button
                   type="button"
-                  onClick={() => setImage('')}
-                  className="absolute top-2 right-2 w-8 h-8 rounded-full bg-rose-500 text-white flex items-center justify-center shadow-md hover:bg-rose-600 transition-colors"
+                  onClick={() => setUploadMode('file')}
+                  className={`px-2.5 py-1 rounded-md transition-colors flex items-center gap-1.5 ${
+                    uploadMode === 'file'
+                      ? 'bg-pine text-white shadow-sm'
+                      : 'text-taupe hover:text-ink'
+                  }`}
                 >
-                  <X className="w-4 h-4" />
+                  <UploadCloud className="w-3.5 h-3.5" /> Upload File
                 </button>
+                <button
+                  type="button"
+                  onClick={() => setUploadMode('url')}
+                  className={`px-2.5 py-1 rounded-md transition-colors flex items-center gap-1.5 ${
+                    uploadMode === 'url'
+                      ? 'bg-pine text-white shadow-sm'
+                      : 'text-taupe hover:text-ink'
+                  }`}
+                >
+                  <Link2 className="w-3.5 h-3.5" /> Image URL
+                </button>
+              </div>
+            </div>
+
+            {uploadMode === 'file' ? (
+              <div>
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  accept="image/png,image/jpeg,image/webp,image/avif,image/svg+xml"
+                  className="hidden"
+                />
+
+                {isUploading ? (
+                  <div className="border-2 border-dashed border-brass rounded-xl p-8 text-center bg-brass/5 flex flex-col items-center justify-center gap-3">
+                    <Loader2 className="w-8 h-8 text-brass animate-spin" />
+                    <div>
+                      <p className="text-sm font-semibold text-ink">Uploading cover image...</p>
+                      <p className="text-xs text-taupe mt-1">Please wait while the file uploads to the server</p>
+                    </div>
+                  </div>
+                ) : !image && !previewUrl ? (
+                  <div
+                    onDragOver={handleDragOver}
+                    onDragLeave={handleDragLeave}
+                    onDrop={handleDrop}
+                    onClick={() => fileInputRef.current?.click()}
+                    className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all flex flex-col items-center justify-center gap-3 ${
+                      isDragging
+                        ? 'border-brass bg-brass/5 ring-2 ring-brass/20'
+                        : 'border-line hover:border-brass bg-ivory/40 hover:bg-ivory/80'
+                    }`}
+                  >
+                    <div className="w-12 h-12 rounded-full bg-paper border border-line flex items-center justify-center text-brass shadow-sm">
+                      <UploadCloud className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-ink">
+                        Click to upload <span className="font-normal text-ink-soft">or drag and drop</span>
+                      </p>
+                      <p className="text-xs text-taupe mt-1">
+                        PNG, JPG, WEBP, or SVG (Max 10MB)
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="relative w-full rounded-xl overflow-hidden border border-line bg-ivory">
+                    <div className="relative h-56 w-full">
+                      <img src={previewUrl || resolveFileUrl(image)} alt="Preview" className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+                      <div className="absolute top-3 right-3 flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => fileInputRef.current?.click()}
+                          className="bg-paper/90 backdrop-blur-sm hover:bg-paper text-ink px-3 py-1.5 rounded-lg text-xs font-semibold shadow-md transition-colors flex items-center gap-1.5"
+                        >
+                          <UploadCloud className="w-3.5 h-3.5 text-brass" /> Change
+                        </button>
+                        <button
+                          type="button"
+                          onClick={handleRemoveImage}
+                          className="w-8 h-8 rounded-lg bg-rose-500 hover:bg-rose-600 text-white flex items-center justify-center shadow-md transition-colors"
+                          title="Remove image"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                      <div className="absolute bottom-3 left-3 right-3 text-white">
+                        <div className="flex items-center gap-2">
+                          <ImageIcon className="w-4 h-4 text-brass-bright shrink-0" />
+                          <span className="text-xs font-medium truncate">
+                            {imageFileName || 'Uploaded Image'}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div>
+                <input
+                  type="url"
+                  value={image}
+                  onChange={e => {
+                    setImage(e.target.value);
+                    setPreviewUrl(e.target.value);
+                    setImageFileName(e.target.value.split('/').pop()?.split('?')[0] || '');
+                  }}
+                  placeholder="https://example.com/image.webp"
+                  className="w-full border border-line rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-brass text-ink font-medium mb-4"
+                />
+                {(image || previewUrl) && (
+                  <div className="relative w-full h-48 rounded-lg overflow-hidden border border-line">
+                    <img src={previewUrl || image} alt="Preview" className="w-full h-full object-cover" />
+                    <button
+                      type="button"
+                      onClick={handleRemoveImage}
+                      className="absolute top-2 right-2 w-8 h-8 rounded-full bg-rose-500 text-white flex items-center justify-center shadow-md hover:bg-rose-600 transition-colors"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -215,9 +432,9 @@ export default function EditBlog() {
                 <span>Published {new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
               </div>
 
-              {image ? (
+              {previewUrl || image ? (
                 <div className="w-full h-48 sm:h-64 bg-ivory rounded overflow-hidden mb-8">
-                  <img src={image} alt="Preview" className="w-full h-full object-cover" />
+                  <img src={previewUrl || resolveFileUrl(image)} alt="Preview" className="w-full h-full object-cover" />
                 </div>
               ) : (
                 <div className="w-full h-48 sm:h-64 bg-ivory rounded border border-line-light flex items-center justify-center text-taupe mb-8">

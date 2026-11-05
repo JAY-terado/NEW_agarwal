@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useBlogContext } from '../context/BlogContext';
+import { resolveFileUrl } from '../_api/fileUpload';
 import blogGreen from '../assets/blog-green-sustainable-homes-virar.webp';
 
 export default function Blog() {
@@ -48,12 +49,21 @@ export default function Blog() {
           ) : (
             <div className="blog-grid">
               {blogs.map((post) => {
-                const blogImg = post.image || 'https://via.placeholder.com/600x400?text=No+Image';
-              return (
-                <article key={post.id} className="bcard">
-                  <div className="bcard-media">
-                    <img src={blogImg} alt={post.title} />
-                  </div>
+                const blogImg = resolveFileUrl(post.image) || blogGreen;
+                return (
+                  <article key={post.id} className="bcard">
+                    <Link to={`/blogs/${post.id}`} className="bcard-media block">
+                      <img
+                        src={blogImg}
+                        alt={post.title}
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          if (target.src !== blogGreen) {
+                            target.src = blogGreen;
+                          }
+                        }}
+                      />
+                    </Link>
                   <div className="bbody">
                     <div className="bmeta">
                       <span>{post.category}</span>

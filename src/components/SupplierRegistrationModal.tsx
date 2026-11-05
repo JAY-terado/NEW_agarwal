@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   X, Briefcase, Package, Check, ChevronRight, UploadCloud, FileText, 
-  Trash2, Edit2, Users, Sparkles, RefreshCw, AlertCircle, Building2, MapPin, Phone, Mail, User, ShieldCheck
+  Trash2, Edit2, Users, Sparkles, RefreshCw, AlertCircle, Building2, MapPin, Phone, Mail, User, ShieldCheck,
+  Eye, ExternalLink, Download
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { supplierRegisterAxios, extractErrorMessage, type SupplierRegisterPayload } from '../_api/registration';
@@ -196,6 +197,36 @@ export default function SupplierRegistrationModal({ isOpen, onClose }: { isOpen:
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [validationError, setValidationError] = useState<string | null>(null);
+
+  // Document Preview Modal State
+  const [previewDoc, setPreviewDoc] = useState<{
+    title: string;
+    file: File;
+    url?: string;
+  } | null>(null);
+  const [previewBlobUrl, setPreviewBlobUrl] = useState<string>('');
+
+  useEffect(() => {
+    if (!previewDoc) {
+      setPreviewBlobUrl('');
+      return;
+    }
+    const objectUrl = URL.createObjectURL(previewDoc.file);
+    setPreviewBlobUrl(objectUrl);
+    return () => {
+      URL.revokeObjectURL(objectUrl);
+    };
+  }, [previewDoc]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && previewDoc) {
+        setPreviewDoc(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [previewDoc]);
 
   // CAPTCHA State
   const [captchaQ, setCaptchaQ] = useState({ a: 7, b: 5 });
@@ -953,6 +984,15 @@ export default function SupplierRegistrationModal({ isOpen, onClose }: { isOpen:
                                         </div>
                                       </div>
                                       <div className="flex items-center gap-2 shrink-0">
+                                        <button
+                                          type="button"
+                                          onClick={() => setPreviewDoc({ title: item.title, file: docState.file! })}
+                                          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold text-brass-deep bg-brass/10 hover:bg-brass/20 transition-colors cursor-pointer"
+                                          title="Preview attachment"
+                                        >
+                                          <Eye className="w-3.5 h-3.5" />
+                                          <span>Preview</span>
+                                        </button>
                                         <label 
                                           htmlFor={inputId}
                                           className="text-xs text-brass-deep hover:underline cursor-pointer font-semibold px-2 py-1"
@@ -1288,6 +1328,107 @@ export default function SupplierRegistrationModal({ isOpen, onClose }: { isOpen:
 
         </motion.div>
       </motion.div>
+
+      {/* Attachment Preview Modal */}
+      <AnimatePresence>
+        {previewDoc && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-6 bg-black/75 backdrop-blur-sm"
+            onClick={() => setPreviewDoc(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-2xl shadow-2xl border border-line max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between px-5 py-4 border-b border-line bg-ivory/60">
+                <div className="flex items-center gap-3 overflow-hidden">
+                  <div className="w-10 h-10 rounded-xl bg-brass/10 text-brass-deep flex items-center justify-center shrink-0">
+                    <FileText className="w-5 h-5" />
+                  </div>
+                  <div className="overflow-hidden">
+                    <h3 className="text-sm sm:text-base font-serif font-bold text-ink truncate">
+                      {previewDoc.title}
+                    </h3>
+                    <p className="text-xs text-ink-soft truncate">
+                      {previewDoc.file.name} • {(previewDoc.file.size / 1024 / 1024).toFixed(2)} MB
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 shrink-0">
+                  {previewBlobUrl && (
+                    <a
+                      href={previewBlobUrl}
+                      download={previewDoc.file.name}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="p-2 rounded-xl text-ink-soft hover:text-ink hover:bg-ivory border border-line/60 transition-all flex items-center gap-1.5 text-xs font-semibold"
+                      title="Download or open in new tab"
+                    >
+                      <ExternalLink className="w-4 h-4 text-brass-deep" />
+                      <span className="hidden sm:inline">Open in Tab</span>
+                    </a>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setPreviewDoc(null)}
+                    className="p-2 rounded-xl text-ink-soft hover:text-ink hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
+                    title="Close preview"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Body Content */}
+              <div className="flex-1 overflow-auto p-4 sm:p-6 bg-ivory/30 flex items-center justify-center min-h-[300px]">
+                {previewDoc.file.type.startsWith('image/') || /\.(jpe?g|png|webp|gif|svg)$/i.test(previewDoc.file.name) ? (
+                  <div className="w-full flex items-center justify-center">
+                    <img
+                      src={previewBlobUrl}
+                      alt={previewDoc.file.name}
+                      className="max-h-[65vh] w-auto max-w-full object-contain rounded-xl shadow-md border border-line"
+                    />
+                  </div>
+                ) : previewDoc.file.type === 'application/pdf' || /\.pdf$/i.test(previewDoc.file.name) ? (
+                  <iframe
+                    src={previewBlobUrl}
+                    title={previewDoc.file.name}
+                    className="w-full h-[65vh] rounded-xl border border-line bg-white shadow-inner"
+                  />
+                ) : (
+                  <div className="flex flex-col items-center justify-center text-center p-8 bg-white rounded-2xl border border-line max-w-md shadow-sm">
+                    <div className="w-16 h-16 rounded-2xl bg-brass/10 text-brass-deep flex items-center justify-center mb-4">
+                      <FileText className="w-8 h-8" />
+                    </div>
+                    <h4 className="font-serif font-bold text-ink text-base mb-1 truncate max-w-full px-2">
+                      {previewDoc.file.name}
+                    </h4>
+                    <p className="text-xs text-ink-soft mb-5">
+                      Direct in-browser preview is not available for this file type. You can download or open the document directly.
+                    </p>
+                    <a
+                      href={previewBlobUrl}
+                      download={previewDoc.file.name}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brass-deep hover:bg-brass text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-sm"
+                    >
+                      <Download className="w-4 h-4" /> Download File
+                    </a>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </AnimatePresence>
   );
 }

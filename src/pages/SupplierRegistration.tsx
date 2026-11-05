@@ -3,11 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   CheckCircle2, Briefcase, Package, Users, Sparkles, Building2, MapPin, 
   Phone, Mail, User, ShieldCheck, UploadCloud, FileText, Trash2, Check, 
-  RefreshCw, Globe, AlertCircle
+  RefreshCw, Globe, AlertCircle, Eye, ExternalLink, X, Download
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { supplierRegisterAxios, extractErrorMessage, type SupplierRegisterPayload } from '../_api/registration';
+import { uploadFileAxios } from '../_api/fileUpload';
 import heroImage from '../assets/gallery-exterior-residential-towers-virar.webp';
 
 export type RegistrationTypeKey = 
@@ -19,6 +20,8 @@ export type RegistrationTypeKey =
 export interface DocumentEntry {
   status: 'attached' | 'later' | 'na';
   file: File | null;
+  uploadedUrl?: string;
+  isUploading?: boolean;
 }
 
 export interface SupplierFormValues {
@@ -200,6 +203,36 @@ export default function SupplierRegistration() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [serverError, setServerError] = useState<string | null>(null);
 
+  // Document Preview Modal State
+  const [previewDoc, setPreviewDoc] = useState<{
+    title: string;
+    file: File;
+    url?: string;
+  } | null>(null);
+  const [previewBlobUrl, setPreviewBlobUrl] = useState<string>('');
+
+  useEffect(() => {
+    if (!previewDoc) {
+      setPreviewBlobUrl('');
+      return;
+    }
+    const objectUrl = URL.createObjectURL(previewDoc.file);
+    setPreviewBlobUrl(objectUrl);
+    return () => {
+      URL.revokeObjectURL(objectUrl);
+    };
+  }, [previewDoc]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && previewDoc) {
+        setPreviewDoc(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [previewDoc]);
+
   // CAPTCHA State
   const [captchaQ, setCaptchaQ] = useState({ a: 7, b: 6 });
   const [captchaInput, setCaptchaInput] = useState('');
@@ -280,7 +313,9 @@ export default function SupplierRegistration() {
         [key]: {
           ...prev.documents[key],
           status,
-          file: status === 'attached' ? prev.documents[key].file : null
+          file: status === 'attached' ? prev.documents[key].file : null,
+          uploadedUrl: status === 'attached' ? prev.documents[key].uploadedUrl : undefined,
+          isUploading: false,
         }
       }
     }));
@@ -294,7 +329,28 @@ export default function SupplierRegistration() {
     }
   };
 
-  const setDocFile = (key: keyof SupplierFormValues['documents'], file: File | null) => {
+  const setDocFile = async (key: keyof SupplierFormValues['documents'], file: File | null) => {
+    if (!file) {
+      setFormValues(prev => ({
+        ...prev,
+        documents: {
+          ...prev.documents,
+          [key]: {
+            ...prev.documents[key],
+            file: null,
+            uploadedUrl: undefined,
+            isUploading: false,
+          }
+        }
+      }));
+      return;
+    }
+
+    if (file.size > 15 * 1024 * 1024) {
+      toast.error(`File "${file.name}" exceeds 15MB limit`);
+      return;
+    }
+
     setFormValues(prev => ({
       ...prev,
       documents: {
@@ -302,7 +358,8 @@ export default function SupplierRegistration() {
         [key]: {
           ...prev.documents[key],
           file,
-          status: file ? 'attached' : prev.documents[key].status
+          status: 'attached',
+          isUploading: true,
         }
       }
     }));
@@ -313,6 +370,34 @@ export default function SupplierRegistration() {
         delete next[`doc_${key}`];
         return next;
       });
+    }
+
+    try {
+      const res = await uploadFileAxios(file, 'suppliers');
+      setFormValues(prev => ({
+        ...prev,
+        documents: {
+          ...prev.documents,
+          [key]: {
+            ...prev.documents[key],
+            uploadedUrl: res.data.fileURL,
+            isUploading: false,
+          }
+        }
+      }));
+    } catch (err: any) {
+      console.error(`Upload error for ${key}:`, err);
+      toast.error(err.message || `Failed to upload ${file.name}`);
+      setFormValues(prev => ({
+        ...prev,
+        documents: {
+          ...prev.documents,
+          [key]: {
+            ...prev.documents[key],
+            isUploading: false,
+          }
+        }
+      }));
     }
   };
 
@@ -391,6 +476,13 @@ export default function SupplierRegistration() {
 
     setIsSubmitting(true);
     try {
+      const isAnyUploading = Object.values(formValues.documents).some(d => d.isUploading);
+      if (isAnyUploading) {
+        toast.error('Please wait for all documents to finish uploading.');
+        setIsSubmitting(false);
+        return;
+      }
+
       const cats = [...formValues.categories];
       if (formValues.categoryOther.trim()) {
         cats.push(formValues.categoryOther.trim());
@@ -399,15 +491,37 @@ export default function SupplierRegistration() {
         cats.push(formValues.registrationType);
       }
 
-      const getDocString = (doc: DocumentEntry) => {
-        if (doc.status === 'attached' && doc.file) {
-          return doc.file.name;
+      const uploadDocIfAttached = async (doc: DocumentEntry): Promise<string> => {
+        if (doc.status === 'attached') {
+          if (doc.uploadedUrl) {
+            return doc.uploadedUrl;
+          }
+          if (doc.file) {
+            const uploadRes = await uploadFileAxios(doc.file, 'suppliers');
+            return uploadRes.data.fileURL;
+          }
         }
         if (doc.status === 'later') {
           return 'To be submitted later';
         }
         return 'Not Applicable';
       };
+
+      const [
+        companyProfileAttachment,
+        productCatalogueAttachment,
+        rateListAttachment,
+        projectPortfolioAttachment,
+        relevantLicencesAttachment,
+        otherSupportingAttachment
+      ] = await Promise.all([
+        uploadDocIfAttached(formValues.documents.companyProfile),
+        uploadDocIfAttached(formValues.documents.catalogue),
+        uploadDocIfAttached(formValues.documents.rateList),
+        uploadDocIfAttached(formValues.documents.portfolio),
+        uploadDocIfAttached(formValues.documents.licences),
+        uploadDocIfAttached(formValues.documents.otherDocs),
+      ]);
 
       const payload: SupplierRegisterPayload = {
         supplierName: formValues.contactPerson.trim(),
@@ -420,12 +534,12 @@ export default function SupplierRegistration() {
         yearsOfExperience: formValues.experienceYears || '1',
         areaOfOperation: formValues.areasOfOperation.length > 0 ? formValues.areasOfOperation.join(', ') : 'MMR',
         majorClientServed: formValues.majorProjects.trim() || formValues.additionalInfo.trim() || 'N/A',
-        companyProfileAttachment: getDocString(formValues.documents.companyProfile),
-        productCatalogueAttachment: getDocString(formValues.documents.catalogue),
-        rateListAttachment: getDocString(formValues.documents.rateList),
-        projectPortfolioAttachment: getDocString(formValues.documents.portfolio),
-        relevantLicencesAttachment: getDocString(formValues.documents.licences),
-        otherSupportingAttachment: getDocString(formValues.documents.otherDocs),
+        companyProfileAttachment,
+        productCatalogueAttachment,
+        rateListAttachment,
+        projectPortfolioAttachment,
+        relevantLicencesAttachment,
+        otherSupportingAttachment,
       };
 
       const response = await supplierRegisterAxios(payload);
@@ -940,14 +1054,31 @@ export default function SupplierRegistration() {
                                 <div className="flex items-center justify-between p-3 rounded-xl bg-ivory/70 border border-brass/30">
                                   <div className="flex items-center gap-2.5 overflow-hidden">
                                     <div className="w-8 h-8 rounded-lg bg-green-50 text-green-600 flex items-center justify-center shrink-0">
-                                      <Check className="w-4 h-4" />
+                                      {docState.isUploading ? (
+                                        <span className="w-4 h-4 border-2 border-brass-deep border-t-transparent rounded-full animate-spin" />
+                                      ) : (
+                                        <Check className="w-4 h-4" />
+                                      )}
                                     </div>
                                     <div className="overflow-hidden">
                                       <p className="text-xs font-semibold text-ink truncate">{docState.file.name}</p>
-                                      <p className="text-[10px] text-ink-soft">{(docState.file.size / 1024 / 1024).toFixed(2)} MB</p>
+                                      <p className="text-[10px] text-ink-soft">
+                                        {docState.isUploading
+                                          ? 'Uploading to server...'
+                                          : `${(docState.file.size / 1024 / 1024).toFixed(2)} MB • Uploaded`}
+                                      </p>
                                     </div>
                                   </div>
                                   <div className="flex items-center gap-2 shrink-0">
+                                    <button
+                                      type="button"
+                                      onClick={() => setPreviewDoc({ title: item.title, file: docState.file!, url: docState.uploadedUrl })}
+                                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold text-brass-deep bg-brass/10 hover:bg-brass/20 transition-colors cursor-pointer"
+                                      title="Preview attachment"
+                                    >
+                                      <Eye className="w-3.5 h-3.5" />
+                                      <span>Preview</span>
+                                    </button>
                                     <label
                                       htmlFor={inputId}
                                       className="text-xs text-brass-deep hover:underline cursor-pointer font-semibold px-2 py-1"
@@ -1148,6 +1279,107 @@ export default function SupplierRegistration() {
           )}
         </AnimatePresence>
       </section>
+
+      {/* Attachment Preview Modal */}
+      <AnimatePresence>
+        {previewDoc && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-6 bg-black/75 backdrop-blur-sm"
+            onClick={() => setPreviewDoc(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-2xl shadow-2xl border border-line max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between px-5 py-4 border-b border-line bg-ivory/60">
+                <div className="flex items-center gap-3 overflow-hidden">
+                  <div className="w-10 h-10 rounded-xl bg-brass/10 text-brass-deep flex items-center justify-center shrink-0">
+                    <FileText className="w-5 h-5" />
+                  </div>
+                  <div className="overflow-hidden">
+                    <h3 className="text-sm sm:text-base font-serif font-bold text-ink truncate">
+                      {previewDoc.title}
+                    </h3>
+                    <p className="text-xs text-ink-soft truncate">
+                      {previewDoc.file.name} • {(previewDoc.file.size / 1024 / 1024).toFixed(2)} MB
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 shrink-0">
+                  {previewBlobUrl && (
+                    <a
+                      href={previewBlobUrl}
+                      download={previewDoc.file.name}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="p-2 rounded-xl text-ink-soft hover:text-ink hover:bg-ivory border border-line/60 transition-all flex items-center gap-1.5 text-xs font-semibold"
+                      title="Download or open in new tab"
+                    >
+                      <ExternalLink className="w-4 h-4 text-brass-deep" />
+                      <span className="hidden sm:inline">Open in Tab</span>
+                    </a>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setPreviewDoc(null)}
+                    className="p-2 rounded-xl text-ink-soft hover:text-ink hover:bg-rose-50 hover:text-rose-600 transition-colors cursor-pointer"
+                    title="Close preview"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Body Content */}
+              <div className="flex-1 overflow-auto p-4 sm:p-6 bg-ivory/30 flex items-center justify-center min-h-[300px]">
+                {previewDoc.file.type.startsWith('image/') || /\.(jpe?g|png|webp|gif|svg)$/i.test(previewDoc.file.name) ? (
+                  <div className="w-full flex items-center justify-center">
+                    <img
+                      src={previewBlobUrl}
+                      alt={previewDoc.file.name}
+                      className="max-h-[65vh] w-auto max-w-full object-contain rounded-xl shadow-md border border-line"
+                    />
+                  </div>
+                ) : previewDoc.file.type === 'application/pdf' || /\.pdf$/i.test(previewDoc.file.name) ? (
+                  <iframe
+                    src={previewBlobUrl}
+                    title={previewDoc.file.name}
+                    className="w-full h-[65vh] rounded-xl border border-line bg-white shadow-inner"
+                  />
+                ) : (
+                  <div className="flex flex-col items-center justify-center text-center p-8 bg-white rounded-2xl border border-line max-w-md shadow-sm">
+                    <div className="w-16 h-16 rounded-2xl bg-brass/10 text-brass-deep flex items-center justify-center mb-4">
+                      <FileText className="w-8 h-8" />
+                    </div>
+                    <h4 className="font-serif font-bold text-ink text-base mb-1 truncate max-w-full px-2">
+                      {previewDoc.file.name}
+                    </h4>
+                    <p className="text-xs text-ink-soft mb-5">
+                      Direct in-browser preview is not available for this file type. You can download or open the document directly.
+                    </p>
+                    <a
+                      href={previewBlobUrl}
+                      download={previewDoc.file.name}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brass-deep hover:bg-brass text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-sm"
+                    >
+                      <Download className="w-4 h-4" /> Download File
+                    </a>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

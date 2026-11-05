@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Clock, ArrowLeft } from 'lucide-react';
 import { getBlogByIdAxios } from '../_api/admin';
+import { resolveFileUrl } from '../_api/fileUpload';
 import { type BlogPost as BlogPostType } from '../data/blogs';
+import blogGreen from '../assets/blog-green-sustainable-homes-virar.webp';
 
 export default function BlogPost() {
   const { id } = useParams();
@@ -18,13 +20,19 @@ export default function BlogPost() {
     getBlogByIdAxios(Number(id)).then(response => {
       const data = response?.data?.blog || response?.data || response?.blog || response;
       if (data && (data.title || data.titlename)) { // Check if valid blog exists
+        const rawImg =
+          data.blogImageURL ||
+          (Array.isArray(data.imageurl) && data.imageurl.length > 0 ? data.imageurl[0] : data.imageurl) ||
+          (data.blogImageFileName ? `/uploads/blogs/${data.blogImageFileName}` : '') ||
+          data.image ||
+          '';
         setPost({
           id: data.id.toString(),
           title: data.title || data.titlename,
           category: data.blogCategory || data.category || '',
           excerpt: data.blogSummary || data.summary || '',
           content: data.blogDescription || data.article || '',
-          image: data.blogImageURL || (data.imageurl && data.imageurl.length > 0 ? data.imageurl[0] : ''),
+          image: resolveFileUrl(rawImg, data.relativePath),
           date: new Date(data.createdAt || Date.now()).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
         });
       } else {
@@ -81,9 +89,15 @@ export default function BlogPost() {
       <section className="w-full max-w-5xl mx-auto px-6 mb-12">
         <div className="w-full h-[40vh] sm:h-[60vh] bg-ivory rounded-lg overflow-hidden">
           <img
-            src={post.image || 'https://via.placeholder.com/1200x800?text=No+Image'}
+            src={resolveFileUrl(post.image) || blogGreen}
             alt={post.title}
             className="w-full h-full object-cover"
+            onError={(e) => {
+              const target = e.currentTarget;
+              if (target.src !== blogGreen) {
+                target.src = blogGreen;
+              }
+            }}
           />
         </div>
         <div className="mt-3 text-[10px] sm:text-xs text-taupe font-medium flex justify-between">

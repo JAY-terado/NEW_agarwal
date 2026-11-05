@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, useRef, type ReactNode } from 'react';
 import { type BlogPost } from '../data/blogs';
 import { getAllBlogsAxios, deleteBlogAxios } from '../_api/admin';
+import { resolveFileUrl } from '../_api/fileUpload';
 import toast from 'react-hot-toast';
 
 interface BlogContextType {
@@ -40,15 +41,23 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
         ? response
         : [];
       
-      const mappedBlogs: BlogPost[] = apiData.map((b: any) => ({
-        id: b.id.toString(),
-        title: b.title || b.titlename || '',
-        category: b.blogCategory || b.category || '',
-        excerpt: b.blogSummary || b.summary || '',
-        content: b.blogDescription || b.article || '',
-        image: b.blogImageURL || (b.imageurl && b.imageurl.length > 0 ? b.imageurl[0] : '') || '',
-        date: new Date(b.createdAt || Date.now()).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
-      }));
+      const mappedBlogs: BlogPost[] = apiData.map((b: any) => {
+        const rawImg =
+          b.blogImageURL ||
+          (Array.isArray(b.imageurl) && b.imageurl.length > 0 ? b.imageurl[0] : b.imageurl) ||
+          (b.blogImageFileName ? `/uploads/blogs/${b.blogImageFileName}` : '') ||
+          b.image ||
+          '';
+        return {
+          id: b.id.toString(),
+          title: b.title || b.titlename || '',
+          category: b.blogCategory || b.category || '',
+          excerpt: b.blogSummary || b.summary || '',
+          content: b.blogDescription || b.article || '',
+          image: resolveFileUrl(rawImg, b.relativePath),
+          date: new Date(b.createdAt || Date.now()).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+        };
+      });
 
       // Set API blogs directly
       setBlogs(mappedBlogs);
