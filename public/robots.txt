@@ -3,5 +3,5 @@ Allow: /
 Disallow: /admin/
 Disallow: /admin/*
 
-Sitemap: https://agarwalgroup.in/sitemap.xml
+Sitemap: https://www.agarwalgroup.in/sitemap.xml
 
