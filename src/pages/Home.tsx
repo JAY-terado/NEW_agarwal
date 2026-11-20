@@ -1,3 +1,4 @@
+import HeroVideo from '../components/HeroVideo';
 
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
@@ -29,6 +30,14 @@ import testVid5 from '../assets/testimonials/ekta goraksha AG5.mp4';
 import testVid6 from '../assets/testimonials/Deesha shah AG6.mp4';
 import testVid7 from '../assets/testimonials/M.S.bijju AG7.mp4';
 import testVid8 from '../assets/testimonials/Ramkrushna sabat AG8.mp4';
+import testPoster1 from '../assets/testimonials/posters/ag1.webp';
+import testPoster2 from '../assets/testimonials/posters/ag2.webp';
+import testPoster3 from '../assets/testimonials/posters/ag3.webp';
+import testPoster4 from '../assets/testimonials/posters/ag4.webp';
+import testPoster5 from '../assets/testimonials/posters/ag5.webp';
+import testPoster6 from '../assets/testimonials/posters/ag6.webp';
+import testPoster7 from '../assets/testimonials/posters/ag7.webp';
+import testPoster8 from '../assets/testimonials/posters/ag8.webp';
 
 import blogGreen from '../assets/blog-green-sustainable-homes-virar.webp';
 
@@ -77,18 +86,19 @@ interface Testimonial {
   title: string;
   project: string;
   video: string;
+  poster: string;
 }
 
 // Testimonials data matching the original reels
 const testimonialsData: Testimonial[] = [
-  { id: '1', name: "Ramkrishna Sabat", title: "Trust & Peace of Mind", project: "Proud Home Buyer", video: testVid8 },
-  { id: '2', name: "Keyur Raichand", title: "Exactly as Promised", project: "Proud Home Buyer", video: testVid2 },
-  { id: '3', name: "Meletheil Biju", title: "Exceptional quality", project: "Proud Home Buyer", video: testVid7 },
-  { id: '4', name: "Darshan Mehta", title: "Home to Cherish", project: "Proud Channel Partner", video: testVid1 },
-  { id: '5', name: "Hitesh Patil", title: "Delivered on Time", project: "Proud Channel Partner", video: testVid3 },
-  { id: '6', name: "Ekta Goraksha", title: "A Trusted Name", project: "Proud Home Buyer", video: testVid5 },
-  { id: '7', name: "Disha Shah", title: "Highly Recommended", project: "Proud Home Buyer", video: testVid6 },
-  { id: '8', name: "Hitesh Shah", title: "World class Amenities", project: "Proud Channel Partner", video: testVid4 },
+  { id: '1', name: "Ramkrishna Sabat", title: "Trust & Peace of Mind", project: "Proud Home Buyer", video: testVid8, poster: testPoster8 },
+  { id: '2', name: "Keyur Raichand", title: "Exactly as Promised", project: "Proud Home Buyer", video: testVid2, poster: testPoster2 },
+  { id: '3', name: "Meletheil Biju", title: "Exceptional quality", project: "Proud Home Buyer", video: testVid7, poster: testPoster7 },
+  { id: '4', name: "Darshan Mehta", title: "Home to Cherish", project: "Proud Channel Partner", video: testVid1, poster: testPoster1 },
+  { id: '5', name: "Hitesh Patil", title: "Delivered on Time", project: "Proud Channel Partner", video: testVid3, poster: testPoster3 },
+  { id: '6', name: "Ekta Goraksha", title: "A Trusted Name", project: "Proud Home Buyer", video: testVid5, poster: testPoster5 },
+  { id: '7', name: "Disha Shah", title: "Highly Recommended", project: "Proud Home Buyer", video: testVid6, poster: testPoster6 },
+  { id: '8', name: "Hitesh Shah", title: "World class Amenities", project: "Proud Channel Partner", video: testVid4, poster: testPoster4 },
 ];
 
 
@@ -451,26 +461,7 @@ export default function Home() {
         onClick={handleHeroInteraction}
       >
         <div className="absolute inset-0 z-0">
-          <video
-            className="w-full h-full object-cover hidden md:block"
-            src={heroVideo}
-            poster={heroPoster}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-          />
-          <video
-            className="w-full h-full object-cover block md:hidden"
-            src={heroMobileVideo}
-            poster={heroPoster}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-          />
+          <HeroVideo desktop={heroVideo} mobile={heroMobileVideo} poster={heroPoster} />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(18, 18, 16, .5) 0%, rgba(18, 18, 16, .2) 36%, rgba(18, 18, 16, .85) 100%)' }} />
         </div>
 
@@ -807,12 +798,14 @@ export default function Home() {
                   className="reel"
                   onClick={() => setActiveVideoModal(item)}
                 >
-                  <video
-                    src={`${item.video}#t=0.001`}
-                    preload="metadata"
-                    muted
-                    playsInline
-                    className="reel-video"
+                  <img
+                    src={item.poster}
+                    alt=""
+                    width={480}
+                    height={854}
+                    loading="lazy"
+                    decoding="async"
+                    className="reel-video w-full h-full object-cover"
                   />
                   <button
                     className="reel-play"

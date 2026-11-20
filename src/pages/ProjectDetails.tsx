@@ -1,3 +1,4 @@
+import HeroVideo from '../components/HeroVideo';
 import { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -489,62 +490,11 @@ export default function ProjectDetails() {
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             {project.slug === 'infinity' ? (
-              <>
-                <video
-                  src={infinityHeroVideo}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover hidden md:block"
-                />
-                <video
-                  src={infinityHeroVideoMobile}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover block md:hidden"
-                />
-              </>
+              <HeroVideo desktop={infinityHeroVideo} mobile={infinityHeroVideoMobile} poster={heroImage} />
             ) : project.slug === 'sky-heights' ? (
-              <>
-                <video
-                  src={skyHeightsHeroVideo}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover hidden md:block"
-                />
-                <video
-                  src={skyHeightsHeroVideoMobile}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover block md:hidden"
-                />
-              </>
+              <HeroVideo desktop={skyHeightsHeroVideo} mobile={skyHeightsHeroVideoMobile} poster={heroImage} />
             ) : project.slug === 'skyrise' ? (
-              <>
-                <video
-                  src={skyriseHeroVideo}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover hidden md:block"
-                />
-                <video
-                  src={skyriseHeroVideoMobile}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover block md:hidden"
-                />
-              </>
+              <HeroVideo desktop={skyriseHeroVideo} mobile={skyriseHeroVideoMobile} poster={heroImage} />
             ) : (
               <img
                 src={heroImage}
