@@ -35,7 +35,7 @@ export default function Layout({ children }: LayoutProps) {
       <div style={{ position: 'fixed', right: '20px', bottom: '20px', zIndex: 90, display: 'flex', flexDirection: 'column', gap: '12px' }}>
         {/* WhatsApp */}
         <a
-          href="https://api.whatsapp.com/send?phone=918530081105&text=Hello%2C%20I%27m%20interested%20in%20Agarwal%20Group%20projects"
+          href="https://api.whatsapp.com/send?phone=918408008001&text=Hello%2C%20I%27m%20interested%20in%20Agarwal%20Group%20projects"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="WhatsApp"

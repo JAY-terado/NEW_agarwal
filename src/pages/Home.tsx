@@ -418,7 +418,7 @@ export default function Home() {
 
 
   const countYears = useCountUp(48, 1500, statsTriggered);
-  const countProjects = useCountUp(30, 1500, statsTriggered);
+  const countProjects = useCountUp(50, 1500, statsTriggered);
   const countFamilies = useCountUp(5000, 2000, statsTriggered);
   const [isContactSubmitting, setIsContactSubmitting] = useState(false);
 
@@ -673,7 +673,15 @@ export default function Home() {
                 <article key={proj.slug} className="pcard">
                   <div className="pcard-media">
                     {/* <span className="pbadge">{projectMeta.badge}</span> */}
-                    <img src={imageSrc} alt={projectName} />
+                    <img
+                      src={imageSrc}
+                      alt={projectName}
+                      className={
+                        proj.slug === 'sky-heights'
+                          ? 'pcard-img-sky-heights'
+                          : undefined
+                      }
+                    />
                   </div>
                   <div className="pbody">
                     <h3>{projectName}</h3>
@@ -1017,7 +1025,7 @@ export default function Home() {
 
 
       {/* 8. INSTAGRAM FEED SECTION - matches original profile & grid */}
-      <section className="section insta" id="social" style={{ background: 'var(--color-ivory)' }}>
+      {/* <section className="section insta" id="social" style={{ background: 'var(--color-ivory)' }}>
         <div className="wrap-widescreen">
           <div className="section-head reveal" style={{ marginBottom: 'clamp(34px, 5vh, 52px)' }}>
             <span className="eyebrow">Instagram</span>
@@ -1176,7 +1184,7 @@ export default function Home() {
             </a>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section className="contact" id="contact" style={{ padding: 'clamp(80px, 13vh, 150px) 0', background: 'var(--color-paper)' }}>
         <div className="wrap-widescreen contact-grid">

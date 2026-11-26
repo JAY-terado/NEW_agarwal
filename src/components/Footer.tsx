@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { requestCallbackAxios, extractErrorMessage } from '../_api/user';
 import toast from 'react-hot-toast';
+import NewsletterSignup from './NewsletterSignup';
 import Logo from '../assets/logo2.webp';
 
 export default function Footer() {
@@ -139,7 +140,7 @@ export default function Footer() {
                 { to: '/projects/infinity', label: 'Agarwal Infinity' },
                 { to: '/projects/sky-heights', label: 'Agarwal Sky Heights' },
                 { to: '/projects/skyrise', label: 'Agarwal Skyrise' },
-                { to: '/projects/horizon', label: 'Agarwal Horizon' },
+                // { to: '/projects/horizon', label: 'Agarwal Horizon' },
               ].map(link => {
                 const isHorizon = link.to === '/projects/horizon';
                 const Wrapper = isHorizon ? 'span' : Link;
@@ -267,6 +268,8 @@ export default function Footer() {
             </div>
           </div>
         </div>
+
+        <NewsletterSignup />
 
         {/* Footer Bottom */}
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', gap: '12px', paddingTop: '24px', fontSize: '.78rem', fontWeight: 300 }}>

@@ -7,7 +7,8 @@
     "dev": "vite --host",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "newsletter": "node newsletter/server.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
@@ -37,6 +38,7 @@
     "@vitejs/plugin-react": "^6.0.3",
     "autoprefixer": "^10.5.3",
     "oxlint": "^1.71.0",
+    "playwright": "^1.65.1",
     "postcss": "^8.5.19",
     "sharp": "^0.35.4",
     "tailwindcss": "^4.3.2",

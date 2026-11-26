@@ -11,9 +11,15 @@ export default defineConfig({
   server: {
     host: true,
     allowedHosts: true,
+    proxy: {
+      '/api/newsletter/subscribe': 'http://127.0.0.1:3107',
+    },
   },
   preview: {
     host: true,
     allowedHosts: true,
+    proxy: {
+      '/api/newsletter/subscribe': 'http://127.0.0.1:3107',
+    },
   },
 })

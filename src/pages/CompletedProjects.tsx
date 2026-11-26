@@ -1,3 +1,4 @@
+import { useCompletedProjectsSeo } from '../seo/useCompletedProjectsSeo';
 import { useEffect } from 'react';
 
 import img0 from '../assets/Completed Projects/new2/Agarwal Doshi.webp';
@@ -93,12 +94,13 @@ const completedProjects = [
 ];
 
 export default function CompletedProjects() {
+  useCompletedProjectsSeo();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <div className="bg-ivory min-h-screen text-ink pt-32 pb-24">
+    <div data-completed-projects="" className="bg-ivory min-h-screen text-ink pt-32 pb-24">
       <div className="wrap-widescreen">
         <div className="text-left mb-16">
           <span className="eyebrow block mb-4">Our Legacy</span>
@@ -115,7 +117,7 @@ export default function CompletedProjects() {
               <div className="aspect-square bg-line relative rounded-2xl overflow-hidden shadow-sm border border-line-light group-hover:border-brass-deep transition-colors duration-300 mb-4">
                 <img
                   src={project.image}
-                  alt={project.name}
+                  alt={project.name + ", " + project.sub}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/10 transition-colors duration-300 pointer-events-none" />
