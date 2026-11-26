@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -12,7 +11,7 @@
   --color-paper: #FFFFFF;
   --color-ink: #1E1F1A;
   --color-ink-soft: #43443C;
-  --color-taupe: #8b8473;
+  --color-taupe: #6b6557;
   --color-line: rgba(20, 20, 18, 0.14);
   --color-line-light: rgba(20, 20, 18, 0.12);
   --color-shadow: rgba(30, 31, 26, 0.3);

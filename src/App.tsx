@@ -1,29 +1,30 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { useEffect } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import Layout from './components/Layout';
 import Home from './pages/Home';
-import ProjectDetails from './pages/ProjectDetails';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
-import AdminLayout from './pages/admin/AdminLayout';
-import AdminLogin from './pages/admin/AdminLogin';
-import BlogList from './pages/admin/BlogList';
-import AddBlog from './pages/admin/AddBlog';
-import EditBlog from './pages/admin/EditBlog';
 import { BlogProvider } from './context/BlogContext';
-import ChannelPartner from './pages/ChannelPartner';
-import CustomerRegistration from './pages/CustomerRegistration';
-import SupplierRegistration from './pages/SupplierRegistration';
-import TermsConditions from './pages/TermsConditions';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import Disclaimer from './pages/Disclaimer';
-import Careers from './pages/Careers';
-import AboutUs from './pages/AboutUs';
-import Sitemap from './pages/Sitemap';
-import CompletedProjects from './pages/CompletedProjects';
-import FaqPage from './pages/FaqPage';
+
+const ProjectDetails = lazy(() => import('./pages/ProjectDetails'));
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
+const AdminLayout = lazy(() => import('./pages/admin/AdminLayout'));
+const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
+const BlogList = lazy(() => import('./pages/admin/BlogList'));
+const AddBlog = lazy(() => import('./pages/admin/AddBlog'));
+const EditBlog = lazy(() => import('./pages/admin/EditBlog'));
+const ChannelPartner = lazy(() => import('./pages/ChannelPartner'));
+const CustomerRegistration = lazy(() => import('./pages/CustomerRegistration'));
+const SupplierRegistration = lazy(() => import('./pages/SupplierRegistration'));
+const TermsConditions = lazy(() => import('./pages/TermsConditions'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const Disclaimer = lazy(() => import('./pages/Disclaimer'));
+const Careers = lazy(() => import('./pages/Careers'));
+const AboutUs = lazy(() => import('./pages/AboutUs'));
+const Sitemap = lazy(() => import('./pages/Sitemap'));
+const CompletedProjects = lazy(() => import('./pages/CompletedProjects'));
+const FaqPage = lazy(() => import('./pages/FaqPage'));
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -39,10 +40,11 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo({ top: 0, left: 0, behavior: 'instant' })}>
       <motion.div
         key={location.pathname}
-        initial={{ opacity: 0 }}
+        initial={false}
         animate={{ opacity: 1, transition: { duration: shouldReduceMotion ? 0 : 0.3, ease: 'easeInOut' } }}
         exit={{ opacity: 0, transition: { duration: shouldReduceMotion ? 0 : 0.15, ease: 'easeInOut' } }}
       >
+        <Suspense fallback={null}>
         <Routes location={location}>
           <Route path="/" element={<Home />} />
           <Route path="/story" element={<Home />} />
@@ -75,6 +77,7 @@ function AnimatedRoutes() {
             <Route path="blogs/edit/:id" element={<EditBlog />} />
           </Route>
         </Routes>
+        </Suspense>
       </motion.div>
     </AnimatePresence>
   );

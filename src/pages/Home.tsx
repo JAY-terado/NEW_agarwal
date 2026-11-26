@@ -573,7 +573,7 @@ export default function Home() {
             </p>
 
             <Link className="custom-read-more" to="/about-us">
-              <span className="custom-read-more__label">Read More</span>
+              <span className="custom-read-more__label">Read More<span className="sr-only"> about Agarwal Group</span></span>
 
               <span className="custom-read-more__icon">
                 <span className="custom-read-more__icon-small">
@@ -604,6 +604,8 @@ export default function Home() {
             <img
               src={homeAus}
               alt="Agarwal Group architecture"
+              loading="lazy"
+              decoding="async"
               draggable={false}
               onContextMenu={(e) => e.preventDefault()}
               style={{
@@ -676,6 +678,8 @@ export default function Home() {
                     <img
                       src={imageSrc}
                       alt={projectName}
+                      loading="lazy"
+                      decoding="async"
                       className={
                         proj.slug === 'sky-heights'
                           ? 'pcard-img-sky-heights'
@@ -985,7 +989,7 @@ export default function Home() {
                       <h3 className="serif">{post.title}</h3>
                       <p>{post.excerpt}</p>
                       <Link className="custom-read-more" to={`/blogs/${post.id}`} style={{ marginTop: 'auto' }}>
-                        <span className="custom-read-more__label">Read More</span>
+                        <span className="custom-read-more__label">Read More<span className="sr-only"> about {post.title}</span></span>
                         <span className="custom-read-more__icon">
                           <span className="custom-read-more__icon-small">
                             <svg viewBox="0 0 100 100">
