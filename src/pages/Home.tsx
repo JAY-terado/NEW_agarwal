@@ -681,9 +681,11 @@ export default function Home() {
                       loading="lazy"
                       decoding="async"
                       className={
-                        proj.slug === 'sky-heights'
-                          ? 'pcard-img-sky-heights'
-                          : undefined
+                        proj.slug === 'skyrise'
+                          ? 'pcard-img-skyrise'
+                          : proj.slug === 'sky-heights'
+                            ? 'pcard-img-sky-heights'
+                            : undefined
                       }
                     />
                   </div>

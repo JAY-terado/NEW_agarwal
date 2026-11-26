@@ -1166,11 +1166,11 @@ input[type="radio"] {
 }
 
 .pcard-media img.pcard-img-skyrise {
-  transform: scale(1.3);
+  transform: scale(1.35);
 }
 
 .pcard:hover .pcard-media img.pcard-img-skyrise {
-  transform: scale(1.43);
+  transform: scale(1.45);
 }
 
 .pcard-media img.pcard-img-sky-heights {
