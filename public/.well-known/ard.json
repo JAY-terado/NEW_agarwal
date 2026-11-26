@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ard.dev/schema/v1/ard.json",
+  "version": "1.0",
+  "name": "Agarwal Group",
+  "description": "Trusted real estate developer in Vasai-Virar and Mumbai since 1978 delivering RERA-registered residential and commercial projects.",
+  "url": "https://www.agarwalgroup.in",
+  "resources": [
+    {
+      "name": "Home",
+      "url": "https://www.agarwalgroup.in/",
+      "type": "text/html",
+      "description": "Homepage with ongoing residential projects, company overview, and enquiry options."
+    },
+    {
+      "name": "Completed Projects",
+      "url": "https://www.agarwalgroup.in/completed-projects",
+      "type": "text/html",
+      "description": "Portfolio of 41 delivered residential and commercial projects across Mumbai and Vasai-Virar."
+    },
+    {
+      "name": "LLMs Guide",
+      "url": "https://www.agarwalgroup.in/llms.txt",
+      "type": "text/plain",
+      "description": "Markdown overview and directory of key Agarwal Group pages."
+    },
+    {
+      "name": "Sitemap",
+      "url": "https://www.agarwalgroup.in/sitemap.xml",
+      "type": "application/xml",
+      "description": "XML sitemap of public pages and project gallery images."
+    }
+  ]
+}

@@ -6,7 +6,9 @@ import { requestCallbackAxios, extractErrorMessage } from '../_api/user';
 import toast from 'react-hot-toast';
 import { projects } from '../data/projects';
 import LogoHero from '../assets/logo1.webp';
+import LogoHero260 from '../assets/logo1-260.webp';
 import LogoOther from '../assets/logo2.webp';
+import LogoOther260 from '../assets/logo2-260.webp';
 
 import infinityHero from '../assets/agarwal-infinity-hero-flats-in-virar-west.webp';
 import skyriseHero from '../assets/skyRise1-flats-in-virar-west.webp';
@@ -185,7 +187,15 @@ export default function Navbar() {
         <div className="wrap-widescreen" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 'clamp(12px, 2vw, 24px)', flexWrap: 'nowrap' }}>
           {/* Brand */}
           <Link to="/" onClick={handleLogoClick} style={{ textDecoration: 'none', color: brandColor, lineHeight: 1, flexShrink: 0 }}>
-            <img src={forceScrolledStyle ? LogoOther : LogoHero} alt="Agarwal Group" style={{ height: 'clamp(28px, 6vw, 40px)', width: 'auto', display: 'block', borderRadius: '6px', transition: 'filter 0.3s ease' }} />
+            <img
+              src={forceScrolledStyle ? LogoOther260 : LogoHero260}
+              srcSet={forceScrolledStyle ? `${LogoOther260} 260w, ${LogoOther} 640w` : `${LogoHero260} 260w, ${LogoHero} 640w`}
+              sizes="212px"
+              width={212}
+              height={40}
+              alt="Agarwal Group"
+              style={{ height: 'clamp(28px, 6vw, 40px)', width: 'auto', display: 'block', borderRadius: '6px', transition: 'filter 0.3s ease' }}
+            />
           </Link>
 
           {/* Right Side Group */}

@@ -6,6 +6,7 @@ import { requestCallbackAxios, extractErrorMessage } from '../_api/user';
 import toast from 'react-hot-toast';
 import NewsletterSignup from './NewsletterSignup';
 import Logo from '../assets/logo2.webp';
+import Logo260 from '../assets/logo2-260.webp';
 
 export default function Footer() {
   const [isSiteVisitModalOpen, setIsSiteVisitModalOpen] = useState(false);
@@ -51,7 +52,11 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="foot-brand">
             <img
-              src={Logo}
+              src={Logo260}
+              srcSet={`${Logo260} 260w, ${Logo} 640w`}
+              sizes="212px"
+              width={212}
+              height={40}
               alt="Agarwal Group"
               style={{ height: 'clamp(28px, 6vw, 40px)', width: 'auto', display: 'block', borderRadius: '6px', marginBottom: '2px' }}
             />

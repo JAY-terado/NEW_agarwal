@@ -1,9 +1,28 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # Serve prerendered completed-projects page before SPA fallback
+  RewriteRule ^completed-projects/?$ /completed-projects/index.html [L]
+
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]
 </IfModule>
 
+<IfModule mod_headers.c>
+  # Long-lived immutable cache for Vite content-hashed assets
+  <FilesMatch "\.(js|css|webp|png|jpg|jpeg|svg|woff2|mp4)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Always revalidate HTML, sitemap, robots, and agent discovery manifests
+  <FilesMatch "^(index\.html|sitemap\.xml|robots\.txt|llms\.txt|ard\.json)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml application/xml application/javascript application/json image/svg+xml
+</IfModule>

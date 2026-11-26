@@ -16,10 +16,15 @@ import heroVideo from '../assets/hero.mp4';
 import heroMobileVideo from '../assets/heroVideosMobile/heroMobile.mp4';
 import heroPoster from '../assets/hero-poster.webp';
 import homeAus from '../assets/homeAus-real-estate-virar-mumbai.webp';
+import homeAus480 from '../assets/homeAus-real-estate-virar-mumbai-480.webp';
 import infinityHero from '../assets/agarwal-infinity-hero-flats-in-virar-west.webp';
+import infinityHero768 from '../assets/agarwal-infinity-hero-flats-in-virar-west-768.webp';
 import skyriseHero from '../assets/skyRise1-flats-in-virar-west.webp';
+import skyriseHero768 from '../assets/skyRise1-flats-in-virar-west-768.webp';
 import skyHeightsHero from '../assets/agarwalSkyheight-luxury-flats-in-virar-west.webp';
+import skyHeightsHero768 from '../assets/agarwalSkyheight-luxury-flats-in-virar-west-768.webp';
 import horizonHero from '../assets/horizon-residential-projects-virar.webp';
+import horizonHero768 from '../assets/horizon-residential-projects-virar-768.webp';
 
 // Testimonial Videos
 import testVid1 from '../assets/testimonials/darshan mehta AG1.mp4';
@@ -42,11 +47,11 @@ import testPoster8 from '../assets/testimonials/posters/ag8.webp';
 import blogGreen from '../assets/blog-green-sustainable-homes-virar.webp';
 
 // Map project slugs to imported hero images
-const projectHeroMap: Record<string, string> = {
-  infinity: infinityHero,
-  skyrise: skyriseHero,
-  'sky-heights': skyHeightsHero,
-  horizon: horizonHero,
+const projectHeroMap: Record<string, { full: string; small: string }> = {
+  infinity: { full: infinityHero, small: infinityHero768 },
+  skyrise: { full: skyriseHero, small: skyriseHero768 },
+  'sky-heights': { full: skyHeightsHero, small: skyHeightsHero768 },
+  horizon: { full: horizonHero, small: horizonHero768 },
 };
 
 // const instagramPosts = [
@@ -466,7 +471,7 @@ export default function Home() {
         </div>
 
         <div
-          className="relative z-10 w-full wrap-widescreen pt-24 pb-16 hidden lg:flex flex-col items-start text-left"
+          className="relative z-10 w-full wrap-widescreen pt-24 pb-16 flex flex-col items-start text-left"
         >
           <motion.div
             initial={false}
@@ -474,10 +479,10 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="flex flex-col items-start"
           >
-            <h1 className="serif drop-shadow-2xl" style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 300, lineHeight: 1.15, marginBottom: '1.2rem' }}>
+            <h1 className="serif drop-shadow-2xl" style={{ fontSize: 'clamp(1.95rem, 5vw, 4.5rem)', fontWeight: 300, lineHeight: 1.15, marginBottom: '1.2rem' }}>
               Trusted Real Estate Developer <br className="hidden md:block" />
               in Vasai–Virar &amp; Mumbai <br />
-              <em className="serif italic block mt-2" style={{ color: 'var(--color-white)', fontSize: 'clamp(2rem, 4.5vw, 3.8rem)', opacity: 0.8 }}>Since 1978</em>
+              <em className="serif italic block mt-2" style={{ color: 'var(--color-white)', fontSize: 'clamp(1.55rem, 4.5vw, 3.8rem)', opacity: 0.8 }}>Since 1978</em>
             </h1>
 
             <p className="flex flex-col md:flex-row items-start md:items-center justify-start gap-2 md:gap-4 mb-10 max-w-4xl drop-shadow-md opacity-90" style={{ fontSize: 'clamp(1rem, 1.2vw, 1.25rem)', fontWeight: 400 }}>
@@ -602,7 +607,11 @@ export default function Home() {
 
           <div className="story-media reveal">
             <img
-              src={homeAus}
+              src={homeAus480}
+              srcSet={`${homeAus480} 480w, ${homeAus} 1254w`}
+              sizes="(max-width: 900px) 80vw, 411px"
+              width={480}
+              height={480}
               alt="Agarwal Group architecture"
               loading="lazy"
               decoding="async"
@@ -639,7 +648,9 @@ export default function Home() {
 
           <div className="pgrid">
             {projects.map((proj) => {
-              const imageSrc = projectHeroMap[proj.slug];
+              const imageEntry = projectHeroMap[proj.slug];
+              const imageSrc = imageEntry?.small || imageEntry?.full;
+              const imageSrcSet = imageEntry ? `${imageEntry.small} 768w, ${imageEntry.full} 1600w` : undefined;
 
               // Map project details to exact static page values
               const projectMeta = {
@@ -677,6 +688,10 @@ export default function Home() {
                     {/* <span className="pbadge">{projectMeta.badge}</span> */}
                     <img
                       src={imageSrc}
+                      srcSet={imageSrcSet}
+                      sizes="(max-width: 900px) 100vw, 565px"
+                      width={768}
+                      height={432}
                       alt={projectName}
                       loading="lazy"
                       decoding="async"

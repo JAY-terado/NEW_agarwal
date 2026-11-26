@@ -7,57 +7,72 @@ interface HeroVideoProps {
 }
 
 export default function HeroVideo({ desktop, mobile, poster }: HeroVideoProps) {
-  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  const [videoSrc, setVideoSrc] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
-    const scheduleLoad = () => {
-      if ('requestIdleCallback' in window) {
-        (window as Window & { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback(
-          () => { if (!cancelled) setShouldLoadVideo(true); },
-          { timeout: 1200 }
-        );
-      } else {
-        setTimeout(() => { if (!cancelled) setShouldLoadVideo(true); }, 600);
-      }
+    let timer: ReturnType<typeof setTimeout> | undefined;
+
+    const activateVideo = () => {
+      if (cancelled) return;
+      const isDesktop = window.matchMedia('(min-width: 768px)').matches;
+      setVideoSrc(isDesktop ? desktop : mobile);
+    };
+
+    const scheduleVideo = () => {
+      // Let LCP and initial paint finish before pulling multi-MB MP4 video
+      timer = setTimeout(activateVideo, 2500);
+    };
+
+    const onInteract = () => {
+      if (timer) clearTimeout(timer);
+      activateVideo();
     };
 
     if (document.readyState === 'complete') {
-      scheduleLoad();
+      scheduleVideo();
     } else {
-      window.addEventListener('load', scheduleLoad, { once: true });
+      window.addEventListener('load', scheduleVideo, { once: true });
     }
+
+    window.addEventListener('pointerdown', onInteract, { once: true, passive: true });
+    window.addEventListener('touchstart', onInteract, { once: true, passive: true });
+    window.addEventListener('scroll', onInteract, { once: true, passive: true });
 
     return () => {
       cancelled = true;
-      window.removeEventListener('load', scheduleLoad);
+      if (timer) clearTimeout(timer);
+      window.removeEventListener('load', scheduleVideo);
+      window.removeEventListener('pointerdown', onInteract);
+      window.removeEventListener('touchstart', onInteract);
+      window.removeEventListener('scroll', onInteract);
     };
-  }, []);
+  }, [desktop, mobile]);
 
   return (
     <div className="relative w-full h-full">
       <img
         src={poster}
         alt=""
+        width={1600}
+        height={900}
         fetchPriority="high"
         decoding="sync"
         className="absolute inset-0 w-full h-full object-cover"
         aria-hidden="true"
       />
-      {shouldLoadVideo && (
+      {videoSrc && (
         <video
-          key={desktop}
+          key={videoSrc}
           className="relative w-full h-full object-cover"
+          src={videoSrc}
           poster={poster}
           autoPlay
           muted
           loop
           playsInline
           aria-hidden="true"
-        >
-          <source media="(min-width: 768px)" src={desktop} type="video/mp4" />
-          <source src={mobile} type="video/mp4" />
-        </video>
+        />
       )}
     </div>
   );
