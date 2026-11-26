@@ -132,9 +132,9 @@ export default function Footer() {
 
           {/* Column 2: Ongoing Projects */}
           <div className="foot-col">
-            <h5 style={{ fontSize: '.72rem', letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--brass)', marginBottom: '18px' }}>
+            <h3 style={{ fontSize: '.72rem', letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--brass-deep)', marginBottom: '18px' }}>
               Ongoing Projects
-            </h5>
+            </h3>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {[
                 { to: '/projects/infinity', label: 'Agarwal Infinity' },
@@ -160,9 +160,9 @@ export default function Footer() {
 
           {/* Column 3: Quick Links */}
           <div className="foot-col">
-            <h5 style={{ fontSize: '.72rem', letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--brass)', marginBottom: '18px' }}>
+            <h3 style={{ fontSize: '.72rem', letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--brass-deep)', marginBottom: '18px' }}>
               Quick Links
-            </h5>
+            </h3>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {[
                 { to: '/', label: 'Home' },
@@ -186,9 +186,9 @@ export default function Footer() {
 
           {/* Column 4: Channel Partners */}
           <div className="foot-col">
-            <h5 style={{ fontSize: '.72rem', letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--brass)', marginBottom: '18px' }}>
+            <h3 style={{ fontSize: '.72rem', letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--brass-deep)', marginBottom: '18px' }}>
               Channel Partners
-            </h5>
+            </h3>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {[
                 { to: '/channel-partner', label: 'Overview' },
@@ -215,9 +215,9 @@ export default function Footer() {
 
           {/* Column 5: Customer Care */}
           <div className="foot-col">
-            <h5 style={{ fontSize: '.72rem', letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--brass)', marginBottom: '18px' }}>
+            <h3 style={{ fontSize: '.72rem', letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--brass-deep)', marginBottom: '18px' }}>
               Customer Care
-            </h5>
+            </h3>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {[
                 { to: '/faqs', label: 'FAQs' },
@@ -247,9 +247,9 @@ export default function Footer() {
 
           {/* Column 6: Legal */}
           <div className="foot-col">
-            <h5 style={{ fontSize: '.72rem', letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--brass)', marginBottom: '18px' }}>
+            <h3 style={{ fontSize: '.72rem', letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--brass-deep)', marginBottom: '18px' }}>
               Legal
-            </h5>
+            </h3>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {[
                 { to: '/privacy-policy', label: 'Privacy Policy' },

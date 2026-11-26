@@ -141,7 +141,7 @@ export default function Home() {
   const [activeVideoModal, setActiveVideoModal] = useState<Testimonial | null>(null);
 
   const [isEnquireModalOpen, setIsEnquireModalOpen] = useState(false);
-  const [isHeroTextVisible, setIsHeroTextVisible] = useState(false);
+  const [isHeroTextVisible, setIsHeroTextVisible] = useState(true);
   const heroTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { blogs, isLoading: isBlogsLoading } = useBlogContext();
@@ -469,7 +469,7 @@ export default function Home() {
           className="relative z-10 w-full wrap-widescreen pt-24 pb-16 hidden lg:flex flex-col items-start text-left"
         >
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={false}
             animate={{ opacity: isHeroTextVisible ? 1 : 0, y: isHeroTextVisible ? 0 : 30 }}
             transition={{ duration: 0.8 }}
             className="flex flex-col items-start"
