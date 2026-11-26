@@ -1354,65 +1354,72 @@ export default function ProjectDetails() {
               animate={{ x: 0, y: '-50%' }}
               exit={{ x: '100%', y: '-50%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-1/2 right-0 md:right-6 w-full max-w-[360px] bg-paper z-[101] p-6 md:p-8 shadow-2xl overflow-y-auto flex flex-col rounded-l-[24px] md:rounded-[24px]"
+              className="fixed top-1/2 right-0 md:right-6 z-[101] w-full max-w-[360px] bg-white rounded-l-[24px] md:rounded-[24px] shadow-[0_20px_40px_rgba(0,0,0,0.25)] p-6 md:p-8 border border-line-light flex flex-col overflow-y-auto"
               style={{ maxHeight: 'calc(100vh - 4rem)' }}
             >
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h3 className="font-serif text-2xl text-ink mb-2">Download Brochure</h3>
-                  <p className="text-xs text-taupe leading-relaxed pr-4">
-                    Share your details to receive the complete project brochure instantly.
-                  </p>
-                </div>
-                <button
-                  onClick={() => setIsBrochureDrawerOpen(false)}
-                  className="p-2 hover:bg-black/5 rounded-full transition-colors shrink-0 -mt-2 -mr-2"
-                >
-                  <X className="w-6 h-6 text-ink-soft" />
-                </button>
-              </div>
-              <div className="w-full border-b border-line-light mb-6" />
+              <button
+                onClick={() => setIsBrochureDrawerOpen(false)}
+                className="absolute top-5 right-5 text-taupe hover:text-ink transition-colors bg-paper hover:bg-line-light rounded-full p-1"
+              >
+                <X className="w-4 h-4" />
+              </button>
 
               {!brochureFormSubmitted ? (
-                <form onSubmit={handleBrochureSubmit} className="flex flex-col gap-6 flex-1">
-                  <div>
-                    <label className="block text-xs uppercase tracking-widest text-ink-soft mb-2 font-semibold">Full Name *</label>
-                    <input
-                      type="text"
-                      name="name"
-                      required
-                      className="w-full border-b border-line-light bg-transparent py-2 outline-none focus:border-brass-deep transition-colors text-ink"
-                      placeholder="Enter your name"
-                    />
+                <>
+                  <div className="ft serif" style={{ fontFamily: '"Fraunces", serif', fontSize: '1.6rem', fontWeight: 400, color: 'var(--color-ink)', paddingBottom: '12px', lineHeight: 1.4 }}>
+                    Download <span className="text-brass">Brochure</span>
                   </div>
-                  <div>
-                    <label className="block text-xs uppercase tracking-widest text-ink-soft mb-2 font-semibold">Phone Number *</label>
-                    <input
-                      type="tel"
-                      name="mobile_number"
-                      required
-                      className="w-full border-b border-line-light bg-transparent py-2 outline-none focus:border-brass-deep transition-colors text-ink"
-                      placeholder="+91"
-                    />
+                  <div className="fsub" style={{ fontSize: '.86rem', color: 'var(--color-ink-soft)', paddingBottom: '20px', marginBottom: '24px', fontWeight: 300, borderBottom: '1px solid var(--color-line)' }}>
+                    Share your details to receive the complete project brochure instantly.
                   </div>
-                  <div>
-                    <label className="block text-xs uppercase tracking-widest text-ink-soft mb-2 font-semibold">Email Address</label>
-                    <input
-                      type="email"
-                      name="email"
-                      className="w-full border-b border-line-light bg-transparent py-2 outline-none focus:border-brass-deep transition-colors text-ink"
-                      placeholder="Enter your email"
-                    />
-                  </div>
+                  <form onSubmit={handleBrochureSubmit} className="flex flex-col gap-4">
+                    <div className="flex flex-col">
+                      <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Full Name*</label>
+                      <input
+                        type="text"
+                        name="name"
+                        required
+                        className="border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors bg-white"
+                        placeholder="Full Name"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Mobile Number*</label>
+                      <div className="flex">
+                        <div className="bg-paper border border-line border-r-0 rounded-l-xl px-4 flex items-center justify-center font-bold text-sm text-ink">+91</div>
+                        <input
+                          type="tel"
+                          name="mobile_number"
+                          required
+                          className="border border-line rounded-r-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors flex-1 bg-white"
+                          placeholder="00000 00000"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex flex-col">
+                      <label className="text-[10px] uppercase font-bold text-taupe mb-1.5 tracking-wider">Email Address</label>
+                      <input
+                        type="email"
+                        name="email"
+                        className="border border-line rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brass-deep transition-colors bg-white"
+                        placeholder="you@email.com"
+                      />
+                    </div>
 
-                  <button
-                    type="submit"
-                    disabled={isBrochureSubmitting}
-                    className="mt-auto bg-brass-deep text-white font-bold tracking-widest uppercase text-sm py-4 rounded-full hover:bg-[#b59254] transition-colors shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed"
-                  >
-                    {isBrochureSubmitting ? 'Submitting...' : 'Submit & Download'}
-                  </button>
-                </form>
+                    <button
+                      type="submit"
+                      disabled={isBrochureSubmitting}
+                      className="pcta-btn btn-enquire disabled:opacity-60 disabled:cursor-not-allowed"
+                      style={{ width: '100%', marginTop: '8px' }}
+                    >
+                      <span>{isBrochureSubmitting ? 'Submitting...' : 'Submit & Download'}</span>
+                      <span className="arr">→</span>
+                    </button>
+                  </form>
+                  <div style={{ fontSize: '.7rem', color: 'var(--color-taupe)', textAlign: 'center', marginTop: '10px', lineHeight: 1.4 }}>
+                    By Clicking Above Button, I Authorize Agarwal Group And Its Representatives To Call, SMS, Email Or Whatsapp Me About Its Products And Offers. This Consent Overrides Any Registration For DND NDNC.
+                  </div>
+                </>
               ) : (
                 <div className="flex flex-col items-center justify-center flex-1 text-center h-full">
                   <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center text-green-600 mb-6">

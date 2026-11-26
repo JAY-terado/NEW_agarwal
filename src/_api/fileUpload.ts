@@ -4,7 +4,8 @@ export type FileUploadModule =
     | "blogs"
     | "resumes"
     | "suppliers"
-    | "documents";
+    | "documents"
+    | "newsletter";
 
 export interface UploadedFileResponse {
     fileName: string;

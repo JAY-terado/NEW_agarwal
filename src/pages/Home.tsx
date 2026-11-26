@@ -167,6 +167,8 @@ export default function Home() {
   };
 
   useEffect(() => {
+    // Start the auto-hide timer on mount so touch/mobile screens fade out hero text just like desktop
+    handleHeroInteraction();
     return () => {
       if (heroTimerRef.current) clearTimeout(heroTimerRef.current);
     };
@@ -463,6 +465,7 @@ export default function Home() {
         onMouseMove={handleHeroInteraction}
         onMouseEnter={handleHeroInteraction}
         onMouseLeave={handleHeroLeave}
+        onTouchStart={handleHeroInteraction}
         onClick={handleHeroInteraction}
       >
         <div className="absolute inset-0 z-0">
@@ -478,6 +481,7 @@ export default function Home() {
             animate={{ opacity: isHeroTextVisible ? 1 : 0, y: isHeroTextVisible ? 0 : 30 }}
             transition={{ duration: 0.8 }}
             className="flex flex-col items-start"
+            style={{ pointerEvents: isHeroTextVisible ? 'auto' : 'none' }}
           >
             <h1 className="serif drop-shadow-2xl" style={{ fontSize: 'clamp(1.95rem, 5vw, 4.5rem)', fontWeight: 300, lineHeight: 1.15, marginBottom: '1.2rem' }}>
               Trusted Real Estate Developer <br className="hidden md:block" />
@@ -501,7 +505,7 @@ export default function Home() {
                   e.preventDefault();
                   document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                style={{ background: 'var(--color-brass)', color: '#fff', fontSize: '0.85rem' }}
+                style={{ background: 'var(--color-brass)', color: 'var(--color-pine)', fontSize: '0.85rem', fontWeight: 600 }}
               >
                 <span>Explore Ongoing Projects</span>
                 <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>

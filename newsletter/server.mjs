@@ -24,7 +24,7 @@ const initSql = `
 `;
 
 let insertEmail;
-let closeDb = () => {};
+let closeDb = () => { };
 
 try {
   // Use native node:sqlite on Node 22.5+ / Node 24
@@ -82,7 +82,7 @@ function reply(res, status, body, headers = {}) {
 }
 
 const server = createServer({ requestTimeout: 15000, headersTimeout: 10000 }, async (req, res) => {
-  if (req.url !== '/api/newsletter/subscribe') return reply(res, 404, { error: 'Not found' });
+  if (req.url !== '/v1/newsletter/subscribe') return reply(res, 404, { error: 'Not found' });
   if (req.method !== 'POST') return reply(res, 405, { error: 'Use POST' }, { Allow: 'POST' });
   if (req.headers['content-type']?.split(';')[0].trim().toLowerCase() !== 'application/json') {
     return reply(res, 415, { error: 'JSON required' });

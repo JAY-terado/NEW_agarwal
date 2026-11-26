@@ -1,4 +1,5 @@
 import { useId, useState, type FormEvent } from 'react';
+import { subscribeNewsletterAxios } from '../_api/newsletter';
 import './NewsletterSignup.css';
 
 export default function NewsletterSignup() {
@@ -15,25 +16,23 @@ export default function NewsletterSignup() {
     setPending(true);
     setMessage('');
     try {
-      const response = await fetch('/api/newsletter/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-        signal: AbortSignal.timeout(12000),
-      });
+      const data = await subscribeNewsletterAxios(email);
 
-      if (response.status === 422) {
-        setMessage('Enter a valid email address and try again.');
-      } else if (response.status === 429) {
-        setMessage('Too many requests. Please try again in a minute.');
-      } else if (response.ok && (await response.json()).subscribed === true) {
+      if (data?.subscribed === true || data?.success === true) {
         form.reset();
         setMessage('Thank you for subscribing to the Agarwal Group newsletter.');
       } else {
         setMessage('We couldn’t confirm your subscription. Please try again.');
       }
-    } catch {
-      setMessage('We couldn’t confirm your subscription. Please try again.');
+    } catch (err: any) {
+      const status = err?.response?.status;
+      if (status === 422) {
+        setMessage('Enter a valid email address and try again.');
+      } else if (status === 429) {
+        setMessage('Too many requests. Please try again in a minute.');
+      } else {
+        setMessage('We couldn’t confirm your subscription. Please try again.');
+      }
     } finally {
       setPending(false);
     }
@@ -48,9 +47,11 @@ export default function NewsletterSignup() {
       <form onSubmit={subscribe}>
         <label htmlFor={emailId}>Email address</label>
         <div className="ag-newsletter-fields">
-          <input id={emailId} name="email" type="email" placeholder="you@example.com"
+          <input id={emailId} name="email" type="email" placeholder="you@email.com"
             autoComplete="email" maxLength={254} required readOnly={pending} />
-          <button type="submit" disabled={pending}>{pending ? 'Subscribing…' : 'Subscribe'}</button>
+          <button type="submit" disabled={pending} className="pcta-btn btn-enquire">
+            <span>{pending ? 'Subscribing…' : 'Subscribe'}</span>
+          </button>
         </div>
         <p role="status" aria-live="polite">{message}</p>
       </form>

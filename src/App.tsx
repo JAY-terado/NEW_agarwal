@@ -14,6 +14,10 @@ const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
 const BlogList = lazy(() => import('./pages/admin/BlogList'));
 const AddBlog = lazy(() => import('./pages/admin/AddBlog'));
 const EditBlog = lazy(() => import('./pages/admin/EditBlog'));
+const NewsletterList = lazy(() => import('./pages/admin/NewsletterList'));
+const NewsletterForm = lazy(() => import('./pages/admin/NewsletterForm'));
+const SubscriberList = lazy(() => import('./pages/admin/SubscriberList'));
+const Unsubscribe = lazy(() => import('./pages/Unsubscribe'));
 const ChannelPartner = lazy(() => import('./pages/ChannelPartner'));
 const CustomerRegistration = lazy(() => import('./pages/CustomerRegistration'));
 const SupplierRegistration = lazy(() => import('./pages/SupplierRegistration'));
@@ -67,6 +71,7 @@ function AnimatedRoutes() {
           <Route path="/faqs" element={<FaqPage />} />
           <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/projects/:slug/faqs" element={<FaqPage />} />
+          <Route path="/unsubscribe" element={<Unsubscribe />} />
           
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
@@ -75,6 +80,10 @@ function AnimatedRoutes() {
             <Route path="blogs" element={<BlogList />} />
             <Route path="blogs/new" element={<AddBlog />} />
             <Route path="blogs/edit/:id" element={<EditBlog />} />
+            <Route path="newsletters" element={<NewsletterList />} />
+            <Route path="newsletters/new" element={<NewsletterForm />} />
+            <Route path="newsletters/edit/:id" element={<NewsletterForm />} />
+            <Route path="subscribers" element={<SubscriberList />} />
           </Route>
         </Routes>
         </Suspense>

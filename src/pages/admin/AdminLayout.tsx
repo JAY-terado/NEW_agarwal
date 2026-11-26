@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
-import { Home, Settings, LogOut } from 'lucide-react';
+import { Home, Settings, LogOut, Mail, Users } from 'lucide-react';
 import { logoutAxios } from '../../_api/admin';
 import Cookies from 'js-cookie';
 
@@ -32,6 +32,8 @@ export default function AdminLayout() {
 
   const menu = [
     { name: 'Dashboard', path: '/admin', icon: <Home className="w-5 h-5" /> },
+    { name: 'Newsletters', path: '/admin/newsletters', icon: <Mail className="w-5 h-5" /> },
+    { name: 'Subscribers', path: '/admin/subscribers', icon: <Users className="w-5 h-5" /> },
     // { name: 'All Blogs', path: '/admin/blogs', icon: <FileText className="w-5 h-5" /> },
     // { name: 'Add New Blog', path: '/admin/blogs/new', icon: <PlusCircle className="w-5 h-5" /> },
     { name: 'Back to Website', path: '/', icon: <Settings className="w-5 h-5" /> },
