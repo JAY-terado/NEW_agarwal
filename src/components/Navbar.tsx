@@ -406,6 +406,7 @@ export default function Navbar() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '22px' }}>
               {projects.map(proj => {
                 const isHorizon = proj.slug === 'horizon';
+                const isSkyrise = proj.slug === 'skyrise';
                 const Wrapper = isHorizon ? 'div' : Link;
                 const wrapperProps = isHorizon ? {} : { to: `/projects/${proj.slug}` };
 
@@ -416,21 +417,21 @@ export default function Navbar() {
                       const h4 = e.currentTarget.querySelector('h4') as HTMLElement;
                       if (h4) h4.style.color = 'var(--brass-deep)';
                       const img = e.currentTarget.querySelector('img') as HTMLElement;
-                      if (img) img.style.transform = 'scale(1.07)';
+                      if (img) img.style.transform = isSkyrise ? 'scale(1.43)' : 'scale(1.07)';
                     }}
                     onMouseLeave={e => {
                       if (isHorizon) return;
                       const h4 = e.currentTarget.querySelector('h4') as HTMLElement;
                       if (h4) h4.style.color = 'var(--ink)';
                       const img = e.currentTarget.querySelector('img') as HTMLElement;
-                      if (img) img.style.transform = 'scale(1)';
+                      if (img) img.style.transform = isSkyrise ? 'scale(1.3)' : 'scale(1)';
                     }}>
                     {/* mc-img */}
                     <div style={{ aspectRatio: '16/10', overflow: 'hidden', borderRadius: '6px', marginBottom: '12px', position: 'relative', background: '#e7e1d4' }}>
                       <img
                         src={projectImages[proj.slug]}
                         alt={isHorizon ? 'Upcoming Mega Project in Virar West' : proj.name}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform .9s', display: 'block' }}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', transform: isSkyrise ? 'scale(1.3)' : 'scale(1)', transition: 'transform .9s', display: 'block' }}
                         onError={e => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
                       />
                       {isHorizon && (
