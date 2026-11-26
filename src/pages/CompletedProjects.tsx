@@ -93,6 +93,17 @@ const completedProjects = [
   { name: 'Surbhi Arcade SH3', sub: 'Gokul Township, Virar West', image: img34 },
 ];
 
+const PROJECT_IMAGE_SCALE: Record<string, string> = {
+  'Agarwal Paramount': 'scale-[1.35]',
+  'Agarwal Exotica': 'scale-[1.35]',
+  'Viva Vrindavan Township': 'scale-[1.35]',
+  'Vrindavan Gardens': 'scale-[1.35]',
+  'Agarwal Meadows': 'scale-[1.35]',
+  'Agarwal Gardens (Phase-II)': 'scale-[1.25]',
+  'Agarwal Residency': 'scale-[1.25]',
+  'Glory': 'scale-[1.25]',
+};
+
 export default function CompletedProjects() {
   useCompletedProjectsSeo();
   useEffect(() => {
@@ -118,7 +129,7 @@ export default function CompletedProjects() {
                 <img
                   src={project.image}
                   alt={project.name + ", " + project.sub}
-                  className="w-full h-full object-cover"
+                  className={`w-full h-full object-cover ${PROJECT_IMAGE_SCALE[project.name] ?? ''}`.trim()}
                 />
                 <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/10 transition-colors duration-300 pointer-events-none" />
               </div>
