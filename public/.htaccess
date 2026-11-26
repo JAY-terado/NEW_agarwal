@@ -18,7 +18,7 @@
   </FilesMatch>
 
   # Always revalidate HTML, sitemap, robots, and agent discovery manifests
-  <FilesMatch "^(index\.html|sitemap\.xml|robots\.txt|llms\.txt|ard\.json)$">
+  <FilesMatch "^(index\.html|sitemap\.xml|robots\.txt|llms\.txt|ard\.json|ai-catalog\.json)$">
     Header set Cache-Control "no-cache, must-revalidate"
   </FilesMatch>
 </IfModule>

@@ -1,0 +1,18 @@
+{
+  "specVersion": "1.0",
+  "entries": [
+    {
+      "identifier": "urn:air:agarwalgroup.in:docs:llms",
+      "displayName": "Agarwal Group LLMs Directory",
+      "type": "text/markdown; profile=\"urn:air:agent-skills\"",
+      "url": "https://www.agarwalgroup.in/llms.txt",
+      "version": "1.0.0",
+      "updatedAt": "2026-11-26T00:00:00Z",
+      "representativeQueries": [
+        "Show ongoing residential projects by Agarwal Group in Vasai and Virar",
+        "List completed projects and contact details for Agarwal Group",
+        "Find RERA registration details and FAQs for Agarwal Group"
+      ]
+    }
+  ]
+}
