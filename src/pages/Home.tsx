@@ -3,7 +3,7 @@ import HeroVideo from '../components/HeroVideo';
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Instagram, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { projects } from '../data/projects';
 import { homeFaqs } from '../data/faqs';
 import { requestCallbackAxios, extractErrorMessage } from '../_api/user';
@@ -49,35 +49,35 @@ const projectHeroMap: Record<string, string> = {
   horizon: horizonHero,
 };
 
-const instagramPosts = [
-  {
-    id: 'DTo5TOAEsSL',
-    title: 'Agarwal Group - Modern Living & Smart Layouts',
-    link: 'https://www.instagram.com/reel/DTo5TOAEsSL/?mdxt=b3R2cDg5ZGs2Zw==',
-    permalink: 'https://www.instagram.com/reel/DTo5TOAEsSL/?utm_source=ig_embed&utm_campaign=loading',
-    caption: 'Step inside a home that’s designed to feel right, from the first moment. Smart layouts. Premium finishes. A lifestyle that rises.',
-    author: 'Agarwal Group',
-    authorHandle: 'agarwalgroupofficial',
-  },
-  {
-    id: 'DWDYF6VEpMh',
-    title: 'Agarwal Group - Gudi Padwa Celebrations',
-    link: 'https://www.instagram.com/reel/DWDYF6VEpMh/?dlrf=eWljd2VrdWZxY20y',
-    permalink: 'https://www.instagram.com/reel/DWDYF6VEpMh/?utm_source=ig_embed&utm_campaign=loading',
-    caption: 'This Gudi Padwa, step into a home that reflects joy, growth, and new opportunities.',
-    author: 'Agarwal Group',
-    authorHandle: 'agarwalgroupofficial',
-  },
-  {
-    id: 'DWVaenhkvZ-',
-    title: 'Agarwal Group - Ram Navami Celebrations',
-    link: 'https://www.instagram.com/reel/DWVaenhkvZ-/?exln=MXR4bG9kcDNneXczMw==',
-    permalink: 'https://www.instagram.com/reel/DWVaenhkvZ-/?utm_source=ig_embed&utm_campaign=loading',
-    caption: 'Celebrate the spirit of Ram Navami with faith, positivity, and new beginnings at home.',
-    author: 'Agarwal Group',
-    authorHandle: 'agarwalgroupofficial',
-  },
-];
+// const instagramPosts = [
+//   {
+//     id: 'DTo5TOAEsSL',
+//     title: 'Agarwal Group - Modern Living & Smart Layouts',
+//     link: 'https://www.instagram.com/reel/DTo5TOAEsSL/?mdxt=b3R2cDg5ZGs2Zw==',
+//     permalink: 'https://www.instagram.com/reel/DTo5TOAEsSL/?utm_source=ig_embed&utm_campaign=loading',
+//     caption: 'Step inside a home that’s designed to feel right, from the first moment. Smart layouts. Premium finishes. A lifestyle that rises.',
+//     author: 'Agarwal Group',
+//     authorHandle: 'agarwalgroupofficial',
+//   },
+//   {
+//     id: 'DWDYF6VEpMh',
+//     title: 'Agarwal Group - Gudi Padwa Celebrations',
+//     link: 'https://www.instagram.com/reel/DWDYF6VEpMh/?dlrf=eWljd2VrdWZxY20y',
+//     permalink: 'https://www.instagram.com/reel/DWDYF6VEpMh/?utm_source=ig_embed&utm_campaign=loading',
+//     caption: 'This Gudi Padwa, step into a home that reflects joy, growth, and new opportunities.',
+//     author: 'Agarwal Group',
+//     authorHandle: 'agarwalgroupofficial',
+//   },
+//   {
+//     id: 'DWVaenhkvZ-',
+//     title: 'Agarwal Group - Ram Navami Celebrations',
+//     link: 'https://www.instagram.com/reel/DWVaenhkvZ-/?exln=MXR4bG9kcDNneXczMw==',
+//     permalink: 'https://www.instagram.com/reel/DWVaenhkvZ-/?utm_source=ig_embed&utm_campaign=loading',
+//     caption: 'Celebrate the spirit of Ram Navami with faith, positivity, and new beginnings at home.',
+//     author: 'Agarwal Group',
+//     authorHandle: 'agarwalgroupofficial',
+//   },
+// ];
 
 
 interface Testimonial {
