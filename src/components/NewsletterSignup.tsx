@@ -1,4 +1,5 @@
 import { useId, useState, type FormEvent } from 'react';
+import { Link } from 'react-router-dom';
 import { subscribeNewsletterAxios } from '../_api/newsletter';
 import './NewsletterSignup.css';
 
@@ -53,6 +54,10 @@ export default function NewsletterSignup() {
             <span>{pending ? 'Subscribing…' : 'Subscribe'}</span>
           </button>
         </div>
+        <p className="ag-newsletter-consent">
+          By subscribing, you agree to receive updates and promotional communications from Agarwal Group. Please refer to our{' '}
+          <Link to="/privacy-policy" onClick={() => window.scrollTo(0, 0)}>Privacy Policy</Link> for details on how we use your information.
+        </p>
         <p role="status" aria-live="polite">{message}</p>
       </form>
     </section>

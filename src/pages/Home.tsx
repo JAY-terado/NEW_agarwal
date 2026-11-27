@@ -1239,7 +1239,7 @@ export default function Home() {
               </div>
               <div>
                 <div className="ct">WhatsApp</div>
-                <a href="https://api.whatsapp.com/send?phone=918530081105&amp;text=Hello%2C%20I%27m%20interested%20in%20Agarwal%20Group%20projects" className="block w-fit transition-transform duration-300 hover:scale-105 hover:text-brass-deep origin-left">+91 853 008 1105</a>
+                <a href="https://api.whatsapp.com/send?phone=918408008001&amp;text=Hello%2C%20I%27m%20interested%20in%20Agarwal%20Group%20projects" className="block w-fit transition-transform duration-300 hover:scale-105 hover:text-brass-deep origin-left">+91 840 800 8001</a>
               </div>
               <div>
                 <div className="ct">Corporate Office</div>

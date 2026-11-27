@@ -16,5 +16,7 @@
 .ag-newsletter-fields button:disabled { opacity: .7; cursor: wait; }
 .ag-newsletter-fields :focus-visible { outline: 2px solid #825e22; outline-offset: 2px; }
 .ag-newsletter [role="status"]:empty { margin: 0; }
+.ag-newsletter-consent { margin-top: .5rem; font-size: .72rem; line-height: 1.45; color: var(--taupe); }
+.ag-newsletter-consent a { color: var(--brass-deep); text-decoration: underline; }
 @media (max-width: 700px) { .ag-newsletter { grid-template-columns: 1fr; } }
 @media (max-width: 360px) { .ag-newsletter-fields { flex-direction: column; } }
